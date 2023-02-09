@@ -1,0 +1,53 @@
+<!-- {
+  "name": "Upload Excel",
+  "uniqueName": "upload",
+  "url": "/trends/upload",
+  "icon": "upload.png",
+  "titleClass": ""
+}, -->
+<ng-container *ngIf="loader">
+    <div class="fyt-spinner-container">
+      <mat-spinner></mat-spinner>
+      <div class="text-center fyt-loading-msg">Please wait</div>
+    </div>
+  </ng-container>
+
+  <ng-container>
+    <div class="row pt-50">
+      <div class="col-md-12">
+        <ng-container *ngIf="loader2">
+          <div class="fyt-upload-btn-wrapper" matTooltip="Drag and drop Excel file here">
+            <div class="upload-button-custom" for="userId">
+              <button mat-button>
+                <i class="material-icons">file_copy</i>
+                <p class="p-text">Click here or drag and drop an excel file here</p>
+              </button>
+            </div>
+            <input required type="file" name="userprofile" id="userId" class="fyt-upload-input" ngFileSelect
+              (change)="fileUpload($event)" accept=".xlsx,.xlsm,.xls,.xlts,.xltm" />
+          </div><br><br>
+        </ng-container>
+      </div>
+
+      <div class="col-md-8 offset-md-2">
+        <ng-container *ngIf="!loader2">
+          <div class="fyt-login-logo-container row">
+            <div class="col-md-5">
+              <img src="../../../../assets/img/Excel.png" width="100%" alt="FYTRACK">
+            </div>
+            <div class="col-md-1 pl-0">
+              <button type="button" mat-icon-button (click)="clearFile()">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </div>
+            <div class="col-md-6">
+              <p>The file '{{uploadExcel.file.name}}' is loaded successfully.</p>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+  <div class="ta-c">
+    <button mat-flat-button color="primary" (click)="uploadExcelFile()" [disabled]="loader2">Upload Excel</button>
+  </div>

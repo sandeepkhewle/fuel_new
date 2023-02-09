@@ -1,0 +1,90 @@
+<div #target></div>
+
+<div class="row new-white-bg py-3">
+    <div class="col-md-4 col-lg-3 py-1 ta-c ">
+        <button type="button" class="ta-c new-tab-head-invoice">
+            <!-- <img src="../../../../assets/icons/sidenavIcons/enquiry1.png" width="18px" style="margin-top: -3px;"
+                alt="">&nbsp; -->
+                APP DATA</button>
+    </div>
+    <div class="col-md-4 col-lg-3 py-1 ta-c ">
+        
+    </div>
+    <div class="col-md-4 col-lg-6 pl-0 ml-0 ta-c">
+        <!-- <ng-container>
+            <button type="button" mat-raised-button class="fr-side   new-tab-side-enquiry" (click)="updateAppData()">UPDATE APP DATA</button>
+        </ng-container> -->
+
+    </div>
+
+</div>
+<div class="row" style="margin-top: -17px;">
+    <div class="col-md-4 col-lg-3 ta-c">
+        <ng-container>
+            <img src="../../../../assets/img/down-triangle.png" width="30px" alt="">
+        </ng-container>
+    </div>
+    <div class="col-md-4 col-lg-3 ta-c">
+    </div>
+    <div class="col-md-4 col-lg-3">
+    </div>
+</div>
+<ng-container *ngIf="updateDataFlag">
+    <trends-update-app-data class="mb-5" [InutDataObj]="passObj"
+    (onActon)="onCardAction($event)"></trends-update-app-data>
+</ng-container>
+
+<ng-container *ngFor="let aData of appData;let i = index">
+    <ng-container>
+<div class="row new-white-bg mb-3 py-3">
+    <div class="col-md-8">
+    <h6 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">
+        <ng-container *ngIf="aData.appId == 'msd'">MS-HSD</ng-container>
+        <ng-container *ngIf="aData.appId == 'lpg'">LPG</ng-container>
+        <ng-container *ngIf="aData.appId == 'bitumen'">BITUMEN</ng-container>
+    </h6>
+    </div>
+    <div class="col-md-4 pb-10">
+          <ng-container>
+            <button type="button" mat-raised-button class="fr-side   new-tab-side-enquiry" (click)="updateAppData(aData, target)">UPDATE APP DATA</button>
+        </ng-container>
+    </div>
+
+    <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+        <span class="pt-5 new-666666 fl">Support Number</span>
+        <span class="pt-5 new-333333 fr">{{aData.supportNumber}}</span>
+    </div>
+
+    <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+        <span class="pt-5 new-666666 fl">WhatsApp Number</span>
+        <span class="pt-5 new-333333 fr">{{aData.whatsAppNumber}}</span>
+    </div>
+
+    <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+        <span class="pt-5 new-666666 fl">Message 1</span>
+        <span class="pt-5 new-333333 fr">{{aData.message1}}</span>
+    </div>
+
+    <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+        <span class="pt-5 new-666666 fl">Message 2</span>
+        <span class="pt-5 new-333333 fr">{{aData.message2}}</span>
+    </div>
+
+    <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+        <span class="pt-5 new-666666 fl">Message 3</span>
+        <span class="pt-5 new-333333 fr">{{aData.message3}}</span>
+    </div>
+
+    <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+        <span class="pt-5 new-666666 fl">Message 4</span>
+        <span class="pt-5 new-333333 fr">{{aData.message4}}</span>
+    </div>
+
+    <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+        <span class="pt-5 new-666666 fl">Message 5</span>
+        <span class="pt-5 new-333333 fr">{{aData.message5}}</span>
+    </div>
+</div>
+
+</ng-container>
+</ng-container>

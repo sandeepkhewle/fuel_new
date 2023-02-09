@@ -1,0 +1,117 @@
+<div class="row new-white-bg mb-10">
+    <div class="col-md-12 pt-20">
+        <div class="fyt-display-flex">
+            <h3 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">{{status}} New Trends </h3>
+            <span class="sp"></span>
+            <span class="new-Montserrat-Medium fyt-link-btn new-808080" > <span style="border-bottom: 1px solid #808080;" (click)="closeDialog('cancel')">Close &nbsp;x</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-12 py-3">
+        <div class="row">
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>App Name</mat-label>
+                    <mat-select name="appId" [(ngModel)]="trendsObj.appId" (ngModelChange)="showInputFields()">
+                        <mat-option *ngFor="let app1 of appIdArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Valid From</mat-label>
+                    <input matInput [matDatepicker]="validFrom" [(ngModel)]="trendsObj.validFrom" name="validFrom"  (click)="validFrom.open()" [ngModelOptions]="{standalone: true}" (keydown)="false" required>
+                    <mat-datepicker-toggle matSuffix [for]="validFrom"></mat-datepicker-toggle>
+                    <mat-datepicker #validFrom></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Valid Through</mat-label>
+                    <input matInput [matDatepicker]="validThrough" [(ngModel)]="trendsObj.validThrough" name="validThrough" [min]="trendsObj.validFrom"  (click)="validThrough.open()" [ngModelOptions]="{standalone: true}" (keydown)="false" required>
+                    <mat-datepicker-toggle matSuffix [for]="validThrough"></mat-datepicker-toggle>
+                    <mat-datepicker #validThrough></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend Date</mat-label>
+                    <input matInput [matDatepicker]="trendDate" [(ngModel)]="trendsObj.trendDate" name="trendDate"  (click)="trendDate.open()" [min]="trendsObj.validFrom" [max]="trendsObj.validThrough" [ngModelOptions]="{standalone: true}" (keydown)="false" required>
+                    <mat-datepicker-toggle matSuffix [for]="trendDate"></mat-datepicker-toggle>
+                    <mat-datepicker #trendDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend Unite</mat-label>
+                    <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite">
+                        <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <ng-container *ngIf="msdFlag">
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>MS</mat-label>
+                    <input matInput type="text" name="ms" [(ngModel)]="trendsObj.ms">
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>HSD</mat-label>
+                    <input matInput type="text" name="hsd" [(ngModel)]="trendsObj.hsd">
+                </mat-form-field>
+            </div>
+        </ng-container>
+            <ng-container *ngIf="lpgFlag">
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Fourteen Kg</mat-label>
+                    <input matInput type="text" name="fourteenKg" [(ngModel)]="trendsObj.fourteenKg">
+                </mat-form-field>
+            </div>
+            
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nineteen Kg</mat-label>
+                    <input matInput type="text" name="nineteenKg" [(ngModel)]="trendsObj.nineteenKg">
+                </mat-form-field>
+            </div>
+        </ng-container>
+
+            <ng-container *ngIf="bitumenFlag">
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Bitumen</mat-label>
+                    <input matInput type="text" name="bitumen" [(ngModel)]="trendsObj.bitumen">
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Furnace Oil</mat-label>
+                    <input matInput type="text" name="furnaceOil" [(ngModel)]="trendsObj.furnaceOil">
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>LDO</mat-label>
+                    <input matInput type="text" name="ldo" [(ngModel)]="trendsObj.ldo">
+                </mat-form-field>
+            </div>
+        </ng-container>
+            <div class="col-lg-12 ta-c pb-20">
+                <button class="new-btn-8CC63F-popup px-5 py-1" (click)="createTrend()">{{status}} Trend</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

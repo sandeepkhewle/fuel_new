@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="fyt-login-container">
+        <div class="col-md-4 col-4 offset-4 offset-md-4">
+            <div class="ta-c">
+                <!-- <img src="../../../../assets//img/logo.png" width="100%" alt="TRENDS"> -->
+                <h6 class="new-Montserrat-Medium new-000000 fnt-30 py-2" style="font-weight: 500;">TRENDS</h6>
+            </div>
+        </div>
+        <mat-card>
+            <mat-card-title>Login <br>
+                <p class="fnt-14">to access TRENDS dashboard</p>
+            </mat-card-title>
+            <mat-card-content>
+                <form #loginForm="ngForm" (ngSubmit)="login()">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Mobile Number</mat-label>
+                        <!-- <mat-icon matPrefix svgIcon="fyt-user-icon"> &nbsp;</mat-icon> -->
+                        <input required type="text" name="phoneNo" matInput placeholder="Phone No" [(ngModel)]="loginObj.phoneNo">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <!-- <mat-icon matPrefix svgIcon="fyt-lock-icon"> &nbsp;</mat-icon> -->
+                        <input required type="password" name="password" matInput placeholder="********" [(ngModel)]="loginObj.password">
+                    </mat-form-field>
+                    <ng-container *ngIf="errorMessage">
+                        <p class="animated fadeInUp slow fyt-error-message">{{errorMessage}}</p>
+                    </ng-container>
+                    <div class="fyt-display-flex">
+                        <!-- <mat-checkbox>Remember Me</mat-checkbox> -->
+                        <span class="sp"></span>
+                        <!-- <a [routerLink]="['/forgetpassword/otp-request']">Forgot Password?</a> -->
+                    </div>
+                    <button [disabled]="loginForm.invalid || disabledBtn" type="submit" mat-raised-button class="fyt-button fyt-full-screen fyt-fnt-bold">{{loginBtn}}</button>
+                </form>
+                <!-- <p class="pt-15 fnt-12 ta-l">Not a Registered Member? <a class="fnt-15" [routerLink]="['/register']">Register Now</a></p> -->
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

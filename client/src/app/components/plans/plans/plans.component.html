@@ -1,0 +1,213 @@
+<div #target></div>
+<div class="row new-white-bg py-3">
+    <div class="col-md-4 col-lg-3 py-1 ta-c ">
+        <button type="button" class="ta-c new-tab-head-invoice">
+            PLANS</button>
+    </div>
+    <div class="col-md-4 col-lg-3 py-1 ta-c ">
+    </div>
+    <div class="col-md-4 col-lg-6 pl-0 ml-0 ta-c">
+        <ng-container>
+            <button type="button" mat-raised-button class="fr-side   new-tab-side-enquiry" (click)="openPlanForm()">ADD
+                PLANS</button>
+        </ng-container>
+    </div>
+
+</div>
+<div class="row" style="margin-top: -17px;">
+    <div class="col-md-4 col-lg-3 ta-c">
+        <ng-container>
+            <img src="../../../../assets/img/down-triangle.png" width="30px" alt="">
+        </ng-container>
+    </div>
+    <div class="col-md-4 col-lg-3 ta-c">
+
+    </div>
+    <div class="col-md-4 col-lg-3">
+    </div>
+</div>
+
+<ng-container *ngIf="addNewPlanFlag">
+    <form #createPlanForm="ngForm">
+    <div class="row new-white-bg mb-3 py-3" style="margin-top: -7px;">
+        <div class="col-md-12 pt-10 pb-10">
+            <div class="fyt-display-flex">
+                <h3 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">{{titleState}} Plan </h3>
+                <span class="sp"></span>
+                <span class="new-Montserrat-Medium fyt-link-btn new-808080" > <span style="border-bottom: 1px solid #808080;" (click)="closeDialog('cancel')">Close &nbsp;x</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <mat-form-field appearance="outline">
+                <mat-label>App Name</mat-label>
+                <mat-select name="appId" [(ngModel)]="createPlanObj.appId" required>
+                    <mat-option *ngFor="let app1 of appIdArray" [value]="app1.value">{{app1.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+            <mat-form-field appearance="outline">
+                <mat-label>Plan Name</mat-label>
+                <input matInput type="text" name="planName" [(ngModel)]="createPlanObj.planName" required>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+            <mat-form-field appearance="outline">
+                <mat-label>Plan Type</mat-label>
+                <mat-select [(ngModel)]="createPlanObj.planType" name="planType" required>
+                    <mat-option value="Monthly">Monthly</mat-option>
+                    <mat-option value="Yearly">Yearly</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Duration</mat-label>
+                <mat-select [(ngModel)]="createPlanObj.duration" name="duration" required>
+                    <mat-option value="{{dur}}" *ngFor="let dur of durationList;let m = index">{{dur}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Valid Upto Day</mat-label>
+                <mat-select [(ngModel)]="createPlanObj.validUptoDay" name="validUptoDay" required>
+                    <mat-option value="{{valid}}" *ngFor="let valid of validUptoDayList;let n = index">{{valid}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Plan Cost</mat-label>
+                <input matInput type="number" name="planCost" [(ngModel)]="createPlanObj.planCost" required>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Plan Status</mat-label>
+                <mat-select [(ngModel)]="createPlanObj.planStatus" name="planStatus" required>
+                    <mat-option value="Active">Active</mat-option>
+                    <mat-option value="Inactive">Inactive</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput name="description" [(ngModel)]="createPlanObj.description" required></textarea>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-12 ta-c pb-20">
+            <button class="new-btn-8CC63F-popup px-5 py-1" (click)="createPlanFun()" [disabled]="createPlanForm.invalid">{{titleState}} Plan</button>
+        </div>
+    </div>
+    </form>
+</ng-container>
+
+
+<ng-container *ngFor="let plan of plansList;let i = index">
+    <ng-container>
+        <div class="row new-white-bg mb-3 py-3">
+            <div class="col-md-12">
+                <h6 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">
+                    <ng-container *ngIf="plan._id == 'msd'">MS-HSD</ng-container>
+                    <ng-container *ngIf="plan._id == 'lpg'">LPG</ng-container>
+                    <ng-container *ngIf="plan._id == 'bitumen'">BITUMEN</ng-container>
+                </h6>
+            </div>
+            <ng-container *ngFor="let item of plan.plans; let j = index">
+                <!-- <div class="col-md-12">
+            
+        </div> -->
+                <div class="col-md-12 col-lg-6 col-xl-6 col-sm-6 col-sx-6 col-12 px-4 py-4">
+                    <mat-card class="pl-0 pr-0"
+                        style="border-radius: 12px;box-shadow: 0px 15px 31px 8px rgba(61, 64, 164, 0.15) !important;">
+                        <div class="row">
+                            <div class="col-md-12 new-Montserrat-Medium">
+                                <h6 class="fnt-15">
+                                    {{item.planName | uppercase}} <span class="fr"><span
+                                            [ngClass]="(item.planStatus == 'Active') ? 'new-80B43F-dot' : 'new-AF272D-dot'"></span>
+                                        {{item.planStatus}}&nbsp;&nbsp;
+                                        <img src="../../../../assets/img/edit.png" width="18px" alt="edit" class="fyt-link-btn" (click)="editPlan(item, target)">
+                                    </span>
+                                
+                                </h6>
+                            </div>
+                            <div class="col-md-12" style="border-bottom: 1px solid lightgray;">
+                                <h6 class="new-Montserrat-Medium fnt-15 new-000000">
+                                    {{item.description | titlecase}}
+                                </h6>
+                            </div>
+                            <div class="col-md-12" style="border-bottom: 1px solid lightgray;">
+                                <div class="row new-Montserrat-Medium">
+                                    <div class="col-lg-4 new-border-right">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            APP NAME
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">
+                                            {{item.appId}}</span>
+                                    </div>
+                                    <div class="col-lg-4 new-border-right">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            PLAN TYPE
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">
+                                            {{item.planType}}</span>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            DURATION
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">
+                                            {{item.duration}} {{item.duration >1 ? 'Months' : 'Month'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12" style="border-bottom: 1px solid lightgray;">
+                                <div class="row new-Montserrat-Medium">
+                                    <div class="col-lg-4 new-border-right">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            PLAN COST
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">&#8377;
+                                            {{item.planCost}}</span>
+                                    </div>
+                                    <!-- <div class="col-lg-4 new-border-right">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            AMOUNT
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">&#8377;
+                                            {{item.amount}}</span>
+                                    </div> -->
+                                    <div class="col-lg-4 new-border-right">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            SGST / CGST
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">
+                                            {{item.sgst}}% / {{item.cgst}}%</span>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            IGST
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">
+                                            {{item.igst}}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h6 class="fnt-13 new-Montserrat-Medium new-000000 pt-3">Valid Up To Day
+                                    <b>{{item.validUptoDay}}</b> of the month
+                                </h6>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </ng-container>
+
+        </div>
+
+    </ng-container>
+</ng-container>

@@ -1,0 +1,281 @@
+<!-- <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Filters
+        </mat-panel-title>
+    </mat-expansion-panel-header> -->
+    <div class="row">
+        <div class="col-md-12">
+            <mat-card class="fyt-filter-bg">
+                <ng-container *ngIf="isShow">
+                    <!-- <div class="fyt-display-flex"> -->
+                    <div class="row pl-0 pr-0 ml-0 mr-0">
+                        <!-- <div class="fyt-pagelength-width">
+                            <mat-form-field >
+                                <mat-select (selectionChange)="applyPageLength($event.value)" [(ngModel)]="pageLength">
+                                    <mat-option *ngFor="let pagelength of pageLengths" [value]="pagelength.value">
+                                        {{pagelength.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <span class="fyt-label-filter">Row per page</span>
+                        <span class="sp"></span> -->
+                        <div class="col-10 col-md-10 col-lg-4 col-xl-6 pl-0 pr-0 ml-0 mr-0">
+                            <div class="fyt-search-box ml-10">
+                                <!-- <mat-form-field style="background: rgba(0, 0, 0, 0.05);border-radius: 30px;line-height: 1.0; border: none;padding-bottom: 0.25em;"> -->
+                                <mat-form-field>
+                                    <input type="text" matInput placeholder="Search..." (keyup.enter)='onSearch($event)'
+                                        [(ngModel)]="postObj.search">
+                                    <button matSuffix mat-icon-button aria-label="Clear" *ngIf="postObj.search"
+                                        (click)="clearSearch($event)" style="padding-right: 35px;">
+                                        <mat-icon style="font-size: 20px;">close</mat-icon>
+                                    </button>
+                                    <button matSuffix mat-icon-button (click)="onSearch($event)">
+                                        <mat-icon>search</mat-icon>
+                                        <!-- <img  src="../../../../../assets/img/Asset 225@1.5x.png" width="23px" style="box-shadow: 0px 0px 4px 0px darkgrey;
+                                    border-radius: 50px; margin-left: -20px;" alt=""> -->
+                                    </button>
+                                </mat-form-field>
+    
+    
+                                <!-- <form #searchForm="ngForm" class="input-field">
+                                <i class="material-icons suffix tooltipped" data-tooltip="I am tooltip">
+                                    <button type="button" class="" *ngIf="postObj.search" mat-icon-button (click)="clearSearch($event)" aria-label="clear">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </i>
+    
+                                <i class="material-icons suffix22 tooltipped" data-tooltip="I am tooltip">
+                                    <img type="submit" mat-icon-button suffix (click)="onSearch($event)" src="../../../../../assets/img/Asset 225@1.5x.png" width="23px" style="box-shadow: 0px 0px 4px 0px darkgrey;
+                                    border-radius: 50px;" alt="">
+                                </i>
+    
+                                <input type="text" [(ngModel)]="postObj.phoneNo" placeholder="Search..." (keyup.enter)='onSearch($event)' [(ngModel)]="postObj.search" name="searchBox" pattern="[0-9]{10,11}" class="py-1 new-Montserrat-Regular new-333333" id="icon_telephone">
+                            </form> -->
+                            </div>
+                        </div>
+                        <ng-container *ngIf="isMobile || isSmallScreen">
+                            <div class="col-2 col-md-2 col-lg-12 pl-0 pr-0 ml-0 mr-0 fr">
+                                <div class="fyt-filter-icon">
+                                    <!-- <button [matMenuTriggerFor]="membersMobileFilter" class="fr-imp" matTooltip="Filter Members" matTooltipPosition="before" mat-icon-button>
+                                    <mat-icon>filter_list</mat-icon>
+                                </button> -->
+                                    <img class="fr pt-10" [matMenuTriggerFor]="membersMobileFilter"
+                                        src="../../../../../assets/icons/new/filter.png" width="20px" alt="">
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="col-6 col-md-6 col-lg-2 col-xl-2 pl-0 pr-0 ml-0 mr-0">
+                            <!-- <div class="fr-side" *ngFor="let filter of filtersArray;">
+                                <span [ngClass]="filter.class" class=""
+                                    *ngIf="filter.type === 'count' && countsObj != undefined">{{filter.name}}
+                                    -
+                                    {{countsObj[filter.model]}}</span>
+                            </div> -->
+                        </div>
+    
+                        <!-- <span class="sp"></span> -->
+                        <!-- <div class="col-6 col-md-7 col-lg-3 col-xl-2 pl-0 pr-0 ml-0 mr-0">
+                            <span class="fyt-link-btn new-F7931E fr-side">
+                                <a (click)="getAttributes()"><img src="../../../../../assets/icons/new/Asset 18@2x.png"
+                                        width="20px" alt=""> &nbsp;<span class="new-Montserrat-Medium"
+                                        style="border-bottom: 1px solid #F7931E;"> Select columns</span></a>
+                            </span>
+                        </div> -->
+                       
+                        <div class="col-12 col-md-5 col-lg-3 col-xl-2 pl-0 pr-0 ta-r ml-0 mr-0">
+                            <span class="fyt-link-btn new-2E7D32 fr-side">
+                                <a (click)="!isRestricted && restrict() || isRestricted && downloadExcel()"><img
+                                        src="../../../../../assets/img/Asset 17@2x.png" width="20px" alt="">
+                                    &nbsp;<span class="new-Montserrat-Medium" style="border-bottom: 1px solid #2E7D32;">
+                                        Download Excel </span></a>
+                            </span>
+                        
+                        </div>
+
+                    </div>
+    
+                    <!-- filtes view -->
+                    <ng-container *ngIf="filterChips && filterChips.length > 0">
+                        <div class="fyt-filter-container">
+                            <mat-chip-list #chipList class="mt-chip-wrapper">
+                                <span class="fyt-filtered-by-lbl">Filtered&nbsp;By: </span>
+                                <mat-chip *ngFor="let filter of filterChips; let i = index;" selectable="true"
+                                    [removable]="!filter.nonRemovable" (removed)="removeAccountsFilter(filter)">
+                                    <ng-container *ngIf="filter.type=='select'">
+                                        <ng-container *ngIf="filter.display">
+                                            {{filter.name}} :&nbsp;{{filter.display}}
+                                        </ng-container>
+                                        <ng-container *ngIf="!filter.display">
+                                            {{filter.name}} :&nbsp;{{filter.value}}
+                                        </ng-container>
+                                    </ng-container>
+                                    <ng-container *ngIf="filter.type=='date'">
+                                        {{filter.name}} :&nbsp;{{filter.value|date:'dd MMM yyyy'}}
+                                    </ng-container>
+                                    <mat-icon matChipRemove *ngIf="!filter.nonRemovable">cancel</mat-icon>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </div>
+                    </ng-container>
+                    <!-- ./filtes view -->
+    
+                    <ng-container *ngIf="!(isMobile || isSmallScreen)">
+                        <div class="row">
+                            <div class="col-md-2 col-lg-1 pt-5">
+                                <div class="fyt-pagelength-width">
+                                    <mat-form-field>
+                                        <mat-select (selectionChange)="applyPageLength($event.value)"
+                                            [(ngModel)]="pageLength">
+                                            <mat-option *ngFor="let pagelength of pageLengths" [value]="pagelength.value">
+                                                {{pagelength.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <ng-container *ngFor="let filter of filtersArray;let i = index;">
+                                <ng-container
+                                    *ngIf="filter.type == 'select' && filter.options && filter.options.length > 0">
+                                    <div class="col-md-2 col-lg-1 pt-5">
+                                        <mat-form-field>
+                                            <mat-label>{{filter.name}}</mat-label>
+                                            <mat-select [(ngModel)]="postObj.filters[filter.model]" [name]="filter.model"
+                                                (change)="onChangeFilter(filter, filter.model, $event)"
+                                                [multiple]="filter.multiple" #filterSelect="ngModel">
+                                                <ng-container *ngIf="filter.multiple">
+                                                    <fyt-select-all [model]="filterSelect" [values]="filter">
+                                                    </fyt-select-all>
+                                                </ng-container>
+                                                <ng-container *ngIf="filter.value">
+                                                    <mat-option *ngFor="let option of filter.options"
+                                                        [value]="option[filter.value]">
+                                                        {{ option[filter.display] }}
+                                                    </mat-option>
+                                                </ng-container>
+                                                <ng-container *ngIf="!filter.value">
+                                                    <mat-option *ngFor="let option of filter.options" [value]="option">
+                                                        {{ option }}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="filter.type == 'date'">
+                                    <div class="col-md-2 col-lg-2 pt-5">
+                                        <mat-form-field>
+                                            <mat-label>{{filter.name}}</mat-label>
+                                            <input matInput [matDatepicker]="i" (click)="i.open()"
+                                                [(ngModel)]="postObj.filters[filter.model]"
+                                                [min]="postObj.filters[filter.min]" [max]="filter.max">
+                                            <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
+                                            <mat-datepicker #i></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                            <!-- <div class="col-md-2"> <button mat-raised-button class="fyt-button mr-5" (click)="getAttributes()">View Columns</button>
+                                </div> -->
+                            <div class="col-md-6 col-lg-5 pt-5">
+                                <!-- <button mat-raised-button class="fyt-button mr-5" (click)="downloadExcel()">Download
+                                    Excel</button> -->
+                                <button class="apply-button px-3" style="text-transform: capitalize;"
+                                    (click)="applyFilters()">Apply</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="clear-all-button px-3" style="text-transform: capitalize;"
+                                    (click)="clearFilters()">Clear</button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="!isShow">
+                    <h5 class="fyt-heading new-Montserrat-Medium">Select Columns</h5>
+                    <mat-checkbox class="pr-20 new-Montserrat-Medium" *ngFor="let column of columns" value="column.name"
+                        (click)="onChecked(column.name)" name="column.name" [checked]="loader2[column.name]">
+                        {{column.name | uppercase}}
+                    </mat-checkbox>
+    
+                    <div class="col-md-6">
+                        <!-- <button mat-raised-button class="fyt-button mr-5" (click)="columnStatus()">Apply
+                        </button> -->
+                        <button class="apply-button px-3 mr-5" style="text-transform: capitalize; "
+                            (click)="columnStatus()">Apply</button>
+                        <!-- <button mat-raised-button (click)="cancelColStatus()">Cancel</button> -->
+                        <button class="clear-all-button px-3 mt-2" style="text-transform: capitalize;"
+                            (click)="cancelColStatus()">Close</button>
+                    </div>
+                </ng-container>
+    
+            </mat-card>
+        </div>
+    </div>
+    <!-- </mat-expansion-panel> -->
+    
+    
+    
+    
+    
+    
+    <!--  -->
+    <mat-menu #membersMobileFilter overlapTrigger="false">
+        <div class="p-5">
+            <ng-container *ngFor="let filter of filtersArray;let i = index;">
+                <ng-container *ngIf="filter.type == 'select' && filter.options && filter.options.length > 0">
+                    <div class="fyt-filter-width" (click)="$event.stopPropagation()">
+                        <mat-form-field>
+                            <mat-label>{{filter.name}}</mat-label>
+                            <mat-select [(ngModel)]="postObj.filters[filter.model]" [name]="filter.model"
+                                (change)="onChangeFilter(filter, filter.model, $event)" [multiple]="filter.multiple"
+                                #filterSelect="ngModel">
+                                <ng-container *ngIf="filter.multiple">
+                                    <fyt-select-all [model]="filterSelect" [values]="filter"></fyt-select-all>
+                                </ng-container>
+                                <ng-container *ngIf="filter.value">
+                                    <mat-option *ngFor="let option of filter.options" [value]="option[filter.value]">
+                                        {{ option[filter.display] }}
+                                    </mat-option>
+                                </ng-container>
+                                <ng-container *ngIf="!filter.value">
+                                    <mat-option *ngFor="let option of filter.options" [value]="option">
+                                        {{ option }}
+                                    </mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="filter.type == 'date'">
+                    <div class="fyt-filter-width" (click)="$event.stopPropagation()">
+                        <mat-form-field>
+                            <mat-label>{{filter.name}}</mat-label>
+                            <input matInput [matDatepicker]="i" (click)="i.open()"
+                                [(ngModel)]="postObj.filters[filter.model]" [min]="postObj.filters[filter.min]"
+                                [max]="filter.max">
+                            <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
+                            <mat-datepicker #i></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <!-- <button mat-raised-button class="fyt-button fyt-full-screen mb-10" (click)="downloadExcel()">Download
+                Excel</button> -->
+            <!-- <button mat-raised-button class="fyt-button fyt-full-screen mb-10" (click)="applyFilters()">Apply
+                filters</button> -->
+    
+            <button class="apply-button px-3" style="text-transform: capitalize; width: 100%;"
+                (click)="applyFilters()">Apply</button>
+            <!-- <button mat-raised-button class="fyt-full-screen" (click)="clearFilters()" (click)="$event.stopPropagation()">Clear filters</button> -->
+    
+            <button class="clear-all-button px-3 mt-2" style="text-transform: capitalize;width: 100%;"
+                (click)="$event.stopPropagation()">Clear</button>
+        </div>
+    </mat-menu>
+    
+    
+    <!-- <ng-container *ngIf="restrictionFlag">
+        <div class="fyt-modal-design-branch animated slideInUp slow " style="z-index: 3;">
+            <fyt-restriction-popup [InutDataObj]="restrictionObj" (onActon)="onCardAction($event)">
+            </fyt-restriction-popup>
+        </div>
+    </ng-container> -->

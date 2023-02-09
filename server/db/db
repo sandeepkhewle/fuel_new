@@ -1,0 +1,37 @@
+// use trendsdb
+db.createUser(
+    {
+        user: "trendsUser",
+        pwd: "trendsPass",
+        roles: [
+            { role: "dbAdmin", db: "trendsdb" },
+            { role: "dbOwner", db: "trendsdb" },
+            { role: "userAdmin", db: "trendsdb" },
+            { role: "readWrite", db: "trendsdb" }
+        ]
+    }
+)
+
+//   mongo -u "trendsUser" -p "trendsPass" --authenticationDatabase "trendsdb"
+
+// live
+// use trendsdb
+db.createUser(
+    {
+        user: "trendsUser",
+        pwd: "livePass2021",
+        roles: [
+            { role: "dbAdmin", db: "trendsdb" },
+            { role: "dbOwner", db: "trendsdb" },
+            { role: "userAdmin", db: "trendsdb" },
+            { role: "readWrite", db: "trendsdb" }
+        ]
+    }
+)
+
+//   mongo -u "trendsUser" -p "livePass2021" --authenticationDatabase "trendsdb"
+
+
+// delete user
+use trendsdb
+db.dropUser("trendsUser") 

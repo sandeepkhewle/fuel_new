@@ -1,0 +1,99 @@
+<div class="row">
+    <ng-container *ngIf="chatWindowStatus">
+        <div class="fyt-custom-modal-design animated slideInUp slow ">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 strt-prctise1" style="border: 1px solid gray;">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 col-12 py-2" style="border-bottom: 1px solid lightgray;">
+                        <h5 class="ta-c">{{chatName}}</h5>
+                        <!-- <div class="col-md-2 col-xs-2 col-2 py-2" style="border-bottom: 1px solid lightgray;"> -->
+                        <span class="sp"></span>
+                        <!-- <button mat-icon-button (click)="closeDialog('cancel')">
+                                <mat-icon>clear</mat-icon>
+                            </button> -->
+                        <span class="new-Montserrat-Medium fyt-link-btn new-999999 fr" (click)="closeDialog('cancel')">
+                            <span style="border-bottom: 1px solid #999999;">Close &nbsp;x</span>
+                        </span>
+                    </div>
+
+                    <!-- </div> -->
+                    <!-- <div class="col-md-12">
+                        <div style="height: 50vh; overflow-y: scroll;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                            <div id="chatPanel" class="row">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-md-12" style="height: 50vh; overflow-y: scroll;" #scrollMe
+                        [scrollTop]="scrollMe.scrollHeight">
+                        <div class="row">
+                            <ng-container *ngFor="let cha of allChatArray;let m = index">
+                                <ng-container *ngIf="cha.userFlag == 'User'">
+                                    <div class="col-md-12 py-2 pl-0 pr-0 fl"
+                                        style="border-bottom: 1px solid lightgray;">
+                                        <div class="row">
+                                            <div class="col-md-12 fl">
+                                                <h6 class=" new-Montserrat-Medium fl fnt-15 new-0071BC">
+                                                    {{cha.userFlag}}
+                                                </h6>
+                                            </div>
+                                            <div class="col-md-12 fl" style="margin-top: -10px; margin-bottom: -10px;">
+                                                <p class=" new-Montserrat-Regular fl new-0071BC"><small>{{cha.chatTime |
+                                                        date:'dd MMM yyyy'}},&nbsp;{{cha.chatTime | date:"h:mm
+                                                        a"}}</small></p>
+                                            </div>
+                                            <div class="col-md-12 fl">
+                                                <h6 class=" new-Montserrat-Regular fnt-14 new-0071BC">
+                                                    <i>{{cha.message}}</i></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="cha.userFlag == 'Admin'">
+                                    <div class="col-md-12 py-2 pl-0 pr-0 fr"
+                                        style="border-bottom: 1px solid lightgray;">
+                                        <div class="row">
+                                            <div class="col-md-12 fr">
+                                                <h6 class="new-Montserrat-Medium fnt-15 new-DF5A24 fr">
+                                                    {{cha.userFlag}}
+                                                </h6>
+                                            </div>
+                                            <div class="col-md-12 fr" style="margin-top: -10px; margin-bottom: -10px;">
+                                                <p class="new-Montserrat-Regular new-DF5A24 fr"><small>{{cha.chatTime |
+                                                        date:'dd MMM yyyy'}},&nbsp;{{cha.chatTime | date:"h:mm
+                                                        a"}}</small></p>
+                                            </div>
+                                            <div class="col-md-12 fr">
+                                                <h6 class="new-Montserrat-Regular fnt-14 new-DF5A24 fr">
+                                                    <i>{{cha.message}}</i></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pr-4 pl-0 pt-10" style="bottom: 4px;position:initial;">
+                        <div class="row pl-0">
+                            <div class="col-md-10 pl-1 pr-1">
+                                <textarea class="form-control" type="text" name="text" id="" cols="100%" rows="2"
+                                    [(ngModel)]="typeMessage.message"></textarea>
+                            </div>
+                            <div class="col-md-2 pl-0 pr-0 py-2 fr">
+                                <!-- <button class="btn btn-chat" (click)="sendMessage()">SEND</button> -->
+                                <button type="button" mat-raised-button class="fr-side   new-tab-side-enquiry"
+                                    style="width: 100%;" (click)="sendMessage()">SEND</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <div class="col-md-12 pl-0 pr-0 ml-0 mr-0">
+        <ng-container *ngIf="postObj.page">
+            <trends-datatable class="mt-0 mb-0 pt-0 pb-0" [postObj]="postObj" (onSelectRows)="onRowsSelected($event)"
+                (onRowClickEvent)="onRowClick($event)" (onActonModal)="onModalAction($event)">
+            </trends-datatable>
+        </ng-container>
+    </div>
+
+</div>

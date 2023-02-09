@@ -1,0 +1,2 @@
+db.getCollection('payments').update({    "paymentStatus" : "Success","appId" : {$in:["lpg","bitumen"]},    
+"endDate" :{$lt: new Date("2022-05-01T00:00:00.000Z") }},{$set:{"endDate" : new Date("2022-07-31T00:00:00.000Z")}},{multi:true})

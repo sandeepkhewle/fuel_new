@@ -1,0 +1,60 @@
+{
+    "dashboardNav": [
+        {
+            "name": "Dashboard",
+            "uniqueName": "dashboard",
+            "url": "/trends/dashboard",
+            "icon": "dashboard.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Members",
+            "uniqueName": "members",
+            "url": "/trends/members",
+            "icon": "member.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Trends",
+            "uniqueName": "trends",
+            "url": "/trends/trends",
+            "icon": "trends.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Payments",
+            "uniqueName": "payments",
+            "url": "/trends/payments",
+            "icon": "payments.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Notifications",
+            "uniqueName": "notifications",
+            "url": "/trends/notifications",
+            "icon": "notifications.png",
+            "titleClass": ""
+        },
+        {
+            "name": "App Data",
+            "uniqueName": "appData",
+            "url": "/trends/app-data",
+            "icon": "app-data.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Plans",
+            "uniqueName": "plans",
+            "url": "/trends/plans",
+            "icon": "plans.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Chat",
+            "uniqueName": "chat",
+            "url": "/trends/chat",
+            "icon": "chat.png",
+            "titleClass": ""
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+<ng-container *ngIf="isLive">
+  <div class="">
+      <router-outlet></router-outlet>
+  </div>
+</ng-container>
+<ng-container *ngIf="!isLive">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="ta-c mt-no-internet">
+              <img src="../assets/img/No_Signal.png" alt="No internet" height="70" width="70">
+              <h3><strong>Please check your internet connection <br>or<br> Try again later</strong></h3>
+          </div>
+      </div>
+  </div>
+</ng-container>
