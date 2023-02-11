@@ -87,36 +87,9 @@ let sendNotificationByUserId = async (userId, message) => {
 // otp sms
 let sendOtpSms = async (appId, phoneNo, otp) => {
     console.log('----- sendInnerSms ------   ', appId, phoneNo);
-    // get senderId from appId
-    let senderId;
-    let templateId;
-    if (appId === 'msd') {
-        senderId = 'MSHSDT';
-        templateId = '1207162167923716557';
-        message = `Your MSHSD Trends OTP is ${otp}`;
-    }
-    if (appId === 'lpg') {
-        senderId = 'LPGTND';
-        templateId = '1207162167929043047';
-        message = `Your LPG Trends OTP is ${otp}`;
-    }
-    if (appId === 'bitumen') {
-        senderId = 'BITMNT';
-        templateId = '1207162167936396979';
-        message = `Your BITUMEN Trends OTP is ${otp}`;
-    }
-    console.log('senderId', senderId);
-    // message = encodeURIComponent(message);
-
-    // let url = `http://bulksms.whizsoftwares.com/http-api.php?username=fuelpricealertindia&password=Whiz1234&senderid=${senderId}&route=5&number=${phoneNo}&message=${message}&templateid=${templateId}`
-
-    // let message = `Dear Member, Your FYTRACK OTP is ${otp}`;
-    // let senderId = 'FYTRAK';
-    let msg = encodeURIComponent(message)
+    let msg = encodeURIComponent(`Your FuelPreAlert OTP is ${otp}.`)
     let apiKey = encodeURIComponent("Nzk3OTRiNTA0NzQ0NzY2ODRkNjQ0YzM3NzIzMzZlNTk=")
-    let url = `http://api.textlocal.in/send/?apikey=${apiKey}&sender=${senderId}&numbers=${phoneNo}&message=${msg}`;
-
-    
+    let url = `http://api.textlocal.in/send/?apikey=${apiKey}&sender=FuelPR&numbers=${phoneNo}&message=${msg}`;
     console.log('url', url);
     request({
         url: url,

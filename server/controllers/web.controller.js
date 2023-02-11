@@ -152,6 +152,40 @@ router.post('/verifyOtp', (req, res) => {
     })
 })
 
+// verify otp 
+router.post('/updateToken', (req, res) => {
+    console.log('/web/updateToken', req.body);
+    let userId = req.body.userId;
+    let token = req.body.token;
+    let payload;
+    authhService.updateToken(userId, token).then((userData) => {
+        try {
+            payload = JSON.parse(JSON.stringify(userData));
+            let token = jwt.sign(payload, jwtSecret, {
+                expiresIn: 32000000 // expires in one year
+            });
+            return token;
+        } catch (error) {
+            throw new Error("Failed")
+        }
+    }).then((tokenData) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "OTP verification success",
+            "payload": payload,
+            "jwt": tokenData
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": err.message
+        });
+    })
+})
+
 // check device 
 router.post('/checkDevice', (req, res) => {
     console.log('/web/checkDevice', req.body);

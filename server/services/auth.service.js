@@ -30,7 +30,7 @@ let sendOtp = async ({ appId, phoneNo }) => {
         if (phoneNo === "1234567890") otp = "1234";
         let gData = await usersModel.findOneAndUpdate({ appId: appId, phoneNo: phoneNo }, { otp: otp, otpTime: new Date() }, { new: true, upsert: true, setDefaultsOnInsert: true });
         console.log({ gData });
-        commService.sendOtpSms(appId, phoneNo, otp)
+        if (phoneNo != "1234567890") await commService.sendOtpSms(appId, phoneNo, otp)
         return;
     } catch (error) {
         throw error;
@@ -41,7 +41,7 @@ let sendOtp = async ({ appId, phoneNo }) => {
 let verifyOtp = async ({ appId, phoneNo, otp, deviceId }) => {
     try {
         let tenMinutErlTime = moment().subtract(10, 'minute');
-        console.log('tenMinutErlTime', tenMinutErlTime);
+        console.log('tenMinutErlTime', new Date(tenMinutErlTime));
         let gData = await usersModel.findOneAndUpdate({ appId: appId, phoneNo: phoneNo, otp: otp, otpTime: { $gte: new Date(tenMinutErlTime) } },
             { isOtpVerified: true, deviceId: deviceId },
             { new: true })
@@ -57,13 +57,11 @@ let verifyOtp = async ({ appId, phoneNo, otp, deviceId }) => {
 }
 
 // update token
-let updateToken = async (garageId, { token }) => {
+let updateToken = async (userId, token) => {
     try {
-        let gData = await usersModel.findOneAndUpdate({ garageId: garageId }, { token: token }, { new: true }).select({
-            garageId: 1, phoneNo: 1, garageName: 1, companyName: 1, ownerName: 1, emailId: 1, gstStatus: 1, token: 1
-        });
-        // console.log({ gData });
-        return gData;
+        let uData = await usersModel.findOneAndUpdate({ userId: userId }, { token: token }, { new: true }).select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1 });
+        // console.log({ uData });
+        return uData;
     } catch (error) {
         throw error;
     }
