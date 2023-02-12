@@ -8,6 +8,7 @@ const passKey = require('../config/config').config.passKey;
 // models
 const usersModel = require('../models/users.model');
 const adminModel = require('../models/admin.model');
+const versionControlsModel = require('../models/versionControl.model')
 
 // services
 const commService = require('../services/communication.service');
@@ -70,29 +71,10 @@ let updateToken = async (userId, token) => {
 // check version update
 let checkVersion = async (appId) => {
     try {
-        let newData = {
-            currentVersion: '1.6',
-            forceUpdate: true,
-            message: "Please update your app to latest version."
-        };
-
-        if (appId === "bitumen") {
-            newData = {
-                currentVersion: '1.3',
-                forceUpdate: true,
-                message: "Please update your app to latest version."
-            };
-        }
-
-        if (appId === "lpg") {
-            newData = {
-                currentVersion: '1.4',
-                forceUpdate: true,
-                message: "Please update your app to latest version."
-            };
-        }
-
-        return newData;
+        let newData = await versionControlsModel.findOne({ appId })
+        let vData;
+        if (newData) vData = JSON.parse(JSON.stringify(newData));
+        return vData;
     } catch (error) {
         throw error;
     }

@@ -240,6 +240,27 @@ router.post('/checkUser', (req, res) => {
     })
 })
 
+// check app version update
+router.post('/checkVersion', (req, res) => {
+    console.log('/web/checkVersion', req.body);
+    let appId = req.body.appId;
+    authhService.checkVersion(appId).then(payload => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Version check success",
+            "payload": payload
+        });
+    }).catch(error => {
+        console.log('error', error);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Version check Failed"
+        });
+    })
+});
+
 // change device request 
 router.post('/changeDevice', (req, res) => {
     console.log('/web/changeDevice', req.body);
@@ -345,26 +366,5 @@ router.post('/createInvoice', (req, res) => {
     })
 });
 
-
-// check app version update
-router.post('/checkVersion', (req, res) => {
-    console.log('/web/checkVersion', req.body);
-    let appId = req.body.appId;
-    authhService.checkVersion(appId).then(payload => {
-        res.status(res.statusCode).send({
-            "statusCode": "001",
-            "status": "Success",
-            "message": "Version check success",
-            "payload": payload
-        });
-    }).catch(error => {
-        console.log('error', error);
-        res.status(res.statusCode).send({
-            "statusCode": "002",
-            "status": "Failed",
-            "message": "Version check Failed"
-        });
-    })
-});
 
 module.exports = router;
