@@ -23,25 +23,25 @@ router.get('/bitumen/privacy.html', function (req, res) { res.render('bitumenpri
 //-----------admin api-----------
 
 // admin register
-// router.post('/adminRegister', (req, res) => {
-//     console.log('/web/adminRegister', req.body);
-//     let data = req.body;
-//     adminService.registerAdmin(data).then((payload) => {
-//         res.status(res.statusCode).send({
-//             "statusCode": "001",
-//             "status": "Success",
-//             "message": "Admin registerd successfully",
-//             "payload": payload
-//         });
-//     }).catch(err => {
-//         console.log('err', err);
-//         res.status(res.statusCode).send({
-//             "statusCode": "002",
-//             "status": "Failed",
-//             "message": err.message
-//         });
-//     })
-// })
+router.post('/adminRegister', (req, res) => {
+    console.log('/web/adminRegister', req.body);
+    let data = req.body;
+    adminService.registerAdmin(data).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Admin registerd successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": err.message
+        });
+    })
+})
 
 // admin login 
 router.post('/adminLogin', (req, res) => {
