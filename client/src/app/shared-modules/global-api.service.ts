@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 @Injectable()
 export class GlobalApiService {
-  public API_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost') ? ':3737' : '';
-  public SOCKET_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost') ? ':3737' : '';
+  public API_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost') ? ':4108' : '';
+  public SOCKET_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost') ? ':4108' : '';
 
   // public CUSTOM_API = 'https://staging.fytrack.com';
   public CUSTOM_API = '192.168.1.115';
