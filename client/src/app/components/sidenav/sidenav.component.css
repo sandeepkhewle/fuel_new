@@ -44,6 +44,14 @@ h1.fyt-app-name {
     flex: 1;
 }
 
+.fyt-sidenav-container-color {
+    background-color: #232D30;
+}
+
+.fyt-sidenav-container-textcolor {
+    color: goldenrod;
+}
+
 .fyt-is-mobile .fyt-sidenav-container {
     flex: 1 0 auto;
 }
@@ -54,12 +62,23 @@ h1.fyt-app-name {
     color: #007bff;
     padding-left: 5px;
 }
+/* 
+.fyt-marginremove {
+    margin: 0;
+    border-radius: 0;
+} */
+
+/* .fyt-width100{
+    width: 100%;
+} */
 
 .mat-list-base .mat-list-item,
 .mat-list-base .mat-list-option {
     height: 47px;
     width: 88%;
+    color: white;
 }
+
 @media (max-width: 600px) {
     .fyt-modal-design-branch {
         min-width: 40%;
@@ -89,6 +108,7 @@ h1.fyt-app-name {
         width: 100%;
         border-radius: 5px;
     }
+
     .mat-drawer.mat-drawer-side,
     .mat-drawer {
         /* margin: 10px; */

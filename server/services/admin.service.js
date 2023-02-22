@@ -182,23 +182,24 @@ let dashBoardSummary = async () => {
                     { "name": "Inactive Users", "value": msdInactiveUsers },
                     { "name": "Total Subsription", "value": msdTotalSub },
                     { "name": "Subsription last month", "value": msdMonthSub }]
-                },
-                {
-                    "name": "lpg",
-                    "data": [{ "name": "Total Users", "value": lpgTotalUsers },
-                    { "name": "Active Users", "value": lpgActiveUsers },
-                    { "name": "Inactive Users", "value": lpgInactiveUsers },
-                    { "name": "Total Subsription", "value": lpgTotalSub },
-                    { "name": "Subsription last month", "value": lpgMonthSub }]
-                },
-                {
-                    "name": "bitumen",
-                    "data": [{ "name": "Total Users", "value": bitumenTotalUsers },
-                    { "name": "Active Users", "value": bitumenActiveUsers },
-                    { "name": "Inactive Users", "value": bitumenInactiveUsers },
-                    { "name": "Total Subsription", "value": bitumenTotalSub },
-                    { "name": "Subsription last month", "value": bitumenMonthSub }]
                 }
+                // ,
+                // {
+                //     "name": "lpg",
+                //     "data": [{ "name": "Total Users", "value": lpgTotalUsers },
+                //     { "name": "Active Users", "value": lpgActiveUsers },
+                //     { "name": "Inactive Users", "value": lpgInactiveUsers },
+                //     { "name": "Total Subsription", "value": lpgTotalSub },
+                //     { "name": "Subsription last month", "value": lpgMonthSub }]
+                // },
+                // {
+                //     "name": "bitumen",
+                //     "data": [{ "name": "Total Users", "value": bitumenTotalUsers },
+                //     { "name": "Active Users", "value": bitumenActiveUsers },
+                //     { "name": "Inactive Users", "value": bitumenInactiveUsers },
+                //     { "name": "Total Subsription", "value": bitumenTotalSub },
+                //     { "name": "Subsription last month", "value": bitumenMonthSub }]
+                // }
             ]
         };
         return data;
