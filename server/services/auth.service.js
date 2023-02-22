@@ -8,6 +8,7 @@ const passKey = require('../config/config').config.passKey;
 // models
 const usersModel = require('../models/users.model');
 const adminModel = require('../models/admin.model');
+const versionControlsModel = require('../models/versionControl.model')
 
 // services
 const commService = require('../services/communication.service');
@@ -30,7 +31,7 @@ let sendOtp = async ({ appId, phoneNo }) => {
         if (phoneNo === "1234567890") otp = "1234";
         let gData = await usersModel.findOneAndUpdate({ appId: appId, phoneNo: phoneNo }, { otp: otp, otpTime: new Date() }, { new: true, upsert: true, setDefaultsOnInsert: true });
         console.log({ gData });
-        commService.sendOtpSms(appId, phoneNo, otp)
+        if (phoneNo != "1234567890") await commService.sendOtpSms(appId, phoneNo, otp)
         return;
     } catch (error) {
         throw error;
@@ -41,11 +42,9 @@ let sendOtp = async ({ appId, phoneNo }) => {
 let verifyOtp = async ({ appId, phoneNo, otp, deviceId }) => {
     try {
         let tenMinutErlTime = moment().subtract(10, 'minute');
-        console.log('tenMinutErlTime', tenMinutErlTime);
-        let gData = await usersModel.findOneAndUpdate({ appId: appId, phoneNo: phoneNo, otp: otp, otpTime: { $gte: new Date(tenMinutErlTime) } },
-            { isOtpVerified: true, deviceId: deviceId },
-            { new: true })
-            .select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1 });
+        console.log('tenMinutErlTime', appId, phoneNo, otp, deviceId, new Date(tenMinutErlTime));
+        let gData = await usersModel.findOneAndUpdate({ appId: appId, phoneNo: phoneNo, otp: otp, otpTime: { $gte: new Date(tenMinutErlTime) } }, { isOtpVerified: true, deviceId: deviceId }, { new: true })
+        .select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1 });
         console.log({ gData });
         return gData;
     } catch (error) {
@@ -57,13 +56,11 @@ let verifyOtp = async ({ appId, phoneNo, otp, deviceId }) => {
 }
 
 // update token
-let updateToken = async (garageId, { token }) => {
+let updateToken = async (userId, token) => {
     try {
-        let gData = await usersModel.findOneAndUpdate({ garageId: garageId }, { token: token }, { new: true }).select({
-            garageId: 1, phoneNo: 1, garageName: 1, companyName: 1, ownerName: 1, emailId: 1, gstStatus: 1, token: 1
-        });
-        // console.log({ gData });
-        return gData;
+        let uData = await usersModel.findOneAndUpdate({ userId: userId }, { token: token }, { new: true }).select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1 });
+        // console.log({ uData });
+        return uData;
     } catch (error) {
         throw error;
     }
@@ -72,29 +69,10 @@ let updateToken = async (garageId, { token }) => {
 // check version update
 let checkVersion = async (appId) => {
     try {
-        let newData = {
-            currentVersion: '1.6',
-            forceUpdate: true,
-            message: "Please update your app to latest version."
-        };
-
-        if (appId === "bitumen") {
-            newData = {
-                currentVersion: '1.3',
-                forceUpdate: true,
-                message: "Please update your app to latest version."
-            };
-        }
-
-        if (appId === "lpg") {
-            newData = {
-                currentVersion: '1.4',
-                forceUpdate: true,
-                message: "Please update your app to latest version."
-            };
-        }
-
-        return newData;
+        let newData = await versionControlsModel.findOne({ appId })
+        let vData;
+        if (newData) vData = JSON.parse(JSON.stringify(newData));
+        return vData;
     } catch (error) {
         throw error;
     }

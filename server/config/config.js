@@ -17,7 +17,7 @@ let config = {
         s3url: "https://s3.ap-south-1.amazonaws.com/infotecindia",
 
         // database
-        database: 'mongodb://localhost:27017/trendsdb',
+        database: 'mongodb://localhost:27017/fuledb',
         secret_key: "MRy1NTqbVgkkYcz3sp2m5iLiaPlLoD0RMRy1NTqbVgkkYcz3sp2m5iLiaPlLoD0R",
         autoIndex: true,
         mongooseDebug: false,
@@ -66,7 +66,7 @@ let config = {
         s3url: "https://s3.ap-south-1.amazonaws.com/infotecindia",
 
         // database
-        database: 'mongodb://localhost:27017/trendsdb',
+        database: 'mongodb://localhost:27017/fuledb',
         secret_key: "MRy1NTqbVgkkYcz3sp2m5iLiaPlLoD0RMRy1NTqbVgkkYcz3sp2m5iLiaPlLoD0R",
         autoIndex: true,
         mongooseDebug: false,
