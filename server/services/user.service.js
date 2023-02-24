@@ -9,6 +9,7 @@ const passKey = require('../config/config').config.passKey;
 // models
 const userModel = require('../models/users.model');
 const paymenModel = require('../models/payments.model');
+const versionControlsModel = require('../models/versionControl.model')
 
 let makeid = async (length) => {
     var result = [];
@@ -55,7 +56,7 @@ let registerNewUser = async ({ appId, fullName, phoneNo, emailId, deviceId, pass
             "firmName": "",
             "invoiceNo": "10029",
             // do not delete - will be used in future to set free plan for 10 days
-            "endDate": new Date(moment().add(60, 'days')), 
+            "endDate": new Date(moment().add(60, 'days')),
             "startDate": new Date(),
             "discount": 0,
             "payableAmount": 0,
@@ -119,11 +120,21 @@ let changeDeviceApprove = async ({ appId, phoneNo }) => {
     }
 }
 
+let updateVersion = async ({ appId, androidVersion, iosVersion }) => {
+    try {
+        await versionControlsModel.findOneAndUpdate({ appId: appId }, { androidVersion: androidVersion, iosVersion: iosVersion }, { new: true, upsert: true });
+        return;
+    } catch (error) {
+        throw error;
+    }
+}
+
 
 module.exports = {
     registerNewUser: registerNewUser,
     checkDevice: checkDevice,
     checkUser: checkUser,
     changeDeviceRequest: changeDeviceRequest,
-    changeDeviceApprove: changeDeviceApprove
+    changeDeviceApprove: changeDeviceApprove,
+    updateVersion: updateVersion
 }
