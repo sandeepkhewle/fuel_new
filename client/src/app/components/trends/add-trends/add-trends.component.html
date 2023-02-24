@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
-                    <mat-label>App Name</mat-label>
+                    <mat-label>Product Name</mat-label>
                     <mat-select name="appId" [(ngModel)]="trendsObj.appId" (ngModelChange)="showInputFields()">
                         <mat-option *ngFor="let app1 of appIdArray" [value]="app1.value">{{app1.name}}</mat-option>
                     </mat-select>

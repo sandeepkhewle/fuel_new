@@ -6,7 +6,7 @@
 </ng-container>
 <div class="row pl-0 pr-0 ml-0 mr-0">
     <ng-container *ngFor="let item of summaryData; let i = index">
-    <div class="col-md-4 px-2">
+    <div class="col-md-6 px-2">
         <div class="row py-3 pl-0 pr-0" [ngClass]="{'new-msd-bg': item.name == 'msd','new-lpg-bg': item.name == 'lpg','new-bitumen-bg': item.name == 'bitumen'}">
             <div class="col-md-12 px-3 py-2">
                 <h6 class="new-Montserrat-Medium fnt-15 new-ffffff">{{item.name | uppercase}}</h6>

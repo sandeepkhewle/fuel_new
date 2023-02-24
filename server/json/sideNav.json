@@ -55,6 +55,55 @@
             "url": "/trends/chat",
             "icon": "chat.png",
             "titleClass": ""
+        },
+        {
+            "name": "All Users",
+            "uniqueName": "allUsers",
+            "url": "/trends/chat",
+            "icon": "chat.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Add Posts",
+            "uniqueName": "addPosts",
+            "url": "/trends/chat",
+            "icon": "chat.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Fortnight Pro",
+            "uniqueName": "updateFProducts",
+            "url": "/trends/chat",
+            "icon": "chat.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Monthly Pro",
+            "uniqueName": "updateMProducts",
+            "url": "/trends/chat",
+            "icon": "chat.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Send Notifications",
+            "uniqueName": "sendNotifications",
+            "url": "/trends/chat",
+            "icon": "chat.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Import Excel",
+            "uniqueName": "importExcel",
+            "url": "/trends/chat",
+            "icon": "chat.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Change Plan",
+            "uniqueName": "changePlan",
+            "url": "/trends/chat",
+            "icon": "chat.png",
+            "titleClass": ""
         }
     ]
 }
