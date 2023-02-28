@@ -57,8 +57,9 @@ export class AddTrendsComponent implements OnInit, OnChanges {
   ];
   appId2Array: any = [
     {
-      "name": "MS-HSD",
-      "value": "msd"
+      "name": "BITUMEN",
+      "value": "BITUMEN",
+      "trendType": "bitumen"
     },
     {
       "name": "LPG",
