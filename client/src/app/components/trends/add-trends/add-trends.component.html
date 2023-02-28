@@ -12,6 +12,24 @@
         <div class="row">
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
+                    <mat-label>Product Timeline</mat-label>
+                    <mat-select name="timelineId" [(ngModel)]="trendsObj.timelineId" (ngModelChange)="showUpdateFields()">
+                        <mat-option *ngFor="let app1 of timelineIdArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-4" *ngIf="updateFortFlag">
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Name</mat-label>
+                    <mat-select name="appId2" [(ngModel)]="trendsObj.appId2" (ngModelChange)="showInput1Fields()">
+                        <mat-option *ngFor="let app1 of appId2Array" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-4" *ngIf="updateMonthFlag">
+                <mat-form-field appearance="outline">
                     <mat-label>Product Name</mat-label>
                     <mat-select name="appId" [(ngModel)]="trendsObj.appId" (ngModelChange)="showInputFields()">
                         <mat-option *ngFor="let app1 of appIdArray" [value]="app1.value">{{app1.name}}</mat-option>
@@ -27,6 +45,7 @@
                     <mat-datepicker #validFrom></mat-datepicker>
                 </mat-form-field>
             </div>
+            
 
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
@@ -45,6 +64,7 @@
                     <mat-datepicker #trendDate></mat-datepicker>
                 </mat-form-field>
             </div>
+
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
                     <mat-label>Trend Unite</mat-label>
@@ -52,7 +72,8 @@
                         <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
+            </div>            
+
             <ng-container *ngIf="msdFlag">
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">

@@ -36,77 +36,139 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ]
 })
-export class AddTrendsComponent implements OnInit, OnChanges  {
-  @Input() InutDataObj:any;
+export class AddTrendsComponent implements OnInit, OnChanges {
+  @Input() InutDataObj: any;
   @Output() onActon = new EventEmitter<any>();
-  trendsObj:any={};
-  status:any = 'Create'
-  appIdArray:any=[
-  {
+  trendsObj: any = {};
+  status: any = 'Create'
+  appIdArray: any = [
+    {
       "name": "MS-HSD",
       "value": "msd"
-  },
-  {
+    },
+    {
       "name": "LPG",
       "value": "lpg"
-  },
-  {
+    },
+    {
       "name": "BITUMEN",
       "value": "bitumen"
-  }
+    }
+  ];
+  appId2Array: any = [
+    {
+      "name": "MS-HSD",
+      "value": "msd"
+    },
+    {
+      "name": "LPG",
+      "value": "lpg"
+    },
+    {
+      "name": "BITUMEN",
+      "value": "bitumen"
+    },
+    {
+      "name": "BITdgdfgUMEN",
+      "value": "bitsdfsdumen"
+    }
+
+  ];
+  timelineIdArray: any = [
+    {
+      "name": "Update Fortnight Product",
+      "value": "ufp"
+    },
+    {
+      "name": "Update Monthly Product",
+      "value": "ump"
+    }
   ];
 
-  msdFlag:boolean=false;
-  lpgFlag:boolean=false;
-  bitumenFlag:boolean=false;
-  trendsUnitArray:any=[
-    'KL', 'CYLINDER', 'MT' 
+  msdFlag: boolean = false;
+  lpgFlag: boolean = false;
+  bitumenFlag: boolean = false;
+  updateFortFlag: boolean = false;
+  updateMonthFlag: boolean = false;
+  trendsUnitArray: any = [
+    'KL', 'CYLINDER', 'MT'
   ];
   constructor(
-    public trendsService:TrendsService
+    public trendsService: TrendsService
   ) { }
 
   ngOnInit(): void {
     if (this.InutDataObj.appId) {
       this.trendsObj = this.InutDataObj;
       this.status = this.InutDataObj.status;
-      this.checkInputFields();
-    }else{
-      this.showInputFields();
+      this.checkUpdateFields();
+    } else {
+      this.showUpdateFields();
     }
   }
 
   ngOnChanges() {
   }
 
-  showInputFields(){
-    this.msdFlag=false;
-    this.lpgFlag=false;
-    this.bitumenFlag=false;
-  
+  showUpdateFields() {
+    this.updateFortFlag = false;
+    this.updateMonthFlag = false;
+
+    if (this.trendsObj.timelineId == 'ufp') {
+      this.trendsObj = {};
+      this.trendsObj.timelineId = 'ufp';
+      this.updateFortFlag = true;
+    }
+    if (this.trendsObj.timelineId == 'ump') {
+      this.trendsObj = {};
+      this.trendsObj.timelineId = 'ump';
+      this.updateMonthFlag = true;
+    }
+  }
+  checkUpdateFields() {
+    this.updateFortFlag = false;
+    this.updateMonthFlag = false;
+
+    if (this.trendsObj.timelineId == 'ufp') {
+      // this.trendsObj={};
+      this.trendsObj.timelineId = 'ufp';
+      this.updateFortFlag = true;
+    }
+    if (this.trendsObj.timelineId == 'ump') {
+      // this.trendsObj={};
+      this.trendsObj.timelineId = 'ump';
+      this.updateMonthFlag = true;
+    }
+  }
+
+  showInputFields() {
+    this.msdFlag = false;
+    this.lpgFlag = false;
+    this.bitumenFlag = false;
+
 
     if (this.trendsObj.appId == 'msd') {
-      this.trendsObj={};
+      this.trendsObj = {};
       this.trendsObj.appId = 'msd';
       this.msdFlag = true;
     }
     if (this.trendsObj.appId == 'lpg') {
-      this.trendsObj={};
+      this.trendsObj = {};
       this.trendsObj.appId = 'lpg';
       this.lpgFlag = true;
     }
     if (this.trendsObj.appId == 'bitumen') {
-      this.trendsObj={};
+      this.trendsObj = {};
       this.trendsObj.appId = 'bitumen';
       this.bitumenFlag = true;
     }
   }
 
-  checkInputFields(){
-    this.msdFlag=false;
-    this.lpgFlag=false;
-    this.bitumenFlag=false;
-  
+  checkInputFields() {
+    this.msdFlag = false;
+    this.lpgFlag = false;
+    this.bitumenFlag = false;
+
 
     if (this.trendsObj.appId == 'msd') {
       // this.trendsObj={};
@@ -125,12 +187,58 @@ export class AddTrendsComponent implements OnInit, OnChanges  {
     }
   }
 
-  
-  closeDialog(flag:any) {
+  showInput1Fields() {
+    this.msdFlag = false;
+    this.lpgFlag = false;
+    this.bitumenFlag = false;
+
+
+    if (this.trendsObj.appId2 == 'msd') {
+      this.trendsObj = {};
+      this.trendsObj.appId2 = 'msd';
+      this.msdFlag = true;
+    }
+    if (this.trendsObj.appId2 == 'lpg') {
+      this.trendsObj = {};
+      this.trendsObj.appId2 = 'lpg';
+      this.lpgFlag = true;
+    }
+    if (this.trendsObj.appId2 == 'bitumen') {
+      this.trendsObj = {};
+      this.trendsObj.appId2 = 'bitumen';
+      this.bitumenFlag = true;
+    }
+  }
+
+  checkInput1Fields() {
+    this.msdFlag = false;
+    this.lpgFlag = false;
+    this.bitumenFlag = false;
+
+
+    if (this.trendsObj.appId2 == 'msd') {
+      // this.trendsObj={};
+      this.trendsObj.appId2 = 'msd';
+      this.msdFlag = true;
+    }
+    if (this.trendsObj.appId2 == 'lpg') {
+      // this.trendsObj={};
+      this.trendsObj.appId2 = 'lpg';
+      this.lpgFlag = true;
+    }
+    if (this.trendsObj.appId2 == 'bitumen') {
+      // this.trendsObj={};
+      this.trendsObj.appId2 = 'bitumen';
+      this.bitumenFlag = true;
+    }
+  }
+
+
+  closeDialog(flag: any) {
     this.onActon.emit({ flag: flag, page: 'addTrends' });
   }
 
-  createTrend(){
+  createTrend() {
     if (this.InutDataObj.appId) {
       this.trendsService.updateTrendsFun(this.trendsObj).subscribe(res => {
         if (res.status == 'Success') {
@@ -139,7 +247,7 @@ export class AddTrendsComponent implements OnInit, OnChanges  {
         else {
         }
       });
-    }else{
+    } else {
       this.trendsService.createTrendsFun(this.trendsObj).subscribe(res => {
         if (res.status == 'Success') {
           this.closeDialog('cancel');
@@ -147,7 +255,7 @@ export class AddTrendsComponent implements OnInit, OnChanges  {
         else {
         }
       });
-    } 
+    }
   }
 
 
