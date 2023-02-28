@@ -118,8 +118,8 @@
         "page": "trends",
         "attributes": [
             {
-                "name": "APP NAME",
-                "prop": "appId",
+                "name": "Trends Type",
+                "prop": "trendType",
                 "sortable": true,
                 "pipe": "",
                 "class": "ta-l text-capitalize",

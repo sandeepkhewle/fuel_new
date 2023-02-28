@@ -7,10 +7,11 @@ const trendsModel = require('../models/trends.model');
 //services
 const commService = require('../services/communication.service');
 
-let createNewTrend = async ({ appId, trendType, validFrom, validThrough, trendDate, trendUnite, ms, hsd, fourteenKg, nineteenKg, bitumen, furnaceOil, ldo }) => {
+let createNewTrend = async ({ trendType, trend, trendName, trendDate, trendUnite, productName, validFrom, validThrough }) => {
     try {
+
         await trendsModel.create({
-            appId: appId, trendType: trendType, validFrom: validFrom, validThrough: validThrough, trendDate: trendDate, trendUnite: trendUnite, ms: ms, hsd: hsd, fourteenKg: fourteenKg, nineteenKg: nineteenKg, bitumen: bitumen, furnaceOil: furnaceOil, ldo: ldo, createdAt: new Date()
+            trendType: trendType, trend: trend, trendName: trendName, trendDate: trendDate, trendUnite: trendUnite, productName: productName, validFrom: validFrom, validThrough: validThrough, createdAt: new Date()
         })
         // await commService.sendNotification({ appId: appId, category: "all members", data: {}, message: "New trend added", title: "Trends Update" })
         return;
@@ -19,60 +20,60 @@ let createNewTrend = async ({ appId, trendType, validFrom, validThrough, trendDa
     }
 }
 
-let updateTrend = async ({ appId, trendsId, trendType, validFrom, validThrough, trendDate, trendUnite, ms, hsd, fourteenKg, nineteenKg, bitumen, furnaceOil, ldo }) => {
+let updateTrend = async ({ trendsId, trendType, trend, trendUnite, productName, validFrom, validThrough, trendName }) => {
     try {
-        let updateObj = {};
+        let updateObj = {
+            updatedAt: new Date()
+        };
         if (trendType) updateObj.trendType = trendType;
+        if (trendName) updateObj.trendName = trendName;
+        if (trendUnite) updateObj.trendUnite = trendUnite;
+        if (trend) updateObj.trend = trend;
+        if (productName) updateObj.productName = productName;
         if (validFrom) updateObj.validFrom = validFrom;
         if (validThrough) updateObj.validThrough = validThrough;
 
-        if (trendDate) updateObj.trendDate = trendDate;
-        if (trendUnite) updateObj.trendUnite = trendUnite;
-        if (ms) updateObj.ms = ms;
-        if (hsd) updateObj.hsd = hsd;
-        if (fourteenKg) updateObj.fourteenKg = fourteenKg;
-        if (nineteenKg) updateObj.nineteenKg = nineteenKg;
-        if (bitumen) updateObj.bitumen = bitumen;
-        if (furnaceOil) updateObj.furnaceOil = furnaceOil;
-        if (ldo) updateObj.ldo = ldo;
-
-        await trendsModel.findOneAndUpdate({ appId: appId, trendsId: trendsId }, updateObj, { new: true })
+        await trendsModel.findOneAndUpdate({ trendsId: trendsId }, updateObj, { new: true })
         return;
     } catch (error) {
         throw error;
     }
 }
 
-let deleteTrend = async ({ appId, trendsId }) => {
+let deleteTrend = async ({ trendsId }) => {
     try {
-        await trendsModel.remove({ appId: appId, trendsId: trendsId })
+        await trendsModel.remove({ trendsId: trendsId })
         return;
     } catch (error) {
         throw error;
     }
 }
 
-let getFutureTrend = async ({ appId }) => {
+let getFutureTrend = async ({ trendName, trendType }) => {
     try {
-        let dateToday = new Date()
-        let tData = await trendsModel.find({
-            appId: appId,
-            trendDate: { $gte: new Date(dateToday) },
-        });
+        // let dateToday = new Date()
+        let tData = await trendsModel.aggregate([{ $sort: { "validThrough": -1 } }, {
+            $match: {
+                trendName: trendName,
+                trendType: trendType,
+                trendDate: { $gte: new Date() },
+            }
+        }, { $group: { _id: "$trendType", data: { "$push": "$$ROOT" } } }]);
         return tData;
     } catch (error) {
         throw error;
     }
 }
 
-let getPastTrend = async ({ appId }) => {
+let getPastTrend = async ({ trendName, trendType }) => {
     try {
         let tData = await trendsModel.aggregate([{ $sort: { "validThrough": -1 } }, {
             $match: {
-                appId: appId,
+                trendName: trendName,
+                trendType: trendType,
                 trendDate: { $lte: new Date() },
             }
-        }, { $limit: 5 }]);
+        }, { $group: { _id: "$trendType", data: { "$push": "$$ROOT" } } }]);
         return tData;
     } catch (error) {
         throw error;

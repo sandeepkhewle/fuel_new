@@ -43,7 +43,7 @@
                                         <mat-menu #actionFilter overlapTrigger="false">
                                             <ng-container *ngIf="propdata.actions && propdata.actions.length > 0">
                                                 <ng-container *ngFor="let action of propdata.actions">
-                                                    <button mat-menu-item (click)="onAction(action.function, row)">{{action.name}}xxx</button>
+                                                    <button mat-menu-item (click)="onAction(action.function, row)">{{action.name}}</button>
                                                 </ng-container>
                                             </ng-container>
                                         </mat-menu>
