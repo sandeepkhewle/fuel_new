@@ -180,7 +180,7 @@ let getMsdList = (req) => {
         sort[orderby] = orderin;
         let search = req.body.search;
         let filters = req.body.filters;
-        let matchObj = { "trendType": "fortnight" }
+        let matchObj = { trendType: "fortnight" }
         if (search) {
             matchObj['$or'] = [
                 { $text: { $search: search } }

@@ -52,12 +52,13 @@ let deleteTrend = async ({ trendsId }) => {
 let getFutureTrend = async ({ trendName, trendType }) => {
     try {
         // let dateToday = new Date()
+        let matchObj = {
+            trendName: trendName,
+            trendDate: { $gte: new Date() },
+        }
+        if (trendType) matchObj.trendType = trendType;
         let tData = await trendsModel.aggregate([{ $sort: { "validThrough": -1 } }, {
-            $match: {
-                trendName: trendName,
-                trendType: trendType,
-                trendDate: { $gte: new Date() },
-            }
+            $match: matchObj
         }, { $group: { _id: "$trendType", data: { "$push": "$$ROOT" } } }]);
         return tData;
     } catch (error) {
@@ -67,12 +68,13 @@ let getFutureTrend = async ({ trendName, trendType }) => {
 
 let getPastTrend = async ({ trendName, trendType }) => {
     try {
+        let matchObj = {
+            trendName: trendName,
+            trendDate: { $lte: new Date() },
+        }
+        if (trendType) matchObj.trendType = trendType;
         let tData = await trendsModel.aggregate([{ $sort: { "validThrough": -1 } }, {
-            $match: {
-                trendName: trendName,
-                trendType: trendType,
-                trendDate: { $lte: new Date() },
-            }
+            $match: matchObj
         }, { $group: { _id: "$trendType", data: { "$push": "$$ROOT" } } }]);
         return tData;
     } catch (error) {
