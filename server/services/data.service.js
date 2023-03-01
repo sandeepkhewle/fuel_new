@@ -77,7 +77,7 @@ let getnotificationList = async ({ appId }) => {
 
 let getAppData = async (userId, { appId }) => {
     try {
-        let userCount = await userModel.count({ appId: appId });
+        let userCount = await userModel.find({ appId: appId }).count()
         let aData = await addDataModel.findOne({ appId: appId })
         let newData = JSON.parse(JSON.stringify(aData));
         newData.isSubscribedPlan = false;
