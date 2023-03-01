@@ -44,27 +44,27 @@ export class AddTrendsComponent implements OnInit, OnChanges {
   monthlyArray: any = [
     {
       "name": "LPG/GAS CYL (DOM)",
-      "value":"LPG/GAS CYL (DOM)",
+      "value": "LPG/GAS CYL (DOM)",
       "trendType": "lpg"
     },
     {
       "name": "MTO",
-      "value":"MTO",
+      "value": "MTO",
       "trendType": "mto"
     },
     {
       "name": "HEXANE",
-      "value":"HEXANE",
+      "value": "HEXANE",
       "trendType": "hexane"
     },
     {
       "name": "KEROSENE",
-      "value":"KEROSENE",
+      "value": "KEROSENE",
       "trendType": "kerosene"
     },
     {
       "name": "LPG/GAS CYL (NON-DOM)",
-      "value":"LPG/GAS CYL (NON-DOM)",
+      "value": "LPG/GAS CYL (NON-DOM)",
       "trendType": "lpg"
     }
   ];
@@ -75,30 +75,40 @@ export class AddTrendsComponent implements OnInit, OnChanges {
       "trendType": "bitumen"
     },
     {
-      "name": "FO",
-      "value": "FO",
-      "trendType":""
+      "name": "FURNACE OIL",
+      "value": "FURNACE OIL",
+      "trendType": "furnaceOil"
     },
     {
-      "name": "HSD(Institutional)",
-      "value": "HSD(Institutional)",
-      "trendType":""
+      "name": "HSD(INSTITUTIONAL)",
+      "value": "HSD(INSTITUTIONAL)",
+      "trendType": "hsd"
     },
     {
       "name": "LDO",
       "value": "LDO",
-      "trendType":""
+      "trendType": "ldo"
     }
 
   ];
-  timelineIdArray: any = [
+  trendNames: any = [
     {
-      "name": "Update Fortnight Product",
-      "value": "ufp"
+      "name": "Fortnight Product",
+      "value": "fortnight"
     },
     {
-      "name": "Update Monthly Product",
-      "value": "ump"
+      "name": "Monthly Product",
+      "value": "monthly"
+    }
+  ];
+  trendArray: any = [
+    {
+      "name": "+",
+      "value": "+"
+    },
+    {
+      "name": "-",
+      "value": "-"
     }
   ];
 
@@ -130,55 +140,42 @@ export class AddTrendsComponent implements OnInit, OnChanges {
   showUpdateFields() {
     this.updateFortFlag = false;
     this.updateMonthFlag = false;
+    if (this.trendsObj.trendName == 'fortnight') this.updateFortFlag = true;
+    if (this.trendsObj.trendName == 'monthly') this.updateMonthFlag = true;
 
-    if (this.trendsObj.timelineId == 'ufp') {
-      this.trendsObj = {};
-      this.trendsObj.timelineId = 'ufp';
-      this.updateFortFlag = true;
-    }
-    if (this.trendsObj.timelineId == 'ump') {
-      this.trendsObj = {};
-      this.trendsObj.timelineId = 'ump';
-      this.updateMonthFlag = true;
-    }
   }
   checkUpdateFields() {
     this.updateFortFlag = false;
     this.updateMonthFlag = false;
-
-    if (this.trendsObj.timelineId == 'ufp') {
-      // this.trendsObj={};
-      this.trendsObj.timelineId = 'ufp';
-      this.updateFortFlag = true;
-    }
-    if (this.trendsObj.timelineId == 'ump') {
-      // this.trendsObj={};
-      this.trendsObj.timelineId = 'ump';
-      this.updateMonthFlag = true;
-    }
+    if (this.trendsObj.trendName == 'fortnight') this.updateFortFlag = true;
+    if (this.trendsObj.trendName == 'monthly') this.updateMonthFlag = true;
   }
 
-  showInputFields() {
-    this.msdFlag = false;
-    this.lpgFlag = false;
-    this.bitumenFlag = false;
+  showInputFields(data: any) {
+    this.trendsObj.trendType = data.trendType;
+    this.trendsObj.productName = data.value;
+    console.log(this.trendsObj, "this.trendsObj");
+
+    // this.msdFlag = false;
+    // this.lpgFlag = false;
+    // this.bitumenFlag = false;
 
 
-    if (this.trendsObj.appId == 'msd') {
-      this.trendsObj = {};
-      this.trendsObj.appId = 'msd';
-      this.msdFlag = true;
-    }
-    if (this.trendsObj.appId == 'lpg') {
-      this.trendsObj = {};
-      this.trendsObj.appId = 'lpg';
-      this.lpgFlag = true;
-    }
-    if (this.trendsObj.appId == 'bitumen') {
-      this.trendsObj = {};
-      this.trendsObj.appId = 'bitumen';
-      this.bitumenFlag = true;
-    }
+    // if (this.trendsObj.appId == 'msd') {
+    //   this.trendsObj = {};
+    //   this.trendsObj.appId = 'msd';
+    //   this.msdFlag = true;
+    // }
+    // if (this.trendsObj.appId == 'lpg') {
+    //   this.trendsObj = {};
+    //   this.trendsObj.appId = 'lpg';
+    //   this.lpgFlag = true;
+    // }
+    // if (this.trendsObj.appId == 'bitumen') {
+    //   this.trendsObj = {};
+    //   this.trendsObj.appId = 'bitumen';
+    //   this.bitumenFlag = true;
+    // }
   }
 
   checkInputFields() {
