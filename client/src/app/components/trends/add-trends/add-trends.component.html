@@ -68,9 +68,7 @@
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
                     <mat-label>Trend Value</mat-label>
-                    <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite">
-                        <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
-                    </mat-select>
+                    <input matInput type="text" name="trendValue" [(ngModel)]="trendsObj.trendValue">
                 </mat-form-field>
             </div> 
 
