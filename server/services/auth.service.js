@@ -44,10 +44,11 @@ let verifyOtp = async ({ appId, phoneNo, otp, deviceId }) => {
         let tenMinutErlTime = moment().subtract(10, 'minute');
         console.log('tenMinutErlTime', appId, phoneNo, otp, deviceId, new Date(tenMinutErlTime));
         let gData = await usersModel.findOneAndUpdate({ appId: appId, phoneNo: phoneNo, otp: otp, otpTime: { $gte: new Date(tenMinutErlTime) } }, { isOtpVerified: true, deviceId: deviceId }, { new: true })
-        .select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1 });
+            .select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1 });
         console.log({ gData });
         return gData;
     } catch (error) {
+        console.log("error", error);
         if (error.codeName === 'DuplicateKey') {
             throw new Error("This device is already registered with another mobile number")
         }
