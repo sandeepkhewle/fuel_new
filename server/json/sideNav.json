@@ -48,6 +48,13 @@
             "url": "/trends/chat",
             "icon": "chat.png",
             "titleClass": ""
+        },
+        {
+            "name": "Add Data",
+            "uniqueName": "addData",
+            "url": "/trends/app-data",
+            "icon": "addData.png",
+            "titleClass": ""
         }
     ]
 }

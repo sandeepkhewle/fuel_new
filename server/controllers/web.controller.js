@@ -132,6 +132,7 @@ router.post('/verifyOtp', (req, res) => {
             });
             return token;
         } catch (error) {
+            console.log("error", error);
             throw new Error("Failed")
         }
     }).then((tokenData) => {
