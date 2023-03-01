@@ -41,37 +41,53 @@ export class AddTrendsComponent implements OnInit, OnChanges {
   @Output() onActon = new EventEmitter<any>();
   trendsObj: any = {};
   status: any = 'Create'
-  appIdArray: any = [
+  monthlyArray: any = [
     {
-      "name": "MS-HSD",
-      "value": "msd"
+      "name": "LPG/GAS CYL (DOM)",
+      "value":"LPG/GAS CYL (DOM)",
+      "trendType": "lpg"
     },
     {
-      "name": "LPG",
-      "value": "lpg"
+      "name": "MTO",
+      "value":"MTO",
+      "trendType": "mto"
     },
     {
-      "name": "BITUMEN",
-      "value": "bitumen"
+      "name": "HEXANE",
+      "value":"HEXANE",
+      "trendType": "hexane"
+    },
+    {
+      "name": "KEROSENE",
+      "value":"KEROSENE",
+      "trendType": "kerosene"
+    },
+    {
+      "name": "LPG/GAS CYL (NON-DOM)",
+      "value":"LPG/GAS CYL (NON-DOM)",
+      "trendType": "lpg"
     }
   ];
-  appId2Array: any = [
+  fortnightArray: any = [
     {
       "name": "BITUMEN",
       "value": "BITUMEN",
       "trendType": "bitumen"
     },
     {
-      "name": "LPG",
-      "value": "lpg"
+      "name": "FO",
+      "value": "FO",
+      "trendType":""
     },
     {
-      "name": "BITUMEN",
-      "value": "bitumen"
+      "name": "HSD(Institutional)",
+      "value": "HSD(Institutional)",
+      "trendType":""
     },
     {
-      "name": "BITdgdfgUMEN",
-      "value": "bitsdfsdumen"
+      "name": "LDO",
+      "value": "LDO",
+      "trendType":""
     }
 
   ];

@@ -23,7 +23,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Product Name</mat-label>
                     <mat-select name="appId2" [(ngModel)]="trendsObj.appId2" (ngModelChange)="showInput1Fields()">
-                        <mat-option *ngFor="let app1 of appId2Array" [value]="app1.value">{{app1.name}}</mat-option>
+                        <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -32,7 +32,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Product Name</mat-label>
                     <mat-select name="appId" [(ngModel)]="trendsObj.appId" (ngModelChange)="showInputFields()">
-                        <mat-option *ngFor="let app1 of appIdArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        <mat-option *ngFor="let app1 of monthlyArray" [value]="app1.value">{{app1.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -67,14 +67,25 @@
 
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
+                    <mat-label>Trend Value</mat-label>
+                    <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite">
+                        <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> 
+
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
                     <mat-label>Trend Unite</mat-label>
                     <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite">
                         <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>            
+            </div> 
+            
+            
 
-            <ng-container *ngIf="msdFlag">
+            <!-- <ng-container *ngIf="msdFlag">
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
                     <mat-label>MS</mat-label>
@@ -88,8 +99,8 @@
                     <input matInput type="text" name="hsd" [(ngModel)]="trendsObj.hsd">
                 </mat-form-field>
             </div>
-        </ng-container>
-            <ng-container *ngIf="lpgFlag">
+        </ng-container> -->
+            <!-- <ng-container *ngIf="lpgFlag">
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
                     <mat-label>Fourteen Kg</mat-label>
@@ -103,9 +114,9 @@
                     <input matInput type="text" name="nineteenKg" [(ngModel)]="trendsObj.nineteenKg">
                 </mat-form-field>
             </div>
-        </ng-container>
+        </ng-container> -->
 
-            <ng-container *ngIf="bitumenFlag">
+            <!-- <ng-container *ngIf="bitumenFlag">
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
                     <mat-label>Bitumen</mat-label>
@@ -126,7 +137,7 @@
                     <input matInput type="text" name="ldo" [(ngModel)]="trendsObj.ldo">
                 </mat-form-field>
             </div>
-        </ng-container>
+        </ng-container> -->
             <div class="col-lg-12 ta-c pb-20">
                 <button class="new-btn-8CC63F-popup px-5 py-1" (click)="createTrend()">{{status}} Trend</button>
             </div>
