@@ -27,7 +27,7 @@ export class TrendsComponent implements OnInit {
 
   ngOnInit(): void {
     this.applyFilters();
-    this.changeTrends('msd');
+    this.changeTrends('fortnight');
   }
 
   applyFilters() {
@@ -43,16 +43,16 @@ export class TrendsComponent implements OnInit {
     this.lpgFlag = false;
     this.bitumenFlag = false;
 
-    if (name == 'msd') {
+    if (name == 'fortnight') {
       this.postObj = {
-        page : 'msd'
+        page : 'fortnight'
       }
       this.applyFilters();
       this.msdFlag = true;
     }
-    if (name == 'lpg') {
+    if (name == 'monthly') {
       this.postObj = {
-        page : 'lpg'
+        page : 'monthly'
       }
       this.applyFilters();
       this.lpgFlag = true;

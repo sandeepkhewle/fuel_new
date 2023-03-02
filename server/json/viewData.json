@@ -112,7 +112,7 @@
             }
         ]
     },
-    "msd": {
+    "fortnight": {
         "index": 0,
         "name": "Trends",
         "page": "trends",
@@ -130,10 +130,10 @@
             {
                 "name": "VALID FROM",
                 "prop": "validFrom",
-                "sortable": false,
+                "sortable": true,
                 "pipe": "date",
                 "class": "ta-l",
-                "colSize": 150,
+                "colSize": 110,
                 "label": false,
                 "headerClass": ""
             },
@@ -142,9 +142,9 @@
                 "prop": "validThrough",
                 "sortable": true,
                 "pipe": "date",
-                "class": "ta-r",
-                "headerClass": "ta-c",
-                "colSize": 150,
+                "class": "ta-l",
+                "headerClass": "",
+                "colSize": 110,
                 "label": false
             },
             {
@@ -168,18 +168,8 @@
                 "label": false
             },
             {
-                "name": "MS",
-                "prop": "ms",
-                "sortable": false,
-                "pipe": "",
-                "class": "ta-c",
-                "headerClass": "ta-c",
-                "colSize": 80,
-                "label": false
-            },
-            {
-                "name": "HSD",
-                "prop": "hsd",
+                "name": "TREND",
+                "prop": "trend",
                 "sortable": false,
                 "pipe": "",
                 "class": "ta-c",
@@ -219,14 +209,14 @@
             }
         ]
     },
-    "lpg": {
+    "monthly": {
         "index": 0,
-        "name": "Trends",
-        "page": "trends",
+        "name": "Monthly",
+        "page": "monthly",
         "attributes": [
             {
-                "name": "APP NAME",
-                "prop": "appId",
+                "name": "Trends Type",
+                "prop": "trendType",
                 "sortable": true,
                 "pipe": "",
                 "class": "ta-l text-capitalize",
@@ -237,10 +227,10 @@
             {
                 "name": "VALID FROM",
                 "prop": "validFrom",
-                "sortable": false,
+                "sortable": true,
                 "pipe": "date",
                 "class": "ta-l",
-                "colSize": 150,
+                "colSize": 110,
                 "label": false,
                 "headerClass": ""
             },
@@ -249,9 +239,9 @@
                 "prop": "validThrough",
                 "sortable": true,
                 "pipe": "date",
-                "class": "ta-r",
-                "headerClass": "ta-c",
-                "colSize": 150,
+                "class": "ta-l",
+                "headerClass": "",
+                "colSize": 110,
                 "label": false
             },
             {
@@ -275,18 +265,8 @@
                 "label": false
             },
             {
-                "name": "FOURTEEN KG DOM",
-                "prop": "fourteenKg",
-                "sortable": false,
-                "pipe": "",
-                "class": "ta-c",
-                "headerClass": "ta-c",
-                "colSize": 80,
-                "label": false
-            },
-            {
-                "name": "NINETEEN KG COM",
-                "prop": "nineteenKg",
+                "name": "TREND",
+                "prop": "trend",
                 "sortable": false,
                 "pipe": "",
                 "class": "ta-c",

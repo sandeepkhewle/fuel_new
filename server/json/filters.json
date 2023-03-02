@@ -91,7 +91,7 @@
             "max": ""
         }
     ],
-    "msd": [
+    "fortnight": [
         {
             "name": "Page Length",
             "model": "limit",
@@ -139,7 +139,7 @@
             "max": ""
         }
     ],
-    "lpg": [
+    "monthly": [
         {
             "name": "Page Length",
             "model": "limit",

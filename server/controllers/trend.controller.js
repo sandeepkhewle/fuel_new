@@ -7,7 +7,7 @@ const trendService = require('../services/trend.service');
 
 // create new trend
 router.post('/create', (req, res) => {
-    console.log('/trend/create');
+    console.log('/trend/create', req.body);
     let data = req.body;
     trendService.createNewTrend(data).then(() => {
         res.status(res.statusCode).send({

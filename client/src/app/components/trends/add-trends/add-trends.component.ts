@@ -150,34 +150,15 @@ export class AddTrendsComponent implements OnInit, OnChanges {
     if (this.trendsObj.trendName == 'fortnight') this.updateFortFlag = true;
     if (this.trendsObj.trendName == 'monthly') this.updateMonthFlag = true;
   }
-
   showInputFields(data: any) {
-    this.trendsObj.trendType = data.trendType;
-    this.trendsObj.productName = data.value;
-    console.log(this.trendsObj, "this.trendsObj");
+    let selectedArray = [];
+    if (this.updateFortFlag == true) selectedArray = this.fortnightArray
+    if (this.updateMonthFlag == true) selectedArray = this.monthlyArray
+    let obj = selectedArray.find((o: any) => o.value === data)
+    this.trendsObj.trendType = obj.trendType;
+    this.trendsObj.productName = obj.value;
 
-    // this.msdFlag = false;
-    // this.lpgFlag = false;
-    // this.bitumenFlag = false;
-
-
-    // if (this.trendsObj.appId == 'msd') {
-    //   this.trendsObj = {};
-    //   this.trendsObj.appId = 'msd';
-    //   this.msdFlag = true;
-    // }
-    // if (this.trendsObj.appId == 'lpg') {
-    //   this.trendsObj = {};
-    //   this.trendsObj.appId = 'lpg';
-    //   this.lpgFlag = true;
-    // }
-    // if (this.trendsObj.appId == 'bitumen') {
-    //   this.trendsObj = {};
-    //   this.trendsObj.appId = 'bitumen';
-    //   this.bitumenFlag = true;
-    // }
   }
-
   checkInputFields() {
     this.msdFlag = false;
     this.lpgFlag = false;
@@ -200,7 +181,6 @@ export class AddTrendsComponent implements OnInit, OnChanges {
       this.bitumenFlag = true;
     }
   }
-
   showInput1Fields() {
     this.msdFlag = false;
     this.lpgFlag = false;

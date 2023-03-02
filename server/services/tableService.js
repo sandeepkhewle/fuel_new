@@ -19,11 +19,11 @@ let chooseTable = (page, req) => {
             case 'members':
                 resolve(getMemberList(req))
                 break;
-            case 'msd':
-                resolve(getMsdList(req))
+            case 'fortnight':
+                resolve(getFortnightList(req))
                 break;
-            case 'lpg':
-                resolve(getLpgList(req))
+            case 'monthly':
+                resolve(getMonthlyProductList(req))
                 break;
             case 'bitumen':
                 resolve(getBitumenList(req))
@@ -165,7 +165,7 @@ let getMemberList = (req) => {
 }
 
 //msd trends list function
-let getMsdList = (req) => {
+let getFortnightList = (req) => {
     return new Promise((resolve, reject) => {
         let sendObj = {};
         let query = [];
@@ -180,7 +180,7 @@ let getMsdList = (req) => {
         sort[orderby] = orderin;
         let search = req.body.search;
         let filters = req.body.filters;
-        let matchObj = { trendType: "fortnight" }
+        let matchObj = { trendName: "fortnight" }
         if (search) {
             matchObj['$or'] = [
                 { $text: { $search: search } }
@@ -205,25 +205,6 @@ let getMsdList = (req) => {
         query.push({ $skip: skip });
         query.push({ $limit: limit });
 
-        query.push({
-            $project: {
-                appId: 1,
-                trendsId: 1,
-                trendType: 1,
-                validFrom: 1,
-                validThrough: 1,
-                trendDate: 1,
-                trendUnite: 1,
-                ms: 1,
-                hsd: 1,
-                fourteenKg: 1,
-                nineteenKg: 1,
-                bitumen: 1,
-                furnaceOil: 1,
-                ldo: 1,
-                createdAt: 1
-            }
-        })
         trendsModel.aggregate(query).then(async userData => {
             let total = await trendsModel.aggregate([{ $match: matchObj }, { $count: "count" }])
             sendObj.userData = userData;
@@ -241,8 +222,8 @@ let getMsdList = (req) => {
     })
 }
 
-//lpg trends list function
-let getLpgList = (req) => {
+//monthly trends list function
+let getMonthlyProductList = (req) => {
     return new Promise((resolve, reject) => {
         let sendObj = {};
         let query = [];
@@ -257,7 +238,7 @@ let getLpgList = (req) => {
         sort[orderby] = orderin;
         let search = req.body.search;
         let filters = req.body.filters;
-        let matchObj = { appId: 'lpg' }
+        let matchObj = { trendName: "monthly" }
         if (search) {
             matchObj['$or'] = [
                 { $text: { $search: search } }
