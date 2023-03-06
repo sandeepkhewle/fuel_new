@@ -54,8 +54,8 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             firmName: firmName
         }
 
-        let cData = await counterSchema.findOneAndUpdate({ appId: appId, counterName: "Invoice Number" }, { $inc: { counter: 1 } }, { new: true })
-        createobj.invoiceNo = cData.counter;
+        // let cData = await counterSchema.findOneAndUpdate({ appId: appId, counterName: "Invoice Number" }, { $inc: { counter: 1 } }, { new: true })
+        createobj.invoiceNo = 1
         let pT = (pD.planType === 'Monthly') ? 'months' : 'years';
 
         let validUpto = moment().add(pT, pD.duration).set("date", pD.validUptoDay);
@@ -163,14 +163,14 @@ const paymentUpdate = async (orderId, CHECKSUMHASH) => {
     })
 }
 
+
 const createinvoice = async (orderId) => {
     try {
         console.log('createinvoice', orderId);
         let pData = await paymentsModel.findOne({ orderId: orderId });
         let appId = pData.appId;
-        let appName = "MS-HSD";
-        if (appId === 'lpg') appName = "LPG";
-        if (appId === 'bitumen') appName = "BITUMEN";
+        let appName = "FUEL";
+  
 
         let pendingStepCount = 2;
         const pdfFile = "./public/Invoice/" + orderId + ".pdf";
@@ -198,7 +198,7 @@ const createinvoice = async (orderId) => {
 
         doc.fontSize(24)
         doc.font('Times-Roman')
-        doc.text(`${appName} - TRENDS`, { align: 'center' }, y - 10)
+        doc.text(`${appName}`, { align: 'center' }, y - 10)
 
 
         // if (logoData) {
@@ -314,7 +314,7 @@ const convertImg = (imgLink) => {
         })
     })
 }
-
+createinvoice("fuel_060323_cwhgoqrclex3onvy")
 module.exports = {
     initiatePayment: initiatePayment,
     paymentUpdate: paymentUpdate,

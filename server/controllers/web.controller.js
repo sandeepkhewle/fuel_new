@@ -388,5 +388,24 @@ router.post('/createInvoice', (req, res) => {
     })
 });
 
+router.post('/gstgetamount', (req, res) => {
+    console.log("gstgetamount " + JSON.stringify(req.body));
+    let amount = req.body.amount;
+    let sgst = 9; cgst = 9, igst = 18;
+    let total = amount * cgst / 100;
+    let amountTotal = amount + total + total
+    res.status(res.statusCode).send({
+        "StatusCode": "001",
+        "Status": "Success",
+        "cgstPercentage": cgst + "%",
+        "sgstPercentage": sgst + "%",
+        "igstPercentage": igst + "%",
+        "cgstAmount": total,
+        "sgstAmount": total,
+        "igstAmount": total + total,
+        "amountTotal": amountTotal.toFixed(2)
+    })
+})
+
 
 module.exports = router;
