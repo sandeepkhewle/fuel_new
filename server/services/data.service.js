@@ -81,16 +81,17 @@ let getAppData = async (userId, { appId }) => {
         let aData = await addDataModel.findOne({ appId: appId })
         let newData = JSON.parse(JSON.stringify(aData));
         newData.isSubscribedPlan = false;
-        let pData = await paymentModel.findOne({ appId: appId, userId: userId, paymentStatus: "Success", startDate: { $lte: new Date() }, endDate: { $gte: new Date() } })
+        let pData = await paymentModel.aggregate([{ $match: { appId: appId, userId: userId, paymentStatus: "Success", startDate: { $lte: new Date() }, endDate: { $gte: new Date() } } },
+        { $group: { _id: "$planForTrend", data: { $push: "$$ROOT" } } }]);
         console.log('userCount', userCount);
         if (pData) {
-            // if (pData.planName === "TRIAL PLAN") newData.validityMessage = `You are enjoying our free trial service valid upto ${moment(pData.endDate).format("DD MMM YYYY")}`;
-            // if (pData.planName != "TRIAL PLAN" && pData.endDate) newData.validityMessage = `Your subscription is valid upto ${moment(pData.endDate).format("DD MMM YYYY")}`;
-            newData.validUpto = pData.endDate;
+            pData.forEach(e1 => {
+                newData[e1._id] = true;
+            })
             newData.isSubscribedPlan = true;
         }
         newData.activeUser = 10000 + Number(userCount);
-        newData.howItWorks = "https://infotecindia.s3.ap-south-1.amazonaws.com/assets/MSHSD-Eng-Resize-1.m4v";
+        // newData.howItWorks = "https://infotecindia.s3.ap-south-1.amazonaws.com/assets/MSHSD-Eng-Resize-1.m4v";
         return newData;
     } catch (error) {
         throw error;

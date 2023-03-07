@@ -53,7 +53,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             createdAt: new Date(),
             firmName: firmName
         }
-
+        createobj.planForTrend = pD.planForTrend;
         // let cData = await counterSchema.findOneAndUpdate({ appId: appId, counterName: "Invoice Number" }, { $inc: { counter: 1 } }, { new: true })
         createobj.invoiceNo = 1
         let pT = (pD.planType === 'Monthly') ? 'months' : 'years';
@@ -170,7 +170,7 @@ const createinvoice = async (orderId) => {
         let pData = await paymentsModel.findOne({ orderId: orderId });
         let appId = pData.appId;
         let appName = "FUEL";
-  
+
 
         let pendingStepCount = 2;
         const pdfFile = "./public/Invoice/" + orderId + ".pdf";
@@ -314,7 +314,6 @@ const convertImg = (imgLink) => {
         })
     })
 }
-createinvoice("fuel_060323_cwhgoqrclex3onvy")
 module.exports = {
     initiatePayment: initiatePayment,
     paymentUpdate: paymentUpdate,

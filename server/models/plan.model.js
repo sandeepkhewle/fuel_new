@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var planSchema = mongoose.Schema({
     planId: { type: String, default: mongoose.Types.ObjectId, index: true, required: true, unique: true, auto: true },
     planName: String,
+    planForTrend: String,
     description: String,
     appId: String,
     duration: Number, // validity in months
