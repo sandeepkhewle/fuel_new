@@ -42,6 +42,7 @@ let createPlan = async ({ planId, planName, description, appId, planType, durati
         if (cgst) obj.cgst = cgst;
         if (igst) obj.igst = igst;
         if (planStatus) obj.planStatus = planStatus;
+        if (planForTrend) obj.planForTrend = planForTrend;
         if (validUptoDay) obj.validUptoDay = validUptoDay;
 
         if (planId) {

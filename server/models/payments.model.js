@@ -7,6 +7,7 @@ var paymentSchema = mongoose.Schema({
   planId: String,
   planName: { type: String, index: true },
   planType: String,
+  planForTrend: String,
   amount: Number,
   discount: Number,
   tax: Number,

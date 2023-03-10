@@ -39,14 +39,14 @@ let config = {
 
         // paytm cred
         PAYTM_URL: 'https://secure.paytm.in',
-        MID: 'A2Info81257778072208',
+        MID: 'MEENEE32331547612765',
         PAYTM_ENVIORMENT: 'PROD',   // PROD FOR PRODUCTION
-        PAYTM_MERCHANT_KEY: 'Va0uEryG36G@tgee',
-        WEBSITE: 'DEFAULT',
+        PAYTM_MERCHANT_KEY: 'loIApoTHiiWgn@1k',
+        WEBSITE: 'MEENEE',
         CHANNEL_ID: 'WEB',
-        INDUSTRY_TYPE_ID: 'ECommerce',
+        INDUSTRY_TYPE_ID: 'Retail109',
         //  GUID : "47acd048-e54d-49a2-9b7c-e712ee5582fc",
-        CALLBACK_URL: 'https://www.infotecindia.in/web/response',
+        CALLBACK_URL: 'http://www.fuelpricealert.in/paytm/response',
         //  CALLBACK_URL : 'http://www.infotecindia.in/paytm/response',
         PAYTM_FINAL_URL: 'https://securegw.paytm.in/order/process',
         PAYTMRESPONSE_URL: "https://securegw.paytm.in/order/status?JsonData="
@@ -89,14 +89,14 @@ let config = {
         // paytm cred
         // PAYTM_URL: 'https://pguat.paytm.com',
         PAYTM_URL: 'https://secure.paytm.in',
-        MID: 'A2Info81257778072208',
+        MID: 'MEENEE32331547612765',
         PAYTM_ENVIORMENT: 'PROD',   // PROD FOR PRODUCTION
-        PAYTM_MERCHANT_KEY: 'Va0uEryG36G@tgee',
-        WEBSITE: 'DEFAULT',
+        PAYTM_MERCHANT_KEY: 'loIApoTHiiWgn@1k',
+        WEBSITE: 'MEENEE',
         CHANNEL_ID: 'WEB',
-        INDUSTRY_TYPE_ID: 'ECommerce',
+        INDUSTRY_TYPE_ID: 'Retail109',
         //  GUID : "47acd048-e54d-49a2-9b7c-e712ee5582fc",
-        CALLBACK_URL: 'http://localhost:3737/web/response',
+        CALLBACK_URL: 'http://localhost:4108/web/response',
         //  CALLBACK_URL : 'http://www.infotecindia.in/paytm/response',
         PAYTM_FINAL_URL: 'https://securegw.paytm.in/order/process',
         PAYTMRESPONSE_URL: "https://securegw.paytm.in/order/status?JsonData="
