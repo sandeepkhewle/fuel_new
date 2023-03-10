@@ -13,7 +13,7 @@ passObj:any={};
 dataObj: any = {};
 
 appData:any;
-  openTrendsForm: boolean = true;
+  openTrendsForm: boolean = false;
   constructor(
     public appDataService:AppDataService
   ) { }
