@@ -28,7 +28,7 @@ let registerAdmin = async ({ phoneNo, fullName, password }) => {
     }
 }
 
-let createPlan = async ({ planId, planName, description, appId, planType, duration, planCost, amount, sgst, cgst, igst, planStatus, validUptoDay }) => {
+let createPlan = async ({ planId, planName, description, appId, planType, duration, planCost, amount, sgst, cgst, igst, planStatus, validUptoDay, planForTrend, discountedPrice, discountedPercent }) => {
     try {
         let obj = {};
         if (planName) obj.planName = planName;
@@ -44,6 +44,8 @@ let createPlan = async ({ planId, planName, description, appId, planType, durati
         if (planStatus) obj.planStatus = planStatus;
         if (planForTrend) obj.planForTrend = planForTrend;
         if (validUptoDay) obj.validUptoDay = validUptoDay;
+        if (discountedPrice) obj.discountedPrice = discountedPrice;
+        if (discountedPercent) obj.discountedPercent = discountedPercent;
 
         if (planId) {
             await planModel.findOneAndUpdate({ planId: planId }, obj);

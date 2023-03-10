@@ -9,24 +9,16 @@ import { PlansService } from '../plans.service';
 export class PlansComponent implements OnInit {
   plansList: any;
   addNewPlanFlag: boolean = false;
-  titleState:any = 'Create New';
+  titleState: any = 'Create New';
   appIdArray: any = [
     {
-      "name": "MS-HSD",
-      "value": "msd"
-    },
-    {
-      "name": "LPG",
-      "value": "lpg"
-    },
-    {
-      "name": "BITUMEN",
-      "value": "bitumen"
+      "name": "FUEL",
+      "value": "fuel"
     }
   ];
 
-  durationList:any = ["1", "2", "3", "4", "5", "6"];
-  validUptoDayList:any = ["0", "4"];
+  durationList: any = ["1", "2", "3", "4", "5", "6"];
+  validUptoDayList: any = ["0", "4"];
   createPlanObj: any = {};
   constructor(
     public plansService: PlansService
@@ -73,7 +65,7 @@ export class PlansComponent implements OnInit {
     this.addNewPlanFlag = false;
   }
 
-  editPlan(editdata:any, $element:any){
+  editPlan(editdata: any, $element: any) {
     this.createPlanObj = {};
     // console.log('editData', editdata);
     this.createPlanObj.appId = editdata.appId;
@@ -91,7 +83,7 @@ export class PlansComponent implements OnInit {
     // this.createPlanObj = editdata;
     this.openPlanForm();
     $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-    
+
   }
 
 }
