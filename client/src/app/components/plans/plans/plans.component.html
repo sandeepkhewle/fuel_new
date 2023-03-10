@@ -85,6 +85,18 @@
         </div>
         <div class="col-lg-3">
             <mat-form-field appearance="outline">
+                <mat-label>Discount</mat-label>
+                <input matInput type="text" name="discountedPrice" [(ngModel)]="createPlanObj.discountedPrice" required>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Discount percentage</mat-label>
+                <input matInput type="text" name="discountedPercent" [(ngModel)]="createPlanObj.discountedPercent" required>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+            <mat-form-field appearance="outline">
                 <mat-label>Plan Status</mat-label>
                 <mat-select [(ngModel)]="createPlanObj.planStatus" name="planStatus" required>
                     <mat-option value="Active">Active</mat-option>
@@ -155,6 +167,7 @@
                                         <span class="new-000000 fnt-14 new-Montserrat-Bold">
                                             {{item.planType}}</span>
                                     </div>
+                                 
                                     <div class="col-lg-4">
                                         <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
                                             DURATION
@@ -197,6 +210,31 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12" style="border-bottom: 1px solid lightgray;">
+                                <div class="row new-Montserrat-Medium">
+                                  
+                                    <div class="col-lg-4 new-border-right">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            DISCOUNT 
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">
+                                            {{item.discountedPrice}}</span>
+                                    </div>
+
+                                    <div class="col-lg-4 new-border-right">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            DISCOUNT PERCENTAGE
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">
+                                            {{item.discountedPercent}}</span>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+
+
+
+
                             <div class="col-md-12">
                                 <h6 class="fnt-13 new-Montserrat-Medium new-000000 pt-3">Valid Up To Day
                                     <b>{{item.validUptoDay}}</b> of the month

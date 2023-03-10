@@ -82,6 +82,8 @@ export class PlansComponent implements OnInit {
     this.createPlanObj.planType = editdata.planType;
     this.createPlanObj.validUptoDay = JSON.stringify(editdata.validUptoDay);
     this.createPlanObj.planCost = editdata.planCost;
+    this.createPlanObj.discountedPrice = editdata.discountedPrice;
+    this.createPlanObj.discountedPercent = editdata.discountedPercent;
     this.createPlanObj.planStatus = editdata.planStatus;
     this.createPlanObj.description = editdata.description;
     this.createPlanObj.planId = editdata.planId;

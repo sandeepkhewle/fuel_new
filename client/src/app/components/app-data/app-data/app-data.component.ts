@@ -7,7 +7,7 @@ import { AppDataService } from '../app-data.service';
   styleUrls: ['./app-data.component.css']
 })
 export class AppDataComponent implements OnInit {
-updateDataFlag:boolean = true;
+updateDataFlag:boolean = false;
 @Output() onActon = new EventEmitter<any>();
 passObj:any={};
 dataObj: any = {};
@@ -28,7 +28,9 @@ appData:any;
     $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   }
 
-  addAppData(){}
+  addAppData(){
+    this.openTrendsForm = true;
+  }
 
   createData(){
     this.passObj = {};
@@ -36,6 +38,7 @@ appData:any;
   }
 
   closeDialog(flag: any) {
+    this.openTrendsForm = false;
     this.onActon.emit({ flag: flag, page: 'addTrends' });
   }
 
