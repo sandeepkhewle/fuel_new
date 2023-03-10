@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AppDataService } from '../app-data.service';
 
 @Component({
@@ -7,10 +7,13 @@ import { AppDataService } from '../app-data.service';
   styleUrls: ['./app-data.component.css']
 })
 export class AppDataComponent implements OnInit {
-updateDataFlag:boolean = false;
+updateDataFlag:boolean = true;
+@Output() onActon = new EventEmitter<any>();
 passObj:any={};
+dataObj: any = {};
 
 appData:any;
+  openTrendsForm: boolean = true;
   constructor(
     public appDataService:AppDataService
   ) { }
@@ -23,6 +26,17 @@ appData:any;
     this.updateDataFlag = true;
     this.passObj= data;
     $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  }
+
+  addAppData(){}
+
+  createData(){
+    this.passObj = {};
+    this.openTrendsForm = true;
+  }
+
+  closeDialog(flag: any) {
+    this.onActon.emit({ flag: flag, page: 'addTrends' });
   }
 
   onCardAction(event:any) {
