@@ -60,10 +60,10 @@ let createPlan = async ({ planId, planName, description, appId, planType, durati
     }
 }
 
-let addUpdateAppData = async ({ appId, supportNumber, whatsAppNumber, message1, message2, message3, message4, message5 }) => {
+let addUpdateAppData = async ({ _id, appId, supportNumber, whatsAppNumber, message1, message2, message3, message4, message5 }) => {
     try {
-        await appDataModel.findOneAndUpdate({ appId: appId }, {
-            supportNumber: supportNumber, whatsAppNumber: whatsAppNumber, message1: message1, message2: message2, message3: message3, message4: message4, message5: message5
+        await appDataModel.findOneAndUpdate({ _id: _id }, {
+            appId: appId, supportNumber: supportNumber, whatsAppNumber: whatsAppNumber, message1: message1, message2: message2, message3: message3, message4: message4, message5: message5
         }, { new: true, upsert: true })
     } catch (error) {
         throw error;
@@ -137,12 +137,12 @@ let dashBoardSummary = async () => {
         }]);
         console.log('totalUser', JSON.stringify(totalUser[0]));
         totalUser[0].totalUser.forEach(element => {
-            if (element._id === 'msd') msdTotalUsers = element.count;
+            if (element._id === 'fuel') msdTotalUsers = element.count;
             if (element._id === 'lpg') lpgTotalUsers = element.count;
             if (element._id === 'bitumen') bitumenTotalUsers = element.count;
         });
         totalUser[0].actInactuser.forEach(element => {
-            if (element._id.app === 'msd') {
+            if (element._id.app === 'fuel') {
                 if (element._id.status === true) msdActiveUsers = element.count;
                 if (element._id.status === false) msdInactiveUsers = element.count;
             }
@@ -166,12 +166,12 @@ let dashBoardSummary = async () => {
         }]);
         console.log('totalSub', JSON.stringify(totalSub[0]));
         totalSub[0].totalSub.forEach(element => {
-            if (element._id === 'msd') msdTotalSub = element.amount;
+            if (element._id === 'fuel') msdTotalSub = element.amount;
             if (element._id === 'lpg') lpgTotalSub = element.amount;
             if (element._id === 'bitumen') bitumenTotalSub = element.amount;
         });
         totalSub[0].monthSub.forEach(element => {
-            if (element._id === 'msd') msdMonthSub = element.amount;
+            if (element._id === 'fuel') msdMonthSub = element.amount;
             if (element._id === 'lpg') lpgMonthSub = element.amount;
             if (element._id === 'bitumen') bitumenMonthSub = element.amount;
         });
@@ -179,7 +179,7 @@ let dashBoardSummary = async () => {
         let data = {
             "data": [
                 {
-                    "name": "msd",
+                    "name": "fuel",
                     "data": [{ "name": "Total Users", "value": msdTotalUsers },
                     { "name": "Active Users", "value": msdActiveUsers },
                     { "name": "Inactive Users", "value": msdInactiveUsers },

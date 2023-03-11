@@ -69,7 +69,7 @@ router.post('/getPlans', (req, res) => {
 
 // update app data
 router.post('/updateAppData', (req, res) => {
-    console.log('/admin/updateAppData');
+    console.log('/admin/updateAppData', req.body);
     let data = req.body;
     adminService.addUpdateAppData(data).then((payload) => {
         res.status(res.statusCode).send({

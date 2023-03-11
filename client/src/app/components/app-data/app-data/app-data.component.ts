@@ -7,34 +7,41 @@ import { AppDataService } from '../app-data.service';
   styleUrls: ['./app-data.component.css']
 })
 export class AppDataComponent implements OnInit {
-updateDataFlag:boolean = false;
-@Output() onActon = new EventEmitter<any>();
-passObj:any={};
-dataObj: any = {};
+  updateDataFlag: boolean = false;
+  @Output() onActon = new EventEmitter<any>();
+  passObj: any = {};
+  dataObj: any = {};
 
-appData:any;
+  appData: any;
   openTrendsForm: boolean = false;
   constructor(
-    public appDataService:AppDataService
+    public appDataService: AppDataService
   ) { }
 
   ngOnInit(): void {
     this.getAppData();
   }
 
-  updateAppData(data:any, $element:any){
+  updateAppData(data: any, $element: any) {
     this.updateDataFlag = true;
-    this.passObj= data;
+    this.passObj = data;
     $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   }
 
-  addAppData(){
+  addAppData() {
     this.openTrendsForm = true;
   }
 
-  createData(){
-    this.passObj = {};
+  createData() {
+    // this.passObj = {};
     this.openTrendsForm = true;
+    this.appDataService.updateAppDataFun(this.dataObj).subscribe(res => {
+      if (res.status == 'Success') {
+        this.closeDialog(false);
+      }
+      else {
+      }
+    });
   }
 
   closeDialog(flag: any) {
@@ -42,15 +49,15 @@ appData:any;
     this.onActon.emit({ flag: flag, page: 'addTrends' });
   }
 
-  onCardAction(event:any) {
+  onCardAction(event: any) {
     this.updateDataFlag = false;
     this.getAppData();
   }
 
-  getAppData(){
+  getAppData() {
     this.appDataService.getAppDataFun({}).subscribe(res => {
       if (res.status == 'Success') {
-        this.appData = res.payload;        
+        this.appData = res.payload;
       }
       else {
       }
