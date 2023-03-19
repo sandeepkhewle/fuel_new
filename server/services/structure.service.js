@@ -4,6 +4,7 @@
 const viewData = require('../json/viewData.json');
 const filters = require('../json/filters.json');
 const sideNav = require('../json/sideNav.json')
+const list = require('../json/list.json')
 
 let getSideNav = async () => {
     try {
@@ -56,10 +57,21 @@ let getFilters = ({ page }) => {
 //     })
 // }
 
+// get report list
+let getReportList = async (branchId, adminUserId, role, type) => {
+    try {
+        let reportList = list["Reports"];
+        return reportList;
+    } catch (error) {
+        throw error;
+    }
+}
+
 
 module.exports = {
     getSideNav: getSideNav,
     getViewData: getViewData,
     getFilters: getFilters,
+    getReportList: getReportList
     // getGeneralDataList: getGeneralDataList,
 }

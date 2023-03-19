@@ -98,4 +98,26 @@ router.post('/exportExcel', function (req, res, next) {
     })
 })
 
+// get list of available reports
+router.post('/reportList', function (req, res, next) {
+    console.log("/structure/reportList---", (req.body));
+    let role = req.user?.role;
+    let type = req.body?.type;
+    structureService.getReportList(role, type).then((data) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "Status": "Success",
+            "Message": "Report list fetched succesfully",
+            "data": data
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "Status": "Failed",
+            "Message": "Failed to fetch report list succesfully"
+        })
+    })
+})
+
 module.exports = router;
