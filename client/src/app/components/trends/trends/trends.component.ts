@@ -13,7 +13,7 @@ export class TrendsComponent implements OnInit {
   deleteTrendsFlag:boolean = false;
   deleteTrendData:any;
   postObj:any={
-    page :'msd'
+    page :'fortnight'
   }
 
   msdFlag:boolean = true;
@@ -57,13 +57,13 @@ export class TrendsComponent implements OnInit {
       this.applyFilters();
       this.lpgFlag = true;
     }
-    if (name == 'bitumen') {
-      this.postObj = {
-        page : 'bitumen'
-      }
-      this.applyFilters();
-      this.bitumenFlag = true;
-    }
+    // if (name == 'bitumen') {
+    //   this.postObj = {
+    //     page : 'bitumen'
+    //   }
+    //   this.applyFilters();
+    //   this.bitumenFlag = true;
+    // }
   }
 
   createNewTrends(){
@@ -73,9 +73,10 @@ export class TrendsComponent implements OnInit {
   
   onCardAction(event:any) {
     this.openTrendsForm = false;
-    this.postObj = {
-      page : 'msd'
-    }
+    this.applyFilters();
+    // this.postObj = {
+    //   page : 'fortnight'
+    // }
   }
 
   onRowsSelected(event:any){
@@ -111,9 +112,11 @@ export class TrendsComponent implements OnInit {
 
   closeDialog(flag:any){
     this.deleteTrendsFlag = false;
-    this.postObj = {
-      page : 'msd'
-    }
+    this.applyFilters();
+
+    // this.postObj = {
+    //   page : 'fortnight'
+    // }
   }
 
   deleteTrends(data:any){
@@ -125,7 +128,7 @@ export class TrendsComponent implements OnInit {
       if (res.status == 'Success') {
         this.closeDialog('cancel');
         this.postObj = {
-          page : 'msd'
+          page : 'fortnight'
         }
       }
       else {
