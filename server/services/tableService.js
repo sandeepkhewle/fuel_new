@@ -279,6 +279,7 @@ let getMonthlyProductList = (req) => {
                 bitumen: 1,
                 furnaceOil: 1,
                 ldo: 1,
+                productName: 1
             }
         })
         trendsModel.aggregate(query).then(async userData => {
