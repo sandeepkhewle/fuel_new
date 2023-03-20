@@ -55,6 +55,13 @@
             "url": "/trends/app-data",
             "icon": "addData.png",
             "titleClass": ""
+        },
+        {
+            "name": "Reports",
+            "uniqueName": "reports",
+            "url": "/trends/reports",
+            "icon": "reports.png",
+            "titleClass": ""
         }
     ]
 }
