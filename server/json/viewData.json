@@ -118,8 +118,8 @@
         "page": "trends",
         "attributes": [
             {
-                "name": "Trends Type",
-                "prop": "trendType",
+                "name": "Product Name",
+                "prop": "productName",
                 "sortable": true,
                 "pipe": "",
                 "class": "ta-l text-capitalize",
@@ -215,8 +215,8 @@
         "page": "monthly",
         "attributes": [
             {
-                "name": "Trends Type",
-                "prop": "trendType",
+                "name": "Product Name",
+                "prop": "productName",
                 "sortable": true,
                 "pipe": "",
                 "class": "ta-l text-capitalize",
