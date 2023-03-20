@@ -116,43 +116,20 @@ let dashBoardSummary = async () => {
         let msdTotalSub = 0;
         let msdMonthSub = 0;
 
-        let lpgTotalUsers = 0;
-        let lpgActiveUsers = 0;
-        let lpgInactiveUsers = 0;
-        let lpgTotalSub = 0;
-        let lpgMonthSub = 0;
-
-
-        let bitumenTotalUsers = 0;
-        let bitumenActiveUsers = 0;
-        let bitumenInactiveUsers = 0;
-        let bitumenTotalSub = 0;
-        let bitumenMonthSub = 0;
-
         let totalUser = await usersModel.aggregate([{
             $facet: {
                 totalUser: [{ $group: { _id: "$appId", count: { $sum: 1 } } }],
                 actInactuser: [{ $group: { _id: { app: "$appId", status: "$isActive" }, count: { $sum: 1 } } }]
             }
         }]);
-        console.log('totalUser', JSON.stringify(totalUser[0]));
+        // console.log('totalUser', JSON.stringify(totalUser[0]));
         totalUser[0].totalUser.forEach(element => {
             if (element._id === 'fuel') msdTotalUsers = element.count;
-            if (element._id === 'lpg') lpgTotalUsers = element.count;
-            if (element._id === 'bitumen') bitumenTotalUsers = element.count;
         });
         totalUser[0].actInactuser.forEach(element => {
             if (element._id.app === 'fuel') {
                 if (element._id.status === true) msdActiveUsers = element.count;
                 if (element._id.status === false) msdInactiveUsers = element.count;
-            }
-            if (element._id.app === 'lpg') {
-                if (element._id.status === true) lpgActiveUsers = element.count;
-                if (element._id.status === false) lpgInactiveUsers = element.count;
-            }
-            if (element._id.app === 'bitumen') {
-                if (element._id.status === true) bitumenActiveUsers = element.count;
-                if (element._id.status === false) bitumenInactiveUsers = element.count;
             }
         });
 
@@ -164,45 +141,26 @@ let dashBoardSummary = async () => {
                 monthSub: [{ $match: { paymentStatus: 'Success', date: { $gte: new Date(lms), $lte: new Date(lme) } } }, { $group: { _id: "$appId", amount: { $sum: '$payableAmount' } } }]
             }
         }]);
-        console.log('totalSub', JSON.stringify(totalSub[0]));
+        // console.log('totalSub', JSON.stringify(totalSub[0]));
         totalSub[0].totalSub.forEach(element => {
             if (element._id === 'fuel') msdTotalSub = element.amount;
-            if (element._id === 'lpg') lpgTotalSub = element.amount;
-            if (element._id === 'bitumen') bitumenTotalSub = element.amount;
         });
         totalSub[0].monthSub.forEach(element => {
             if (element._id === 'fuel') msdMonthSub = element.amount;
-            if (element._id === 'lpg') lpgMonthSub = element.amount;
-            if (element._id === 'bitumen') bitumenMonthSub = element.amount;
         });
 
         let data = {
             "data": [
                 {
                     "name": "fuel",
-                    "data": [{ "name": "Total Users", "value": msdTotalUsers },
-                    { "name": "Active Users", "value": msdActiveUsers },
-                    { "name": "Inactive Users", "value": msdInactiveUsers },
-                    { "name": "Total Subsription", "value": msdTotalSub },
-                    { "name": "Subsription last month", "value": msdMonthSub }]
+                    "data": [
+                        { "name": "Total Users", "value": msdTotalUsers },
+                        { "name": "Active Users", "value": msdActiveUsers },
+                        { "name": "Inactive Users", "value": msdInactiveUsers },
+                        { "name": "Total Subsription", "value": msdTotalSub },
+                        { "name": "Subsription last month", "value": msdMonthSub }
+                    ]
                 }
-                // ,
-                // {
-                //     "name": "lpg",
-                //     "data": [{ "name": "Total Users", "value": lpgTotalUsers },
-                //     { "name": "Active Users", "value": lpgActiveUsers },
-                //     { "name": "Inactive Users", "value": lpgInactiveUsers },
-                //     { "name": "Total Subsription", "value": lpgTotalSub },
-                //     { "name": "Subsription last month", "value": lpgMonthSub }]
-                // },
-                // {
-                //     "name": "bitumen",
-                //     "data": [{ "name": "Total Users", "value": bitumenTotalUsers },
-                //     { "name": "Active Users", "value": bitumenActiveUsers },
-                //     { "name": "Inactive Users", "value": bitumenInactiveUsers },
-                //     { "name": "Total Subsription", "value": bitumenTotalSub },
-                //     { "name": "Subsription last month", "value": bitumenMonthSub }]
-                // }
             ]
         };
         return data;
