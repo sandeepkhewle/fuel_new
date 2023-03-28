@@ -11,6 +11,9 @@ const userModel = require('../models/users.model');
 const paymenModel = require('../models/payments.model');
 const versionControlsModel = require('../models/versionControl.model')
 
+//services
+const authService = require('../services/auth.service')
+
 let makeid = async (length) => {
     var result = [];
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -37,13 +40,17 @@ let registerNewUser = async ({ appId, fullName, phoneNo, emailId, deviceId, pass
         let referralCode = await makeid(8);
         if (referralCode) dataToSave.referralCode = referralCode;
         console.log('Send OTP function here');
-        uData = await userModel.create(dataToSave);
-
+        await userModel.create(dataToSave).then(data => {
+            uData = data;
+            if (uData) authService.sendOtp('fuel', phoneNo).then(d1 => {
+                console.log("Otp send successfully");
+            })
+        })
         let payObj = {
             "mailStatus": false,
             "paymentStatus": "Success",
             "appId": appId,
-            "userId": uData.userId,
+            "userId": uData?.userId,
             "planId": "trialPlan",
             "planName": "TRIAL PLAN",
             "planType": "TRIAL PLAN",
@@ -66,7 +73,6 @@ let registerNewUser = async ({ appId, fullName, phoneNo, emailId, deviceId, pass
             "paymentId": "trialPlan",
             "orderId": unique()
         }
-
         await paymenModel.create(payObj);
         return uData;
     } catch (error) {
