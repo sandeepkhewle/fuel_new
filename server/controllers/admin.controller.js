@@ -29,7 +29,7 @@ router.post('/sendNotification', (req, res) => {
 
 // create new plan
 router.post('/createPlan', (req, res) => {
-    console.log('/admin/createPlan');
+    console.log('/admin/createPlan', req.body);
     let data = req.body;
     adminService.createPlan(data).then((payload) => {
         res.status(res.statusCode).send({
