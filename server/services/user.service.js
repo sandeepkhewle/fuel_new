@@ -135,6 +135,19 @@ let updateVersion = async ({ appId, androidVersion, iosVersion }) => {
     }
 }
 
+let getUserActivePlans = async (userId) => {
+    try {
+        let userActivePlan = await paymenModel.aggregate([{
+            $match: {
+                userId, "paymentStatus": "Success", endDate: { $gte: new Date() }
+            }
+            // }, { $group: { _id: "$planForTrend", planData: { "$push": "$$ROOT" } } }
+        }, { $group: { _id: "$planForTrend" } }])
+        return userActivePlan;
+    } catch (error) {
+        throw error;
+    }
+}
 
 module.exports = {
     registerNewUser: registerNewUser,
@@ -142,5 +155,6 @@ module.exports = {
     checkUser: checkUser,
     changeDeviceRequest: changeDeviceRequest,
     changeDeviceApprove: changeDeviceApprove,
-    updateVersion: updateVersion
+    updateVersion: updateVersion,
+    getUserActivePlans: getUserActivePlans
 }

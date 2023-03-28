@@ -73,7 +73,8 @@ router.post('/future', (req, res) => {
 router.post('/past', (req, res) => {
     console.log('/data/past');
     let data = req.body;
-    trendService.getPastTrend(data).then((payload) => {
+    let userId = req.user.userId
+    trendService.getPastTrend(data,userId).then((payload) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",

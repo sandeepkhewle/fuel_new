@@ -6,6 +6,7 @@ const trendsModel = require('../models/trends.model');
 
 //services
 const commService = require('../services/communication.service');
+const userService = require('../services/user.service')
 
 let createNewTrend = async ({ trendType, trend, trendName, trendDate, trendUnite, productName, validFrom, validThrough }) => {
     try {
@@ -66,8 +67,9 @@ let getFutureTrend = async ({ trendName, trendType }) => {
     }
 }
 
-let getPastTrend = async ({ trendName, trendType }) => {
+let getPastTrend = async ({ trendName, trendType }, userId) => {
     try {
+        let userActivePlans = await userService.getUserActivePlans(userId);
         let matchObj = {
             trendName: trendName,
             trendDate: { $lte: new Date() },
@@ -76,6 +78,17 @@ let getPastTrend = async ({ trendName, trendType }) => {
         let tData = await trendsModel.aggregate([{ $sort: { "validThrough": -1 } }, {
             $match: matchObj
         }, { $group: { _id: "$trendType", data: { "$push": "$$ROOT" } } }]);
+        // to add is have active plan against trendType
+        if (tData) {
+            tData.forEach(e1 => {
+                e1.activePlan = false
+                if (userActivePlans) {
+                    userActivePlans.forEach(e2 => {
+                        if (e2._id == e1._id) e1.activePlan = true
+                    })
+                }
+            })
+        }
         return tData;
     } catch (error) {
         throw error;
