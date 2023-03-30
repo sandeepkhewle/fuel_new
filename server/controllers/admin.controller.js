@@ -170,4 +170,24 @@ router.post('/assignPlanManually', (req, res) => {
     })
 })
 
+router.post('/getPlanListByTreads', (req, res) => {
+    console.log('/admin/getPlanListByTreads');
+    let planForTrend = req.body.trendName;
+    adminService.getPlanListByTreads(planForTrend).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Plan list fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to get plan list"
+        });
+    })
+})
+
 module.exports = router;
