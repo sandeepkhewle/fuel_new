@@ -208,6 +208,16 @@ let getPlanListByTreads = async (planForTrend) => {
     }
 }
 
+
+let getUserDetials = async (userId) => {
+    try {
+        let uData = await usersModel.findOne({ userId })
+        return uData;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     registerAdmin: registerAdmin,
     createPlan: createPlan,
@@ -218,5 +228,6 @@ module.exports = {
     dashBoardSummary: dashBoardSummary,
     getReviews: getReviews,
     checkReferral: checkReferral,
-    getPlanListByTreads: getPlanListByTreads
+    getPlanListByTreads: getPlanListByTreads,
+    getUserDetials: getUserDetials
 };

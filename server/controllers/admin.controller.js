@@ -190,4 +190,24 @@ router.post('/getPlanListByTreads', (req, res) => {
     })
 })
 
+router.post('/getUserDetials', (req, res) => {
+    console.log('/admin/getUserDetials', req.user);
+    let userId = req.user.userId;
+    adminService.getUserDetials(userId).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Plan list fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to get plan list"
+        });
+    })
+})
+
 module.exports = router;
