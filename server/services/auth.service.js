@@ -30,11 +30,10 @@ let sendOtp = async ({ appId, phoneNo }) => {
         let otp = Math.floor(1000 + Math.random() * 9000);
         if (phoneNo === "1234567890") otp = "1234";
         let gData = await usersModel.findOneAndUpdate({ appId: appId, phoneNo: phoneNo }, { otp: otp, otpTime: new Date() }, { new: true, upsert: true, setDefaultsOnInsert: true });
-        console.log({ gData });
         if (phoneNo != "1234567890") await commService.sendOtpSms(appId, phoneNo, otp)
         return;
     } catch (error) {
-        throw error;
+    throw error;
     }
 }
 

@@ -32,17 +32,15 @@ let registerNewUser = async ({ appId, fullName, phoneNo, emailId, deviceId, pass
             if (uData.deviceId !== deviceId) throw new Error("This mobile number already registered with another device")
             else throw new Error("This mobile number already registerd")
         }
-        let otp = "1234";
-        let dataToSave = { appId: appId, phoneNo: phoneNo, fullName: fullName, createdAt: new Date(), otp: otp, otpTime: new Date() };
+        let dataToSave = { appId: appId, phoneNo: phoneNo, fullName: fullName, createdAt: new Date() };
         // if (deviceId) dataToSave.deviceId = deviceId;
         if (emailId) dataToSave.emailId = emailId;
         if (password) dataToSave.password = CryptoJS.HmacSHA1(password, passKey).toString();
         let referralCode = await makeid(8);
         if (referralCode) dataToSave.referralCode = referralCode;
-        console.log('Send OTP function here');
-        await userModel.create(dataToSave).then(data => {
+        userModel.create(dataToSave).then(data => {
             uData = data;
-            if (uData) authService.sendOtp('fuel', phoneNo).then(d1 => {
+            if (uData) authService.sendOtp({ appId: 'fuel', phoneNo }).then(d1 => {
                 console.log("Otp send successfully");
             })
         })
