@@ -8,11 +8,12 @@ const trendsModel = require('../models/trends.model');
 const commService = require('../services/communication.service');
 const userService = require('../services/user.service')
 
-let createNewTrend = async ({ trendType, trend, trendName, trendDate, trendUnite, productName, validFrom, validThrough }) => {
+let createNewTrend = async ({ trendType, trend, trendName, trendDate, trendUnite, productName, validFrom, validThrough, trendValue }) => {
     try {
 
         await trendsModel.create({
-            trendType: trendType, trend: trend, trendName: trendName, trendDate: trendDate, trendUnite: trendUnite, productName: productName, validFrom: validFrom, validThrough: validThrough, createdAt: new Date()
+            trendType: trendType, trend: trend, trendName: trendName, trendDate: trendDate, trendUnite: trendUnite, productName: productName, validFrom: validFrom, validThrough: validThrough, createdAt: new Date(),
+            trendValue: trendValue
         })
         // await commService.sendNotification({ appId: appId, category: "all members", data: {}, message: "New trend added", title: "Trends Update" })
         return;
@@ -21,7 +22,7 @@ let createNewTrend = async ({ trendType, trend, trendName, trendDate, trendUnite
     }
 }
 
-let updateTrend = async ({ trendsId, trendType, trend, trendUnite, productName, validFrom, validThrough, trendName }) => {
+let updateTrend = async ({ trendsId, trendType, trend, trendUnite, productName, validFrom, validThrough, trendName, trendValue }) => {
     try {
         let updateObj = {
             updatedAt: new Date()
@@ -33,6 +34,7 @@ let updateTrend = async ({ trendsId, trendType, trend, trendUnite, productName, 
         if (productName) updateObj.productName = productName;
         if (validFrom) updateObj.validFrom = validFrom;
         if (validThrough) updateObj.validThrough = validThrough;
+        if (trendValue) updateObj.trendValue = trendValue;
 
         await trendsModel.findOneAndUpdate({ trendsId: trendsId }, updateObj, { new: true })
         return;
