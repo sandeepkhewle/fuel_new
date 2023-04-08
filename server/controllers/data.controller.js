@@ -157,4 +157,24 @@ router.post('/pastFortnight', (req, res) => {
     })
 })
 
+// Get APP Images data 
+router.get('/appImagesData', (req, res) => {
+    console.log('/data/appImagesData');
+    dataService.getAppImagesData().then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "App Images data fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to fetch app Images data"
+        });
+    })
+})
+
 module.exports = router;

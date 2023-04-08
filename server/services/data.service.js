@@ -107,9 +107,31 @@ let getTransaction = async (userId, appId) => {
     }
 }
 
+let getAppImagesData = async (getAppImagesData) => {
+    try {
+        let Images = {
+            tecnicalSpec: [
+                { name: "bitumen", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+                { name: "furnaceOil", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+                { name: "hsd", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+                { name: "ldo", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+                { name: "lpg", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+                { name: "mto", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+                { name: "hexane", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+                { name: "kerosene", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+            ],
+            "converationTable": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg"
+        }
+        return Images;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     getPlanList: getPlanList,
     getnotificationList: getnotificationList,
     getAppData: getAppData,
-    getTransaction: getTransaction
+    getTransaction: getTransaction,
+    getAppImagesData: getAppImagesData
 }
