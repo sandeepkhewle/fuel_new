@@ -158,9 +158,29 @@ router.post('/pastFortnight', (req, res) => {
 })
 
 // Get APP Images data 
-router.get('/appImagesData', (req, res) => {
-    console.log('/data/appImagesData');
-    dataService.getAppImagesData().then((payload) => {
+router.get('/appImagesTecSpec', (req, res) => {
+    console.log('/data/appImagesTecSpec');
+    dataService.getAppImagesTecSpec().then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "App Images data fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to fetch app Images data"
+        });
+    })
+})
+
+// Get APP Images data 
+router.get('/appImagesConvertionTable', (req, res) => {
+    console.log('/data/appImagesConvertionTable');
+    dataService.getAppImagesConvertionTable().then((payload) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
