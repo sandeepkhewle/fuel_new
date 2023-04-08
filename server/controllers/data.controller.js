@@ -74,7 +74,7 @@ router.post('/past', (req, res) => {
     console.log('/data/past');
     let data = req.body;
     let userId = req.user.userId
-    trendService.getPastTrend(data,userId).then((payload) => {
+    trendService.getPastTrend(data, userId).then((payload) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
@@ -131,6 +131,28 @@ router.post('/transactions', (req, res) => {
             "statusCode": "002",
             "status": "Failed",
             "message": "Failed to fetch transaction data"
+        });
+    })
+})
+
+// get past trend
+router.post('/pastFortnight', (req, res) => {
+    console.log('/data/pastFortnight');
+    let data = req.body;
+    let userId = req.user.userId
+    trendService.getPastFortnightTrend(data, userId).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Trend fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to fetch trend"
         });
     })
 })

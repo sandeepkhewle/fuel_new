@@ -97,10 +97,39 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
     }
 }
 
+let getPastFortnightTrend = async (userId) => {
+    try {
+        let userActivePlans = await userService.getUserActivePlans(userId);
+        let matchObj = {
+            trendName: "fortnight",
+            trendDate: { $lte: new Date() },
+        }
+        // if (trendType) matchObj.trendType = trendType;
+        let tData = await trendsModel.aggregate([{ $sort: { "validThrough": -1 } }, {
+            $match: matchObj
+        }]);
+        // to add is have active plan against trendType
+        if (tData) {
+            tData.forEach(e1 => {
+                e1.activePlan = false
+                if (userActivePlans) {
+                    userActivePlans.forEach(e2 => {
+                        if (e2._id == e1.trendType) e1.activePlan = true
+                    })
+                }
+            })
+        }
+        return tData;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     createNewTrend: createNewTrend,
     updateTrend: updateTrend,
     deleteTrend: deleteTrend,
     getFutureTrend: getFutureTrend,
-    getPastTrend: getPastTrend
+    getPastTrend: getPastTrend,
+    getPastFortnightTrend:getPastFortnightTrend
 }
