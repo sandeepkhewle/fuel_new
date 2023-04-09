@@ -135,6 +135,28 @@ router.post('/transactions', (req, res) => {
     })
 })
 
+// get member Plans
+router.post('/myPlans', (req, res) => {
+    console.log('/data/myPlans');
+    let appId = req.user.appId;
+    let userId = req.user.userId;
+    dataService.getPlanData(userId, appId).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Transaction data fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to fetch transaction data"
+        });
+    })
+})
+
 // get past trend
 router.post('/pastFortnight', (req, res) => {
     console.log('/data/pastFortnight');
