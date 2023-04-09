@@ -144,7 +144,7 @@ router.post('/myPlans', (req, res) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
-            "message": "Transaction data fetched successfully",
+            "message": "Plans data fetched successfully",
             "payload": payload
         });
     }).catch(err => {
@@ -152,7 +152,7 @@ router.post('/myPlans', (req, res) => {
         res.status(res.statusCode).send({
             "statusCode": "002",
             "status": "Failed",
-            "message": "Failed to fetch transaction data"
+            "message": "Failed to fetch plans data"
         });
     })
 })
