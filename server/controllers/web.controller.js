@@ -125,15 +125,19 @@ router.post('/verifyOtp', (req, res) => {
     let data = req.body;
     let payload;
     authhService.verifyOtp(data).then((userData) => {
-        try {
-            payload = JSON.parse(JSON.stringify(userData));
-            let token = jwt.sign(payload, jwtSecret, {
-                expiresIn: 32000000 // expires in one year
-            });
-            return token;
-        } catch (error) {
-            console.log("error", error);
-            throw new Error("Failed")
+        if (userData) {
+            try {
+                payload = JSON.parse(JSON.stringify(userData));
+                let token = jwt.sign(payload, jwtSecret, {
+                    expiresIn: 32000000 // expires in one year
+                });
+                return token;
+            } catch (error) {
+                console.log("error", error);
+                throw new Error("Failed")
+            }
+        } else {
+            throw new Error("Please enter a valid OTP");
         }
     }).then((tokenData) => {
         res.status(res.statusCode).send({
