@@ -29,91 +29,109 @@
 
 <ng-container *ngIf="addNewPlanFlag">
     <form #createPlanForm="ngForm">
-    <div class="row new-white-bg mb-3 py-3" style="margin-top: -7px;">
-        <div class="col-md-12 pt-10 pb-10">
-            <div class="fyt-display-flex">
-                <h3 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">{{titleState}} Plan </h3>
-                <span class="sp"></span>
-                <span class="new-Montserrat-Medium fyt-link-btn new-808080" > <span style="border-bottom: 1px solid #808080;" (click)="closeDialog('cancel')">Close &nbsp;x</span>
-                </span>
+        <div class="row new-white-bg mb-3 py-3" style="margin-top: -7px;">
+            <div class="col-md-12 pt-10 pb-10">
+                <div class="fyt-display-flex">
+                    <h3 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">{{titleState}} Plan </h3>
+                    <span class="sp"></span>
+                    <span class="new-Montserrat-Medium fyt-link-btn new-808080"> <span
+                            style="border-bottom: 1px solid #808080;" (click)="closeDialog('cancel')">Close
+                            &nbsp;x</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>App Name</mat-label>
+                    <mat-select name="appId" [(ngModel)]="createPlanObj.appId" required>
+                        <mat-option *ngFor="let app1 of appIdArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Plan For Trend</mat-label>
+                    <mat-select [(ngModel)]="createPlanObj.planForTrend" name="planForTrend" required>
+                        <mat-option value="lpg">LPG</mat-option>
+                        <mat-option value="bitumen">BITUMEN</mat-option>
+                        <mat-option value="mto">MTO</mat-option>
+                        <mat-option value="hexane">HEXANE</mat-option>
+                        <mat-option value="kerosene">KEROSENE</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Plan Name</mat-label>
+                    <input matInput type="text" name="planName" [(ngModel)]="createPlanObj.planName" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Plan Type</mat-label>
+                    <mat-select [(ngModel)]="createPlanObj.planType" name="planType" required>
+                        <mat-option value="Monthly">Monthly</mat-option>
+                        <mat-option value="Yearly">Yearly</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Duration</mat-label>
+                    <mat-select [(ngModel)]="createPlanObj.duration" name="duration" required>
+                        <mat-option value="{{dur}}" *ngFor="let dur of durationList;let m = index">{{dur}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Valid Upto Day</mat-label>
+                    <mat-select [(ngModel)]="createPlanObj.validUptoDay" name="validUptoDay" required>
+                        <mat-option value="{{valid}}"
+                            *ngFor="let valid of validUptoDayList;let n = index">{{valid}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Plan Cost</mat-label>
+                    <input matInput type="number" name="planCost" [(ngModel)]="createPlanObj.planCost" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Discount</mat-label>
+                    <input matInput type="text" name="discountedPrice" [(ngModel)]="createPlanObj.discountedPrice"
+                        required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Discount percentage</mat-label>
+                    <input matInput type="text" name="discountedPercent" [(ngModel)]="createPlanObj.discountedPercent"
+                        required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Plan Status</mat-label>
+                    <mat-select [(ngModel)]="createPlanObj.planStatus" name="planStatus" required>
+                        <mat-option value="Active">Active</mat-option>
+                        <mat-option value="Inactive">Inactive</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-9">
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput name="description" [(ngModel)]="createPlanObj.description" required></textarea>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-12 ta-c pb-20">
+                <button class="new-btn-8CC63F-popup px-5 py-1" (click)="createPlanFun()"
+                    [disabled]="createPlanForm.invalid">{{titleState}} Plan</button>
             </div>
         </div>
-        <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-                <mat-label>App Name</mat-label>
-                <mat-select name="appId" [(ngModel)]="createPlanObj.appId" required>
-                    <mat-option *ngFor="let app1 of appIdArray" [value]="app1.value">{{app1.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Plan Name</mat-label>
-                <input matInput type="text" name="planName" [(ngModel)]="createPlanObj.planName" required>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Plan Type</mat-label>
-                <mat-select [(ngModel)]="createPlanObj.planType" name="planType" required>
-                    <mat-option value="Monthly">Monthly</mat-option>
-                    <mat-option value="Yearly">Yearly</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Duration</mat-label>
-                <mat-select [(ngModel)]="createPlanObj.duration" name="duration" required>
-                    <mat-option value="{{dur}}" *ngFor="let dur of durationList;let m = index">{{dur}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Valid Upto Day</mat-label>
-                <mat-select [(ngModel)]="createPlanObj.validUptoDay" name="validUptoDay" required>
-                    <mat-option value="{{valid}}" *ngFor="let valid of validUptoDayList;let n = index">{{valid}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Plan Cost</mat-label>
-                <input matInput type="number" name="planCost" [(ngModel)]="createPlanObj.planCost" required>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Discount</mat-label>
-                <input matInput type="text" name="discountedPrice" [(ngModel)]="createPlanObj.discountedPrice" required>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Discount percentage</mat-label>
-                <input matInput type="text" name="discountedPercent" [(ngModel)]="createPlanObj.discountedPercent" required>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Plan Status</mat-label>
-                <mat-select [(ngModel)]="createPlanObj.planStatus" name="planStatus" required>
-                    <mat-option value="Active">Active</mat-option>
-                    <mat-option value="Inactive">Inactive</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-9">
-            <mat-form-field appearance="outline">
-                <mat-label>Description</mat-label>
-                <textarea matInput name="description" [(ngModel)]="createPlanObj.description" required></textarea>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-12 ta-c pb-20">
-            <button class="new-btn-8CC63F-popup px-5 py-1" (click)="createPlanFun()" [disabled]="createPlanForm.invalid">{{titleState}} Plan</button>
-        </div>
-    </div>
     </form>
 </ng-container>
 
@@ -141,9 +159,10 @@
                                     {{item.planName | uppercase}} <span class="fr"><span
                                             [ngClass]="(item.planStatus == 'Active') ? 'new-80B43F-dot' : 'new-AF272D-dot'"></span>
                                         {{item.planStatus}}&nbsp;&nbsp;
-                                        <img src="../../../../assets/img/edit.png" width="18px" alt="edit" class="fyt-link-btn" (click)="editPlan(item, target)">
+                                        <img src="../../../../assets/img/edit.png" width="18px" alt="edit"
+                                            class="fyt-link-btn" (click)="editPlan(item, target)">
                                     </span>
-                                
+
                                 </h6>
                             </div>
                             <div class="col-md-12" style="border-bottom: 1px solid lightgray;">
@@ -158,7 +177,14 @@
                                             APP NAME
                                         </small><br>
                                         <span class="new-000000 fnt-14 new-Montserrat-Bold">
-                                            {{item.appId}}</span>
+                                            {{item.appId | titlecase}}</span>
+                                    </div>
+                                    <div class="col-lg-4 new-border-right">
+                                        <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
+                                            PLAN FOR TREND
+                                        </small><br>
+                                        <span class="new-000000 fnt-14 new-Montserrat-Bold">
+                                            {{item.planForTrend | titlecase}}</span>
                                     </div>
                                     <div class="col-lg-4 new-border-right">
                                         <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
@@ -167,19 +193,18 @@
                                         <span class="new-000000 fnt-14 new-Montserrat-Bold">
                                             {{item.planType}}</span>
                                     </div>
-                                 
-                                    <div class="col-lg-4">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12" style="border-bottom: 1px solid lightgray;">
+                                <div class="row new-Montserrat-Medium">
+                                    <div class="col-lg-4 new-border-right">
                                         <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
                                             DURATION
                                         </small><br>
                                         <span class="new-000000 fnt-14 new-Montserrat-Bold">
                                             {{item.duration}} {{item.duration >1 ? 'Months' : 'Month'}}</span>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12" style="border-bottom: 1px solid lightgray;">
-                                <div class="row new-Montserrat-Medium">
                                     <div class="col-lg-4 new-border-right">
                                         <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
                                             PLAN COST
@@ -196,26 +221,26 @@
                                     </div> -->
                                     <div class="col-lg-4 new-border-right">
                                         <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
-                                            SGST / CGST
+                                            SGST / CGST / IGST
                                         </small><br>
                                         <span class="new-000000 fnt-14 new-Montserrat-Bold">
-                                            {{item.sgst}}% / {{item.cgst}}%</span>
+                                            {{item.sgst}}% / {{item.cgst}}% / {{item.igst}}% </span>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <!-- <div class="col-lg-4">
                                         <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
                                             IGST
                                         </small><br>
                                         <span class="new-000000 fnt-14 new-Montserrat-Bold">
                                             {{item.igst}}%</span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-md-12" style="border-bottom: 1px solid lightgray;">
                                 <div class="row new-Montserrat-Medium">
-                                  
+
                                     <div class="col-lg-4 new-border-right">
                                         <small class="new-666666 fnt-8 new-Montserrat-SemiBold">
-                                            DISCOUNT 
+                                            DISCOUNT
                                         </small><br>
                                         <span class="new-000000 fnt-14 new-Montserrat-Bold">
                                             {{item.discountedPrice}}</span>
@@ -228,7 +253,7 @@
                                         <span class="new-000000 fnt-14 new-Montserrat-Bold">
                                             {{item.discountedPercent}}</span>
                                     </div>
-                                  
+
                                 </div>
                             </div>
 

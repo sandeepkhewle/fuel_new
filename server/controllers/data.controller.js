@@ -73,7 +73,8 @@ router.post('/future', (req, res) => {
 router.post('/past', (req, res) => {
     console.log('/data/past');
     let data = req.body;
-    trendService.getPastTrend(data).then((payload) => {
+    let userId = req.user.userId
+    trendService.getPastTrend(data, userId).then((payload) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
@@ -130,6 +131,90 @@ router.post('/transactions', (req, res) => {
             "statusCode": "002",
             "status": "Failed",
             "message": "Failed to fetch transaction data"
+        });
+    })
+})
+
+// get member Plans
+router.post('/myPlans', (req, res) => {
+    console.log('/data/myPlans');
+    let appId = req.user.appId;
+    let userId = req.user.userId;
+    dataService.getPlanData(userId, appId).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Plans data fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to fetch plans data"
+        });
+    })
+})
+
+// get past trend
+router.post('/pastFortnight', (req, res) => {
+    console.log('/data/pastFortnight');
+    let data = req.body;
+    let userId = req.user.userId
+    trendService.getPastFortnightTrend(data, userId).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Trend fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to fetch trend"
+        });
+    })
+})
+
+// Get APP Images data 
+router.get('/appImagesTecSpec', (req, res) => {
+    console.log('/data/appImagesTecSpec');
+    dataService.getAppImagesTecSpec().then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "App Images data fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to fetch app Images data"
+        });
+    })
+})
+
+// Get APP Images data 
+router.get('/appImagesConvertionTable', (req, res) => {
+    console.log('/data/appImagesConvertionTable');
+    dataService.getAppImagesConvertionTable().then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "App Images data fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to fetch app Images data"
         });
     })
 })

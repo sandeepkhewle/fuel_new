@@ -15,12 +15,16 @@ import { AuthGuard } from './shared-modules/guards/auth.guard';
 import { NotAuthGuard } from './shared-modules/guards/notAuth.guard';
 import { SidenavService } from './components/sidenav/sidenav.service';
 import { AuthService } from './shared-modules/services/auth.service';
+import { ReportsComponent } from './components/reports/reports/reports.component';
+// import { RestrictionPopupComponent } from './components/restriction-popup/restriction-popup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
-    DefaultSettingsComponent
+    DefaultSettingsComponent,
+    ReportsComponent,
+    // RestrictionPopupComponent
   ],
   imports: [
     BrowserModule,

@@ -100,8 +100,46 @@ let getAppData = async (userId, { appId }) => {
 
 let getTransaction = async (userId, appId) => {
     try {
+        let pData = await paymentsModel.find({ appId: appId, userId: userId }, { planName: 1, invoiceNo: 1, startDate: 1, endDate: 1, payableAmount: 1, planType: 1, link: 1, paymentStatus: 1 });
+        return pData;
+    } catch (error) {
+        throw error;
+    }
+}
+
+let getPlanData = async (userId, appId) => {
+    try {
         let pData = await paymentsModel.find({ appId: appId, userId: userId, paymentStatus: "Success" }, { planName: 1, invoiceNo: 1, startDate: 1, endDate: 1, payableAmount: 1, planType: 1, link: 1 });
         return pData;
+    } catch (error) {
+        throw error;
+    }
+}
+
+let getAppImagesTecSpec = async () => {
+    try {
+        let tecnicalSpec = [
+            { name: "bitumen", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+            { name: "furnaceOil", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+            { name: "hsd", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+            { name: "ldo", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+            { name: "lpg", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+            { name: "mto", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+            { name: "hexane", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+            { name: "kerosene", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg" },
+        ]
+        return tecnicalSpec;
+    } catch (error) {
+        throw error;
+    }
+}
+
+let getAppImagesConvertionTable = async () => {
+    try {
+        let Images = {
+            name: "converationTable", link: "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg"
+        }
+        return Images;
     } catch (error) {
         throw error;
     }
@@ -111,5 +149,8 @@ module.exports = {
     getPlanList: getPlanList,
     getnotificationList: getnotificationList,
     getAppData: getAppData,
-    getTransaction: getTransaction
+    getTransaction: getTransaction,
+    getAppImagesTecSpec: getAppImagesTecSpec,
+    getAppImagesConvertionTable: getAppImagesConvertionTable,
+    getPlanData: getPlanData
 }

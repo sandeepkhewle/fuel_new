@@ -1,0 +1,66 @@
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+    display: block !important;
+    flex-grow: 1;
+    margin-right: 16px;
+}
+
+.mat-expansion-panel {
+    box-shadow: none;
+}
+
+.mat-expansion-panel-header:hover {
+    background-color: #75A941 !important;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+    background-image: linear-gradient(to right, #3FC0D1, #75A941) !important;
+    height: 48px !important;
+}
+
+::ng-deep .mat-expansion-panel-body {
+    background: #F2F2F2 !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+::ng-deep .specific-class>.mat-expansion-indicator:after {
+    color: white !important;
+}
+
+::ng-deep .mat-expansion-panel-content {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding-top: 1px !important;
+}
+
+.fyt-modal-design-branch {
+    min-width: 35%;
+    max-width: 40%;
+    position: fixed;
+    z-index: 1;
+    top: 10rem;
+    right: 20%;
+    max-height: 50%;
+    min-height: 200px;
+    /* border: 1px solid #ccc; */
+    margin-right: 1rem;
+    box-shadow: 0 3px 5px 5px rgb(0 0 0 / 6%), 0 6px 10px 0 rgb(0 0 0 / 7%), 0 1px 18px 0 rgb(0 0 0 / 12%) !important;
+    /* box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075); */
+    background: #fff;
+    padding: .5rem;
+    border-radius: 7px;
+}
+
+.example-month-picker .mat-calendar-period-button {
+    pointer-events: none;
+}
+
+.example-month-picker .mat-calendar-arrow {
+    display: none;
+}

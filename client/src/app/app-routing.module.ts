@@ -58,7 +58,11 @@ const routes: Routes = [
       {
         path: 'chat',
         loadChildren: () => import('./components/chat/chat.module').then((m) => m.ChatModule)
-      }
+      },
+      {
+        path: 'reports',
+        loadChildren: () => import('./components/reports/reports.module').then((m) => m.ReportsModule)
+      },
     ]
   },
     // default and error routes

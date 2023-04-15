@@ -7,7 +7,7 @@ const accountService = require('../services/account.service');
 
 // create new trend
 router.post('/initiate', (req, res) => {
-    console.log('/payment/initiate', req.user);
+    console.log('/payment/initiate', req.body);
     let data = req.body;
     let userId = req.user.userId;
     let appId = req.user.appId;

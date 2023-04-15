@@ -192,6 +192,32 @@ let checkReferral = async ({ appId, referralCode }) => {
     }
 }
 
+let getPlanListByTreads = async (planForTrend) => {
+    try {
+        let matchObj = {}
+        if (planForTrend) matchObj.planForTrend = planForTrend;
+        let pData = await planModel.aggregate([{ $match: matchObj }, {
+            $group: {
+                _id: "$planForTrend",
+                plans: { $push: "$$ROOT" }
+            }
+        }])
+        return pData;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+let getUserDetials = async (userId) => {
+    try {
+        let uData = await usersModel.findOne({ userId })
+        return uData;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     registerAdmin: registerAdmin,
     createPlan: createPlan,
@@ -201,5 +227,7 @@ module.exports = {
     createCounter: createCounter,
     dashBoardSummary: dashBoardSummary,
     getReviews: getReviews,
-    checkReferral: checkReferral
+    checkReferral: checkReferral,
+    getPlanListByTreads: getPlanListByTreads,
+    getUserDetials: getUserDetials
 };

@@ -1,0 +1,173 @@
+<ng-container *ngIf="loader">
+    <div class="fyt-spinner-container">
+        <mat-spinner></mat-spinner>
+        <div class="text-center fyt-loading-msg">Please wait</div>
+    </div>
+</ng-container>
+
+<div class="container-fluid  pl-0 pr-0 ml-0 mr-0">
+    <div class="row new-white-bg py-3 ">
+        <div class="col-md-12 py-3">
+            <h6 class="new-006837 fnt-20 new-Montserrat-Medium">ALL REPORTS</h6>
+            <!-- <img src="../../../../assets/icons/new/all reports@2x.png" width="30px" alt="">&nbsp; ADD LATER -->
+        </div>
+        <!-- <div class="col-md-12">
+            <ng-container *ngFor="let repL of reportList;let m = index">
+
+                <mat-expansion-panel class="my-3 mx-5" (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header class="expansion-header-background specific-class"
+                        style="height: 48px !important;">
+                        <mat-panel-title class="new-ffffff new-Montserrat-Medium fnt-20">
+                            <img src="../../../../assets/icons/new/{{repL.icon}}" width="25px" alt="">
+                            &nbsp;&nbsp;&nbsp; {{repL.name}}
+                            <span class="fr">0{{repL.List.length}}</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <ng-container *ngFor="let re of repL.List;let m = index">
+
+                        <div class="col-md-12 py-2">
+                            <div class="row pt-5">
+                                <div class="col-md-7">
+                                    <h6 class="fnt-18 pt-15 new-4D4D4D new-Montserrat-Medium">
+                                        {{re.name}}
+                                    </h6>
+                                </div>
+                                <div class="col-md-5 py-2 pl-0 pr-0 ml-0 mr-0">
+                                    <h6 class="fnt-18 new-2E7D32 new-Montserrat-Medium">
+                                    <button type="button" class="ta-c new-corner-btn px-3 fr"
+                                        (click)="getReport(repL.table, re)">
+
+                                        <img src="../../../../assets/icons/new/EXCEL@1.5x.png" width="20px" alt="">
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span
+                                            class="fnt-15 fr new-2E7D32 new-Montserrat-Medium">Download</span></button>
+
+                                    <button type="button" class="ta-c new-corner-btn px-3 fr"><span class="fnt-15 fr new-4D4D4D new-Montserrat-Medium">Advance</span></button>
+
+
+                                    </h6>
+                                </div>
+                                <div class="col-md-12" style="border-bottom: 0.5px solid #1A1A1A;"></div>
+
+                            </div>
+                        </div>
+                    </ng-container>
+
+                </mat-expansion-panel>
+
+            </ng-container>            
+        </div> -->
+
+        <div class="col-md-4 col-12">
+            <div class="row py-3">
+                <ng-container *ngFor="let repL of reportList;let m = index">
+                    <div class="col-md-12 col-12 py-2">
+                        <h6 class="new-1A1A1A fnt-15 new-Montserrat-Medium fyt-link-btn" >
+                            <!-- (click)="openDetails(repL)" -->
+                            {{repL.name}}</h6>
+                            <!-- [ngClass]="(repL.name == selectedReportName) ? 'fyt-underline' : ''" Add above later -->
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-md-8 col-12 py-4 pl-0 ml-0 ">
+            <div class="row" style="background-color: #F2F2F2; border-radius: 4px;" *ngIf="reportsSideData">
+                <ng-container *ngFor="let re of reportsSideData.List;let m = index">
+
+                    <div class="col-md-12 py-2">
+                        <div class="row pt-5">
+                            <div class="col-md-4">
+                                <h6 class="fnt-18 pt-15 new-4D4D4D new-Montserrat-Medium">
+                                    <!-- <img src="../../../../assets/icons/new/{{re.name}}.png" width="25px" alt=""> &nbsp;&nbsp;&nbsp; -->
+                                    {{re.name}}
+                                </h6>
+                            </div>
+                            <div class="col-md-5 pl-0 pr-0">
+                                <div class="row">
+                                    <ng-container *ngFor="let filter of re.options;let i = index;">
+                                        <ng-container
+                                            *ngIf="filter.type == 'select' && filter.options && filter.options.length > 0">
+                                            <div class="col-md-6 col-lg-6">
+                                                <!-- <mat-form-field>
+                                                    <mat-label>{{filter.name}}</mat-label>
+                                                    <mat-select [(ngModel)]="postObj.filters[filter.model]"
+                                                        [name]="filter.model"
+                                                        (change)="onChangeFilter(filter, filter.model, $event)"
+                                                        [multiple]="filter.multiple" #filterSelect="ngModel">
+                                                        <ng-container *ngIf="filter.multiple">
+                                                            <fyt-select-all [model]="filterSelect" [values]="filter">
+                                                            </fyt-select-all>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="filter.value">
+                                                            <mat-option *ngFor="let option of filter.options"
+                                                                [value]="option[filter.value]">
+                                                                {{ option[filter.display] }}
+                                                            </mat-option>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="!filter.value">
+                                                            <mat-option *ngFor="let option of filter.options"
+                                                                [value]="option.id">
+                                                                {{ option.name }}
+                                                            </mat-option>
+                                                        </ng-container>
+                                                    </mat-select>
+                                                </mat-form-field> -->
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="filter.type == 'date'">
+                                            <div class="col-md-6 col-lg-6">
+                                                <!-- <mat-form-field>
+                                                    <mat-label>{{filter.name}}</mat-label>
+                                                    <input matInput [matDatepicker]="i" (click)="i.open()"
+                                                        [(ngModel)]="postObj.filters[filter.model]"
+                                                        [min]="postObj.filters[filter.min]" [max]="filter.max">
+                                                    <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
+                                                    <mat-datepicker #i></mat-datepicker>
+                                                </mat-form-field> -->
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="filter.type == 'monthYear'">
+                                            <div class="col-md-6 col-lg-6">
+                                                <!-- <mat-form-field>
+                                                    <mat-label>{{filter.name}}</mat-label>
+                                                    <input matInput [matDatepicker]="dp" [formControl]="date"
+                                                        (click)="dp.open()" [(ngModel)]="postObj.filters[filter.model]">
+                                                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                                                    <mat-datepicker #dp startView="multi-year"
+                                                        (monthSelected)="setMonthAndYear($event, dp,filter)"
+                                                        panelClass="example-month-picker">
+                                                    </mat-datepicker>
+                                                </mat-form-field> -->
+                                            </div>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="col-md-3 py-2 pl-0 pr-0 ml-0 mr-0">
+                                <!-- <h6 class="fnt-18 new-2E7D32 new-Montserrat-Medium"> -->
+                                <button type="button" class="ta-c new-corner-btn px-2 fr" (click)="!isRestricted && restrict() || isRestricted && getReport(reportsSideData.table, re)">
+                                    <!--  -->
+
+                                    <img src="../../../../assets/icons/new/EXCEL@1.5x.png" width="20px" alt="">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <span class="fnt-15 fr new-2E7D32 new-Montserrat-Medium">Download</span></button>
+                            </div>
+                            <div class="col-md-12" style="border-bottom: 0.5px solid #1A1A1A;"></div>
+
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-container *ngIf="restrictionFlag">
+    <div class="fyt-modal-design-branch animated slideInUp slow " style="z-index: 3;">
+        <!-- <fyt-restriction-popup [InutDataObj]="restrictionObj" (onActon)="onCardAction($event)">
+        </fyt-restriction-popup> -->
+    </div>
+</ng-container>

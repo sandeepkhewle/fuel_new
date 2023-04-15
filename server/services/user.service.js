@@ -11,6 +11,9 @@ const userModel = require('../models/users.model');
 const paymenModel = require('../models/payments.model');
 const versionControlsModel = require('../models/versionControl.model')
 
+//services
+const authService = require('../services/auth.service')
+
 let makeid = async (length) => {
     var result = [];
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -29,21 +32,23 @@ let registerNewUser = async ({ appId, fullName, phoneNo, emailId, deviceId, pass
             if (uData.deviceId !== deviceId) throw new Error("This mobile number already registered with another device")
             else throw new Error("This mobile number already registerd")
         }
-        let otp = "1234";
-        let dataToSave = { appId: appId, phoneNo: phoneNo, fullName: fullName, createdAt: new Date(), otp: otp, otpTime: new Date() };
+        let dataToSave = { appId: appId, phoneNo: phoneNo, fullName: fullName, createdAt: new Date() };
         // if (deviceId) dataToSave.deviceId = deviceId;
         if (emailId) dataToSave.emailId = emailId;
         if (password) dataToSave.password = CryptoJS.HmacSHA1(password, passKey).toString();
         let referralCode = await makeid(8);
         if (referralCode) dataToSave.referralCode = referralCode;
-        console.log('Send OTP function here');
-        uData = await userModel.create(dataToSave);
-
+        userModel.create(dataToSave).then(data => {
+            uData = data;
+            if (uData) authService.sendOtp({ appId: 'fuel', phoneNo }).then(d1 => {
+                console.log("Otp send successfully");
+            })
+        })
         let payObj = {
             "mailStatus": false,
             "paymentStatus": "Success",
             "appId": appId,
-            "userId": uData.userId,
+            "userId": uData?.userId,
             "planId": "trialPlan",
             "planName": "TRIAL PLAN",
             "planType": "TRIAL PLAN",
@@ -66,7 +71,6 @@ let registerNewUser = async ({ appId, fullName, phoneNo, emailId, deviceId, pass
             "paymentId": "trialPlan",
             "orderId": unique()
         }
-
         await paymenModel.create(payObj);
         return uData;
     } catch (error) {
@@ -129,6 +133,19 @@ let updateVersion = async ({ appId, androidVersion, iosVersion }) => {
     }
 }
 
+let getUserActivePlans = async (userId) => {
+    try {
+        let userActivePlan = await paymenModel.aggregate([{
+            $match: {
+                userId, "paymentStatus": "Success", endDate: { $gte: new Date() }
+            }
+            // }, { $group: { _id: "$planForTrend", planData: { "$push": "$$ROOT" } } }
+        }, { $group: { _id: "$planForTrend" } }])
+        return userActivePlan;
+    } catch (error) {
+        throw error;
+    }
+}
 
 module.exports = {
     registerNewUser: registerNewUser,
@@ -136,5 +153,6 @@ module.exports = {
     checkUser: checkUser,
     changeDeviceRequest: changeDeviceRequest,
     changeDeviceApprove: changeDeviceApprove,
-    updateVersion: updateVersion
+    updateVersion: updateVersion,
+    getUserActivePlans: getUserActivePlans
 }

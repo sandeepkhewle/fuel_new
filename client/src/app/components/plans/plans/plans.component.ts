@@ -79,6 +79,7 @@ export class PlansComponent implements OnInit {
     this.createPlanObj.planStatus = editdata.planStatus;
     this.createPlanObj.description = editdata.description;
     this.createPlanObj.planId = editdata.planId;
+    this.createPlanObj.planForTrend = editdata.planForTrend;
     this.titleState = 'Update';
     // this.createPlanObj = editdata;
     this.openPlanForm();

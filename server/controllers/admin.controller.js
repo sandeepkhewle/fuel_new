@@ -29,7 +29,7 @@ router.post('/sendNotification', (req, res) => {
 
 // create new plan
 router.post('/createPlan', (req, res) => {
-    console.log('/admin/createPlan');
+    console.log('/admin/createPlan', req.body);
     let data = req.body;
     adminService.createPlan(data).then((payload) => {
         res.status(res.statusCode).send({
@@ -166,6 +166,46 @@ router.post('/assignPlanManually', (req, res) => {
             "statusCode": "002",
             "status": "Failed",
             "message": "Failed to assigne plan"
+        });
+    })
+})
+
+router.post('/getPlanListByTreads', (req, res) => {
+    console.log('/admin/getPlanListByTreads');
+    let planForTrend = req.body.trendName;
+    adminService.getPlanListByTreads(planForTrend).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Plan list fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to get plan list"
+        });
+    })
+})
+
+router.post('/getUserDetials', (req, res) => {
+    console.log('/admin/getUserDetials', req.user);
+    let userId = req.user.userId;
+    adminService.getUserDetials(userId).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Plan list fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to get plan list"
         });
     })
 })
