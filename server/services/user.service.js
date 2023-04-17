@@ -99,7 +99,7 @@ let checkUser = async ({ appId, deviceId, phoneNo }) => {
                 throw new Error("This mobile number already registered with another device");
             else return { message: "Mobile number and device matched" }
         } else {
-            return { message: "No user found." }
+            return { message: "You are not a registerd member, please register to avail the services." }
         }
     } catch (error) {
         throw error;
