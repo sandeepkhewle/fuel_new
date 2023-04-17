@@ -115,9 +115,9 @@ let getPastFortnightTrend = async (userId) => {
         if (tData) {
             tData.forEach(e1 => {
                 e1.activePlan = false
-                e1.data.forEach(e2 => {
-                    e2.newTrendValue = `${e2.trend} ${e2.trendValue}/${e2.trendUnite}`
-                })
+                // e1.data.forEach(e2 => {
+                    e1.newTrendValue = `${e1.trend} ${e1.trendValue}/${e1.trendUnite}`
+                // })
                 if (userActivePlans) {
                     userActivePlans.forEach(e2 => {
                         if (e2._id == e1.trendType) e1.activePlan = true
