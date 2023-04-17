@@ -72,22 +72,22 @@ export class AddTrendsComponent implements OnInit, OnChanges {
     {
       "name": "BITUMEN",
       "value": "BITUMEN",
-      "trendType": "bitumen"
+      "trendType": "bitumen/fo/hsd/ldo"
     },
     {
       "name": "FURNACE OIL",
       "value": "FURNACE OIL",
-      "trendType": "furnaceOil"
+      "trendType": "bitumen/fo/hsd/ldo"
     },
     {
       "name": "HSD(INSTITUTIONAL)",
       "value": "HSD(INSTITUTIONAL)",
-      "trendType": "hsd"
+      "trendType": "bitumen/fo/hsd/ldo"
     },
     {
       "name": "LDO",
       "value": "LDO",
-      "trendType": "ldo"
+      "trendType": "bitumen/fo/hsd/ldo"
     }
 
   ];
@@ -157,7 +157,6 @@ export class AddTrendsComponent implements OnInit, OnChanges {
     let obj = selectedArray.find((o: any) => o.value === data)
     this.trendsObj.trendType = obj.trendType;
     this.trendsObj.productName = obj.value;
-
   }
   checkInputFields() {
     this.msdFlag = false;

@@ -4,7 +4,7 @@ let trendsSchema = mongoose.Schema({
     // appId: { type: String, index: true, required: true },
     trendsId: { type: String, default: mongoose.Types.ObjectId, index: true, required: true, unique: true, auto: true },
     trendName: { type: String, enum: ['fortnight', 'monthly'] },
-    trendType: { type: String, enum: ["bitumen", "furnaceOil", "hsd", "ldo", "lpg", "mto", "hexane", "kerosene"] },
+    trendType: { type: String, enum: ["bitumen/fo/hsd/ldo", "lpg", "mto", "hexane", "kerosene"] },
     validFrom: Date,
     validThrough: Date,
     trendDate: Date,
