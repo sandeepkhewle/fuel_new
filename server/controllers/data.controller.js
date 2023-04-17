@@ -162,7 +162,7 @@ router.post('/pastFortnight', (req, res) => {
     console.log('/data/pastFortnight');
     let data = req.body;
     let userId = req.user.userId
-    trendService.getPastFortnightTrend(data, userId).then((payload) => {
+    trendService.getPastFortnightTrend( userId).then((payload) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
