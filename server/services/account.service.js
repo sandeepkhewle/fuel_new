@@ -58,7 +58,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         createobj.invoiceNo = 1
         let pT = (pD.planType === 'Monthly') ? 'months' : 'years';
 
-        let validUpto = moment().add(pT, pD.duration).set("date", pD.validUptoDay);
+        let validUpto = moment().add('months', pD.duration).set("date", pD.validUptoDay);
         if (pD.validUptoDay === 0) validUpto = moment().add(pT, pD.duration)
         // console.log('validUpto', validUpto);
         createobj.endDate = new Date(validUpto);

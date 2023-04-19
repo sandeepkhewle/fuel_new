@@ -202,6 +202,20 @@ let getPlanListByTreads = async (planForTrend) => {
                 plans: { $push: "$$ROOT" }
             }
         }])
+
+        if (pData.length > 0) {
+            pData.forEach(e1 => {
+                if (e1.plans.length > 0) {
+                    e1.plans.forEach(e2 => {
+                        let pT = (e2.planType === 'Monthly') ? 'months' : 'years';
+                        let validUpto = moment().add('months', e2.duration).set("date", e2.validUptoDay);
+                        if (e2.validUptoDay === 0) validUpto = moment().add(pT, e2.duration)
+                        e2.validUptoDate = new Date(validUpto)
+                        console.log("pData.length", validUpto, pT);
+                    })
+                }
+            })
+        }
         return pData;
     } catch (error) {
         throw error;
