@@ -220,4 +220,19 @@ router.get('/appImagesConvertionTable', (req, res) => {
     })
 })
 
+// App URl 
+router.get('/otherUrl', (req, res) => {
+    console.log('/data/otherUrl');
+    res.status(res.statusCode).send({
+        "statusCode": "001",
+        "status": "Success",
+        "aboutUs": "https://staging.fytrack.com/assets/img/logo.png",
+        "contactUs": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/6r7s5wblab7aagb6r7s5wblab7rrtx.png",
+        "disclaimer": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/ikjs5jwua0qc45cru2d58la82128k.jpg",
+        "howItWork": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg",
+        "TermAndCondition": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/ikjs5jwua0qc4tq2zul1gksisg2dy.png",
+    });
+})
+
+
 module.exports = router;
