@@ -70,6 +70,9 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         let payableAmount = pD.planCost - discount;
         createobj.payableAmount = payableAmount;
         createobj.amount = pD.planCost;
+        let sgst = 9; cgst = 9, igst = 18;
+        let total = payableAmount * cgst / 100;
+        createobj.payableAmount = (payableAmount + total + total).toFixed(2)
 
         /** ************  do not delete will be used in future ************ */
         // calculate gst
@@ -94,7 +97,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
 
         let CUST_ID = userId;
         let ORDER_ID = `${appId}_${moment().format('DDMMYY')}_${uniqid()}`;
-        let TXN_AMOUNT = payableAmount.toString();
+        let TXN_AMOUNT = createobj.payableAmount.toString();
 
         createobj.orderId = ORDER_ID;
 
