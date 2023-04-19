@@ -1604,8 +1604,8 @@ __webpack_require__.r(__webpack_exports__);
 
 class GlobalApiService {
     constructor() {
-        this.API_SERVER_PORTSTRING = (window.location.hostname === 'localhost') ? ':4108' : '';
-        this.SOCKET_SERVER_PORTSTRING = (window.location.hostname === 'localhost') ? ':4108' : '';
+        this.API_SERVER_PORTSTRING = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
+        this.SOCKET_SERVER_PORTSTRING = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
         // public CUSTOM_API = 'http://65.0.75.20:4108';
         this.CUSTOM_API = '192.168.1.115';
     }
