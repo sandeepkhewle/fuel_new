@@ -230,7 +230,7 @@ router.get('/otherUrl', (req, res) => {
         "contactUs": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/6r7s5wblab7aagb6r7s5wblab7rrtx.png",
         "disclaimer": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/ikjs5jwua0qc45cru2d58la82128k.jpg",
         "howItWork": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg",
-        "termAndCondition": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/ikjs5jwua0qc4tq2zul1gksisg2dy.png",
+        "termAndCondition": "http://fuelpricealert.in/home#!/privacyPolicy",
     });
 })
 
