@@ -34,12 +34,13 @@ module.exports.dummy = (socket_io) => {
     socket_io.on('getChat', (data, callback) => {
         console.log("getChat", { data });
         chatModel.findOne({ userId: data.userId }).then(data => {
-            data.chat.forEach(e1 => {
-                if (e1.chatTime) {
-                    let newDate = moment(e1.chatTime).add(5.30, 'hour')
-                    e1.chatTime = new Date(newDate)
-                }
-            });
+            // data.chat.forEach(e1 => {
+            //     if (e1.chatTime) {
+            //         let newDate = moment(e1.chatTime).add(5.30, 'hour')
+            //         e1.chatTime = new Date(newDate)
+            //         e1.newchatTime = new Date(newDate)
+            //     }
+            // });
             console.log('data', data.chat);
             callback(data.chat);
         }).catch(err => {
