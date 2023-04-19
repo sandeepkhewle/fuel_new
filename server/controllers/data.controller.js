@@ -162,7 +162,7 @@ router.post('/pastFortnight', (req, res) => {
     console.log('/data/pastFortnight');
     let data = req.body;
     let userId = req.user.userId
-    trendService.getPastFortnightTrend(data, userId).then((payload) => {
+    trendService.getPastFortnightTrend(userId).then((payload) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
@@ -180,9 +180,10 @@ router.post('/pastFortnight', (req, res) => {
 })
 
 // Get APP Images data 
-router.get('/appImagesTecSpec', (req, res) => {
-    console.log('/data/appImagesTecSpec');
-    dataService.getAppImagesTecSpec().then((payload) => {
+router.post('/appImagesTecSpec', (req, res) => {
+    console.log('/data/appImagesTecSpec', req.body);
+    let imageName = req.body.name
+    dataService.getAppImagesTecSpec(imageName).then((payload) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
