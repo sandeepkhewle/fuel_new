@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 @Injectable()
 export class GlobalApiService {
-  public API_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost') ? ':4108' : '';
-  public SOCKET_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost') ? ':4108' : '';
+  public API_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
+  public SOCKET_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
 
   // public CUSTOM_API = 'http://65.0.75.20:4108';
   public CUSTOM_API = '192.168.1.115';
