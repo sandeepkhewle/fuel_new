@@ -71,7 +71,7 @@ router.post('/future', (req, res) => {
 
 // get past trend
 router.post('/past', (req, res) => {
-    console.log('/data/past');
+    console.log('/data/past', req.body);
     let data = req.body;
     let userId = req.user.userId
     trendService.getPastTrend(data, userId).then((payload) => {
@@ -231,6 +231,7 @@ router.get('/otherUrl', (req, res) => {
         "disclaimer": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/ikjs5jwua0qc45cru2d58la82128k.jpg",
         "howItWork": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg",
         "termAndCondition": "http://fuelpricealert.in/home#!/privacyPolicy",
+        "rateUs": "https://play.google.com/store/apps/details?id=io.FuelPreAlert.org"
     });
 })
 
