@@ -41,7 +41,7 @@ module.exports.dummy = (socket_io) => {
                     e1.newchatTime = new Date(newDate)
                 }
             });
-            // console.log('data', data.chat);
+            console.log('data', data.chat);
             callback(data.chat);
         }).catch(err => {
             callback({ error: err.message })
