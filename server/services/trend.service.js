@@ -60,9 +60,33 @@ let getFutureTrend = async ({ trendName, trendType }) => {
             trendDate: { $gte: new Date() },
         }
         if (trendType) matchObj.trendType = trendType;
-        let tData = await trendsModel.aggregate([{ $sort: { "validThrough": -1 } }, {
+        let tData = await trendsModel.aggregate([{
             $match: matchObj
-        }, { $group: { _id: "$trendType", data: { "$push": "$$ROOT" } } }]);
+        }, {
+            $sort: { trendDate: -1 }
+        }, {
+            $group: {
+                _id: {
+                    "trendType": "$trendType", "productName": "$productName"
+                },
+                data: { $push: "$$ROOT" }
+            }
+        }, {
+            $project: { first: { $arrayElemAt: ["$data", 0] } }
+        }, {
+            $replaceRoot: { newRoot: "$first" }
+        }, {
+            $group: { _id: "$trendType", data: { "$push": "$$ROOT" } }
+        }]);
+
+        // to add is have active plan against trendType
+        if (tData) {
+            tData.forEach(e1 => {
+                e1.data.forEach(e2 => {
+                    e2.newTrendValue = `${e2.trend} ${e2.trendValue}/${e2.trendUnite}`
+                })
+            })
+        }
         return tData;
     } catch (error) {
         throw error;
