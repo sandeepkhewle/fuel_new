@@ -23,7 +23,7 @@ module.exports.dummy = (socket_io) => {
         let uData = await usersModel.findOne({ userId: data.userId });
 
         chatModel.findOneAndUpdate({ userId: data.userId }, { userSocketId: socket_io.id, $setOnInsert: { createDate: new Date(), fullName: uData.fullName, appId: uData.appId } }, { new: true, upsert: true }).then(data => {
-            console.log('data', data.chat);
+            // console.log('data', data.chat);
             callback(data);
         }).catch(err => {
             callback({ error: err.message })
@@ -41,7 +41,7 @@ module.exports.dummy = (socket_io) => {
             //         e1.newchatTime = new Date(newDate)
             //     }
             // });
-            console.log('data', data.chat);
+            // console.log('data', data.chat);
             callback(data.chat);
         }).catch(err => {
             callback({ error: err.message })
