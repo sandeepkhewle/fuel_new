@@ -226,6 +226,7 @@ router.get('/otherUrl', (req, res) => {
     res.status(res.statusCode).send({
         "statusCode": "001",
         "status": "Success",
+        "converationTable": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg",
         "aboutUs": "https://staging.fytrack.com/assets/img/logo.png",
         "contactUs": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/6r7s5wblab7aagb6r7s5wblab7rrtx.png",
         "disclaimer": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/ikjs5jwua0qc45cru2d58la82128k.jpg",
