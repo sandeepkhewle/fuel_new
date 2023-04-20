@@ -120,21 +120,43 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
         }, {
             $group: { _id: "$trendType", data: { "$push": "$$ROOT" } }
         }]);
+        let arrayToSend = [];
+
         // to add is have active plan against trendType
         if (tData) {
             tData.forEach(e1 => {
                 e1.activePlan = false
-                e1.data.forEach(e2 => {
-                    e2.newTrendValue = `${e2.trend} ${e2.trendValue}/${e2.trendUnite}`
-                })
                 if (userActivePlans) {
                     userActivePlans.forEach(e2 => {
                         if (e2._id == e1._id) e1.activePlan = true
                     })
                 }
+                let newArray = []
+                e1.data.forEach(e2 => {
+                    e2.newTrendValue = `${e2.trend} ${e2.trendValue}/${e2.trendUnite}`
+                    if (trendName === 'monthly') newArray.push(e2)
+                    if (trendName === 'fortnight') {
+                        if (e2.productName === 'BITUMEN') { newArray[0] = e2 };
+                        if (e2.productName === 'FURNACE OIL') { newArray[1] = e2 };
+                        if (e2.productName === 'HSD(INSTITUTIONAL)') { newArray[2] = e2 };
+                        if (e2.productName === 'LDO') { newArray[3] = e2 };
+                    }
+                })
+                e1.data = newArray.filter(Boolean);
+                if (trendName === 'monthly') {
+                    if (e1._id === 'lpg') { arrayToSend[0] = e1 };
+                    if (e1._id === 'kerosene') { arrayToSend[1] = e1 };
+                    if (e1._id === 'hexane') { arrayToSend[2] = e1 };
+                    if (e1._id === 'mto') { arrayToSend[3] = e1 };
+                }
+                if (trendName === 'fortnight') {
+                    arrayToSend.push(e1)
+                }
             })
         }
-        return tData;
+        let dataToSend = arrayToSend.filter(Boolean);
+
+        return dataToSend;
     } catch (error) {
         throw error;
     }
