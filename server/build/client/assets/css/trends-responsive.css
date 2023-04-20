@@ -1,0 +1,74 @@
+/* to do responsive styles here */
+
+@media screen and (max-width:768px) {
+    .fyt-custom-modal-design,
+    .new-popup-design,
+    .fyt-search-box-cont {
+        min-width: 100%;
+        max-width: 100%;
+        right: .1rem;
+        left: .1rem;
+    }
+    .fyt-custom-modal-design {
+        top: 80px !important;
+    }
+    .fyt-noty-popup {
+        min-width: 100%;
+        max-width: 100%;
+        right: .1rem;
+        left: .1rem;
+    }
+    .fyt-search-box {
+        max-width: 130px;
+    }
+    .fyt-label-filter {
+        font-size: 12px;
+    }
+    .brand-title {
+        font-size: 15px;
+    }
+    .branch-title {
+        font-size: 12px;
+    }
+    .new-tab-side-btn {
+        width: auto;
+        line-height: 30px !important;
+    }
+    .new-tab-side-enquiry {
+        width: auto;
+        line-height: 30px !important;
+    }
+    .new-tab-side-trainer {
+        width: auto;
+        line-height: 30px !important;
+    }
+    .new-green-gradient {
+        line-height: 30px !important;
+    }
+    .new-work-schedule-btn {
+        line-height: 30px !important;
+    }
+    .new-food-gradiet-btn {
+        line-height: 30px !important;
+    }
+    .fr-side {
+        float: none;
+    }
+}
+
+@media screen and (max-width:1300px) {
+    .fyt-btn-container>button {
+        margin: 0 4px;
+        font-size: 10px;
+        padding: 0 10px;
+    }
+    .fyt-dash {
+        max-width: 36px !important;
+        min-width: 35px !important;
+    }
+    /* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+    @media (min-width: 481px) and (max-width: 767px) {}
+}

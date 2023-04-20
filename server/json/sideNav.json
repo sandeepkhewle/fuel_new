@@ -1,0 +1,67 @@
+{
+    "dashboardNav": [
+        {
+            "name": "Dashboard",
+            "uniqueName": "dashboard",
+            "url": "/trends/dashboard",
+            "icon": "dashboard.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Members",
+            "uniqueName": "members",
+            "url": "/trends/members",
+            "icon": "member.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Trends",
+            "uniqueName": "trends",
+            "url": "/trends/trends",
+            "icon": "trends.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Payments",
+            "uniqueName": "payments",
+            "url": "/trends/payments",
+            "icon": "payments.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Notifications",
+            "uniqueName": "notifications",
+            "url": "/trends/notifications",
+            "icon": "notifications.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Plans",
+            "uniqueName": "plans",
+            "url": "/trends/plans",
+            "icon": "plans.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Chat",
+            "uniqueName": "chat",
+            "url": "/trends/chat",
+            "icon": "chat.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Add Data",
+            "uniqueName": "addData",
+            "url": "/trends/app-data",
+            "icon": "addData.png",
+            "titleClass": ""
+        },
+        {
+            "name": "Reports",
+            "uniqueName": "reports",
+            "url": "/trends/reports",
+            "icon": "reports.png",
+            "titleClass": ""
+        }
+    ]
+}

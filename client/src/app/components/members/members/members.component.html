@@ -1,0 +1,47 @@
+<div class="row new-white-bg py-3">
+    <div class="col-md-12 pl-0 pr-0 ml-0 mr-0">
+        <ng-container >
+            <ng-container *ngIf="postObj.page">
+                <trends-datatable class="mt-0 mb-0 pt-0 pb-0" [postObj]="postObj" (onSelectRows)="onRowsSelected($event)"
+                    (onRowClickEvent)="onRowClick($event)" (onActonModal)="onModalAction($event)">
+                </trends-datatable>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
+<ng-container *ngIf="assignPlanFlag">
+    <div class="fyt-custom-modal-design animated slideInUp slow ">
+        <trends-assign-plans [InutDataObj]="sendData"
+            (onActon)="onCardAction($event)"></trends-assign-plans>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="deactiveMemberFlag">
+    <div class="trends-modal-design-branch animated slideInUp slow row" style="z-index: 3;">
+        <div class="col-md-12 fyt-display-flex">
+            <span class="sp">
+            </span>
+            <span class="new-Montserrat-Medium fyt-link-btn new-999999" (click)="closeDialog('cancel')"> <span
+                    style="border-bottom: 1px solid #999999;">Close &nbsp;x</span>
+            </span>
+        </div>
+        <div class="col-md-12 ta-c" style="border-bottom: 1px solid #999999;">
+            <h6 class="ta-c new-Montserrat-Regular fnt-15 new-333333">DEACTIVATE MEMBER</h6>
+            <span class="fnt-15 new-Montserrat-Regular new-808080 ta-c">Are You Sure To Deactivate Member</span>
+            <h6 class="ta-c new-Montserrat-Medium fnt-15 new-0071BC pt-10">{{sendData.fullName | uppercase}}
+            </h6>
+            <h6 class="ta-c new-Montserrat-Medium fnt-15 new-0071BC">Contact Number - {{sendData.phoneNo}}</h6>
+
+        </div>
+        <div class="col-md-6 col-6 py-3 pb-20" style="text-align: end;">
+            <button type="button" class="new-Montserrat-Medium yes-btn" style="text-align: initial;"
+                (click)="deactivateMember()"><img src="../../../../assets/img/yes.png" width="22px"
+                    style="margin-top: -2px;" alt="">&nbsp;Yes</button>
+        </div>
+        <div class="col-md-6 col-6 py-3 pb-20" style="text-align: initial;">
+            <button type="button" class="new-Montserrat-Medium no-btn" style="text-align: initial;"
+                (click)="closeDialog('cancel')"><img src="../../../../assets/img/no.png" width="22px"
+                    style="margin-top: -2px;" alt="">&nbsp;No</button>
+        </div>
+    </div>
+</ng-container>

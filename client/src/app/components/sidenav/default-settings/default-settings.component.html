@@ -1,0 +1,35 @@
+<div class="fyt-display-flex">
+    <h3 class="fyt-modal-header">SET DEFAULT BRANCH</h3>
+    <span class="sp"></span>
+    <button mat-icon-button (click)="closeDialog('cancel')">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+<div class="row mt-10">
+    <div class="col-md-12" *ngIf="successMessage">
+        <div class="alert alert-success">{{successMessage}}</div>
+    </div>
+    <div class="col-md-12">
+        <form #defaultSettingsForm="ngForm">
+            <mat-form-field appearance="outline">
+                <mat-label>Brand Name</mat-label>
+                <mat-select [(ngModel)]="defaultObj.brandData" #brandData name="brandData"
+                    (ngModelChange)="getBranches(brandData.value)">
+                    <mat-option *ngFor="let br of brand" [value]="br">{{br.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Centre Name</mat-label>
+                <mat-select [(ngModel)]="defaultObj.centreData" name="centreData">
+                    <mat-option *ngFor="let branch of branches" [value]="branch">{{branch.branchName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+</div>
+<div class="fyt-display-flex mb-10">
+    <p class="sp">&nbsp;</p>
+    <span class="sp"></span>
+    <button mat-raised-button class="mr-5" (click)="closeDialog('cancel')">Cancel</button>
+    <button mat-raised-button class="fyt-button mr-5" (click)="setDefaultBranch()">Set Default Branch</button>
+</div>

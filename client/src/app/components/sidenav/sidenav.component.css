@@ -1,0 +1,120 @@
+.mat-drawer.mat-drawer-side {
+    z-index: 1;
+}
+
+.fyt-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.fyt-modal-design-branch {
+    min-width: 35%;
+    max-width: 40%;
+    position: fixed;
+    z-index: 1;
+    top: 10rem;
+    right: 20%;
+    max-height: 50%;
+    min-height: 200px;
+    /* border: 1px solid #ccc; */
+    margin-right: 1rem;
+    box-shadow: 0 3px 5px 5px rgb(0 0 0 / 6%), 0 6px 10px 0 rgb(0 0 0 / 7%), 0 1px 18px 0 rgb(0 0 0 / 12%) !important;
+    /* box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075); */
+    background: #fff;
+    padding: .5rem;
+    border-radius: 7px;
+}
+
+.fyt-is-mobile .fyt-toolbar {
+    position: fixed;
+    z-index: 2;
+}
+
+h1.fyt-app-name {
+    margin-left: 8px;
+    outline: none;
+}
+
+.fyt-sidenav-container {
+    flex: 1;
+}
+
+.fyt-sidenav-container-color {
+    background-color: #232D30;
+}
+
+.fyt-sidenav-container-textcolor {
+    color: goldenrod;
+}
+
+.fyt-is-mobile .fyt-sidenav-container {
+    flex: 1 0 auto;
+}
+
+.fyt-role {
+    display: inline-block;
+    font-size: 10px;
+    color: #007bff;
+    padding-left: 5px;
+}
+/* 
+.fyt-marginremove {
+    margin: 0;
+    border-radius: 0;
+} */
+
+/* .fyt-width100{
+    width: 100%;
+} */
+
+.mat-list-base .mat-list-item,
+.mat-list-base .mat-list-option {
+    height: 47px;
+    width: 88%;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .fyt-modal-design-branch {
+        min-width: 40%;
+        max-width: 45%;
+        position: fixed;
+        z-index: 1;
+        bottom: 15rem;
+        right: 35%;
+        max-height: 40%;
+        min-height: 200px;
+        /* border: 1px solid #ccc; */
+        margin-right: 1rem;
+        box-shadow: 0 3px 5px 5px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+        background: #fff;
+        padding: .5rem;
+        border-radius: 7px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mat-toolbar.mat-primary {
+        margin: 0px;
+        background: #fff;
+        color: #000;
+        box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+        z-index: 10;
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    .mat-drawer.mat-drawer-side,
+    .mat-drawer {
+        /* margin: 10px; */
+        margin-left: 1px;
+        margin-top: 20px;
+        border-radius: 10px;
+        background: #ffffff;
+    }
+}

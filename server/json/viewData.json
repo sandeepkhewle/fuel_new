@@ -1,0 +1,813 @@
+{
+    "members": {
+        "index": 0,
+        "name": "Members",
+        "page": "members",
+        "attributes": [
+            {
+                "name": "APP ID",
+                "prop": "appId",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false
+            },
+            {
+                "name": "MEMBER NAME",
+                "prop": "fullName",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "IS ACTIVE",
+                "prop": "isActive",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false
+            },
+            {
+                "name": "PHONE",
+                "prop": "phoneNo",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 200,
+                "label": false
+            },
+            {
+                "name": "EMAIL",
+                "prop": "emailId",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "PLAN",
+                "prop": "planName",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "PLAN TYPE",
+                "prop": "planType",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "LAST ACTIVE",
+                "prop": "lastActive",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "REGN DATE",
+                "prop": "createdAt",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 120,
+                "label": false
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 60,
+                "label": false,
+                "actions": [
+                    {
+                        "name": "ASSIGN FREE PLAN",
+                        "function": "assignFreePlan"
+                    }
+                ]
+            }
+        ]
+    },
+    "fortnight": {
+        "index": 0,
+        "name": "Trends",
+        "page": "trends",
+        "attributes": [
+            {
+                "name": "Product Name",
+                "prop": "productName",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "VALID FROM",
+                "prop": "validFrom",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-l",
+                "colSize": 110,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "VALID THROUGH",
+                "prop": "validThrough",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-l",
+                "headerClass": "",
+                "colSize": 110,
+                "label": false
+            },
+            {
+                "name": "TRENDS DATE",
+                "prop": "trendDate",
+                "sortable": false,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "UNIT",
+                "prop": "trendUnite",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "TREND",
+                "prop": "trend",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "CREATE DATE",
+                "prop": "createdAt",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false,
+                "actions": [
+                    {
+                        "name": "DELETE TREND",
+                        "function": "deleteTrend"
+                    }
+                ]
+            }
+        ]
+    },
+    "monthly": {
+        "index": 0,
+        "name": "Monthly",
+        "page": "monthly",
+        "attributes": [
+            {
+                "name": "Product Name",
+                "prop": "productName",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "VALID FROM",
+                "prop": "validFrom",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-l",
+                "colSize": 110,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "VALID THROUGH",
+                "prop": "validThrough",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-l",
+                "headerClass": "",
+                "colSize": 110,
+                "label": false
+            },
+            {
+                "name": "TRENDS DATE",
+                "prop": "trendDate",
+                "sortable": false,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "UNIT",
+                "prop": "trendUnite",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "TREND",
+                "prop": "trend",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "CREATE DATE",
+                "prop": "createdAt",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false,
+                "actions": [
+                    {
+                        "name": "DELETE TREND",
+                        "function": "deleteTrend"
+                    },
+                    {
+                        "name": "UPDATE TREND",
+                        "function": "updateTrend"
+                    }
+                ]
+            }
+        ]
+    },
+    "bitumen": {
+        "index": 0,
+        "name": "Trends",
+        "page": "trends",
+        "attributes": [
+            {
+                "name": "APP NAME",
+                "prop": "appId",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "VALID FROM",
+                "prop": "validFrom",
+                "sortable": false,
+                "pipe": "date",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "VALID THROUGH",
+                "prop": "validThrough",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-r",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "TRENDS DATE",
+                "prop": "trendDate",
+                "sortable": false,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "UNIT",
+                "prop": "trendUnite",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "BITUMEN",
+                "prop": "bitumen",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "FURNACE OIL",
+                "prop": "furnaceOil",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "LDO",
+                "prop": "ldo",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "CREATE DATE",
+                "prop": "createdAt",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false,
+                "actions": [
+                    {
+                        "name": "DELETE TREND",
+                        "function": "deleteTrend"
+                    },
+                    {
+                        "name": "UPDATE TREND",
+                        "function": "updateTrend"
+                    }
+                ]
+            }
+        ]
+    },
+    "notifications": {
+        "index": 0,
+        "name": "Notifications",
+        "page": "notifications",
+        "attributes": [
+            {
+                "name": "APP NAME",
+                "prop": "appId",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "SENT TO",
+                "prop": "sentTo",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "CATEGORY",
+                "prop": "category",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-r",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "TITLE",
+                "prop": "title",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-r",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "SENT ON",
+                "prop": "createdAt",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "MESSAGE",
+                "prop": "message",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 300,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false,
+                "actions": []
+            }
+        ]
+    },
+    "payments": {
+        "index": 0,
+        "name": "Payments",
+        "page": "payments",
+        "attributes": [
+            {
+                "name": "APP NAME",
+                "prop": "appId",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "INVOICE NO",
+                "prop": "invoiceNo",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-r",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "NAME",
+                "prop": "fullName",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "PHONE NO",
+                "prop": "phoneNo",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "EMAIL ID",
+                "prop": "emailId",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "FIRM NAME",
+                "prop": "firmName",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "PLAN TYPE",
+                "prop": "planType",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "START DATE",
+                "prop": "startDate",
+                "sortable": false,
+                "pipe": "date",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "END DATE",
+                "prop": "endDate",
+                "sortable": false,
+                "pipe": "date",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "PAID AMOUNT",
+                "prop": "txnAmount",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "TRANSACTION ID",
+                "prop": "orderId",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "PAYMENT MODE",
+                "prop": "paymentMode",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "TRANSACTION STATUS",
+                "prop": "paymentStatus",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "INVOICE LINK",
+                "prop": "link",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false,
+                "actions": [
+                    {
+                        "name": "TEST",
+                        "function": "sendInvoice"
+                    }
+                ]
+            }
+        ]
+    },
+    "device": {
+        "index": 0,
+        "name": "Device",
+        "page": "device",
+        "attributes": [
+            {
+                "name": "APP NAME",
+                "prop": "appId",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "MEMBER NAME",
+                "prop": "fullName",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "PHONE",
+                "prop": "phoneNo",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false
+            },
+            {
+                "name": "EMAIL",
+                "prop": "emailId",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "COMPANY NAME",
+                "prop": "companyName",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "CD COUNTER",
+                "prop": "cdCounter",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "CD STATUS",
+                "prop": "cdStatus",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            }
+        ]
+    },
+    "chat": {
+        "index": 0,
+        "name": "Chat",
+        "page": "chat",
+        "attributes": [
+            {
+                "name": "APP NAME",
+                "prop": "appId",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "MEMBER NAME",
+                "prop": "fullName",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "STATUS",
+                "prop": "status",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false
+            },
+            {
+                "name": "CREATE DATE",
+                "prop": "createDate",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "UPDATE DATE",
+                "prop": "updateDate",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false,
+                "actions": [
+                    {
+                        "name": "CHAT NOW",
+                        "function": "openChat"
+                    }
+                ]
+            }
+        ]
+    }
+}

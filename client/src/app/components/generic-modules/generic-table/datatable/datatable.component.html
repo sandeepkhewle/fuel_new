@@ -1,0 +1,64 @@
+<!-- <ng-container *ngIf="loader">
+    <div class="fyt-spinner-container">
+        <mat-spinner></mat-spinner>
+        <div class="text-center fyt-loading-msg">Please wait</div>
+    </div>
+</ng-container> -->
+<ng-container *ngIf="!isAttendance">
+    <ng-container *ngIf="filterObj && filterObj.page">
+        <trends-filters [inputFilterObj]="filterObj"  [attributeObj]="newAttributeObj" (onFilter)="onApplyFilters($event)">
+        </trends-filters>
+    </ng-container>
+</ng-container>
+
+<div class="row mt-10 mb-10">
+    <div class="col-md-12">
+        <ng-container *ngIf="membersAttributeList  && membersAttributeList.length > 0">
+            
+            <!-- [selectionType]="'checkbox'" -->
+            <!-- [columns]="columns" -->
+            <ngx-datatable #dataTable class='fyt-line-hight material fixed-header striped' [rows]="membersList" [scrollbarV]="false" [headerHeight]="35" [footerHeight]="50"  [rowHeight]="35" [rowClass]="getRowClass" [columnMode]="'force'" [scrollbarH]="false"
+                [externalPaging]="true" [count]="membersListCount" [loadingIndicator]="loader" [externalSorting]="true" (sort)="onSort($event)"  [limit]="filterObj.limit" (page)="onPage($event)" (select)='onSelect($event)'>
+
+                <!-- <ng-container *ngIf="postObj.page != 'attendanceMember' && postObj.page != 'attendanceTrainer' && postObj.page != 'communication' && postObj.page !='collection' && postObj.page !='accounts' && postObj.page !='expense'">
+                    <ngx-datatable-column [width]="60" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true" [frozenLeft]="true">
+                    </ngx-datatable-column>
+                </ng-container> -->
+
+                <ng-container *ngFor="let propdata of membersAttributeList;let i = index">
+                    <ng-container *ngIf="checkShowColumn(propdata.name)">
+                        <ngx-datatable-column [name]="propdata.name" [prop]="propdata.prop" [frozenLeft]="(propdata.prop == 'button') ? true : false" [width]="propdata.colSize" [headerClass]="propdata.headerClass" [sortable]="propdata.sortable" [headerCheckboxable]="true">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <div [ngClass]="propdata.class">
+                                    <a class="fyt-link-btn fyt-datatable-font"  (click)="onClickRow(row)">
+                                        <!-- <span *ngIf="propdata.prop=='fullName'"> -->
+                                        {{value | formatter:propdata.pipe}}
+                                        <!-- [ngClass]="propdata.label ? this[propdata.setLabel](value):''" -->
+                                        <!-- </span> -->
+                                    </a>
+                                    <ng-container *ngIf="propdata.prop == 'button'">
+                                        <button mat-icon-button [matMenuTriggerFor]="actionFilter" class="fyt-tbl-action-btn">
+                                        <mat-icon>more_horiz</mat-icon>
+                                    </button>
+                                        <mat-menu #actionFilter overlapTrigger="false">
+                                            <ng-container *ngIf="propdata.actions && propdata.actions.length > 0">
+                                                <ng-container *ngFor="let action of propdata.actions">
+                                                    <button mat-menu-item (click)="onAction(action.function, row)">{{action.name}}</button>
+                                                </ng-container>
+                                            </ng-container>
+                                        </mat-menu>
+                                    </ng-container>
+                                </div>
+                                <ng-container *ngIf="propdata.prop == 'whatsApp'">
+                                    <img src="../../../../../assets/img/whatsapp.png" class="fyt-link-btn" width="20px" alt="" (click)="openWhatsApp(row)">
+                                </ng-container>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ng-container>
+                </ng-container>
+
+
+            </ngx-datatable>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,133 @@
+<mat-card>
+    <mat-card-header class="ta-c">
+        <div class="row pl-0 pr-0 ml-0 mr-0 pb-20" style="width: 100%;">
+            <div class="col-md-10 ta-c enquiry-header new-Montserrat-Medium">
+                <h4>SEND NOTIFICATIONS</h4>
+            </div>
+
+            <div class="col-md-2 fr pl-0 pr-0 ml-0 mr-0" style="margin-top: 15px;">
+                <span class="new-Montserrat-Medium fyt-link-btn new-808080" (click)="closeForm(false)"> <span style="border-bottom: 1px solid #808080;">Close &nbsp;x</span>
+                </span>
+            </div>
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-md-12">
+                    <div class="alert alert-success" *ngIf="successMsg">
+                        <span>{{successMsg}}</span>
+                    </div>
+                </div>
+                <form #communicationForm="ngForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>App Name</mat-label>
+                                <mat-select name="appId" [(ngModel)]="commObj.appId">
+                                    <mat-option *ngFor="let app1 of appIdArray" [value]="app1.value">{{app1.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Title</mat-label>
+                                <input matInput required name="title" [(ngModel)]="commObj.title" id="title" #title="ngModel">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field appearance="outline" >
+                                <mat-label>Category</mat-label>
+                                <mat-select name="catName" [(ngModel)]="commObj.catName"  required>
+                                    <mat-option *ngFor="let cat of commCategory" [value]="cat.catName">{{cat.catName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Message</mat-label>
+                                <textarea matInput name="message" [(ngModel)]="commObj.message" (keyup)="smsLengthFun()"></textarea>
+                            </mat-form-field>
+                        </div>
+
+
+                        <ng-container *ngIf="usedFlag">
+                            <div class="col-md-12 py-1">
+                                <mat-card>
+                                    <span>Total characters <b>{{descriptionLength}}</b></span>
+
+                                    <!-- <span>You have used <b>{{descriptionLength}}</b> characters</span><br>
+                                    <span>Messages over {{overCharCount}} characters will be sent as <b>{{calculateSMSCount}}</b> SMS.</span><br>
+                                    <span>Total Number of SMS will send  <b>{{totalMsgSentCount}}</b></span> -->
+                                </mat-card>
+                            </div>
+                        </ng-container>
+
+<!-- 
+                        <div class="col-md-12 py-1">
+                            <mat-card style="background-color: green;color: white;">
+                                <span>Total SMS Left - <b>{{smsCount}}</b></span>
+                                <span style="float: right;">
+                                   <ng-container *ngIf="pageName == 'Enquiry'">Enquiry - <b>{{memberCount}}</b></ng-container><ng-container *ngIf="pageName == 'member'">Member - <b>{{memberCount}}</b></ng-container></span>
+                            </mat-card>
+                        </div>
+                        <ng-container *ngIf="usedFlag">
+                            <div class="col-md-12 py-1">
+                                <mat-card>
+                                    <span>You have used <b>{{descriptionLength}}</b> characters</span><br>
+                                    <span>Messages over {{overCharCount}} characters will be sent as <b>{{calculateSMSCount}}</b> SMS.</span><br>
+                                    <span>Total Number of SMS will send  <b>{{totalMsgSentCount}}</b></span>
+                                </mat-card>
+                            </div>
+                        </ng-container> -->
+
+                        <!-- <ng-container *ngIf="suffBalanceFlag">
+                            <div class="col-md-12 py-1">
+                                <mat-card style="background-color: red;color: white;">
+                                    <span>You do not have sufficient SMS balance please contact <b>Fyteack Team</b></span>
+                                </mat-card>
+                            </div>
+                        </ng-container> -->
+                        <!-- <ng-container *ngIf="memberListData">
+                            <div class="col-md-12 mt-1 mb-3">
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header class="web-page-color">
+                                        <mat-panel-title>
+                                            <span>SMS will be sent to {{memberCount}} members &nbsp;(<small>Click here
+                                                    to
+                                                    check</small>)</span>
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <mat-panel-description>
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table table-borderless fyt-content-loader">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">MEMBER</th>
+                                                            <th scope="col">CONTACT NO</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let mem of memberListData; let i = index">
+                                                            <td>{{mem.fullName}}</td>
+                                                            <td>{{mem.phoneNo}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </mat-panel-description>
+                                </mat-expansion-panel>
+                            </div>
+                        </ng-container> -->
+                        <ng-container >
+                            <div class="col-md-12 ta-c pb-20">
+                                <button class="new-btn-8CC63F-popup px-5 py-1" [disabled]="communicationForm.invalid" (click)="sendMessage()">SEND</button>
+                            </div>
+                        </ng-container>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

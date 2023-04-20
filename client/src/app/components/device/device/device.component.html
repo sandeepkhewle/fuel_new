@@ -1,0 +1,60 @@
+<div class="row new-white-bg py-3">
+    <div class="col-md-4 col-lg-3 py-1 ta-c ">
+        <button type="button" class="ta-c new-tab-head-invoice">
+                CHANGE DEVICE</button>
+    </div>
+    <div class="col-md-4 col-lg-3 py-1 ta-c ">
+    </div>
+    <div class="col-md-4 col-lg-6 pl-0 ml-0 ta-c">
+    </div>
+</div>
+<div class="row" style="margin-top: -17px;">
+    <div class="col-md-4 col-lg-3 ta-c">
+        <ng-container>
+            <img src="../../../../assets/img/down-triangle.png" width="30px" alt="">
+        </ng-container>
+    </div>
+    <div class="col-md-4 col-lg-3 ta-c">
+    </div>
+    <div class="col-md-4 col-lg-3">
+    </div>
+</div>
+
+
+<div class="row new-white-bg py-3">
+    <div class="col-md-12 pl-0 pr-0 ml-0 mr-0">
+            <ng-container *ngIf="postObj.page">
+                <trends-datatable class="mt-0 mb-0 pt-0 pb-0" [postObj]="postObj" (onSelectRows)="onRowsSelected($event)"
+                    (onRowClickEvent)="onRowClick($event)" (onActonModal)="onModalAction($event)">
+                </trends-datatable>
+            </ng-container>
+    </div>
+</div>
+
+<ng-container *ngIf="cdDeviceFlag">
+    <div class="fyt-custom-modal-design animated slideInUp slow ">
+        <div class="row">
+            <div class="col-md-12 pt-20 pb-20">
+                <div class="fyt-display-flex">
+                    <h3 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">Approve / Decline Device Of <br><span class=" new-009245 fnt-15">{{currentRowData.fullName | titlecase}} &nbsp;<br>App Name - {{currentRowData.appId | uppercase}}</span> </h3>
+                    <span class="sp"></span>
+                    <span class="new-Montserrat-Medium fyt-link-btn new-808080" (click)="closeBox()"> <span style="border-bottom: 1px solid #808080;">Close &nbsp;x</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12 pt-30">
+                <div class="row">
+                    <div class="col-md-6 ta-c">
+                        <button class="apply-button px-3" style="text-transform: capitalize;"
+                        (click)="changeDeviceStatus(currentRowData, 'approve')">Approve</button>
+                    </div>
+                    <div class="col-md-6 ta-c">
+                        <button class="clear-all-button px-3" style="text-transform: capitalize;"
+                        (click)="changeDeviceStatus(currentRowData, 'decline')">Decline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+

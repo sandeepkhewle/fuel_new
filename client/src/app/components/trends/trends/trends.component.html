@@ -1,0 +1,116 @@
+<div class="row new-white-bg py-3">
+    <div class="col-md-4 col-lg-4 py-1 ta-c ">
+        <button type="button" class="ta-c" [ngClass]="msdFlag ? 'new-workout-btn' :'new-workout-btn-unselect'"
+            (click)="changeTrends('fortnight')">
+            <img src="../../../../assets/icons/sidenavIcons/enquiry1.png" width="18px" style="margin-top: -3px;"
+                alt="">&nbsp;
+            FORTNIGHT PRODUCTS</button>
+    </div>
+    <div class="col-md-4 col-lg-4 py-1 ta-c ">
+        <button type="button" class="ta-c" [ngClass]="lpgFlag ? 'new-diet-btn' :'new-workout-btn-unselect'"
+            (click)="changeTrends('monthly')">
+            <img src="../../../../assets/icons/sidenavIcons/enquiry1.png" width="18px" style="margin-top: -3px;"
+                alt="">&nbsp;
+            MONTHLY PRODUCTS</button>
+    </div>
+    <!-- <div class="col-md-2 col-lg-2 py-1 ta-c ">
+        <button type="button" class="ta-c" [ngClass]="bitumenFlag ? 'new-food-btn' :'new-workout-btn-unselect'" (click)="changeTrends('bitumen')">
+            <img src="../../../../assets/icons/sidenavIcons/enquiry1.png" width="18px" style="margin-top: -3px;"
+                alt="">&nbsp;
+                BITUMEN TRENDS</button>
+    </div> -->
+    <!-- <div class="col-md-4 col-lg-3 py-1 ta-c ">
+        
+    </div> -->
+    <div class="col-md-4 col-lg-4 pl-0 ml-0 ta-c">
+        <ng-container>
+            <button type="button" mat-raised-button class="fr-side new-tab-side-enquiry" style="margin-right:auto"
+                (click)="createNewTrends()">ADD TREND</button>
+        </ng-container>
+
+    </div>
+
+</div>
+<div #target></div>
+<div class="row" style="margin-top: -17px;">
+    <div class="col-md-2 col-lg-2 ta-c">
+        <ng-container *ngIf="msdFlag">
+            <img src="../../../../assets/img/down-triangle.png" width="30px" alt="">
+        </ng-container>
+    </div>
+    <div class="col-md-2 col-lg-2 ta-c">
+        <ng-container *ngIf="lpgFlag">
+            <img src="../../../../assets/img/down-triangle.png" width="30px" alt="">
+        </ng-container>
+    </div>
+    <div class="col-md-2 col-lg-2 ta-c">
+        <ng-container *ngIf="bitumenFlag">
+            <img src="../../../../assets/img/down-triangle.png" width="30px" alt="">
+        </ng-container>
+    </div>
+</div>
+
+<ng-container *ngIf="openTrendsForm">
+    <trends-add-trends [InutDataObj]="passObj" (onActon)="onCardAction($event)"></trends-add-trends>
+</ng-container>
+
+
+<div class="row new-white-bg py-3">
+    <div class="col-md-12 pl-0 pr-0 ml-0 mr-0">
+        <ng-container>
+            <ng-container *ngIf="msdFlag">
+                <ng-container *ngIf="postObj.page">
+                    <trends-datatable class="mt-0 mb-0 pt-0 pb-0" [postObj]="postObj"
+                        (onSelectRows)="onRowsSelected($event)" (onRowClickEvent)="onRowClick($event)"
+                        (onActonModal)="onModalAction($event, target)">
+                    </trends-datatable>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="lpgFlag">
+                <ng-container *ngIf="postObj.page">
+                    <trends-datatable class="mt-0 mb-0 pt-0 pb-0" [postObj]="postObj"
+                        (onSelectRows)="onRowsSelected($event)" (onRowClickEvent)="onRowClick($event)"
+                        (onActonModal)="onModalAction($event, target)">
+                    </trends-datatable>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="bitumenFlag">
+                <ng-container *ngIf="postObj.page">
+                    <trends-datatable class="mt-0 mb-0 pt-0 pb-0" [postObj]="postObj"
+                        (onSelectRows)="onRowsSelected($event)" (onRowClickEvent)="onRowClick($event)"
+                        (onActonModal)="onModalAction($event, target)">
+                    </trends-datatable>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
+
+
+<ng-container *ngIf="deleteTrendsFlag">
+    <div class="trends-modal-design-branch animated slideInUp slow row" style="z-index: 3;">
+        <div class="col-md-12 fyt-display-flex">
+            <span class="sp">
+            </span>
+            <span class="new-Montserrat-Medium fyt-link-btn new-999999" (click)="closeDialog('cancel')"> <span
+                    style="border-bottom: 1px solid #999999;">Close &nbsp;x</span>
+            </span>
+        </div>
+        <div class="col-md-12 ta-c" style="border-bottom: 1px solid #999999;">
+            <h6 class="ta-c new-Montserrat-Regular fnt-15 new-333333">Delete Trend Of {{deleteTrendData.appId |
+                titlecase}}</h6>
+            <span class="fnt-15 new-Montserrat-Regular new-808080 ta-c">Are You Sure To Delete Trend</span>
+
+        </div>
+        <div class="col-md-6 col-6 py-3 pb-20" style="text-align: end;">
+            <button type="button" class="new-Montserrat-Medium yes-btn" style="text-align: initial;"
+                (click)="deleteTrends(deleteTrendData)"><img src="../../../../assets/img/yes.png" width="22px"
+                    style="margin-top: -2px;" alt="">&nbsp;Yes</button>
+        </div>
+        <div class="col-md-6 col-6 py-3 pb-20" style="text-align: initial;">
+            <button type="button" class="new-Montserrat-Medium no-btn" style="text-align: initial;"
+                (click)="closeDialog('cancel')"><img src="../../../../assets/img/no.png" width="22px"
+                    style="margin-top: -2px;" alt="">&nbsp;No</button>
+        </div>
+    </div>
+</ng-container>

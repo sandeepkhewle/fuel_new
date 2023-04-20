@@ -1,0 +1,97 @@
+<div class="fyt-container" [class.fyt-is-mobile]="mobileQuery.matches" style="background-color: #EDEBEB;">
+    <!-- <div class="px-2 py-2"> -->
+    <mat-toolbar color="primary" class="fyt-toolbar fyt-marginremove fyt-width100">
+        <button mat-icon-button (click)="snav.toggle();">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="fyt-app-name fyt-link-btn" routerLink="/trends/members">
+            <ng-container *ngIf="mobileQuery.matches">
+                <!-- <img class="fyt-brand-logo-mobile" src="../../../assets/img/logo1.png" alt="TRENDS"> -->
+                <h6 class="new-Montserrat-Medium new-000000 fnt-20" style="font-weight: 500;">FUEL PRE ALERT</h6>
+
+            </ng-container>
+            <ng-container *ngIf="!mobileQuery.matches">
+                <!-- <img src="../../../assets/img/logo.png" alt="TRENDS" class="fyt-brand-logo-desktop"> -->
+                <h6 class="new-Montserrat-Medium new-000000 fnt-20" style="font-weight: 500;">FUEL PRE ALERT</h6>
+            </ng-container>
+        </h1>
+
+        <span class="sp"></span>
+
+
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <div class="menu">
+            <!-- <button> -->
+            <!-- <img src="{{profilePic}}" 
+                    class="fyt-loggedin-user"> -->
+            <!-- onError="this.src='../../../../assets/img/profile.png';" -->
+            <a (click)="logOutUser()" class="fyt-link-btn new-Montserrat-Medium new-000000 fnt-20">Log out <i
+                    class="fa fa-sign-out" aria-hidden="true"></i></a>
+            <!-- </button> -->
+
+            <!-- <mat-menu #userMenu="matMenu">
+                <div class="menu-content">
+                    <a mat-menu-item (click)="logOutUser()">Log out <i class="fa fa-sign-out"
+                            aria-hidden="true"></i></a>
+                </div>
+            </mat-menu> -->
+
+        </div>
+
+    </mat-toolbar>
+    <!-- </div> -->
+    <mat-sidenav-container class="fyt-sidenav-container fyt-list-diff"
+        [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav class="fyt-sidenav-container-color fyt-marginremove" #snav
+            [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
+            [opened]="(mobileQuery.matches) ? false : true">
+            <mat-nav-list>
+                <ng-container *ngIf="dynamicNav && dynamicNav.length > 0">
+                    <ng-container *ngFor="let nav of dynamicNav; let i = index">
+                        <mat-list-item class="mx-2 fyt-sidenav-container-textcolor" (click)="navigateTo(nav, i)"
+                            [routerLink]="nav.url" routerLinkActive="fyt-active-route"
+                            [routerLinkActiveOptions]="{ exact: true }">
+                            <!-- <img *ngIf="currentActive !== i" src="../../../../assets/icons/sidenavIcons/{{nav.imgUrl}}"
+                                width="20px" style="margin-right: 15px;" alt="">
+                            <img *ngIf="currentActive === i"
+                                src="../../../../assets/icons/sidenavIcons/{{nav.imgUrlWhite}}" width="20px"
+                                style="margin-right: 15px;" alt=""> -->
+                            {{nav.name | uppercase}}
+                            <span fxFlex *ngIf="nav.children && nav.children.length > 0">
+                                <span fxFlex></span>
+                                <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+                                    expand_more
+                                </mat-icon>
+                            </span>
+                        </mat-list-item>
+                        <!-- for nested nav bar only -->
+                        <ng-container *ngIf="expanded">
+                            <ng-container *ngFor="let child of nav.children; let j = index">
+                                <mat-list-item class="pl-15" (click)="navigateTo(child, i)">
+                                    {{child.name | uppercase}}
+                                </mat-list-item>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <div class="fyt-content-wrapper">
+
+                <ng-container *ngIf="!isNavLoading ">
+                    <router-outlet></router-outlet>
+                </ng-container>
+
+                <ng-container *ngIf="isNavLoading ">
+                    <!-- <fyt-ghost-loader [loaderCount]="10 " [loaderType]="loaderType "></fyt-ghost-loader> -->
+                </ng-container>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+<!-- <ng-container *ngIf="defaultSettingModal ">
+    <div class="fyt-search-box-cont animated slideInDown slow ">
+        <trends-default-settings (onActon)="onCardAction($event) "></trends-default-settings>
+    </div>
+</ng-container> -->

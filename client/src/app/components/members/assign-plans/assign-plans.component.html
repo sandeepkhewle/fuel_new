@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-12 pt-20 pb-20">
+        <div class="fyt-display-flex">
+            <h3 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">Assign Plan To <br><span class=" new-009245 fnt-15">{{InutDataObj.fullName | uppercase}}&nbsp;&nbsp;{{InutDataObj.phoneNo}}</span> </h3>
+            <span class="sp"></span>
+            <span class="new-Montserrat-Medium fyt-link-btn new-808080" (click)="closeDialog('cancel')"> <span style="border-bottom: 1px solid #808080;">Close &nbsp;x</span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<form #assignPlansForm="ngForm">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-form-field appearance="outline">
+                <mat-label>App Name</mat-label>
+                <input matInput type="text" name="planName" [(ngModel)]="plansObj.appId" disabled>
+            </mat-form-field>
+        </div>
+
+        <ng-container *ngIf="internalPlans && internalPlans.plans && internalPlans.plans.length > 0">
+        <div class="col-md-12">
+            <mat-form-field appearance="outline">
+                <mat-label>Select Plan</mat-label>
+                <mat-select [(ngModel)]="plansObj.plan" #plan name="plan" required>
+                    <mat-option *ngFor="let plan of internalPlans.plans" [value]="plan">
+                        {{plan.planName | uppercase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </ng-container>
+
+    <div class="col-md-6">
+        <mat-form-field appearance="outline">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker12" placeholder="Start Date" [(ngModel)]="plansObj.startDate" name="startDate" [ngModelOptions]="{standalone: true}" (click)="picker12.open()" (keydown)="false" required>
+            <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+            <mat-datepicker #picker12></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+        <mat-form-field appearance="outline">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="picker2" placeholder="End Date" [(ngModel)]="plansObj.endDate" name="endDate" (click)="picker2.open()" [ngModelOptions]="{standalone: true}" [min]="plansObj.startDate" (keydown)="false" required>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12 ta-c">
+        <button type="button" mat-raised-button class="new-tab-side-enquiry" [disabled]="assignPlansForm.invalid || !(plansObj.startDate) || !(plansObj.endDate)" (click)="assignPlans()" >ASSIGN PLAN</button>
+    </div>    
+    </div>
+</form>
