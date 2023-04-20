@@ -8,6 +8,8 @@ const Logger = require('morgan');
 const jwt = require('jsonwebtoken');
 const server = require('http').createServer(app)
 const io = require('socket.io')(server, { cors: { origin: '*' } });
+const fs = require('fs');
+
 
 // config
 const config = require('./config/config').config;
@@ -23,6 +25,16 @@ app.set('port', process.env.PORT || 4108);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
+
+
+// api.automi.in
+app.use('/.well-known/acme-challenge/KvmIqbTsTNypSAzuglWFzQXrs0EbT_wJgsfa5cxhnA8', (req, res) => {
+    try {
+        res.send("KvmIqbTsTNypSAzuglWFzQXrs0EbT_wJgsfa5cxhnA8.SlFxx5G2l2gxWmrU5Nv0Oq6vqJZdXuh-G7ccKHaWd8Q")
+    } catch (error) {
+        console.log('error', error);
+    }
+});
 
 // let chatController = require('./controllers/chat.controller');
 // socket code
@@ -87,6 +99,28 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
-server.listen(app.get('port'));
+// run https server in the production
+// if (process.env.NODE_ENV === "production") {
+//     // Certificate
+//     const privateKey = fs.readFileSync('/etc/letsencrypt/live/api.automi.in-0001/privkey.pem', 'utf8');
+//     const certificate = fs.readFileSync('/etc/letsencrypt/live/api.automi.in-0001/cert.pem', 'utf8');
+//     const ca = fs.readFileSync('/etc/letsencrypt/live/api.automi.in-0001/chain.pem', 'utf8');
+
+//     const credentials = {
+//         key: privateKey,
+//         cert: certificate,
+//         ca: ca
+//     };
+
+//     const httpsServer = require('https').createServer(credentials, app);
+
+//     httpsServer.listen(app.get('securePort'), () => {
+//         console.log('HTTPS Server running');
+//     });
+// } else {
+    // run http server on staging
+    server.listen(app.get('port'));
+// }
+
 module.exports = app;
 
