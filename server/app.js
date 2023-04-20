@@ -22,6 +22,7 @@ app.use(cors())
 app.use(express.static(__dirname + '/public'));
 app.use(Logger('common'));
 app.set('port', process.env.PORT || 4108);
+app.set('securePort', process.env.SECUREPORT || 4109);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
