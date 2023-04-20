@@ -39,7 +39,7 @@ module.exports.dummy = (socket_io) => {
             if (data.chat.length > 0) {
                 data.chat.forEach(e1 => {
                     if (e1.chatTime) {
-                        let newDate = moment(e1.chatTime).tz('Asia/Kolkata')
+                        let newDate = e1.chatTime.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
                         e1.chatTime = new Date(newDate)
                         e1.newchatTime = new Date(newDate)
                     }
@@ -75,3 +75,55 @@ module.exports.dummy = (socket_io) => {
         // commService.sendNotificationByUserId(data.userId, data.message);
     });
 }
+
+// let data = {}
+// data.chat = [
+//     {
+//         "message": "hey",
+//         "image": "",
+//         "chatTime": "2023-04-19T06:53:38.275Z",
+//         "_id": "643f8ff2ed32eeb054e40338",
+//         "userFlag": "User"
+//     },
+
+//     {
+//         "message": "tested ",
+//         "image": "",
+//         "chatTime": "2023-04-19T13:35:25.439Z",
+//         "_id": "643fee1d5e7f49bc01a93cf2",
+//         "userFlag": "User"
+//     },
+//     {
+//         "message": "vikas",
+//         "image": "",
+//         "chatTime": "2023-04-19T19:29:13.806Z",
+//         "_id": "644041095e7f49bc01a93d5a",
+//         "userFlag": "User"
+//     },
+//     {
+//         "message": "hi",
+//         "image": "",
+//         "chatTime": "2023-04-20T11:46:51.516Z",
+//         "_id": "6441262b32b0a7dda2d12b80",
+//         "userFlag": "User"
+//     },
+//     {
+//         "message": "hm",
+//         "image": "",
+//         "chatTime": "2023-04-20T11:49:43.205Z",
+//         "_id": "644126d7f105cede4750b974",
+//         "userFlag": "User"
+//     }
+// ]
+
+// if (data.chat.length > 0) {
+//     data.chat.forEach(e1 => {
+//         if (e1.chatTime) {
+//             console.log("e1.chatTime", e1.chatTime);
+//             let newDate = e1.chatTime.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })
+//             e1.chatTime = new Date(newDate)
+//             e1.newchatTime = new Date(newDate)
+//             console.log("e1.newchatTime", e1.newchatTime);
+//         }
+//     });
+// }
