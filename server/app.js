@@ -100,27 +100,27 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 // run https server in the production
-// if (process.env.NODE_ENV === "production") {
-//     // Certificate
-//     const privateKey = fs.readFileSync('/etc/letsencrypt/live/api.automi.in-0001/privkey.pem', 'utf8');
-//     const certificate = fs.readFileSync('/etc/letsencrypt/live/api.automi.in-0001/cert.pem', 'utf8');
-//     const ca = fs.readFileSync('/etc/letsencrypt/live/api.automi.in-0001/chain.pem', 'utf8');
+if (process.env.NODE_ENV === "production") {
+    // Certificate
+    const privateKey = fs.readFileSync('/etc/letsencrypt/live/api.fuelpricealert.in/privkey.pem', 'utf8');
+    const certificate = fs.readFileSync('/etc/letsencrypt/live/api.fuelpricealert.in/cert.pem', 'utf8');
+    const ca = fs.readFileSync('/etc/letsencrypt/live/api.fuelpricealert.in/chain.pem', 'utf8');
 
-//     const credentials = {
-//         key: privateKey,
-//         cert: certificate,
-//         ca: ca
-//     };
+    const credentials = {
+        key: privateKey,
+        cert: certificate,
+        ca: ca
+    };
 
-//     const httpsServer = require('https').createServer(credentials, app);
+    const httpsServer = require('https').createServer(credentials, app);
 
-//     httpsServer.listen(app.get('securePort'), () => {
-//         console.log('HTTPS Server running');
-//     });
-// } else {
+    httpsServer.listen(app.get('securePort'), () => {
+        console.log('HTTPS Server running');
+    });
+} else {
     // run http server on staging
     server.listen(app.get('port'));
-// }
+}
 
 module.exports = app;
 
