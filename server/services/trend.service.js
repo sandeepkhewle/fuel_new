@@ -124,12 +124,23 @@ let getPastFortnightTrend = async (userId) => {
             trendDate: { $lte: new Date() },
         }
         // if (trendType) matchObj.trendType = trendType;
-        let tData = await trendsModel.aggregate([{ $sort: { "validThrough": -1 } }, {
+        let tData = await trendsModel.aggregate([{
             $match: matchObj
-        }, { $group: { _id: "$trendName", data: { "$push": "$$ROOT" } } }, {
-            $project: {
-                data: { "$slice": ["$data", 1] }
+        }, {
+            $sort: { trendDate: -1 }
+        }, {
+            $group: {
+                _id: {
+                    "trendType": "$trendType", "productName": "$productName"
+                },
+                data: { $push: "$$ROOT" }
             }
+        }, {
+            $project: { first: { $arrayElemAt: ["$data", 0] } }
+        }, {
+            $replaceRoot: { newRoot: "$first" }
+        }, {
+            $group: { _id: "$trendType", data: { "$push": "$$ROOT" } }
         }]);
         // to add is have active plan against trendType
         if (tData) {
