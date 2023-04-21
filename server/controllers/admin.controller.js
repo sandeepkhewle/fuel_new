@@ -171,7 +171,7 @@ router.post('/assignPlanManually', (req, res) => {
 })
 
 router.post('/getPlanListByTreads', (req, res) => {
-    console.log('/admin/getPlanListByTreads');
+    console.log('/admin/getPlanListByTreads', req.body);
     let planForTrend = req.body.trendName;
     adminService.getPlanListByTreads(planForTrend).then((payload) => {
         res.status(res.statusCode).send({
