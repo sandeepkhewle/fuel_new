@@ -46,7 +46,7 @@ let config = {
         CHANNEL_ID: 'WEB',
         INDUSTRY_TYPE_ID: 'Retail109',
         //  GUID : "47acd048-e54d-49a2-9b7c-e712ee5582fc",
-        CALLBACK_URL: 'https://api.fuelpricealert.in/paytm/response',
+        CALLBACK_URL: 'https://api.fuelpricealert.in/web/response',
         //  CALLBACK_URL : 'http://www.infotecindia.in/paytm/response',
         PAYTM_FINAL_URL: 'https://securegw.paytm.in/order/process',
         PAYTMRESPONSE_URL: "https://securegw.paytm.in/order/status?JsonData="
