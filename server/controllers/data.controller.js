@@ -10,7 +10,8 @@ const trendService = require('../services/trend.service');
 router.post('/notificationList', (req, res) => {
     console.log('/data/notificationList');
     let data = req.body;
-    dataService.getnotificationList(data).then((payload) => {
+    let userId = req.user.userId
+    dataService.getnotificationList(data, userId).then((payload) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
