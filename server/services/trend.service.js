@@ -15,7 +15,7 @@ let createNewTrend = async ({ trendType, trend, trendName, trendDate, trendUnite
             trendType: trendType, trend: trend, trendName: trendName, trendDate: trendDate, trendUnite: trendUnite, productName: productName, validFrom: validFrom, validThrough: validThrough, createdAt: new Date(),
             trendValue: trendValue
         })
-        await commService.sendNotification({ appId: appId, category: "all members", data: {}, message: "New trend added", title: "Trends Update" })
+        await commService.sendNotification({ appId: "fuel", category: "all members", data: {}, message: "New trend added", title: "Trends Update" })
         return;
     } catch (error) {
         throw error;
