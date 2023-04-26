@@ -1355,7 +1355,7 @@ class ChatComponent {
             page: 'chat'
         };
         this.start = () => {
-            this.socket = Object(socket_io_client__WEBPACK_IMPORTED_MODULE_0__["default"])(this.globalApiService.getApiUrl());
+            this.socket = Object(socket_io_client__WEBPACK_IMPORTED_MODULE_0__["default"])(this.globalApiService.getSocketUrl());
             this.socket.on('message', this.appendChatMessage);
             this.socket.emit("adminSocket", { adminUserId: JSON.parse(this.userDetails).adminUserId });
             // console.log('admin socket----------2-');
