@@ -7,9 +7,9 @@ let config = {
         passKey: "6T{z'8`zkz0,tY<ILZR^/NhQo8ap'Whj", //password encryption
 
         //gcm config details
-        gcmServerKey: 'AAAA8dvpYGU:APA91bENo5jd8Xj-73kaQrJdS7kUcyBNHXoO4OpllezGXKiXNS1iGchoGTG_A2trX0ShRwcba5uVArmwj94xzIgauvS61CAnh5BPwa6ecxls64ClPOxVURIL7VrYFdu6kRNpSam5Un3v',
-        // legacyServerKey: 'AIzaSyC8QrU1D7GLRlWAg_1DUI3z1kzifMPnlRA',  // generate this key 
-        senderId: '1038776623205',
+        gcmServerKey: 'AAAACLXwftw:APA91bFZI_1ilU-vkdzxaNpt_Ash5fMe1oZgbr_Soianlo66WZDvXWzC9MlrpZuNVywFOpF8MPcB9ASBDUnPi7T4NIwZblYBJFdkpjPcOxf4Eanmt429K8YWIngJCM0JK2NtfLV98Wi0',
+        // legacyServerKey: 'AIzaSyAm9Anm4FcleLxIly-KAlDTvx55wyNg_y8',  // generate this key 
+        senderId: '266576575296',
 
         //aws config details
         accessKeyId: "AKIATKGLISTWSADKJHYV",
@@ -56,9 +56,9 @@ let config = {
         passKey: "6T{z'8`zkz0,tY<ILZR^/NhQo8ap'Whj", //password encryption
 
         //gcm config details
-        gcmServerKey: 'AAAA8dvpYGU:APA91bENo5jd8Xj-73kaQrJdS7kUcyBNHXoO4OpllezGXKiXNS1iGchoGTG_A2trX0ShRwcba5uVArmwj94xzIgauvS61CAnh5BPwa6ecxls64ClPOxVURIL7VrYFdu6kRNpSam5Un3v',
-        // legacyServerKey: 'AIzaSyC8QrU1D7GLRlWAg_1DUI3z1kzifMPnlRA', // generate this key 
-        senderId: '1038776623205',
+        gcmServerKey: 'AAAACLXwftw:APA91bFZI_1ilU-vkdzxaNpt_Ash5fMe1oZgbr_Soianlo66WZDvXWzC9MlrpZuNVywFOpF8MPcB9ASBDUnPi7T4NIwZblYBJFdkpjPcOxf4Eanmt429K8YWIngJCM0JK2NtfLV98Wi0',
+        // legacyServerKey: 'AIzaSyAm9Anm4FcleLxIly-KAlDTvx55wyNg_y8', // generate this key 
+        senderId: '266576575296',
 
         //aws config details
         accessKeyId: "AKIATKGLISTWSADKJHYV",

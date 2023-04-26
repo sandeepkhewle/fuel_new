@@ -34,7 +34,7 @@ module.exports.dummy = (socket_io) => {
 
     // update user scoket id in chat table
     socket_io.on('getChat', (data, callback) => {
-        // console.log("getChat", { data });
+        console.log("getChat", { data });
         chatModel.findOne({ userId: data.userId }).then(data => {
             if (data.chat.length > 0) {
                 data.chat.forEach(e1 => {

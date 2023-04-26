@@ -4,6 +4,7 @@ let notificationSchema = mongoose.Schema({
     notificationId: { type: String, default: mongoose.Types.ObjectId, index: true, required: true, unique: true, auto: true },
     message: String,
     appId: String,
+    userId: String,
     category: String,
     notificationTitle: String,
     sentTo: Number,

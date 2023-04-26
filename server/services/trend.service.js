@@ -5,8 +5,8 @@ const moment = require('moment');
 const trendsModel = require('../models/trends.model');
 
 //services
-const commService = require('../services/communication.service');
-const userService = require('../services/user.service')
+const commService = require('./communication.service');
+const userService = require('./user.service')
 
 let createNewTrend = async ({ trendType, trend, trendName, trendDate, trendUnite, productName, validFrom, validThrough, trendValue }) => {
     try {
@@ -15,7 +15,7 @@ let createNewTrend = async ({ trendType, trend, trendName, trendDate, trendUnite
             trendType: trendType, trend: trend, trendName: trendName, trendDate: trendDate, trendUnite: trendUnite, productName: productName, validFrom: validFrom, validThrough: validThrough, createdAt: new Date(),
             trendValue: trendValue
         })
-        // await commService.sendNotification({ appId: appId, category: "all members", data: {}, message: "New trend added", title: "Trends Update" })
+        await commService.sendNotification({ appId: appId, category: "all members", data: {}, message: "New trend added", title: "Trends Update" })
         return;
     } catch (error) {
         throw error;
