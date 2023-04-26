@@ -118,10 +118,10 @@ if (process.env.NODE_ENV === "production") {
     httpsServer.listen(app.get('securePort'), () => {
         console.log('HTTPS Server running');
     });
-} else {
-    // run http server on staging
-    server.listen(app.get('port'));
 }
+// run http server on staging - for socket connections
+server.listen(app.get('port'));
+
 
 module.exports = app;
 
