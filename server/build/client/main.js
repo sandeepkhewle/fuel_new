@@ -1618,7 +1618,7 @@ class GlobalApiService {
         // return this.CUSTOM_API;
     }
     getSocketUrl() {
-        const socketUrl = window.location.protocol + '//' + window.location.hostname + this.SOCKET_SERVER_PORTSTRING;
+        const socketUrl = 'http//' + window.location.hostname + this.SOCKET_SERVER_PORTSTRING;
         return `${socketUrl}`;
     }
 }

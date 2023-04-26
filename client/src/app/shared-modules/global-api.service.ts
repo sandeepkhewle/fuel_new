@@ -17,7 +17,7 @@ export class GlobalApiService {
 
   }
   public getSocketUrl(): string {
-    const socketUrl: string = window.location.protocol + '//' + window.location.hostname + this.SOCKET_SERVER_PORTSTRING
+    const socketUrl: string = 'http//' + window.location.hostname + this.SOCKET_SERVER_PORTSTRING
     return `${socketUrl}`
   }
 }
