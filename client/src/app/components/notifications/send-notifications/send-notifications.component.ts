@@ -20,16 +20,8 @@ export class SendNotificationsComponent implements OnInit, OnChanges {
   totalMsgSentCount: any;
   appIdArray: any = [
     {
-      "name": "MS-HSD",
-      "value": "msd"
-    },
-    {
-      "name": "LPG",
-      "value": "lpg"
-    },
-    {
-      "name": "BITUMEN",
-      "value": "bitumen"
+      "name": "FUEL",
+      "value": "fuel"
     }
   ];
   commCategory: any = [

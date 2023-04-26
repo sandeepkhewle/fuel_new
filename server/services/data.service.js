@@ -66,9 +66,9 @@ let getPlanList = async ({ appId, gstNumber }) => {
 }
 
 // get all notification list for the user
-let getnotificationList = async ({ appId }, userId) => {
+let getnotificationList = async ({ appId }) => {
     try {
-        let nData = await notificationModel.find({ appId: 'fuel', userId: userId });
+        let nData = await notificationModel.find({ appId: appId });
         return nData;
     } catch (error) {
         throw error;

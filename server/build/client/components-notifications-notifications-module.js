@@ -218,16 +218,8 @@ class SendNotificationsComponent {
         this.usedFlag = false;
         this.appIdArray = [
             {
-                "name": "MS-HSD",
-                "value": "msd"
-            },
-            {
-                "name": "LPG",
-                "value": "lpg"
-            },
-            {
-                "name": "BITUMEN",
-                "value": "bitumen"
+                "name": "FUEL",
+                "value": "fuel"
             }
         ];
         this.commCategory = [
