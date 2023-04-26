@@ -67,7 +67,7 @@ export class ChatComponent implements OnInit {
   }
 
   start = () => {
-    this.socket = openSocket(this.globalApiService.getApiUrl());
+    this.socket = openSocket(this.globalApiService.getSocketUrl());
     this.socket.on('message', this.appendChatMessage);
 
     this.socket.emit("adminSocket", { adminUserId: JSON.parse(this.userDetails).adminUserId });
