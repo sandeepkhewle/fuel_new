@@ -72,7 +72,7 @@ export class ChatComponent implements OnInit {
 
     this.socket.emit("adminSocket", { adminUserId: JSON.parse(this.userDetails).adminUserId });
 
-    // console.log('admin socket----------2-');
+    console.log('admin socket----------2-', this.globalApiService.getSocketUrl());
 
     // to send userId & get chat data from server for user
     this.socket.emit("getChat", { userId: this.currentuserId }, this.appendChatMessage);
@@ -134,7 +134,7 @@ export class ChatComponent implements OnInit {
 
   closeDialog(flag: any) {
     this.chatWindowStatus = false;
-    this.typeMessage ={ message: "hi..." };
+    this.typeMessage = { message: "hi..." };
   }
 
 
