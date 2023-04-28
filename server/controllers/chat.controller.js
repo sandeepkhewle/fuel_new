@@ -69,7 +69,7 @@ module.exports.dummy = (socket_io) => {
             status: "Resolved",
             $push: { chat: { message: data.message, userFlag: "Admin", chatTime: new Date() } }
         }, { new: true, upsert: true })
-        socket_io.to(cData.userSocketId).emit('reply', { userFlag: "Admin", message: data.message, chatTime: new Date() });
+        socket_io.to(cData.userSocketId).emit('reply', { "userFlag": "Admin", "message": data.message, "chatTime": new Date() });
         // commService.sendNotificationByUserId(data.userId, data.message);
     });
 }
