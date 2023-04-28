@@ -59,7 +59,7 @@ module.exports.dummy = (socket_io) => {
         // console.log("cData", cData);
         // let socketId = cData.userSocketId;
         let aData = await adminModel.findOne({});
-        socket_io.to(aData.adminSocketId).emit('message', { userId: data.userId, message: data.message, userFlag: "User", chatTime: new Date() });
+        socket_io.to(aData.adminSocketId).emit('message', { "userId": data.userId, "message": data.message, "userFlag": "User", "chatTime": new Date() });
     });
 
     // admin to send message to user
