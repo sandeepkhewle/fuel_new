@@ -1358,7 +1358,7 @@ class ChatComponent {
             this.socket = Object(socket_io_client__WEBPACK_IMPORTED_MODULE_0__["default"])(this.globalApiService.getSocketUrl());
             this.socket.on('message', this.appendChatMessage);
             this.socket.emit("adminSocket", { adminUserId: JSON.parse(this.userDetails).adminUserId });
-            // console.log('admin socket----------2-');
+            console.log('admin socket----------2-', this.globalApiService.getSocketUrl());
             // to send userId & get chat data from server for user
             this.socket.emit("getChat", { userId: this.currentuserId }, this.appendChatMessage);
         };
@@ -1770,8 +1770,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatService", function() { return ChatService; });
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var src_app_shared_modules_global_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/shared-modules/global-api.service */ "nNIA");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! socket.io-client */ "2qj+");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_shared_modules_global_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/shared-modules/global-api.service */ "nNIA");
+
 
 
 
@@ -1780,9 +1782,9 @@ class ChatService {
         this.globalService = globalService;
         this.url = this.globalService.getSocketUrl();
     }
-    // initializeSocketIO() {
-    //   this.socket = socketIO(this.url, { transports: ['websocket'] });
-    // }
+    initializeSocketIO() {
+        this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1__["connect"](this.url, { transports: ['websocket'] });
+    }
     sendMessage(message) {
         this.socket.emit('new-message', message);
     }
@@ -1805,8 +1807,8 @@ class ChatService {
         });
     }
 }
-ChatService.ɵfac = function ChatService_Factory(t) { return new (t || ChatService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](src_app_shared_modules_global_api_service__WEBPACK_IMPORTED_MODULE_2__["GlobalApiService"])); };
-ChatService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: ChatService, factory: ChatService.ɵfac, providedIn: 'root' });
+ChatService.ɵfac = function ChatService_Factory(t) { return new (t || ChatService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](src_app_shared_modules_global_api_service__WEBPACK_IMPORTED_MODULE_3__["GlobalApiService"])); };
+ChatService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({ token: ChatService, factory: ChatService.ɵfac, providedIn: 'root' });
 
 
 /***/ }),

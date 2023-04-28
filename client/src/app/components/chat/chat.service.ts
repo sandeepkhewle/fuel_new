@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-// import * as socketIO from 'socket.io-client';
+import * as socketIO from 'socket.io-client';
 import { GlobalApiService } from 'src/app/shared-modules/global-api.service';
 
 @Injectable({
@@ -13,15 +13,16 @@ export class ChatService {
     private globalService: GlobalApiService
   ) { }
 
-  
-  // initializeSocketIO() {
-  //   this.socket = socketIO(this.url, { transports: ['websocket'] });
-  // }
-  public sendMessage(message:any): void {
+
+  initializeSocketIO() {
+    this.socket = socketIO.connect(this.url, { transports: ['websocket'] });
+  }
+
+  public sendMessage(message: any): void {
     this.socket.emit('new-message', message);
   }
 
-  public notificationConnection(message:any): void {
+  public notificationConnection(message: any): void {
     this.socket.emit('notificationConnection', message);
   }
 
