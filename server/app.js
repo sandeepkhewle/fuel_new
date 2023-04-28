@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const Logger = require('morgan');
 const jwt = require('jsonwebtoken');
 const server = require('http').createServer(app)
-const io = require('socket.io')(server, { cors: { origin: '*' } });
+var io = require('socket.io')(server, { cors: { origin: '*' } });
 const fs = require('fs');
 
 
@@ -36,6 +36,25 @@ app.use('/.well-known/acme-challenge/KvmIqbTsTNypSAzuglWFzQXrs0EbT_wJgsfa5cxhnA8
         console.log('error', error);
     }
 });
+
+
+// run https server in the production
+if (process.env.NODE_ENV === "production") {
+    // Certificate
+    const privateKey = fs.readFileSync('/etc/letsencrypt/live/api.fuelpricealert.in/privkey.pem', 'utf8');
+    const certificate = fs.readFileSync('/etc/letsencrypt/live/api.fuelpricealert.in/cert.pem', 'utf8');
+    const ca = fs.readFileSync('/etc/letsencrypt/live/api.fuelpricealert.in/chain.pem', 'utf8');
+
+    const credentials = {
+        key: privateKey,
+        cert: certificate,
+        ca: ca
+    };
+
+    const httpsServer = require('https').createServer(credentials, app);
+
+    io = require('socket.io')(httpsServer, { cors: { origin: '*' } });
+}
 
 // let chatController = require('./controllers/chat.controller');
 // socket code
@@ -102,19 +121,6 @@ mongoose.set('useCreateIndex', true);
 
 // run https server in the production
 if (process.env.NODE_ENV === "production") {
-    // Certificate
-    const privateKey = fs.readFileSync('/etc/letsencrypt/live/api.fuelpricealert.in/privkey.pem', 'utf8');
-    const certificate = fs.readFileSync('/etc/letsencrypt/live/api.fuelpricealert.in/cert.pem', 'utf8');
-    const ca = fs.readFileSync('/etc/letsencrypt/live/api.fuelpricealert.in/chain.pem', 'utf8');
-
-    const credentials = {
-        key: privateKey,
-        cert: certificate,
-        ca: ca
-    };
-
-    const httpsServer = require('https').createServer(credentials, app);
-
     httpsServer.listen(app.get('securePort'), () => {
         console.log('HTTPS Server running');
     });
