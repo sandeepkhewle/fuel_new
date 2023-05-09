@@ -11,7 +11,7 @@
 
     <div class="col-md-12 py-3">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Trend Name</mat-label>
                     <mat-select name="trendName" [(ngModel)]="trendsObj.trendName"
@@ -21,27 +21,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-lg-4" *ngIf="updateFortFlag">
-                <mat-form-field appearance="outline">
-                    <mat-label>Product Name</mat-label>
-                    <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
-                        required>
-                        <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div class="col-lg-4" *ngIf="updateMonthFlag">
-                <mat-form-field appearance="outline">
-                    <mat-label>Product Name</mat-label>
-                    <mat-select name="appId" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
-                        required>
-                        <mat-option *ngFor="let app1 of monthlyArray" [value]="app1.value">{{app1.name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Valid From</mat-label>
                     <input matInput [matDatepicker]="validFrom" [(ngModel)]="trendsObj.validFrom" name="validFrom"
@@ -52,7 +32,7 @@
             </div>
 
 
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Valid Through</mat-label>
                     <input matInput [matDatepicker]="validThrough" [(ngModel)]="trendsObj.validThrough"
@@ -63,7 +43,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Trend Date</mat-label>
                     <input matInput [matDatepicker]="trendDate" [(ngModel)]="trendsObj.trendDate" name="trendDate"
@@ -73,24 +53,35 @@
                     <mat-datepicker #trendDate></mat-datepicker>
                 </mat-form-field>
             </div>
+            
 
-            <div class="col-lg-4">
+            <div class="row" *ngIf="updateFortFlag">
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Name</mat-label>
+                    <!-- <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
+                        required>
+                        <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select> -->
+                    <input type="text" matInput readonly class="form-control-plaintext" id="app1.value" value="BITUMEN">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Trend Value</mat-label>
                     <input matInput type="number" name="trendValue" [(ngModel)]="trendsObj.trendValue" required>
                 </mat-form-field>
             </div>
-
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Trend Unite</mat-label>
-                    <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
+                    <!-- <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
                         <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
+                    <input type="text" matInput readonly class="form-control-plaintext" id="unit" value="KG">
                 </mat-form-field>
             </div>
-
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Trend</mat-label>
                     <mat-select name="trend" [(ngModel)]="trendsObj.trend" required>
@@ -98,6 +89,276 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Name</mat-label>
+                    <!-- <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
+                        required>
+                        <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select> -->
+                    <input type="text" matInput readonly class="form-control-plaintext" id="app1.value" value="FURNACE OIL">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend Value</mat-label>
+                    <input matInput type="number" name="trendValue" [(ngModel)]="trendsObj.trendValue" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend Unite</mat-label>
+                    <!-- <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
+                        <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                    </mat-select> -->
+                    <input type="text" matInput readonly class="form-control-plaintext" id="unit" value="MS">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend</mat-label>
+                    <mat-select name="trend" [(ngModel)]="trendsObj.trend" required>
+                        <mat-option *ngFor="let app1 of trendArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Name</mat-label>
+                    <!-- <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
+                        required>
+                        <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select> -->
+                    <input type="text" matInput readonly class="form-control-plaintext" id="app1.value" value="HSD(INSTITUTIONAL)">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend Value</mat-label>
+                    <input matInput type="number" name="trendValue" [(ngModel)]="trendsObj.trendValue" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend Unite</mat-label>
+                    <!-- <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
+                        <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                    </mat-select> -->
+                    <input type="text" matInput readonly class="form-control-plaintext" id="unit" value="KG">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend</mat-label>
+                    <mat-select name="trend" [(ngModel)]="trendsObj.trend" required>
+                        <mat-option *ngFor="let app1 of trendArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Name</mat-label>
+                    <!-- <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
+                        required>
+                        <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select> -->
+                    <input type="text" matInput readonly class="form-control-plaintext" id="app1.value" value="LDO">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend Value</mat-label>
+                    <input matInput type="number" name="trendValue" [(ngModel)]="trendsObj.trendValue" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend Unite</mat-label>
+                    <!-- <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
+                        <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                    </mat-select> -->
+                    <input type="text" matInput readonly class="form-control-plaintext" id="unit" value="MT">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trend</mat-label>
+                    <mat-select name="trend" [(ngModel)]="trendsObj.trend" required>
+                        <mat-option *ngFor="let app1 of trendArray" [value]="app1.value">{{app1.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            </div>
+
+
+            <div class="row" *ngIf="updateMonthFlag">
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product Name</mat-label>
+                        <!-- <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
+                            required>
+                            <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="app1.value" value="LPG/GAS CYL (DOM)">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Value</mat-label>
+                        <input matInput type="number" name="trendValue" [(ngModel)]="trendsObj.trendValue" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Unite</mat-label>
+                        <!-- <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
+                            <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="unit" value="KG">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend</mat-label>
+                        <mat-select name="trend" [(ngModel)]="trendsObj.trend" required>
+                            <mat-option *ngFor="let app1 of trendArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product Name</mat-label>
+                        <!-- <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
+                            required>
+                            <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="app1.value" value="MTO">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Value</mat-label>
+                        <input matInput type="number" name="trendValue" [(ngModel)]="trendsObj.trendValue" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Unite</mat-label>
+                        <!-- <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
+                            <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="unit" value="MS">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend</mat-label>
+                        <mat-select name="trend" [(ngModel)]="trendsObj.trend" required>
+                            <mat-option *ngFor="let app1 of trendArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product Name</mat-label>
+                        <!-- <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
+                            required>
+                            <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="app1.value" value="HEXANE">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Value</mat-label>
+                        <input matInput type="number" name="trendValue" [(ngModel)]="trendsObj.trendValue" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Unite</mat-label>
+                        <!-- <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
+                            <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="unit" value="KG">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend</mat-label>
+                        <mat-select name="trend" [(ngModel)]="trendsObj.trend" required>
+                            <mat-option *ngFor="let app1 of trendArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product Name</mat-label>
+                        <!-- <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
+                            required>
+                            <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="app1.value" value="KEROSENE">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Value</mat-label>
+                        <input matInput type="number" name="trendValue" [(ngModel)]="trendsObj.trendValue" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Unite</mat-label>
+                        <!-- <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
+                            <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="unit" value="MT">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend</mat-label>
+                        <mat-select name="trend" [(ngModel)]="trendsObj.trend" required>
+                            <mat-option *ngFor="let app1 of trendArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Product Name</mat-label>
+                        <!-- <mat-select name="appId2" [(ngModel)]="trendsObj.productName" (ngModelChange)="showInputFields($event)"
+                            required>
+                            <mat-option *ngFor="let app1 of fortnightArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="app1.value" value="LPG/GAS CYL (NON-DOM)">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Value</mat-label>
+                        <input matInput type="number" name="trendValue" [(ngModel)]="trendsObj.trendValue" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend Unite</mat-label>
+                        <!-- <mat-select name="trendUnite" [(ngModel)]="trendsObj.trendUnite" required>
+                            <mat-option *ngFor="let unit of trendsUnitArray" [value]="unit">{{unit}}</mat-option>
+                        </mat-select> -->
+                        <input type="text" matInput readonly class="form-control-plaintext" id="unit" value="MT">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Trend</mat-label>
+                        <mat-select name="trend" [(ngModel)]="trendsObj.trend" required>
+                            <mat-option *ngFor="let app1 of trendArray" [value]="app1.value">{{app1.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
 
 
 
