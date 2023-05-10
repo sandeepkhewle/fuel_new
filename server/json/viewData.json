@@ -112,6 +112,119 @@
             }
         ]
     },
+    "subscription": {
+        "index": 0,
+        "name": "Subscription",
+        "page": "subscription",
+        "attributes": [
+            {
+                "name": "APP ID",
+                "prop": "appId",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false
+            },
+            {
+                "name": "MEMBER NAME",
+                "prop": "fullName",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "IS ACTIVE",
+                "prop": "isActive",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false
+            },
+            {
+                "name": "PHONE",
+                "prop": "phoneNo",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 200,
+                "label": false
+            },
+            {
+                "name": "EMAIL",
+                "prop": "emailId",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "PLAN",
+                "prop": "planName",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "PLAN TYPE",
+                "prop": "planType",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "LAST ACTIVE",
+                "prop": "lastActive",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 80,
+                "label": false
+            },
+            {
+                "name": "REGN DATE",
+                "prop": "createdAt",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 120,
+                "label": false
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 60,
+                "label": false,
+                "actions": [
+                    {
+                        "name": "ASSIGN FREE PLAN",
+                        "function": "assignFreePlan"
+                    }
+                ]
+            }
+        ]
+    },
     "fortnight": {
         "index": 0,
         "name": "Trends",
@@ -655,6 +768,22 @@
                     {
                         "name": "TEST",
                         "function": "sendInvoice"
+                    }
+                ]
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false,
+                "actions": [
+                    {
+                        "name": "Download Invoice",
+                        "function": "downloadInvoice"
                     }
                 ]
             }

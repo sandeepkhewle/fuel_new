@@ -7,8 +7,9 @@ const mongoose = require('mongoose');
 const Logger = require('morgan');
 const jwt = require('jsonwebtoken');
 const server = require('http').createServer(app)
-var io = require('socket.io')(server, { cors: { origin: '*' } });
 const fs = require('fs');
+var io = require('socket.io')(server, { cors: { origin: '*' } });
+var httpsServer;
 
 
 // config
@@ -51,7 +52,7 @@ if (process.env.NODE_ENV === "production") {
         ca: ca
     };
 
-    const httpsServer = require('https').createServer(credentials, app);
+    httpsServer = require('https').createServer(credentials, app);
 
     io = require('socket.io')(httpsServer, { cors: { origin: '*' } });
 }
