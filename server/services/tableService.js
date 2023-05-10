@@ -185,7 +185,9 @@ let getSubscription = (req) => {
         let search = req.body.search;
         let filters = req.body.filters;
         const appId = req.body.appId;
-        let matchObj = {}
+        let matchObj = {
+            paymentStatus: "Success"
+        }
         if (appId) matchObj.appId = appId
         if (search) {
             matchObj['$or'] = [
