@@ -11,23 +11,27 @@ import { Injectable } from '@angular/core';
 })
 export class TrendsService {
 
-  constructor(    
+  constructor(
     private http: HttpClient,
     private globalApiService: GlobalApiService,
     private authService: AuthService
   ) { }
 
-    createTrendsFun(postObj:any):Observable<any>{
-      return this.http.post(this.globalApiService.getApiUrl() + '/trend/create', postObj)
-          .pipe(catchError((e: any) => this.authService.getCheckError(e)));
-  }
-  updateTrendsFun(postObj:any):Observable<any>{
-    return this.http.post(this.globalApiService.getApiUrl() + '/trend/update', postObj)
-        .pipe(catchError((e: any) => this.authService.getCheckError(e)));
-}
-
-deleteTrendsFun(postObj:any):Observable<any>{
-  return this.http.post(this.globalApiService.getApiUrl() + '/trend/delete', postObj)
+  createTrendsFun(postObj: any): Observable<any> {
+    return this.http.post(this.globalApiService.getApiUrl() + '/trend/create', postObj)
       .pipe(catchError((e: any) => this.authService.getCheckError(e)));
-}
+  }
+  createMultipleTrends(postObj: any): Observable<any> {
+    return this.http.post(this.globalApiService.getApiUrl() + '/trend/createMultiple', postObj)
+      .pipe(catchError((e: any) => this.authService.getCheckError(e)));
+  }
+  updateTrendsFun(postObj: any): Observable<any> {
+    return this.http.post(this.globalApiService.getApiUrl() + '/trend/update', postObj)
+      .pipe(catchError((e: any) => this.authService.getCheckError(e)));
+  }
+
+  deleteTrendsFun(postObj: any): Observable<any> {
+    return this.http.post(this.globalApiService.getApiUrl() + '/trend/delete', postObj)
+      .pipe(catchError((e: any) => this.authService.getCheckError(e)));
+  }
 }

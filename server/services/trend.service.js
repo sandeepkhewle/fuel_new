@@ -43,6 +43,42 @@ let updateTrend = async ({ trendsId, trendType, trend, trendUnite, productName, 
     }
 }
 
+let createMultipleTrend = async (body) => {
+    try {
+        let trendName = body.trendName;
+        let validThrough = new Date(body.validThrough);
+        let trendDate = new Date(body.trendDate);
+        let validFrom = new Date(body.validFrom);
+        let newArray = []
+        if (trendName === 'monthly') {
+            if (body.lpgDoc) newArray.push(body.lpgDoc)
+            if (body.lpgNonDoc) newArray.push(body.lpgNonDoc)
+            if (body.mto) newArray.push(body.mto)
+            if (body.hexane) newArray.push(body.hexane)
+            if (body.kerosene) newArray.push(body.kerosene)
+        }
+        if (trendName === 'fortnight') {
+            if (body.bitumen) newArray.push(body.bitumen)
+            if (body.furanceOil) newArray.push(body.furanceOil)
+            if (body.ldo) newArray.push(body.ldo)
+            if (body.hsd) newArray.push(body.hsd)
+        }
+        let promiseArray = []
+        newArray.forEach(e1 => {
+            promiseArray.push(trendsModel.create({
+                trendType: e1.trendType, trend: e1.trend, trendName: trendName, trendDate: trendDate, trendUnite: e1.trendUnite, productName: e1.productName, validFrom: validFrom, validThrough: validThrough, createdAt: new Date(), trendValue: e1.trendValue
+            }))
+        });
+        Promise.all(promiseArray).then(() => {
+            commService.sendNotification({ appId: "fuel", category: "all members", data: {}, message: "New trend added", title: "Trends Update" }).then(() => {
+                return;
+            })
+        })
+    } catch (error) {
+        throw error;
+    }
+}
+
 let deleteTrend = async ({ trendsId }) => {
     try {
         await trendsModel.remove({ trendsId: trendsId })
@@ -210,6 +246,7 @@ let getPastFortnightTrend = async (userId) => {
 
 module.exports = {
     createNewTrend: createNewTrend,
+    createMultipleTrend: createMultipleTrend,
     updateTrend: updateTrend,
     deleteTrend: deleteTrend,
     getFutureTrend: getFutureTrend,

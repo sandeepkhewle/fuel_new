@@ -25,6 +25,26 @@ router.post('/create', (req, res) => {
     })
 })
 
+// create new trend
+router.post('/createMultiple', (req, res) => {
+    console.log('/trend/createMultiple', req.body);
+    let data = req.body;
+    trendService.createMultipleTrend(data).then(() => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Trend added successfully"
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to add trend"
+        });
+    })
+})
+
 // update trend
 router.post('/update', (req, res) => {
     console.log('/trend/update');
