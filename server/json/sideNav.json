@@ -8,6 +8,13 @@
             "titleClass": ""
         },
         {
+            "name": "Trends",
+            "uniqueName": "trends",
+            "url": "/trends/trends",
+            "icon": "trends.png",
+            "titleClass": ""
+        },
+        {
             "name": "Members",
             "uniqueName": "members",
             "url": "/trends/members",
@@ -15,10 +22,10 @@
             "titleClass": ""
         },
         {
-            "name": "Trends",
-            "uniqueName": "trends",
-            "url": "/trends/trends",
-            "icon": "trends.png",
+            "name": "Subscription",
+            "uniqueName": "subscription",
+            "url": "/trends/subscription",
+            "icon": "member.png",
             "titleClass": ""
         },
         {
