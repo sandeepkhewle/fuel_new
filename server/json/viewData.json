@@ -746,22 +746,6 @@
                 "label": false,
                 "actions": [
                     {
-                        "name": "TEST",
-                        "function": "sendInvoice"
-                    }
-                ]
-            },
-            {
-                "name": "",
-                "prop": "button",
-                "sortable": false,
-                "pipe": "",
-                "class": "ta-l",
-                "headerClass": "ta-c",
-                "colSize": 100,
-                "label": false,
-                "actions": [
-                    {
                         "name": "Download Invoice",
                         "function": "downloadInvoice"
                     }
