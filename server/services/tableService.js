@@ -207,6 +207,13 @@ let getSubscription = (req) => {
             if (filters.endDate) matchObj.createdAt['$lte'] = new Date(moment(filters.endDate).endOf('day'));
         }
 
+        // filter on enrollment date
+        if (filters && (filters.planStartDate || filters.planEndDate)) {
+            matchObj.endDate = {};
+            if (filters.startDate) matchObj.endDate['$gte'] = new Date(moment(filters.planStartDate).startOf('day'));
+            if (filters.endDate) matchObj.endDate['$lte'] = new Date(moment(filters.planEndDate).endOf('day'));
+        }
+
         query.push({ $match: matchObj });
         query.push({ $sort: sort });
         query.push({ $skip: skip });
@@ -233,7 +240,7 @@ let getSubscription = (req) => {
         //         planType: "$plans.planType"
         //     }
         // })
-        
+
         paymentModel.aggregate(query).then(async userData => {
             let total = await userModel.aggregate([{ $match: matchObj }, { $count: "count" }])
             sendObj.userData = userData;
