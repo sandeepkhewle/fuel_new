@@ -892,7 +892,7 @@
                 "pipe": "",
                 "class": "ta-l",
                 "headerClass": "ta-c",
-                "colSize": 100,
+                "colSize": 60,
                 "label": false,
                 "actions": [
                     {
