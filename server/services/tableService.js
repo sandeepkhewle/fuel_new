@@ -19,7 +19,7 @@ let chooseTable = (page, req) => {
             case 'members':
                 resolve(getMemberList(req))
                 break;
-            case 'members':
+            case 'subscription':
                 resolve(getSubscription(req))
                 break;
             case 'fortnight':
