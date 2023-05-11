@@ -99,6 +99,26 @@ router.post('/registerMember', (req, res) => {
     })
 })
 
+router.post('/updateUserDetails', (req, res) => {
+    console.log('/web/updateUserDetails', req.user);
+    let userId = req.user.userId;
+    userService.updateUser(userId, req.body).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Plan list fetched successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to get plan list"
+        });
+    })
+})
+
 // send otp to phone numner
 router.post('/sendOtp', (req, res) => {
     console.log('/web/sendOtp', req.body);
