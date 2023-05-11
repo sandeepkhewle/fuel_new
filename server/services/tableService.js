@@ -221,30 +221,8 @@ let getSubscription = (req) => {
         query.push({ $skip: skip });
         query.push({ $limit: limit });
 
-        // query.push({
-        //     $project: {
-        //         emailId: 1,
-        //         userId: 1,
-        //         fullName: 1,
-        //         phoneNo: 1,
-        //         createdAt: 1,
-        //         updatedAt: 1,
-        //         appId: 1,
-        //         // isActive: 1,
-        //         lastActive: 1,
-        //         // isActive: {
-        //         //     $cond: {
-        //         //         if: { $gt: [{ $size: "$plans" }, 0] }, then: "Active",
-        //         //         else: "Inactive"
-        //         //     }
-        //         // },
-        //         planName: "$plans.planName",
-        //         planType: "$plans.planType"
-        //     }
-        // })
-
         paymentModel.aggregate(query).then(async userData => {
-            let total = await userModel.aggregate([{ $match: matchObj }, { $count: "count" }])
+            let total = await paymentModel.aggregate([{ $match: matchObj }, { $count: "count" }])
             sendObj.userData = userData;
             sendObj.count = 0;
             if (total[0] && total[0].count) {
