@@ -28,7 +28,7 @@ const routes: Routes = [
         loadChildren: () => import('./components/members/members.module').then((m) => m.MembersModule)
       }, {
         path: 'subscription',
-        loadChildren: () => import('./components/members/members.module').then((m) => m.MembersModule)
+        loadChildren: () => import('./components/subscriptions/subscriptions.module').then((m) => m.SubscriptionsModule)
       },
       {
         path: 'upload',
