@@ -114,6 +114,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         // paramarray['THEME'] = "merchant";
         paramarray['CALLBACK_URL'] = CALLBACK_URL
         await paymentsModel.create(createobj);
+        // await createinvoice(ORDER_ID)
         paytm_checksum.genchecksum(paramarray, MERCHANT_KEY, function (err, res) {
             if (err) {
                 reject(err);
@@ -322,34 +323,44 @@ const createinvoice = async (orderId) => {
     try {
         console.log('createinvoice', orderId);
         let pData = await paymentsModel.findOne({ orderId: orderId });
-        await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, paymentMode)
+        await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, pData.paymentMode)
     } catch (error) {
         console.log('error------1----', error);
         throw error;
     }
 }
 
-const generateInvoice = async (fileName, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus) => {
+const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus) => {
     try {
         return new Promise((resolve, reject) => {
             // console.log("in function 27 ");
             // console.log("igstAmount ", igstAmount);
+
             let pendingStepCount = 2;
-            const stepFinished = () => {
+            const pdfFile = "./public/Invoice/" + orderId + ".pdf";
+            const stepFinished = async () => {
                 if (--pendingStepCount == 0) {
-                    console.log('here---------------');
-                    resolve(fileName);
+                    console.log('--------in createinvoice---------', pdfFile);
+                    awsService.uploLocalFileToAws(`Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
+                        console.log('link', link);
+                        return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link }, { new: true })
+                    }).then((data) => {
+                        // resolve();
+                        return;
+                    })
+                    return;
                 }
             };
-            var doc = new pdf;
+
+            var doc = new pdfkit;
             const writeStream = fs.createWriteStream(fileName);
             writeStream.on('close', stepFinished);
             doc.pipe(writeStream);
-            doc.image('./public/icon.png', {
-                fit: [100, 100],
-                align: 'center',
-                valign: 'center'
-            });
+            // doc.image('./public/icon.png', {
+            //     fit: [100, 100],
+            //     align: 'center',
+            //     valign: 'center'
+            // });
             doc.font('Helvetica-Bold')
             doc.text('MEEANDNEE', 270, 175)
             doc.font('Times-Roman')
