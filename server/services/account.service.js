@@ -114,6 +114,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         // paramarray['THEME'] = "merchant";
         paramarray['CALLBACK_URL'] = CALLBACK_URL
         await paymentsModel.create(createobj);
+        // await createinvoice(ORDER_ID)
         paytm_checksum.genchecksum(paramarray, MERCHANT_KEY, function (err, res) {
             if (err) {
                 reject(err);
@@ -166,105 +167,104 @@ const paymentUpdate = async (orderId, CHECKSUMHASH) => {
     })
 }
 
-
-const createinvoice = async (orderId) => {
-    try {
-        console.log('createinvoice', orderId);
-        let pData = await paymentsModel.findOne({ orderId: orderId });
-        let appId = pData.appId;
-        let appName = "FUEL";
-
-
-        let pendingStepCount = 2;
-        const pdfFile = "./public/Invoice/" + orderId + ".pdf";
-        const stepFinished = async () => {
-            if (--pendingStepCount == 0) {
-                console.log('--------in createinvoice---------');
-                awsService.uploLocalFileToAws(`${appId}/Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
-                    console.log('link', link);
-                    return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link }, { new: true })
-                }).then((data) => {
-                    // resolve();
-                    return;
-                })
-                return;
-            }
-        };
-
-        let doc = new pdfkit({ layout: 'landscape' });
-        const writeStream = fs.createWriteStream(pdfFile);
-
-        writeStream.on('close', stepFinished);
-        doc.pipe(writeStream);
-        // doc.pipe(fs.createWriteStream(pdfFile));
-        let y = 50;
-
-        doc.fontSize(24)
-        doc.font('Times-Roman')
-        doc.text(`${appName}`, { align: 'center' }, y - 10)
+// const createinvoice = async (orderId) => {
+//     try {
+//         console.log('createinvoice', orderId);
+//         let pData = await paymentsModel.findOne({ orderId: orderId });
+//         let appId = pData.appId;
+//         let appName = "FUEL";
 
 
-        // if (logoData) {
-        // console.log('logoData-----222-----', logoData);
-        doc.image(`./views/${appId}.png`, 50, 20, { width: 70 }, { height: 70 })
-        // }
+//         let pendingStepCount = 2;
+//         const pdfFile = "./public/Invoice/" + orderId + ".pdf";
+//         const stepFinished = async () => {
+//             if (--pendingStepCount == 0) {
+//                 console.log('--------in createinvoice---------');
+//                 awsService.uploLocalFileToAws(`${appId}/Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
+//                     console.log('link', link);
+//                     return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link }, { new: true })
+//                 }).then((data) => {
+//                     // resolve();
+//                     return;
+//                 })
+//                 return;
+//             }
+//         };
 
-        doc.fontSize(12)
-        doc.font('Times-Roman')
-        doc.text(`Invoice No. - ${pData.invoiceNo}`, { align: 'right' }, y - 5)
-        doc.text(`${moment(pData.createdAt).format('DD MMM YYYY')}`, { align: 'right' }, y + 15)
+//         let doc = new pdfkit({ layout: 'landscape' });
+//         const writeStream = fs.createWriteStream(pdfFile);
 
-        // top line
-        doc.lineCap('butt').moveTo(50, y + 45).lineTo(doc.page.width - 50, y + 45).stroke()
+//         writeStream.on('close', stepFinished);
+//         doc.pipe(writeStream);
+//         // doc.pipe(fs.createWriteStream(pdfFile));
+//         let y = 50;
 
-        doc.fontSize(12)
-        doc.font('Times-Roman')
-        // doc.text(pData.phoneNo, { align: 'left' }, y + 60)
-        // doc.text(pData.emailId, { align: 'left' }, y + 75)
-        // doc.text(pData.completeAddress, { align: 'left', width: 300 }, y + 90)
-
-        doc.text(`Name  -  ${pData.fullName}`, { align: 'left' }, y + 60)
-        doc.text(`Email Id  -  ${pData.emailId}`, { align: 'left' }, y + 80)
-        doc.text(`Phone No  -  ${pData.phoneNo}`, { align: 'left' }, y + 100)
-        doc.text(`Firm Name  -  ${pData.firmName}`, { align: 'left' }, y + 120)
+//         doc.fontSize(24)
+//         doc.font('Times-Roman')
+//         doc.text(`${appName}`, { align: 'center' }, y - 10)
 
 
-        let y1 = 230;
-        // first dotted line
-        doc.lineCap('butt').dash(5, { space: 1 }).moveTo(50, y1 + 10).lineTo(doc.page.width - 50, y1 + 10).stroke()
+//         // if (logoData) {
+//         // console.log('logoData-----222-----', logoData);
+//         doc.image(`./views/${appId}.png`, 50, 20, { width: 70 }, { height: 70 })
+//         // }
 
-        doc.text(`Plan Name`, 70, y1 + 20)
-        doc.text(`Validity`, 245, y1 + 20)
-        doc.text(`Amount`, 500, y1 + 20, { align: 'right' })
-        // middle dotted line
-        doc.lineCap('butt').dash(5, { space: 1 }).moveTo(50, y1 + 40).lineTo(doc.page.width - 50, y1 + 40).stroke()
+//         doc.fontSize(12)
+//         doc.font('Times-Roman')
+//         doc.text(`Invoice No. - ${pData.invoiceNo}`, { align: 'right' }, y - 5)
+//         doc.text(`${moment(pData.createdAt).format('DD MMM YYYY')}`, { align: 'right' }, y + 15)
 
-        let startDate = moment(pData.startDate).format("DD MMM YYYY");
-        let endDate = moment(pData.endDate).format("DD MMM YYYY");
+//         // top line
+//         doc.lineCap('butt').moveTo(50, y + 45).lineTo(doc.page.width - 50, y + 45).stroke()
 
-        doc.text(`${pData.planName.toUpperCase()}`, 72, y1 + 60, { width: 200 })
-        doc.text(`${startDate} - ${endDate}`, 200, y1 + 60, { width: 200 })
-        doc.text(`${pData.txnAmount}`, { align: 'right' }, y1 + 60)
-        y1 += 130;
+//         doc.fontSize(12)
+//         doc.font('Times-Roman')
+//         // doc.text(pData.phoneNo, { align: 'left' }, y + 60)
+//         // doc.text(pData.emailId, { align: 'left' }, y + 75)
+//         // doc.text(pData.completeAddress, { align: 'left', width: 300 }, y + 90)
 
-        // last dotted line
-        doc.lineCap('butt').dash(5, { space: 1 }).moveTo(50, y1).lineTo(doc.page.width - 50, y1).stroke()
-        doc.text(`Paid amount - `, 600, y1 + 15)
-        doc.text(`${pData.txnAmount}`, { align: 'right' }, y1 + 15)
+//         doc.text(`Name  -  ${pData.fullName}`, { align: 'left' }, y + 60)
+//         doc.text(`Email Id  -  ${pData.emailId}`, { align: 'left' }, y + 80)
+//         doc.text(`Phone No  -  ${pData.phoneNo}`, { align: 'left' }, y + 100)
+//         doc.text(`Firm Name  -  ${pData.firmName}`, { align: 'left' }, y + 120)
 
-        // bottom app name
-        doc.text(`${appName} - TRENDS`, 50, doc.page.height - 50, { lineBreak: false });
 
-        // Finalize PDF file
-        doc.end();
-        stepFinished();
+//         let y1 = 230;
+//         // first dotted line
+//         doc.lineCap('butt').dash(5, { space: 1 }).moveTo(50, y1 + 10).lineTo(doc.page.width - 50, y1 + 10).stroke()
 
-        console.log('----pdfend----');
-    } catch (error) {
-        console.log('error------1----', error);
-        throw error;
-    }
-}
+//         doc.text(`Plan Name`, 70, y1 + 20)
+//         doc.text(`Validity`, 245, y1 + 20)
+//         doc.text(`Amount`, 500, y1 + 20, { align: 'right' })
+//         // middle dotted line
+//         doc.lineCap('butt').dash(5, { space: 1 }).moveTo(50, y1 + 40).lineTo(doc.page.width - 50, y1 + 40).stroke()
+
+//         let startDate = moment(pData.startDate).format("DD MMM YYYY");
+//         let endDate = moment(pData.endDate).format("DD MMM YYYY");
+
+//         doc.text(`${pData.planName.toUpperCase()}`, 72, y1 + 60, { width: 200 })
+//         doc.text(`${startDate} - ${endDate}`, 200, y1 + 60, { width: 200 })
+//         doc.text(`${pData.txnAmount}`, { align: 'right' }, y1 + 60)
+//         y1 += 130;
+
+//         // last dotted line
+//         doc.lineCap('butt').dash(5, { space: 1 }).moveTo(50, y1).lineTo(doc.page.width - 50, y1).stroke()
+//         doc.text(`Paid amount - `, 600, y1 + 15)
+//         doc.text(`${pData.txnAmount}`, { align: 'right' }, y1 + 15)
+
+//         // bottom app name
+//         doc.text(`${appName} - TRENDS`, 50, doc.page.height - 50, { lineBreak: false });
+
+//         // Finalize PDF file
+//         doc.end();
+//         stepFinished();
+
+//         console.log('----pdfend----');
+//     } catch (error) {
+//         console.log('error------1----', error);
+//         throw error;
+//     }
+// }
 
 const assignFreePlan = async ({ appId, userId, planId, startDate, endDate }) => {
     try {
@@ -317,9 +317,158 @@ const convertImg = (imgLink) => {
         })
     })
 }
+
+
+const createinvoice = async (orderId) => {
+    try {
+        console.log('createinvoice', orderId);
+        let pData = await paymentsModel.findOne({ orderId: orderId });
+        await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, pData.paymentMode)
+    } catch (error) {
+        console.log('error------1----', error);
+        throw error;
+    }
+}
+
+const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus) => {
+    try {
+        return new Promise((resolve, reject) => {
+            // console.log("in function 27 ");
+            // console.log("igstAmount ", igstAmount);
+
+            let pendingStepCount = 2;
+            const pdfFile = "./public/Invoice/" + orderId + ".pdf";
+            const stepFinished = async () => {
+                if (--pendingStepCount == 0) {
+                    console.log('--------in createinvoice---------', pdfFile);
+                    awsService.uploLocalFileToAws(`Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
+                        console.log('link', link);
+                        return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link }, { new: true })
+                    }).then((data) => {
+                        // resolve();
+                        return;
+                    })
+                    return;
+                }
+            };
+
+            var doc = new pdfkit;
+            const writeStream = fs.createWriteStream(fileName);
+            writeStream.on('close', stepFinished);
+            doc.pipe(writeStream);
+            // doc.image('./public/icon.png', {
+            //     fit: [100, 100],
+            //     align: 'center',
+            //     valign: 'center'
+            // });
+            doc.font('Helvetica-Bold')
+            doc.text('MEEANDNEE', 270, 175)
+            doc.font('Times-Roman')
+            doc.fontSize(8)
+            doc.text('Poornima Tower, Shankar Seth Road, Pune, Maharashtra - 411 037', 210, 195)
+            doc.fontSize(8)
+            doc.text('Email: info@fuelpricealert.in', 70, 235)
+            doc.fontSize(8)
+            doc.text('Contact/Whats Up: 7709225499', 400, 230)
+            doc.fontSize(10)
+            doc.font('Helvetica-Bold')
+            doc.text('Invoice', 290, 260)
+            doc.fontSize(8)
+            doc.font('Times-Roman')
+            doc.text('GSTIN No.', 60, 300)
+            doc.text(": 27ABGFM9425L1ZQ", 130, 300)
+            doc.text('Invoice No.', 60, 320)
+            doc.text(": " + invoiceNo, 130, 320)
+            doc.text('Invoice Date', 60, 340)
+            doc.text(": " + newdate, 130, 340)
+            doc.fontSize(8)
+            doc.font('Helvetica-Bold')
+            doc.text('Bill To', 350, 290)
+            doc.fontSize(8)
+            doc.font('Helvetica-Bold')
+            doc.text(firm_name, 350, 300)
+            doc.font('Times-Roman')
+            doc.fontSize(8)
+            doc.text(email, 350, 310)
+            doc.text(mobile, 350, 320)
+            doc.text("Buyer GSTIN No", 350, 340)
+            doc.text(": " + gstNumber, 410, 340)
+            doc.fontSize(8)
+            doc.text('SNo', 70, 425)
+            doc.text('Description', 100, 425)
+            doc.text('Qty', 275, 425)
+            doc.text('Base Price', 325, 425)
+            doc.text('Discount', 400, 425)
+            doc.text('Amount', 475, 425)
+            doc.font('Helvetica-Bold')
+            doc.text('1', 70, 450)
+            doc.font('Helvetica-Bold')
+            doc.text('FuelPreAlert Subscription', 100, 450)
+            doc.font('Times-Roman')
+            doc.text(package_name, 100, 460)
+            doc.font('Times-Roman')
+            doc.text(plan_name, 100, 470)
+            doc.font('Times-Roman')
+            doc.text('Valid Upto:  ' + validdate, 100, 480)
+            doc.font('Helvetica-Bold')
+            doc.text('1', 275, 450)
+            doc.font('Helvetica-Bold')
+            doc.text(amount, 335, 450)
+            doc.font('Helvetica-Bold')
+            doc.text(discount, 410, 450)
+            doc.font('Helvetica-Bold')
+            doc.text(amount, 480, 450)
+            doc.font('Helvetica-Bold')
+            doc.text("Amount", 270, 550)
+            doc.font('Helvetica-Bold')
+            doc.text(amount, 480, 550)
+            if (sgstAmount > 0) {
+                doc.font('Times-Roman')
+                doc.text("CGST @ 9% ", 270, 565)
+                doc.font('Times-Roman')
+                doc.text(cgstAmount, 480, 565)
+                doc.font('Times-Roman')
+                doc.text("SGST @ 9% ", 270, 575)
+                doc.font('Times-Roman')
+                doc.text(sgstAmount, 480, 575)
+            } else {
+                doc.font('Times-Roman')
+                doc.text("IGST @ 18% ", 270, 565)
+                doc.font('Times-Roman')
+                doc.text(igstAmount, 480, 565)
+            }
+            doc.font('Helvetica-Bold')
+            doc.text('Total Amount', 270, 600)
+            doc.font('Helvetica-Bold')
+            doc.text(amountTotal, 480, 600)
+            doc.font('Helvetica-Bold')
+            doc.text('In Words :', 70, 630)
+            doc.font('Times-Roman')
+            doc.text(moneyInwords, 110, 630)
+            doc.font('Helvetica-Bold')
+            doc.text('Notes:', 70, 650)
+            doc.font('Times-Roman')
+            if (paymentModeStatus == "paytm") {
+                doc.text('Payment Recieved Through Paytm Gateway', 70, 670)
+                doc.text('Paytm Transaction Id: ' + TXNID, 70, 680)
+            } else {
+                doc.text('Payment Recieved Through Payu Gateway', 70, 670)
+                doc.text('Payu Payment Id: ' + mihpayid, 70, 680)
+            }
+            doc.font('Helvetica-Bold')
+            doc.text('This is a computer generated invoice hence signature is not required', 150, 710)
+            doc.end();
+            stepFinished();
+        })
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
     initiatePayment: initiatePayment,
     paymentUpdate: paymentUpdate,
     createinvoice: createinvoice,
-    assignFreePlan: assignFreePlan
+    assignFreePlan: assignFreePlan,
+    generateInvoice: generateInvoice
 }

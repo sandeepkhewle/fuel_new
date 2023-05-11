@@ -19,6 +19,9 @@ let chooseTable = (page, req) => {
             case 'members':
                 resolve(getMemberList(req))
                 break;
+            case 'subscription':
+                resolve(getSubscription(req))
+                break;
             case 'fortnight':
                 resolve(getFortnightList(req))
                 break;
@@ -163,6 +166,78 @@ let getMemberList = (req) => {
         })
     })
 }
+
+// Subscription list function
+let getSubscription = (req) => {
+    return new Promise((resolve, reject) => {
+        let sendObj = {};
+        let query = [];
+        let page = req.body.page;
+        console.log('page-----------', page);
+        console.log('page-----------', req.body);
+        let limit = req.body.limit ? req.body.limit : 10;
+        let skip = req.body.skip ? req.body.skip : 0;
+        let orderby = req.body.orderby ? req.body.orderby : 'createDate';
+        let orderin = 1;
+        if (req.body.orderin === 'desc') orderin = -1;
+        let sort = {};
+        sort[orderby] = orderin;
+        let search = req.body.search;
+        let filters = req.body.filters;
+        const appId = req.body.appId;
+        let matchObj = {
+            paymentStatus: "Success"
+        }
+        if (appId) matchObj.appId = appId
+        if (search) {
+            matchObj['$or'] = [
+                { $text: { $search: search } },
+                { fullName: { $regex: search, $options: 'i' } },
+                { phoneNo: { $regex: search, $options: 'i' } }
+            ]
+        }
+        Object.keys(filters).forEach(element => {
+            if (filters[element] && Array.isArray(filters[element]) && filters[element].length > 0 && filters[element].length > 0) {
+                matchObj[element] = { $in: filters[element] }
+            }
+        });
+
+        // filter on enrollment date
+        if (filters && (filters.startDate || filters.endDate)) {
+            matchObj.createdAt = {};
+            if (filters.startDate) matchObj.createdAt['$gte'] = new Date(moment(filters.startDate).startOf('day'));
+            if (filters.endDate) matchObj.createdAt['$lte'] = new Date(moment(filters.endDate).endOf('day'));
+        }
+
+        // filter on enrollment date
+        if (filters && (filters.planStartDate || filters.planEndDate)) {
+            matchObj.endDate = {};
+            if (filters.startDate) matchObj.endDate['$gte'] = new Date(moment(filters.planStartDate).startOf('day'));
+            if (filters.endDate) matchObj.endDate['$lte'] = new Date(moment(filters.planEndDate).endOf('day'));
+        }
+
+        query.push({ $match: matchObj });
+        query.push({ $sort: sort });
+        query.push({ $skip: skip });
+        query.push({ $limit: limit });
+
+        paymentModel.aggregate(query).then(async userData => {
+            let total = await paymentModel.aggregate([{ $match: matchObj }, { $count: "count" }])
+            sendObj.userData = userData;
+            sendObj.count = 0;
+            if (total[0] && total[0].count) {
+                sendObj.count = (total[0].count);
+            }
+            return structurService.getViewData(page)
+        }).then(data => {
+            sendObj.attributeList = data;
+            resolve(sendObj)
+        }).catch(err => {
+            reject(err);
+        })
+    })
+}
+
 
 //msd trends list function
 let getFortnightList = (req) => {

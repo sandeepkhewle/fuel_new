@@ -15,10 +15,10 @@ const routes: Routes = [
       import('./components/login/login.module').then((m) => m.LoginModule)
   },
   {
-    path:"trends",
-    component:SidenavComponent,
-    canActivate:[AuthGuard],
-    children:[
+    path: "trends",
+    component: SidenavComponent,
+    canActivate: [AuthGuard],
+    children: [
       {
         path: 'dashboard',
         loadChildren: () => import('./components/dashboard/dashboard.module').then((m) => m.DashboardModule)
@@ -26,6 +26,9 @@ const routes: Routes = [
       {
         path: 'members',
         loadChildren: () => import('./components/members/members.module').then((m) => m.MembersModule)
+      }, {
+        path: 'subscription',
+        loadChildren: () => import('./components/subscriptions/subscriptions.module').then((m) => m.SubscriptionsModule)
       },
       {
         path: 'upload',
@@ -65,9 +68,9 @@ const routes: Routes = [
       },
     ]
   },
-    // default and error routes
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: '**', redirectTo: 'login' }
+  // default and error routes
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

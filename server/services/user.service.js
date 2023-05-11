@@ -78,6 +78,17 @@ let registerNewUser = async ({ appId, fullName, phoneNo, emailId, deviceId, pass
     }
 }
 
+const updateUser = async (userId, userData) => {
+    try {
+        let updateObj = { ...userData }
+        let uData = await userModel.findOneAndUpdate({ userId: userId }, updateObj, { new: true })
+        return uData;
+    } catch (error) {
+        throw error
+    }
+}
+
+
 let checkDevice = async ({ appId, deviceId, token }) => {
     try {
         let uData = await userModel.findOneAndUpdate({ appId: appId, deviceId: deviceId }, { token: token, lastActive: new Date() }, { new: true }).select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, emailId: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1, emailId: 1 });
@@ -149,6 +160,7 @@ let getUserActivePlans = async (userId) => {
 
 module.exports = {
     registerNewUser: registerNewUser,
+    updateUser: updateUser,
     checkDevice: checkDevice,
     checkUser: checkUser,
     changeDeviceRequest: changeDeviceRequest,

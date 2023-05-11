@@ -16,6 +16,7 @@ import { NotAuthGuard } from './shared-modules/guards/notAuth.guard';
 import { SidenavService } from './components/sidenav/sidenav.service';
 import { AuthService } from './shared-modules/services/auth.service';
 import { ReportsComponent } from './components/reports/reports/reports.component';
+// import { SubscriptionsComponent } from './components/subscriptions/subscriptions/subscriptions.component';
 // import { RestrictionPopupComponent } from './components/restriction-popup/restriction-popup.component';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ReportsComponent } from './components/reports/reports/reports.component
     SidenavComponent,
     DefaultSettingsComponent,
     ReportsComponent,
+    // SubscriptionsComponent,
     // RestrictionPopupComponent
   ],
   imports: [

@@ -140,9 +140,84 @@ export class AddTrendsComponent implements OnInit, OnChanges {
   showUpdateFields() {
     this.updateFortFlag = false;
     this.updateMonthFlag = false;
-    if (this.trendsObj.trendName == 'fortnight') this.updateFortFlag = true;
-    if (this.trendsObj.trendName == 'monthly') this.updateMonthFlag = true;
+    if (this.trendsObj.trendName == 'fortnight') {
+      this.setFortFlied()
+      this.updateFortFlag = true;
+    }
+    if (this.trendsObj.trendName == 'monthly') {
+      this.setMonthlyFlied()
+      this.updateMonthFlag = true;
+    }
 
+  }
+  setFortFlied() {
+    // this.trendsObj.trendType = "bitumen/fo/hsd/ldo"
+    this.trendsObj.bitumen = {
+      productName: "BITUMEN",
+      trendValue: 0,
+      trendUnite: 'MT',
+      trend: "+",
+      trendType: "bitumen/fo/hsd/ldo"
+    }
+    this.trendsObj.furanceOil = {
+      productName: "FURNACE OIL",
+      trendValue: 0,
+      trendUnite: 'MT',
+      trend: "+",
+      trendType: "bitumen/fo/hsd/ldo"
+    }
+    this.trendsObj.ldo = {
+      productName: "LDO",
+      trendValue: 0,
+      trendUnite: 'KL',
+      trend: "+",
+      trendType: "bitumen/fo/hsd/ldo"
+    }
+    this.trendsObj.hsd = {
+      productName: "HSD(INSTITUTIONAL)",
+      trendValue: 0,
+      trendUnite: 'KL',
+      trend: "+",
+      trendType: "bitumen/fo/hsd/ldo"
+    }
+  }
+  setMonthlyFlied() {
+    // this.trendsObj.trendType = "bitumen/fo/hsd/ldo"
+    this.trendsObj.lpgDoc = {
+      productName: "LPG/GAS CYL (DOM)",
+      trendValue: 0,
+      trendUnite: 'CYLINDER',
+      trend: "+",
+      trendType: "lpg"
+    }
+    this.trendsObj.mto = {
+      productName: "MTO",
+      trendValue: 0,
+      trendUnite: 'KL',
+      trend: "+",
+      trendType: "mto"
+    }
+    this.trendsObj.hexane = {
+      productName: "HEXANE",
+      trendValue: 0,
+      trendUnite: 'KL',
+      trend: "+",
+      trendType: "hexane"
+    }
+    this.trendsObj.kerosene = {
+      productName: "KEROSENE",
+      trendValue: 0,
+      trendUnite: 'KL',
+      trend: "+",
+      trendType: "kerosene"
+    }
+    this.trendsObj.lpgNonDoc = {
+      productName: "LPG/GAS CYL (NON-DOM)",
+      trendValue: 0,
+      trendUnite: 'CYLINDER',
+      trend: "+",
+      trendType: "lpg"
+    }
   }
   checkUpdateFields() {
     this.updateFortFlag = false;
@@ -241,7 +316,7 @@ export class AddTrendsComponent implements OnInit, OnChanges {
         }
       });
     } else {
-      this.trendsService.createTrendsFun(this.trendsObj).subscribe(res => {
+      this.trendsService.createMultipleTrends(this.trendsObj).subscribe(res => {
         if (res.status == 'Success') {
           this.closeDialog('cancel');
         }
