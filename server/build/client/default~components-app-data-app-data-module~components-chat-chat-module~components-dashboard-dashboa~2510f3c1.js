@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"],{
 
 /***/ "+/Bm":
 /*!****************************************************************************!*\
@@ -340,4 +340,4 @@ RestrictionPopupComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ
 /***/ })
 
 }]);
-//# sourceMappingURL=default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7.js.map
+//# sourceMappingURL=default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1.js.map
