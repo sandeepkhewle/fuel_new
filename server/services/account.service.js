@@ -464,11 +464,52 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
         throw error;
     }
 }
-createinvoice("fuel_060323_cwhgoqrclex3onvy")
+// createinvoice("fuel_060323_cwhgoqrclex3onvy")
+
+const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) => {
+    let sgst = 9; cgst = 9, igst = 18;
+    let total = amount * cgst / 100;
+    let amountTotal = amount + total + total
+    let returnData = {
+        "cgstPercentage": cgst + "%",
+        "sgstPercentage": sgst + "%",
+        "igstPercentage": igst + "%",
+        "cgstAmount": total,
+        "sgstAmount": total,
+        "igstAmount": total + total,
+        "amountTotal": amountTotal.toFixed(2)
+    }
+    let matchGstString;
+    if (gstNo) {
+        matchGstString = gstNo.slice(0, 2)
+        if (matchGstString == '27') {
+            returnData = {
+                "cgstPercentage": cgst + "%",
+                "sgstPercentage": sgst + "%",
+                "igstPercentage": 0 + "%",
+                "cgstAmount": total,
+                "sgstAmount": total,
+                "igstAmount": 0,
+                "amountTotal": amountTotal.toFixed(2)
+            }
+        } else returnData = {
+            "cgstPercentage": 0 + "%",
+            "sgstPercentage": 0 + "%",
+            "igstPercentage": igst + "%",
+            "cgstAmount": 0,
+            "sgstAmount": 0,
+            "igstAmount": total + total,
+            "amountTotal": amountTotal.toFixed(2)
+        }
+
+    }
+    return returnData;
+}
 module.exports = {
     initiatePayment: initiatePayment,
     paymentUpdate: paymentUpdate,
     createinvoice: createinvoice,
     assignFreePlan: assignFreePlan,
-    generateInvoice: generateInvoice
+    generateInvoice: generateInvoice,
+    calculateAmount: calculateAmount
 }
