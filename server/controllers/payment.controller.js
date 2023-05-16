@@ -26,7 +26,7 @@ router.post('/initiate', (req, res) => {
 })
 
 router.post('/calculateGst', (req, res) => {
-    console.log("payment/calculateGst " + JSON.stringify(req.body));
+    console.log("/payment/calculateGst " + JSON.stringify(req.body));
     let data = req.body;
     accountService.calculateAmount(data).then((payload) => {
         res.status(res.statusCode).send({
