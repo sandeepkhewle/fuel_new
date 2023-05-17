@@ -469,16 +469,17 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
 const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) => {
     let sgst = 9; cgst = 9, igst = 18;
     let total = amount * cgst / 100;
-    let amountTotal = amount + total + total
+    let amountTotal = amount + total + total;
+    let discount = 0;
     let returnData = {
         "cgstPercentage": cgst + "%",
         "sgstPercentage": sgst + "%",
         "igstPercentage": igst + "%",
         "cgstAmount": total,
         "sgstAmount": total,
-        "igstAmount": total + total,
-        "discount": 0,
-        "amountTotal": amountTotal.toFixed(2)
+        "igstAmount": 0,
+        "discount": discount,
+        "amountTotal": amountTotal.toFixed(2) - discount
     }
     let matchGstString;
     if (gstNo) {
@@ -491,8 +492,8 @@ const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) =
                 "cgstAmount": total,
                 "sgstAmount": total,
                 "igstAmount": 0,
-                "discount": 0,
-                "amountTotal": amountTotal.toFixed(2)
+                "discount": discount,
+                "amountTotal": amountTotal.toFixed(2) - discount
             }
         } else returnData = {
             "cgstPercentage": 0 + "%",
@@ -501,8 +502,8 @@ const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) =
             "cgstAmount": 0,
             "sgstAmount": 0,
             "igstAmount": total + total,
-            "discount": 0,
-            "amountTotal": amountTotal.toFixed(2)
+            "discount": discount,
+            "amountTotal": amountTotal.toFixed(2) - discount
         }
 
     }
