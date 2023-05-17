@@ -233,7 +233,7 @@ router.post('/checkDevice', (req, res) => {
             "message": "Device found",
             "payload": payload,
             "jwt": tokenData,
-            "version": { android: { versionNo: "6.0.0", force: false }, ios: { versionNo: "1.0", force: false } }
+            "version": { android: { versionNo: "4.0.0", force: false }, ios: { versionNo: "1.0", force: false } }
         });
     }).catch(err => {
         console.log('err', err);
