@@ -477,6 +477,7 @@ const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) =
         "cgstAmount": total,
         "sgstAmount": total,
         "igstAmount": total + total,
+        "discount": 0,
         "amountTotal": amountTotal.toFixed(2)
     }
     let matchGstString;
@@ -490,6 +491,7 @@ const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) =
                 "cgstAmount": total,
                 "sgstAmount": total,
                 "igstAmount": 0,
+                "discount": 0,
                 "amountTotal": amountTotal.toFixed(2)
             }
         } else returnData = {
@@ -499,6 +501,7 @@ const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) =
             "cgstAmount": 0,
             "sgstAmount": 0,
             "igstAmount": total + total,
+            "discount": 0,
             "amountTotal": amountTotal.toFixed(2)
         }
 
