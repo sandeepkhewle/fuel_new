@@ -51,7 +51,8 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             date: new Date(),
             updatedAt: new Date(),
             createdAt: new Date(),
-            firmName: firmName
+            firmName: firmName,
+            gstNumber: gstNumber
         }
         createobj.planForTrend = pD.planForTrend;
         // let cData = await counterSchema.findOneAndUpdate({ appId: appId, counterName: "Invoice Number" }, { $inc: { counter: 1 } }, { new: true })
@@ -467,45 +468,48 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
 // createinvoice("fuel_060323_cwhgoqrclex3onvy")
 
 const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) => {
-    let sgst = 9; cgst = 9, igst = 18;
-    let total = amount * cgst / 100;
-    let amountTotal = amount + total + total;
     let discount = 0;
+    let finalAmount = amount - discount;
+    let sgst = 9; cgst = 9, igst = 18;
+    let gst9 = finalAmount * cgst / 100;
+    let amountTotal = finalAmount + gst9 + gst9;
     let returnData = {
+        "amount": amount,
         "cgstPercentage": cgst + "%",
         "sgstPercentage": sgst + "%",
         "igstPercentage": igst + "%",
-        "cgstAmount": total,
-        "sgstAmount": total,
+        "cgstAmount": gst9,
+        "sgstAmount": gst9,
         "igstAmount": 0,
         "discount": discount,
-        "amountTotal": amountTotal.toFixed(2) - discount
+        "amountTotal": amountTotal.toFixed(2)
     }
     let matchGstString;
     if (gstNo) {
         matchGstString = gstNo.slice(0, 2)
         if (matchGstString == '27') {
             returnData = {
+                "amount": amount,
                 "cgstPercentage": cgst + "%",
                 "sgstPercentage": sgst + "%",
                 "igstPercentage": 0 + "%",
-                "cgstAmount": total,
-                "sgstAmount": total,
+                "cgstAmount": gst9,
+                "sgstAmount": gst9,
                 "igstAmount": 0,
                 "discount": discount,
-                "amountTotal": amountTotal.toFixed(2) - discount
+                "amountTotal": amountTotal.toFixed(2)
             }
         } else returnData = {
+            "amount": amount,
             "cgstPercentage": 0 + "%",
             "sgstPercentage": 0 + "%",
             "igstPercentage": igst + "%",
             "cgstAmount": 0,
             "sgstAmount": 0,
-            "igstAmount": total + total,
+            "igstAmount": gst9 + gst9,
             "discount": discount,
-            "amountTotal": amountTotal.toFixed(2) - discount
+            "amountTotal": amountTotal.toFixed(2)
         }
-
     }
     return returnData;
 }
