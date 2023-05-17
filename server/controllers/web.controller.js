@@ -233,7 +233,7 @@ router.post('/checkDevice', (req, res) => {
             "message": "Device found",
             "payload": payload,
             "jwt": tokenData,
-            "version": { android: { versionNo: "6.0.0", force: false }, ios: { versionNo: "1.0", force: false } }
+            "version": { android: { versionNo: "4.0.0", force: false }, ios: { versionNo: "1.0", force: false } }
         });
     }).catch(err => {
         console.log('err', err);
@@ -307,45 +307,45 @@ router.post('/checkVersion', (req, res) => {
     })
 });
 
-// change device request 
-router.post('/changeDevice', (req, res) => {
-    console.log('/web/changeDevice', req.body);
-    let data = req.body;
-    userService.changeDeviceRequest(data).then((payload) => {
-        res.status(res.statusCode).send({
-            "statusCode": "001",
-            "status": "Success",
-            "message": "Change device request success"
-        });
-    }).catch(err => {
-        console.log('err', err);
-        res.status(res.statusCode).send({
-            "statusCode": "002",
-            "status": "Failed",
-            "message": err.message
-        });
-    })
-})
+// // change device request 
+// router.post('/changeDevice', (req, res) => {
+//     console.log('/web/changeDevice', req.body);
+//     let data = req.body;
+//     userService.changeDeviceRequest(data).then((payload) => {
+//         res.status(res.statusCode).send({
+//             "statusCode": "001",
+//             "status": "Success",
+//             "message": "Change device request success"
+//         });
+//     }).catch(err => {
+//         console.log('err', err);
+//         res.status(res.statusCode).send({
+//             "statusCode": "002",
+//             "status": "Failed",
+//             "message": err.message
+//         });
+//     })
+// })
 
-// change device request approve tepmrory in web controller  
-router.post('/changeDeviceApprove', (req, res) => {
-    console.log('/web/changeDeviceApprove', req.body);
-    let data = req.body;
-    userService.changeDeviceApprove(data).then((payload) => {
-        res.status(res.statusCode).send({
-            "statusCode": "001",
-            "status": "Success",
-            "message": "Change device request approved successfully"
-        });
-    }).catch(err => {
-        console.log('err', err);
-        res.status(res.statusCode).send({
-            "statusCode": "002",
-            "status": "Failed",
-            "message": err.message
-        });
-    })
-})
+// // change device request approve tepmrory in web controller  
+// router.post('/changeDeviceApprove', (req, res) => {
+//     console.log('/web/changeDeviceApprove', req.body);
+//     let data = req.body;
+//     userService.changeDeviceApprove(data).then((payload) => {
+//         res.status(res.statusCode).send({
+//             "statusCode": "001",
+//             "status": "Success",
+//             "message": "Change device request approved successfully"
+//         });
+//     }).catch(err => {
+//         console.log('err', err);
+//         res.status(res.statusCode).send({
+//             "statusCode": "002",
+//             "status": "Failed",
+//             "message": err.message
+//         });
+//     })
+// })
 
 // get latest review  
 router.post('/getReview', (req, res) => {
