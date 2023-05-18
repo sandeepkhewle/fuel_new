@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"],{
 
 /***/ "1yKT":
 /*!**************************************************************************!*\
@@ -4915,4 +4915,4 @@ DataFormatter.ɵpipe = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePip
 /***/ })
 
 }]);
-//# sourceMappingURL=default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7.js.map
+//# sourceMappingURL=default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db.js.map

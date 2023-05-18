@@ -1313,6 +1313,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import { SubscriptionsComponent } from './components/subscriptions/subscriptions/subscriptions.component';
 // import { RestrictionPopupComponent } from './components/restriction-popup/restriction-popup.component';
 class AppModule {
 }
@@ -1617,7 +1618,8 @@ class GlobalApiService {
         // return this.CUSTOM_API;
     }
     getSocketUrl() {
-        const socketUrl = `${window.location.protocol}//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
+        // const socketUrl: string = `${window.location.protocol}//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
+        const socketUrl = `http//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
         console.log("getSocketUrl", socketUrl);
         return `${socketUrl}`;
     }
@@ -1881,11 +1883,14 @@ const routes = [
         children: [
             {
                 path: 'dashboard',
-                loadChildren: () => Promise.all(/*! import() | components-dashboard-dashboard-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7"), __webpack_require__.e("components-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./components/dashboard/dashboard.module */ "5+sL")).then((m) => m.DashboardModule)
+                loadChildren: () => Promise.all(/*! import() | components-dashboard-dashboard-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"), __webpack_require__.e("components-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./components/dashboard/dashboard.module */ "5+sL")).then((m) => m.DashboardModule)
             },
             {
                 path: 'members',
-                loadChildren: () => Promise.all(/*! import() | components-members-members-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7"), __webpack_require__.e("components-members-members-module")]).then(__webpack_require__.bind(null, /*! ./components/members/members.module */ "q2vJ")).then((m) => m.MembersModule)
+                loadChildren: () => Promise.all(/*! import() | components-members-members-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"), __webpack_require__.e("components-members-members-module")]).then(__webpack_require__.bind(null, /*! ./components/members/members.module */ "q2vJ")).then((m) => m.MembersModule)
+            }, {
+                path: 'subscription',
+                loadChildren: () => Promise.all(/*! import() | components-subscriptions-subscriptions-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"), __webpack_require__.e("components-subscriptions-subscriptions-module")]).then(__webpack_require__.bind(null, /*! ./components/subscriptions/subscriptions.module */ "oYuK")).then((m) => m.SubscriptionsModule)
             },
             {
                 path: 'upload',
@@ -1893,19 +1898,19 @@ const routes = [
             },
             {
                 path: 'trends',
-                loadChildren: () => Promise.all(/*! import() | components-trends-trends-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7"), __webpack_require__.e("components-trends-trends-module")]).then(__webpack_require__.bind(null, /*! ./components/trends/trends.module */ "S8Gx")).then((m) => m.TrendsModule)
+                loadChildren: () => Promise.all(/*! import() | components-trends-trends-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"), __webpack_require__.e("components-trends-trends-module")]).then(__webpack_require__.bind(null, /*! ./components/trends/trends.module */ "S8Gx")).then((m) => m.TrendsModule)
             },
             {
                 path: 'payments',
-                loadChildren: () => Promise.all(/*! import() | components-payments-payments-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7"), __webpack_require__.e("components-payments-payments-module")]).then(__webpack_require__.bind(null, /*! ./components/payments/payments.module */ "B7Ul")).then((m) => m.PaymentsModule)
+                loadChildren: () => Promise.all(/*! import() | components-payments-payments-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"), __webpack_require__.e("components-payments-payments-module")]).then(__webpack_require__.bind(null, /*! ./components/payments/payments.module */ "B7Ul")).then((m) => m.PaymentsModule)
             },
             {
                 path: 'notifications',
-                loadChildren: () => Promise.all(/*! import() | components-notifications-notifications-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7"), __webpack_require__.e("components-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./components/notifications/notifications.module */ "pJBa")).then((m) => m.NotificationsModule)
+                loadChildren: () => Promise.all(/*! import() | components-notifications-notifications-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"), __webpack_require__.e("components-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./components/notifications/notifications.module */ "pJBa")).then((m) => m.NotificationsModule)
             },
             {
                 path: 'app-data',
-                loadChildren: () => Promise.all(/*! import() | components-app-data-app-data-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7"), __webpack_require__.e("components-app-data-app-data-module")]).then(__webpack_require__.bind(null, /*! ./components/app-data/app-data.module */ "XtCv")).then((m) => m.AppDataModule)
+                loadChildren: () => Promise.all(/*! import() | components-app-data-app-data-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"), __webpack_require__.e("components-app-data-app-data-module")]).then(__webpack_require__.bind(null, /*! ./components/app-data/app-data.module */ "XtCv")).then((m) => m.AppDataModule)
             },
             {
                 path: 'plans',
@@ -1913,15 +1918,15 @@ const routes = [
             },
             {
                 path: 'device',
-                loadChildren: () => Promise.all(/*! import() | components-device-device-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7"), __webpack_require__.e("components-device-device-module")]).then(__webpack_require__.bind(null, /*! ./components/device/device.module */ "OB9x")).then((m) => m.DeviceModule)
+                loadChildren: () => Promise.all(/*! import() | components-device-device-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"), __webpack_require__.e("components-device-device-module")]).then(__webpack_require__.bind(null, /*! ./components/device/device.module */ "OB9x")).then((m) => m.DeviceModule)
             },
             {
                 path: 'chat',
-                loadChildren: () => Promise.all(/*! import() | components-chat-chat-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~4649c4d7"), __webpack_require__.e("components-chat-chat-module")]).then(__webpack_require__.bind(null, /*! ./components/chat/chat.module */ "yIP3")).then((m) => m.ChatModule)
+                loadChildren: () => Promise.all(/*! import() | components-chat-chat-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~78c352db"), __webpack_require__.e("components-chat-chat-module")]).then(__webpack_require__.bind(null, /*! ./components/chat/chat.module */ "yIP3")).then((m) => m.ChatModule)
             },
             {
                 path: 'reports',
-                loadChildren: () => Promise.all(/*! import() | components-reports-reports-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~52eebac7"), __webpack_require__.e("components-reports-reports-module")]).then(__webpack_require__.bind(null, /*! ./components/reports/reports.module */ "YXPf")).then((m) => m.ReportsModule)
+                loadChildren: () => Promise.all(/*! import() | components-reports-reports-module */[__webpack_require__.e("default~components-app-data-app-data-module~components-chat-chat-module~components-dashboard-dashboa~2510f3c1"), __webpack_require__.e("components-reports-reports-module")]).then(__webpack_require__.bind(null, /*! ./components/reports/reports.module */ "YXPf")).then((m) => m.ReportsModule)
             },
         ]
     },
