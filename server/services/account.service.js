@@ -319,7 +319,6 @@ const convertImg = (imgLink) => {
     })
 }
 
-
 const createinvoice = async (orderId) => {
     try {
         console.log('createinvoice', orderId);
@@ -469,6 +468,11 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
 
 const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) => {
     let discount = 0;
+    let userObj = await userModel.findOne({ referralCode: referralCode });
+    let alreadyReferred = await userModel({ "referralHistory.referralCode": referralCode })
+    if (userObj && !alreadyReferred) {
+        discount = 100;
+    }
     let finalAmount = amount - discount;
     let sgst = 9; cgst = 9, igst = 18;
     let gst9 = finalAmount * cgst / 100;
@@ -513,6 +517,7 @@ const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) =
     }
     return returnData;
 }
+
 module.exports = {
     initiatePayment: initiatePayment,
     paymentUpdate: paymentUpdate,
