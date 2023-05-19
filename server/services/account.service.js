@@ -32,7 +32,12 @@ const awsService = require('../services/aws.service');
 const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId }) => {
     return new Promise(async (resolve, reject) => {
 
-        let uD = await userModel.findOne({ appId: appId, userId: userId });
+        let updateObj = {};
+        if (gstNo) updateObj.gstNo = gstNumber;
+        if (firmName) updateObj.firmName = firmName;
+        if (emailId) updateObj.emailId = emailId;
+
+        let uD = await userModel.findOneAndUpdate({ appId: appId, userId: userId }, updateObj, { new: true });
         let pD = await plansModel.findOne({ appId: appId, planId: planId });
         let phoneNo = uD.phoneNo;
         let planName = pD.planName;
@@ -54,6 +59,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             firmName: firmName,
             gstNumber: gstNumber
         }
+        if (referralCode) createobj.referralCode = referralCode;
         createobj.planForTrend = pD.planForTrend;
         // let cData = await counterSchema.findOneAndUpdate({ appId: appId, counterName: "Invoice Number" }, { $inc: { counter: 1 } }, { new: true })
         createobj.invoiceNo = 1
@@ -466,11 +472,11 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
 }
 // createinvoice("fuel_060323_cwhgoqrclex3onvy")
 
-const calculateAmount = async ({ amount, gstNo, referralCode, referralPoint }) => {
+const calculateAmount = async (user, { amount, gstNo, referralCode, referralPoint }) => {
     let discount = 0;
     let userObj = await userModel.findOne({ referralCode: referralCode });
-    let alreadyReferred = await userModel({ "referralHistory.referralCode": referralCode })
-    if (userObj && !alreadyReferred) {
+    let alreadyReferred = await userModel({ userId: user.userId, "referralHistory.referralCode": referralCode })
+    if (userObj && !alreadyReferred && userObj?.userId != alreadyReferred?.userId) {
         discount = 100;
     }
     let finalAmount = amount - discount;
