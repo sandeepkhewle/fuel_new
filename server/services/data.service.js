@@ -100,7 +100,7 @@ let getAppData = async (userId, { appId }) => {
 
 let getTransaction = async (userId, appId) => {
     try {
-        let pData = await paymentsModel.find({ appId: appId, userId: userId }, { planName: 1, invoiceNo: 1, startDate: 1, endDate: 1, payableAmount: 1, planType: 1, link: 1, paymentStatus: 1 });
+        let pData = await paymentsModel.find({ appId: appId, userId: userId }, { planName: 1, invoiceNo: 1, startDate: 1, endDate: 1, payableAmount: 1, planType: 1, link: 1, paymentStatus: 1 }).sort({ _id: -1 });
         return pData;
     } catch (error) {
         throw error;

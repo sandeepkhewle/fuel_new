@@ -116,8 +116,8 @@ router.post('/appData', (req, res) => {
 
 // get member transaction
 router.post('/transactions', (req, res) => {
-    console.log('/data/transactions');
-    let appId = req.user.appId;
+    console.log('/data/transactions', req.body);
+    let appId = req.body.appId;
     let userId = req.user.userId;
     dataService.getTransaction(userId, appId).then((payload) => {
         res.status(res.statusCode).send({
