@@ -138,7 +138,7 @@ router.post('/transactions', (req, res) => {
 
 // get member Plans
 router.post('/myPlans', (req, res) => {
-    console.log('/data/myPlans');
+    console.log('/data/myPlans', req.body);
     let appId = req.body.appId;
     let userId = req.user.userId;
     dataService.getPlanData(userId, appId).then((payload) => {
