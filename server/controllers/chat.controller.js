@@ -21,11 +21,11 @@ module.exports.dummy = (socket_io) => {
 
     // update user scoket id in chat table
     socket_io.on('userSocket', async (data, callback) => {
-        console.log("userSocket", { data });
+        console.log("userSocket", data);
         let uData = await usersModel.findOne({ userId: data.userId });
 
         chatModel.findOneAndUpdate({ userId: data.userId }, { userSocketId: socket_io.id, $setOnInsert: { createDate: new Date(), fullName: uData.fullName, appId: uData.appId } }, { new: true, upsert: true }).then(data => {
-            // console.log('data', data.chat);
+            console.log('data', data.chat);
             callback(data);
         }).catch(err => {
             callback({ error: err.message })
@@ -63,7 +63,7 @@ module.exports.dummy = (socket_io) => {
     });
 
     // admin to send message to user
-    socket_io.on('reply', async (data) => {
+    socket_io.on('reply', async (data, callback) => {
         console.log("reply", { data });
         let cData = await chatModel.findOneAndUpdate({ userId: data.userId }, {
             status: "Resolved",
@@ -71,5 +71,6 @@ module.exports.dummy = (socket_io) => {
         }, { new: true, upsert: true })
         socket_io.to(cData.userSocketId).emit('reply', { "userFlag": "Admin", "message": data.message, "chatTime": new Date() });
         // commService.sendNotificationByUserId(data.userId, data.message);
+        callback(cData.chat)
     });
 }

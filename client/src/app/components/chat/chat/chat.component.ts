@@ -68,12 +68,11 @@ export class ChatComponent implements OnInit {
 
   start = () => {
     this.socket = openSocket(this.globalApiService.getSocketUrl());
-    this.socket.on('message', this.appendChatMessage);
+    // console.log("this.socket", this.socket);
 
-    this.socket.emit("adminSocket", { adminUserId: JSON.parse(this.userDetails).adminUserId });
+    // this.socket.on('message', this.appendChatMessage);
 
-    console.log('admin socket----------2-', this.globalApiService.getSocketUrl());
-
+    this.socket.emit("userSocket", { userId: this.currentuserId }, this.callbackfunct);
     // to send userId & get chat data from server for user
     this.socket.emit("getChat", { userId: this.currentuserId }, this.appendChatMessage);
   }
@@ -105,11 +104,8 @@ export class ChatComponent implements OnInit {
     if (this.typeMessage.message != null) {
       this.typeMessage.userId = this.currentuserId;
       this.typeMessage;
-      this.socket.emit("reply", { userId: this.currentuserId, message: this.typeMessage.message });
-      // to send userId & get chat data from server for user
-
-      // this.appendChatMessage(this.typeMessage);
-      // this.typeMessage = {};
+      this.socket.emit("reply", { userId: this.currentuserId, message: this.typeMessage.message }, this.appendChatMessage)
+      this.typeMessage.message = null
     }
   }
 
@@ -123,9 +119,11 @@ export class ChatComponent implements OnInit {
 
   // ctreae chat list in chat div - append new messages below
   appendChatMessage = (data: any) => {
-    console.log('------data-----', data);
+    console.log('------data-----',);
     if (data && Array.isArray(data)) {
       this.allChatArray = data;
+    } else if (data.chat && Array.isArray(data.chat)) {
+      this.allChatArray = data.chat;
     } else {
       this.allChatArray.push(data);
     }
