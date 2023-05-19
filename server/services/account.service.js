@@ -29,7 +29,7 @@ const paytm_checksum = require('./checksum');
 const awsService = require('../services/aws.service');
 
 // initiate payment
-const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId }) => {
+const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId, referralCode }) => {
     return new Promise(async (resolve, reject) => {
 
         let updateObj = {};
