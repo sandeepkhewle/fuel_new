@@ -139,7 +139,7 @@ router.post('/transactions', (req, res) => {
 // get member Plans
 router.post('/myPlans', (req, res) => {
     console.log('/data/myPlans');
-    let appId = req.user.appId;
+    let appId = req.body.appId;
     let userId = req.user.userId;
     dataService.getPlanData(userId, appId).then((payload) => {
         res.status(res.statusCode).send({
