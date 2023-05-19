@@ -33,7 +33,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
     return new Promise(async (resolve, reject) => {
 
         let updateObj = {};
-        if (gstNo) updateObj.gstNo = gstNumber;
+        if (gstNumber) updateObj.gstNo = gstNumber;
         if (firmName) updateObj.firmName = firmName;
         if (emailId) updateObj.emailId = emailId;
 
