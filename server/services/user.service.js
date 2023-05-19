@@ -91,7 +91,7 @@ const updateUser = async (userId, userData) => {
 
 let checkDevice = async ({ appId, deviceId, token }) => {
     try {
-        let uData = await userModel.findOneAndUpdate({ appId: appId, deviceId: deviceId }, { token: token, lastActive: new Date() }, { new: true }).select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, emailId: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1, emailId: 1 });
+        let uData = await userModel.findOneAndUpdate({ appId: appId, deviceId: deviceId }, { token: token, lastActive: new Date() }, { new: true }).select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, emailId: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1, referralPoints: 1, emailId: 1, firmName: 1, gstno: 1 });
         if (uData) {
             return uData;
         } else {

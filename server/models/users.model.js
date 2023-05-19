@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
     phoneNo: { type: String, index: true, required: true },
     fullName: { type: String, index: true, required: true, default: "guest", lowercase: true, trim: true },
     emailId: { type: String, index: true, lowercase: true, trim: true, sparse: true },
+    firmName: String,
     referralCode: { type: String, uppercase: true, unique: true },
     referralPoints: { type: Number, default: 0 },
     referralHistory: [{
