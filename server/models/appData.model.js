@@ -9,7 +9,8 @@ const appDataSchema = mongoose.Schema({
     message3: String,
     message4: String,
     message5: String,
-    message6: String
+    message6: String,
+    referral: String
 })
 
 module.exports = mongoose.model('appdatas', appDataSchema)
