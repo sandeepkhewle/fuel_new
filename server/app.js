@@ -38,6 +38,9 @@ app.use('/.well-known/acme-challenge/KvmIqbTsTNypSAzuglWFzQXrs0EbT_wJgsfa5cxhnA8
     }
 });
 
+app.get('/privacyPolicy', function (req, res) { res.render(__dirname + '/views/privacyPolicy.html') });
+
+
 
 // run https server in the production
 if (process.env.NODE_ENV === "production") {
