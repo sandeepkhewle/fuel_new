@@ -55,6 +55,24 @@ let verifyOtp = async ({ appId, phoneNo, otp, deviceId }) => {
     }
 }
 
+// verify otp for accoutn deletion
+let verifyOtpForAccountDeletion = async ({ appId, phoneNo, otp }) => {
+    try {
+        let tenMinutErlTime = moment().subtract(10, 'minute');
+        console.log('tenMinutErlTime', appId, phoneNo, otp, new Date(tenMinutErlTime));
+        let gData = await usersModel.findOneAndUpdate({ appId: appId, phoneNo: phoneNo, otp: otp, otpTime: { $gte: new Date(tenMinutErlTime) } }, { accDeletionRequestDate: new Date() }, { new: true })
+        console.log({ gData });
+        if (gData) return true
+        else return false
+    } catch (error) {
+        console.log("error", error);
+        if (error.codeName === 'DuplicateKey') {
+            throw new Error("This device is already registered with another mobile number")
+        }
+        else throw error;
+    }
+}
+
 // update token
 let updateToken = async (userId, token) => {
     try {
@@ -82,6 +100,7 @@ module.exports = {
     auth: auth,
     sendOtp: sendOtp,
     verifyOtp: verifyOtp,
+    verifyOtpForAccountDeletion: verifyOtpForAccountDeletion,
     updateToken: updateToken,
     checkVersion: checkVersion
 }

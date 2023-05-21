@@ -431,4 +431,17 @@ router.post('/gstgetamount', (req, res) => {
     })
 })
 
+// Initiate delete
+router.delete('/initiateDeleteAccount', (req, res) => {
+    console.log("initiateDeleteAccount ---" + JSON.stringify(req.body));
+    let phoneNo = req.body.phoneNo;
+    let otp = req.body.verificationCode;
+    userService.initiateDeleteAccount(phoneNo, otp).then(message => {
+        res.send({ message: message, status: "Success" });
+    }).catch(err => {
+        console.log('err', err);
+        res.send("Failedf");
+    })
+})
+
 module.exports = router;
