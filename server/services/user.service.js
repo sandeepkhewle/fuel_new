@@ -2,6 +2,8 @@
 const CryptoJS = require("crypto-js");
 const moment = require("moment");
 const unique = require("uniqid");
+const pLimit = require('p-limit');
+
 
 //config
 const passKey = require('../config/config').config.passKey;
@@ -13,6 +15,8 @@ const versionControlsModel = require('../models/versionControl.model')
 
 //services
 const authService = require('../services/auth.service')
+
+const userJsonData = require('../json/user.json')
 
 let makeid = async (length) => {
     var result = [];
@@ -157,6 +161,59 @@ let getUserActivePlans = async (userId) => {
         throw error;
     }
 }
+
+const insertUserFunction = async () => {
+    // console.log('here------------------', excelFile);
+    try {
+        //   console.log('userJsonData',userJsonData);
+        let newArray = userJsonData.userData
+        newArray.splice(0, 1)
+        const limit = pLimit(1);
+        return Promise.all(
+            newArray.map(uData => limit(() => insertData(uData)))
+        )
+    } catch (error) {
+        console.log('err--------2', error);
+        throw new Error("formating is wrong...")
+    }
+}
+
+let insertData = async (data) => {
+    try {
+        await userModel.create(data)
+    } catch (error) {
+        console.error('Error inserting data:', error);
+    }
+}
+
+const insertPaymentFunction = async () => {
+    // console.log('here------------------', excelFile);
+    try {
+        //   console.log('userJsonData',userJsonData);
+        let newArray = userJsonData.payementJson
+        newArray.splice(0, 1)
+        const limit = pLimit(1);
+        return Promise.all(
+            newArray.map(uData => limit(() => insertPaymentData(uData)))
+        )
+    } catch (error) {
+        console.log('err--------2', error);
+        throw new Error("Excel formating is wrong...")
+    }
+}
+
+let insertPaymentData = async (data) => {
+    try {
+        if (data.orderId === null) data.orderId = "fuel" + data.invoiceNo + data.phoneNo + data?.emailId +  data.endDate
+        await paymenModel.create(data)
+    } catch (error) {
+        console.error('Error inserting data:', error);
+    }
+}
+
+// insertUserFunction();
+// insertPaymentFunction();
+
 
 module.exports = {
     registerNewUser: registerNewUser,
