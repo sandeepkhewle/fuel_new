@@ -37,6 +37,7 @@ var userSchema = mongoose.Schema({
     createdAt: { type: Date, index: true },
     updatedAt: Date,
     isActive: { type: Boolean, default: false },
+    accDeletionRequestDate: Date
 });
 
 userSchema.index({ appId: 1, deviceId: 1 }, { unique: true });

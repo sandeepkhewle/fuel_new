@@ -162,6 +162,15 @@ let getUserActivePlans = async (userId) => {
     }
 }
 
+let initiateDeleteAccount = async (phoneNo, otp) => {
+    console.log('here-------', phoneNo);
+    // authService.sendOtp({ appId: "fuel", phoneNo });
+    let verifyOtp = await authService.verifyOtpForAccountDeletion({ appId: "fuel", phoneNo, otp });
+    console.log({ verifyOtp });
+    if (verifyOtp) return "We have registered your account deletion request, your account will be deleted within next 30 working days. You may receive a verification call regarding the account deletion.";
+    else throw new Error;
+}
+
 const insertUserFunction = async () => {
     // console.log('here------------------', excelFile);
     try {
@@ -223,5 +232,6 @@ module.exports = {
     changeDeviceRequest: changeDeviceRequest,
     changeDeviceApprove: changeDeviceApprove,
     updateVersion: updateVersion,
-    getUserActivePlans: getUserActivePlans
+    getUserActivePlans: getUserActivePlans,
+    initiateDeleteAccount: initiateDeleteAccount
 }
