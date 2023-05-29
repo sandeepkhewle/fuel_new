@@ -251,6 +251,16 @@
                 "label": false
             },
             {
+                "name": "TRENDS VALUE",
+                "prop": "trendValue",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
                 "name": "UNIT",
                 "prop": "trendUnite",
                 "sortable": false,
@@ -338,6 +348,16 @@
                 "prop": "trendDate",
                 "sortable": false,
                 "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "TRENDS VALUE",
+                "prop": "trendValue",
+                "sortable": false,
+                "pipe": "",
                 "class": "ta-c",
                 "headerClass": "ta-c",
                 "colSize": 150,

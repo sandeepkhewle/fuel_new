@@ -118,7 +118,7 @@ export class AddTrendsComponent implements OnInit, OnChanges {
   updateFortFlag: boolean = false;
   updateMonthFlag: boolean = false;
   trendsUnitArray: any = [
-    'KL', 'CYLINDER', 'MT'
+    'KL', 'CYL', 'MT'
   ];
   constructor(
     public trendsService: TrendsService
@@ -186,7 +186,7 @@ export class AddTrendsComponent implements OnInit, OnChanges {
     this.trendsObj.lpgDoc = {
       productName: "LPG/GAS CYL (DOM)",
       trendValue: 0,
-      trendUnite: 'CYLINDER',
+      trendUnite: 'CYL',
       trend: "+",
       trendType: "lpg"
     }
@@ -214,7 +214,7 @@ export class AddTrendsComponent implements OnInit, OnChanges {
     this.trendsObj.lpgNonDoc = {
       productName: "LPG/GAS CYL (NON-DOM)",
       trendValue: 0,
-      trendUnite: 'CYLINDER',
+      trendUnite: 'CYL',
       trend: "+",
       trendType: "lpg"
     }
