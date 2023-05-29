@@ -737,7 +737,7 @@ class AddTrendsComponent {
         this.updateFortFlag = false;
         this.updateMonthFlag = false;
         this.trendsUnitArray = [
-            'KL', 'CYLINDER', 'MT'
+            'KL', 'CYL', 'MT'
         ];
     }
     ngOnInit() {
@@ -800,7 +800,7 @@ class AddTrendsComponent {
         this.trendsObj.lpgDoc = {
             productName: "LPG/GAS CYL (DOM)",
             trendValue: 0,
-            trendUnite: 'CYLINDER',
+            trendUnite: 'CYL',
             trend: "+",
             trendType: "lpg"
         };
@@ -828,7 +828,7 @@ class AddTrendsComponent {
         this.trendsObj.lpgNonDoc = {
             productName: "LPG/GAS CYL (NON-DOM)",
             trendValue: 0,
-            trendUnite: 'CYLINDER',
+            trendUnite: 'CYL',
             trend: "+",
             trendType: "lpg"
         };
@@ -943,7 +943,7 @@ AddTrendsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
                 deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_1__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_2__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
             },
             { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_1__["MAT_DATE_FORMATS"], useValue: MY_FORMATS },
-        ]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 46, vars: 24, consts: [[1, "row", "new-white-bg", "mb-10"], [1, "col-md-12", "pt-20"], [1, "fyt-display-flex"], [1, "new-000000", "new-Montserrat-Medium", "fnt-20", "pl-10"], [1, "sp"], [1, "new-Montserrat-Medium", "fyt-link-btn", "new-808080"], [2, "border-bottom", "1px solid #808080", 3, "click"], [1, "col-md-12", "py-3"], [1, "row"], [1, "col-lg-6"], ["appearance", "outline"], ["name", "trendName", "required", "", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["matInput", "", "name", "validFrom", "required", "", 3, "matDatepicker", "ngModel", "ngModelOptions", "ngModelChange", "click", "keydown"], ["matSuffix", "", 3, "for"], ["validFrom", ""], ["matInput", "", "name", "validThrough", "required", "", 3, "matDatepicker", "ngModel", "min", "ngModelOptions", "ngModelChange", "click", "keydown"], ["validThrough", ""], ["matInput", "", "name", "trendDate", "required", "", 3, "matDatepicker", "ngModel", "min", "max", "ngModelOptions", "ngModelChange", "click", "keydown"], ["trendDate", ""], ["class", "row", 4, "ngIf"], [1, "col-lg-12", "ta-c", "pb-20"], [1, "new-btn-8CC63F-popup", "px-5", "py-1", 3, "click"], [3, "value"], [1, "col-lg-3"], ["type", "text", "matInput", "", "readonly", "", "id", "app1.value", "value", "BITUMEN", 1, "form-control-plaintext", 3, "ngModel", "ngModelChange"], ["matInput", "", "type", "number", "name", "trendValue", "required", "", 3, "ngModel", "ngModelChange"], ["type", "text", "matInput", "", "readonly", "", "id", "unit", 1, "form-control-plaintext", 3, "ngModel", "ngModelChange"], ["name", "trend", "required", "", 3, "ngModel", "ngModelChange"], ["type", "text", "matInput", "", "readonly", "", "id", "app1.value", 1, "form-control-plaintext", 3, "ngModel", "ngModelChange"]], template: function AddTrendsComponent_Template(rf, ctx) { if (rf & 1) {
+        ]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 46, vars: 24, consts: [[1, "row", "new-white-bg", "mb-10"], [1, "col-md-12", "pt-20"], [1, "fyt-display-flex"], [1, "new-000000", "new-Montserrat-Medium", "fnt-20", "pl-10"], [1, "sp"], [1, "new-Montserrat-Medium", "fyt-link-btn", "new-808080"], [2, "border-bottom", "1px solid #808080", 3, "click"], [1, "col-md-12", "py-3"], [1, "row"], [1, "col-lg-6"], ["appearance", "outline"], ["name", "trendName", "required", "", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["matInput", "", "name", "validFrom", "required", "", 3, "matDatepicker", "ngModel", "ngModelOptions", "ngModelChange", "click", "keydown"], ["matSuffix", "", 3, "for"], ["validFrom", ""], ["matInput", "", "name", "validThrough", "required", "", 3, "matDatepicker", "ngModel", "min", "ngModelOptions", "ngModelChange", "click", "keydown"], ["validThrough", ""], ["matInput", "", "name", "trendDate", "required", "", 3, "matDatepicker", "ngModel", "min", "max", "ngModelOptions", "ngModelChange", "click", "keydown"], ["trendDate", ""], ["class", "row", 4, "ngIf"], [1, "col-lg-12", "ta-c", "pb-20"], [1, "new-btn-8CC63F-popup", "px-5", "py-1", 3, "click"], [3, "value"], [1, "col-lg-3"], ["type", "text", "matInput", "", "readonly", "", "id", "app1.value", "value", "BITUMEN", 1, "form-control-plaintext", 3, "ngModel", "ngModelChange"], ["matInput", "", "type", "text", "name", "trendValue", "required", "", 3, "ngModel", "ngModelChange"], ["type", "text", "matInput", "", "readonly", "", "id", "unit", 1, "form-control-plaintext", 3, "ngModel", "ngModelChange"], ["name", "trend", "required", "", 3, "ngModel", "ngModelChange"], ["type", "text", "matInput", "", "readonly", "", "id", "app1.value", 1, "form-control-plaintext", 3, "ngModel", "ngModelChange"]], template: function AddTrendsComponent_Template(rf, ctx) { if (rf & 1) {
         const _r63 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
@@ -1048,7 +1048,7 @@ AddTrendsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.updateMonthFlag);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", ctx.status, " Trend");
-    } }, directives: [_angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatLabel"], _angular_material_select__WEBPACK_IMPORTED_MODULE_6__["MatSelect"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgForOf"], _angular_material_input__WEBPACK_IMPORTED_MODULE_9__["MatInput"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatDatepickerInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["DefaultValueAccessor"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatDatepickerToggle"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatSuffix"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatDatepicker"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_material_core__WEBPACK_IMPORTED_MODULE_1__["MatOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NumberValueAccessor"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhZGQtdHJlbmRzLmNvbXBvbmVudC5jc3MifQ== */"] });
+    } }, directives: [_angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatLabel"], _angular_material_select__WEBPACK_IMPORTED_MODULE_6__["MatSelect"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgForOf"], _angular_material_input__WEBPACK_IMPORTED_MODULE_9__["MatInput"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatDatepickerInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["DefaultValueAccessor"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatDatepickerToggle"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatSuffix"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatDatepicker"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_material_core__WEBPACK_IMPORTED_MODULE_1__["MatOption"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhZGQtdHJlbmRzLmNvbXBvbmVudC5jc3MifQ== */"] });
 
 
 /***/ }),
