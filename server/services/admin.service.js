@@ -63,7 +63,7 @@ let createPlan = async ({ planId, planName, description, appId, planType, durati
 let addUpdateAppData = async ({ _id, appId, supportNumber, whatsAppNumber, message1, message2, message3, message4, message5, message6 }) => {
     try {
         await appDataModel.findOneAndUpdate({ _id: _id }, {
-            appId: appId, supportNumber: supportNumber, whatsAppNumber: whatsAppNumber, message1: message1, message2: message2, message3: message3, message4: message4, message5: message5, message6: message6
+            appId: appId, supportNumber: supportNumber, whatsAppNumber: whatsAppNumber, message1: message1, message2: message2, message3: message3, message4: message4, message5: message5, message6: message6, message7: message7, message8: message8
         }, { new: true, upsert: true })
     } catch (error) {
         throw error;
