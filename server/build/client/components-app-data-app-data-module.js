@@ -543,14 +543,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function UpdateAppDataComponent_mat_option_16_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 36);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const app1_r9 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", app1_r9.value);
+    const app1_r11 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", app1_r11.value);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](app1_r9.name);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](app1_r11.name);
 } }
 class UpdateAppDataComponent {
     constructor(appDataService) {
@@ -587,7 +587,7 @@ class UpdateAppDataComponent {
     }
 }
 UpdateAppDataComponent.ɵfac = function UpdateAppDataComponent_Factory(t) { return new (t || UpdateAppDataComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_app_data_service__WEBPACK_IMPORTED_MODULE_1__["AppDataService"])); };
-UpdateAppDataComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: UpdateAppDataComponent, selectors: [["trends-update-app-data"]], inputs: { InutDataObj: "InutDataObj" }, outputs: { onActon: "onActon" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 68, vars: 10, consts: [[1, "row", "new-white-bg", "mb-15", "py-3"], [1, "col-md-12"], [1, "fyt-display-flex"], [1, "new-000000", "new-Montserrat-Medium", "fnt-20", "pl-10"], [1, "sp"], [1, "new-Montserrat-Medium", "fyt-link-btn", "new-808080"], [2, "border-bottom", "1px solid #808080", 3, "click"], [1, "col-md-12", "py-3"], [1, "row"], [1, "col-lg-4"], ["appearance", "outline"], ["name", "appId", "disabled", "", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["matInput", "", "type", "text", "name", "supportNumber", "pattern", "[0-9]*", "minlength", "10", "maxlength", "10", "id", "supportNumber", 3, "ngModel", "ngModelChange"], ["supportNumber", "ngModel"], ["matInput", "", "type", "text", "name", "whatsAppNumber", "pattern", "[0-9]*", "minlength", "10", "maxlength", "10", "id", "whatsAppNumber", 3, "ngModel", "ngModelChange"], ["whatsAppNumber", "ngModel"], [1, "col-lg-12"], ["matInput", "", "type", "text", "name", "message1", "id", "message1", 3, "ngModel", "ngModelChange"], ["message1", "ngModel"], ["matInput", "", "type", "text", "name", "message2", "id", "message2", 3, "ngModel", "ngModelChange"], ["message2", "ngModel"], ["matInput", "", "type", "text", "name", "message3", "id", "message3", 3, "ngModel", "ngModelChange"], ["message3", "ngModel"], ["matInput", "", "type", "text", "name", "message4", "id", "message4", 3, "ngModel", "ngModelChange"], ["message4", "ngModel"], ["matInput", "", "type", "text", "name", "message5", "id", "message5", 3, "ngModel", "ngModelChange"], ["message5", "ngModel"], ["matInput", "", "type", "text", "name", "message5", "id", "message6", 3, "ngModel", "ngModelChange"], [1, "col-lg-12", "ta-c", "pb-20"], [1, "new-btn-8CC63F-popup", "px-5", "py-1", 3, "click"], [3, "value"]], template: function UpdateAppDataComponent_Template(rf, ctx) { if (rf & 1) {
+UpdateAppDataComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: UpdateAppDataComponent, selectors: [["trends-update-app-data"]], inputs: { InutDataObj: "InutDataObj" }, outputs: { onActon: "onActon" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 80, vars: 12, consts: [[1, "row", "new-white-bg", "mb-15", "py-3"], [1, "col-md-12"], [1, "fyt-display-flex"], [1, "new-000000", "new-Montserrat-Medium", "fnt-20", "pl-10"], [1, "sp"], [1, "new-Montserrat-Medium", "fyt-link-btn", "new-808080"], [2, "border-bottom", "1px solid #808080", 3, "click"], [1, "col-md-12", "py-3"], [1, "row"], [1, "col-lg-4"], ["appearance", "outline"], ["name", "appId", "disabled", "", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["matInput", "", "type", "text", "name", "supportNumber", "pattern", "[0-9]*", "minlength", "10", "maxlength", "10", "id", "supportNumber", 3, "ngModel", "ngModelChange"], ["supportNumber", "ngModel"], ["matInput", "", "type", "text", "name", "whatsAppNumber", "pattern", "[0-9]*", "minlength", "10", "maxlength", "10", "id", "whatsAppNumber", 3, "ngModel", "ngModelChange"], ["whatsAppNumber", "ngModel"], [1, "col-lg-12"], ["matInput", "", "type", "text", "name", "message1", "id", "message1", 3, "ngModel", "ngModelChange"], ["message1", "ngModel"], ["matInput", "", "type", "text", "name", "message2", "id", "message2", 3, "ngModel", "ngModelChange"], ["message2", "ngModel"], ["matInput", "", "type", "text", "name", "message3", "id", "message3", 3, "ngModel", "ngModelChange"], ["message3", "ngModel"], ["matInput", "", "type", "text", "name", "message4", "id", "message4", 3, "ngModel", "ngModelChange"], ["message4", "ngModel"], ["matInput", "", "type", "text", "name", "message5", "id", "message5", 3, "ngModel", "ngModelChange"], ["message5", "ngModel"], ["matInput", "", "type", "text", "name", "message6", "id", "message6", 3, "ngModel", "ngModelChange"], ["message6", "ngModel"], ["matInput", "", "type", "text", "name", "message7", "id", "message7", 3, "ngModel", "ngModelChange"], ["message7", "ngModel"], ["matInput", "", "type", "text", "name", "message8", "id", "message8", 3, "ngModel", "ngModelChange"], ["message8", "ngModel"], [1, "col-lg-12", "ta-c", "pb-20"], [1, "new-btn-8CC63F-popup", "px-5", "py-1", 3, "click"], [3, "value"]], template: function UpdateAppDataComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -691,15 +691,35 @@ UpdateAppDataComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](61, "mat-label");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](62, "Message 6");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](63, "input", 28, 27);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](63, "input", 28, 29);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateAppDataComponent_Template_input_ngModelChange_63_listener($event) { return ctx.updateObj.message6 = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](65, "div", 29);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](66, "button", 30);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function UpdateAppDataComponent_Template_button_click_66_listener() { return ctx.updateAppData(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](67, "Update App Data");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](65, "div", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](66, "mat-form-field", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](67, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](68, "Message 7");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](69, "input", 30, 31);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateAppDataComponent_Template_input_ngModelChange_69_listener($event) { return ctx.updateObj.message7 = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](71, "div", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](72, "mat-form-field", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](73, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](74, "Message 8");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](75, "input", 32, 33);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateAppDataComponent_Template_input_ngModelChange_75_listener($event) { return ctx.updateObj.message8 = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](77, "div", 34);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](78, "button", 35);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function UpdateAppDataComponent_Template_button_click_78_listener() { return ctx.updateAppData(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](79, "Update App Data");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -726,6 +746,10 @@ UpdateAppDataComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.updateObj.message5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.updateObj.message6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.updateObj.message7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.updateObj.message8);
     } }, directives: [_angular_material_form_field__WEBPACK_IMPORTED_MODULE_2__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_2__["MatLabel"], _angular_material_select__WEBPACK_IMPORTED_MODULE_3__["MatSelect"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_material_input__WEBPACK_IMPORTED_MODULE_6__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["PatternValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["MinLengthValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["MaxLengthValidator"], _angular_material_core__WEBPACK_IMPORTED_MODULE_7__["MatOption"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ1cGRhdGUtYXBwLWRhdGEuY29tcG9uZW50LmNzcyJ9 */"] });
 
 
