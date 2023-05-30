@@ -10,6 +10,8 @@ const appDataSchema = mongoose.Schema({
     message4: String,
     message5: String,
     message6: String,
+    message7: String,
+    message8: String,
     referral: String
 })
 
