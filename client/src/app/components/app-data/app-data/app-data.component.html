@@ -102,6 +102,20 @@
                         <input matInput type="text" name="message6" [(ngModel)]="dataObj.message6" required>
                     </mat-form-field>
                 </div>
+                
+                <div class="col-lg-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Message 7</mat-label>
+                        <input matInput type="text" name="message7" [(ngModel)]="dataObj.message7" required>
+                    </mat-form-field>
+                </div>
+               
+                <div class="col-lg-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Message 8</mat-label>
+                        <input matInput type="text" name="message8" [(ngModel)]="dataObj.message8" required>
+                    </mat-form-field>
+                </div>
 
                 <div class="col-lg-12 ta-c pb-20">
                     <button class="new-btn-8CC63F-popup px-5 py-1" (click)="createData()">CREATE DATA</button>
@@ -172,6 +186,16 @@
             <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
                 <span class="pt-5 new-666666 fl">Message 6</span>
                 <span class="pt-5 new-333333 fr">{{aData.message6}}</span>
+            </div>
+
+            <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+                <span class="pt-5 new-666666 fl">Message 7</span>
+                <span class="pt-5 new-333333 fr">{{aData.message7}}</span>
+            </div>
+
+            <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+                <span class="pt-5 new-666666 fl">Message 8</span>
+                <span class="pt-5 new-333333 fr">{{aData.message8}}</span>
             </div>
         </div>
 
