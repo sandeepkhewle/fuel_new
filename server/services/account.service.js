@@ -299,6 +299,7 @@ const assignFreePlan = async ({ appId, userId, planId, startDate, endDate }) => 
         createObj.planName = pD.planName;
         createObj.planType = pD.planType;
         createObj.fullName = uD.fullName;
+        createObj.planForTrend = pD.planForTrend;
         createObj.orderId = `${appId}_${moment().format('DDMMYY')}_${uniqid()}`;
 
         await paymentsModel.create(createObj);
