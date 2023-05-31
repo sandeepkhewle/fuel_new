@@ -33,7 +33,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
     return new Promise(async (resolve, reject) => {
 
         let updateObj = {};
-        if (gstNumber) updateObj.gstNo = gstNumber;
+        if (gstNumber) updateObj.gstNumber = gstNumber;
         if (firmName) updateObj.firmName = firmName;
         if (emailId) updateObj.emailId = emailId;
 
@@ -474,7 +474,7 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
 }
 // createinvoice("fuel_060323_cwhgoqrclex3onvy")
 
-const calculateAmount = async (user, { amount, gstNo, referralCode, referralPoint }) => {
+const calculateAmount = async (user, { amount, gstNumber, referralCode, referralPoint }) => {
     let discount = 0;
     let userObj = await userModel.findOne({ referralCode: referralCode });
     let alreadyReferred = await userModel({ userId: user.userId, "referralHistory.referralCode": referralCode })
@@ -497,8 +497,8 @@ const calculateAmount = async (user, { amount, gstNo, referralCode, referralPoin
         "amountTotal": amountTotal.toFixed(2)
     }
     let matchGstString;
-    if (gstNo) {
-        matchGstString = gstNo.slice(0, 2)
+    if (gstNumber) {
+        matchGstString = gstNumber.slice(0, 2)
         if (matchGstString == '27') {
             returnData = {
                 "amount": amount,

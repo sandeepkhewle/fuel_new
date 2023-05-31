@@ -23,7 +23,7 @@ var userSchema = mongoose.Schema({
     city: String,
     cityId: String,
     lastActive: { type: Date },
-    gstno: String,
+    gstNumber: String,
     isOtpVerified: { type: Boolean, default: false },
     otp: Number,
     otpTime: Date,
