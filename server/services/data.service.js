@@ -48,6 +48,11 @@ let getPlanList = async ({ appId, gstNumber }) => {
 
             console.log({ e });
             let pT = (e.planType === 'Monthly') ? 'months' : 'years';
+            if (e.planType === 'Yearly') {
+                console.log('here--');
+                e.actualPlanCost = 5000;
+                console.log("e.actualPlanCost", e.actualPlanCost);
+            }
             // console.log({ pT });
             // console.log('dur', e.duration);
             let validUpto = moment().add(pT, e.duration).set("date", e.validUptoDay).format('DD MMM YYYY');
