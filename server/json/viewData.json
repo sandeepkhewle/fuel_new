@@ -303,19 +303,7 @@
                     {
                         "name": "DELETE TREND",
                         "function": "deleteTrend"
-                    }
-                ]
-            },
-            {
-                "name": "",
-                "prop": "button",
-                "sortable": false,
-                "pipe": "",
-                "class": "ta-l",
-                "headerClass": "ta-c",
-                "colSize": 100,
-                "label": false,
-                "actions": [
+                    },
                     {
                         "name": "UPDATE TREND",
                         "function": "updateTrend"
