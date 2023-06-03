@@ -41,7 +41,6 @@ export class UpdateTrendsComponent implements OnInit {
   @Input() InutDataObj: any;
   @Output() onActon = new EventEmitter<any>();
   updateTrendsObj: any = {};
-  updateTrendsFlag: boolean = false;
   status: any = 'Update'
   monthlyArray: any = [
     {
@@ -129,7 +128,6 @@ export class UpdateTrendsComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.InutDataObj, "InutDataObj----update");
     this.updateTrendsObj = this.InutDataObj;
-    if (this.updateTrendsObj) this.updateTrendsFlag = true
     this.status = this.InutDataObj.status;
     this.checkUpdateFields();
   }
@@ -304,7 +302,6 @@ export class UpdateTrendsComponent implements OnInit {
 
   closeDialog(flag: any) {
     this.onActon.emit({ flag: flag, page: 'addTrends' });
-    this.updateTrendsFlag = false;
   }
 
   updateTrend() {

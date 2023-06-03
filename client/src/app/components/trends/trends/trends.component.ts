@@ -74,6 +74,7 @@ export class TrendsComponent implements OnInit {
 
   onCardAction(event: any) {
     this.openTrendsForm = false;
+    this.openUpdateTrendsForm = false;
     this.applyFilters();
     // this.postObj = {
     //   page : 'fortnight'
@@ -94,7 +95,7 @@ export class TrendsComponent implements OnInit {
 
   onModalAction(event: any, $element: any) {
     this.openTrendsForm = false;
-
+    this.openUpdateTrendsForm = false;
     this.deleteTrendsFlag = false;
     if (event.name == 'deleteTrend') {
       this.deleteTrendData = event.rowData;
@@ -102,14 +103,15 @@ export class TrendsComponent implements OnInit {
     }
     if (event.name == 'updateTrend') {
       this.openTrendsForm = false;
+      this.passObj = event.rowData;
+      this.passObj.status = 'Update';
+      // this.openTrendsForm = true;
+      this.openUpdateTrendsForm = true;
       console.log(event.rowData, "event.rowData");
-      setTimeout(() => {
-        this.passObj = event.rowData;
-        this.passObj.status = 'Update';
-        // this.openTrendsForm = true;
-        this.openUpdateTrendsForm = true;
-        $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-      }, 200);
+      // setTimeout(() => {
+     
+      //   $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+      // }, 200);
     }
   }
 
