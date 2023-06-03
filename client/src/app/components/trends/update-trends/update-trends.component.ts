@@ -304,7 +304,7 @@ export class UpdateTrendsComponent implements OnInit {
 
   closeDialog(flag: any) {
     this.onActon.emit({ flag: flag, page: 'addTrends' });
-    this.updateTrendsFlag = false
+    this.updateTrendsFlag = false;
   }
 
   updateTrend() {
