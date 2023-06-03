@@ -25,4 +25,25 @@ router.post('/initiate', (req, res) => {
     })
 })
 
+router.post('/calculateGst', (req, res) => {
+    console.log("/payment/calculateGst " + JSON.stringify(req.body));
+    let user = req.user;
+    let data = req.body;
+    accountService.calculateAmount(user, data).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Calculate Gst successful",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Unable to Calculate Gst"
+        });
+    })
+})
+
 module.exports = router;

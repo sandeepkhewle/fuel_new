@@ -29,10 +29,15 @@ const paytm_checksum = require('./checksum');
 const awsService = require('../services/aws.service');
 
 // initiate payment
-const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId }) => {
+const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId, referralCode }) => {
     return new Promise(async (resolve, reject) => {
 
-        let uD = await userModel.findOne({ appId: appId, userId: userId });
+        let updateObj = {};
+        if (gstNumber) updateObj.gstNumber = gstNumber;
+        if (firmName) updateObj.firmName = firmName;
+        if (emailId) updateObj.emailId = emailId;
+
+        let uD = await userModel.findOneAndUpdate({ appId: appId, userId: userId }, updateObj, { new: true });
         let pD = await plansModel.findOne({ appId: appId, planId: planId });
         let phoneNo = uD.phoneNo;
         let planName = pD.planName;
@@ -51,8 +56,10 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             date: new Date(),
             updatedAt: new Date(),
             createdAt: new Date(),
-            firmName: firmName
+            firmName: firmName,
+            gstNumber: gstNumber
         }
+        if (referralCode) createobj.referralCode = referralCode;
         createobj.planForTrend = pD.planForTrend;
         // let cData = await counterSchema.findOneAndUpdate({ appId: appId, counterName: "Invoice Number" }, { $inc: { counter: 1 } }, { new: true })
         createobj.invoiceNo = 1
@@ -292,6 +299,8 @@ const assignFreePlan = async ({ appId, userId, planId, startDate, endDate }) => 
         createObj.planName = pD.planName;
         createObj.planType = pD.planType;
         createObj.fullName = uD.fullName;
+        createObj.planForTrend = pD.planForTrend;
+        createObj.payableAmount = 0;
         createObj.orderId = `${appId}_${moment().format('DDMMYY')}_${uniqid()}`;
 
         await paymentsModel.create(createObj);
@@ -318,7 +327,6 @@ const convertImg = (imgLink) => {
     })
 }
 
-
 const createinvoice = async (orderId) => {
     try {
         console.log('createinvoice', orderId);
@@ -341,19 +349,19 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
             const stepFinished = async () => {
                 if (--pendingStepCount == 0) {
                     console.log('--------in createinvoice---------', pdfFile);
-                    awsService.uploLocalFileToAws(`Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
-                        console.log('link', link);
-                        return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link }, { new: true })
-                    }).then((data) => {
-                        // resolve();
-                        return;
-                    })
+                    // awsService.uploLocalFileToAws(`Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
+                    //     console.log('link', link);
+                    //     return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link }, { new: true })
+                    // }).then((data) => {
+                    //     // resolve();
+                    //     return;
+                    // })
                     return;
                 }
             };
 
             var doc = new pdfkit;
-            const writeStream = fs.createWriteStream(fileName);
+            const writeStream = fs.createWriteStream(pdfFile);
             writeStream.on('close', stepFinished);
             doc.pipe(writeStream);
             // doc.image('./public/icon.png', {
@@ -362,101 +370,101 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
             //     valign: 'center'
             // });
             doc.font('Helvetica-Bold')
-            doc.text('MEEANDNEE', 270, 175)
+            doc.text('MEEANDNEE', 270, 75)
             doc.font('Times-Roman')
             doc.fontSize(8)
-            doc.text('Poornima Tower, Shankar Seth Road, Pune, Maharashtra - 411 037', 210, 195)
+            doc.text('Poornima Tower, Shankar Seth Road, Pune, Maharashtra - 411 037', 210, 95)
             doc.fontSize(8)
-            doc.text('Email: info@fuelpricealert.in', 70, 235)
+            doc.text('Email: info@fuelpricealert.in', 70, 135)
             doc.fontSize(8)
-            doc.text('Contact/Whats Up: 7709225499', 400, 230)
+            doc.text('Contact/Whats Up: 7709225499', 400, 130)
             doc.fontSize(10)
             doc.font('Helvetica-Bold')
-            doc.text('Invoice', 290, 260)
+            doc.text('Invoice', 290, 160)
             doc.fontSize(8)
             doc.font('Times-Roman')
-            doc.text('GSTIN No.', 60, 300)
-            doc.text(": 27ABGFM9425L1ZQ", 130, 300)
-            doc.text('Invoice No.', 60, 320)
-            doc.text(": " + invoiceNo, 130, 320)
-            doc.text('Invoice Date', 60, 340)
-            doc.text(": " + newdate, 130, 340)
+            doc.text('GSTIN No.', 60, 200)
+            doc.text(": 27ABGFM9425L1ZQ", 130, 200)
+            doc.text('Invoice No.', 60, 220)
+            doc.text(": " + invoiceNo, 130, 220)
+            doc.text('Invoice Date', 60, 240)
+            doc.text(": " + newdate, 130, 240)
             doc.fontSize(8)
             doc.font('Helvetica-Bold')
-            doc.text('Bill To', 350, 290)
+            doc.text('Bill To', 350, 190)
             doc.fontSize(8)
             doc.font('Helvetica-Bold')
-            doc.text(firm_name, 350, 300)
+            doc.text(firm_name, 350, 200)
             doc.font('Times-Roman')
             doc.fontSize(8)
-            doc.text(email, 350, 310)
-            doc.text(mobile, 350, 320)
-            doc.text("Buyer GSTIN No", 350, 340)
-            doc.text(": " + gstNumber, 410, 340)
+            doc.text(email, 350, 210)
+            doc.text(mobile, 350, 220)
+            doc.text("Buyer GSTIN No", 350, 240)
+            doc.text(": " + gstNumber, 410, 240)
             doc.fontSize(8)
-            doc.text('SNo', 70, 425)
-            doc.text('Description', 100, 425)
-            doc.text('Qty', 275, 425)
-            doc.text('Base Price', 325, 425)
-            doc.text('Discount', 400, 425)
-            doc.text('Amount', 475, 425)
+            doc.text('SNo', 70, 325)
+            doc.text('Description', 100, 325)
+            doc.text('Qty', 275, 325)
+            doc.text('Base Price', 325, 325)
+            doc.text('Discount', 400, 325)
+            doc.text('Amount', 475, 325)
             doc.font('Helvetica-Bold')
-            doc.text('1', 70, 450)
+            doc.text('1', 70, 350)
             doc.font('Helvetica-Bold')
-            doc.text('FuelPreAlert Subscription', 100, 450)
+            doc.text('FuelPreAlert Subscription', 100, 350)
             doc.font('Times-Roman')
-            doc.text(package_name, 100, 460)
+            doc.text(package_name, 100, 360)
             doc.font('Times-Roman')
-            doc.text(plan_name, 100, 470)
+            doc.text(plan_name, 100, 370)
             doc.font('Times-Roman')
-            doc.text('Valid Upto:  ' + validdate, 100, 480)
+            doc.text('Valid Upto:  ' + validdate, 100, 380)
             doc.font('Helvetica-Bold')
-            doc.text('1', 275, 450)
+            doc.text('1', 275, 350)
             doc.font('Helvetica-Bold')
-            doc.text(amount, 335, 450)
+            doc.text(amount, 335, 350)
             doc.font('Helvetica-Bold')
-            doc.text(discount, 410, 450)
+            doc.text(discount, 410, 350)
+            doc.font('Helvetica-Bold')
+            doc.text(amount, 480, 350)
+            doc.font('Helvetica-Bold')
+            doc.text("Amount", 270, 450)
             doc.font('Helvetica-Bold')
             doc.text(amount, 480, 450)
-            doc.font('Helvetica-Bold')
-            doc.text("Amount", 270, 550)
-            doc.font('Helvetica-Bold')
-            doc.text(amount, 480, 550)
             if (sgstAmount > 0) {
                 doc.font('Times-Roman')
-                doc.text("CGST @ 9% ", 270, 565)
+                doc.text("CGST @ 9% ", 270, 465)
                 doc.font('Times-Roman')
-                doc.text(cgstAmount, 480, 565)
+                doc.text(cgstAmount, 480, 465)
                 doc.font('Times-Roman')
-                doc.text("SGST @ 9% ", 270, 575)
+                doc.text("SGST @ 9% ", 270, 475)
                 doc.font('Times-Roman')
-                doc.text(sgstAmount, 480, 575)
+                doc.text(sgstAmount, 480, 475)
             } else {
                 doc.font('Times-Roman')
-                doc.text("IGST @ 18% ", 270, 565)
+                doc.text("IGST @ 18% ", 270, 465)
                 doc.font('Times-Roman')
-                doc.text(igstAmount, 480, 565)
+                doc.text(igstAmount, 480, 465)
             }
             doc.font('Helvetica-Bold')
-            doc.text('Total Amount', 270, 600)
+            doc.text('Total Amount', 270, 500)
             doc.font('Helvetica-Bold')
-            doc.text(amountTotal, 480, 600)
+            doc.text(amountTotal, 480, 500)
             doc.font('Helvetica-Bold')
-            doc.text('In Words :', 70, 630)
+            doc.text('In Words :', 70, 530)
             doc.font('Times-Roman')
-            doc.text(moneyInwords, 110, 630)
+            doc.text(moneyInwords, 110, 530)
             doc.font('Helvetica-Bold')
-            doc.text('Notes:', 70, 650)
+            doc.text('Notes:', 70, 550)
             doc.font('Times-Roman')
             if (paymentModeStatus == "paytm") {
-                doc.text('Payment Recieved Through Paytm Gateway', 70, 670)
-                doc.text('Paytm Transaction Id: ' + TXNID, 70, 680)
+                doc.text('Payment Recieved Through Paytm Gateway', 70, 570)
+                doc.text('Paytm Transaction Id: ' + TXNID, 70, 580)
             } else {
-                doc.text('Payment Recieved Through Payu Gateway', 70, 670)
-                doc.text('Payu Payment Id: ' + mihpayid, 70, 680)
+                doc.text('Payment Recieved Through Payu Gateway', 70, 570)
+                doc.text('Payu Payment Id: ' + mihpayid, 70, 580)
             }
             doc.font('Helvetica-Bold')
-            doc.text('This is a computer generated invoice hence signature is not required', 150, 710)
+            doc.text('This is a computer generated invoice hence signature is not required', 150, 610)
             doc.end();
             stepFinished();
         })
@@ -464,11 +472,65 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
         throw error;
     }
 }
+// createinvoice("fuel_060323_cwhgoqrclex3onvy")
+
+const calculateAmount = async (user, { amount, gstNumber, referralCode, referralPoint }) => {
+    let discount = 0;
+    let userObj = await userModel.findOne({ referralCode: referralCode });
+    let alreadyReferred = await userModel({ userId: user.userId, "referralHistory.referralCode": referralCode })
+    if (userObj && !alreadyReferred && userObj?.userId != alreadyReferred?.userId) {
+        discount = 100;
+    }
+    let finalAmount = amount - discount;
+    let sgst = 9; cgst = 9, igst = 18;
+    let gst9 = finalAmount * cgst / 100;
+    let amountTotal = finalAmount + gst9 + gst9;
+    let returnData = {
+        "amount": amount,
+        "cgstPercentage": cgst + "%",
+        "sgstPercentage": sgst + "%",
+        "igstPercentage": igst + "%",
+        "cgstAmount": gst9,
+        "sgstAmount": gst9,
+        "igstAmount": 0,
+        "discount": discount,
+        "amountTotal": amountTotal.toFixed(2)
+    }
+    let matchGstString;
+    if (gstNumber) {
+        matchGstString = gstNumber.slice(0, 2)
+        if (matchGstString == '27') {
+            returnData = {
+                "amount": amount,
+                "cgstPercentage": cgst + "%",
+                "sgstPercentage": sgst + "%",
+                "igstPercentage": 0 + "%",
+                "cgstAmount": gst9,
+                "sgstAmount": gst9,
+                "igstAmount": 0,
+                "discount": discount,
+                "amountTotal": amountTotal.toFixed(2)
+            }
+        } else returnData = {
+            "amount": amount,
+            "cgstPercentage": 0 + "%",
+            "sgstPercentage": 0 + "%",
+            "igstPercentage": igst + "%",
+            "cgstAmount": 0,
+            "sgstAmount": 0,
+            "igstAmount": gst9 + gst9,
+            "discount": discount,
+            "amountTotal": amountTotal.toFixed(2)
+        }
+    }
+    return returnData;
+}
 
 module.exports = {
     initiatePayment: initiatePayment,
     paymentUpdate: paymentUpdate,
     createinvoice: createinvoice,
     assignFreePlan: assignFreePlan,
-    generateInvoice: generateInvoice
+    generateInvoice: generateInvoice,
+    calculateAmount: calculateAmount
 }

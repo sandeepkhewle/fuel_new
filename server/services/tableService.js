@@ -347,6 +347,7 @@ let getMonthlyProductList = (req) => {
                 validThrough: 1,
                 trendDate: 1,
                 trendUnite: 1,
+                trendValue: 1,
                 ms: 1,
                 hsd: 1,
                 fourteenKg: 1,

@@ -1356,9 +1356,9 @@ class ChatComponent {
         };
         this.start = () => {
             this.socket = Object(socket_io_client__WEBPACK_IMPORTED_MODULE_0__["default"])(this.globalApiService.getSocketUrl());
-            this.socket.on('message', this.appendChatMessage);
-            this.socket.emit("adminSocket", { adminUserId: JSON.parse(this.userDetails).adminUserId });
-            console.log('admin socket----------2-', this.globalApiService.getSocketUrl());
+            // console.log("this.socket", this.socket);
+            // this.socket.on('message', this.appendChatMessage);
+            this.socket.emit("userSocket", { userId: this.currentuserId }, this.callbackfunct);
             // to send userId & get chat data from server for user
             this.socket.emit("getChat", { userId: this.currentuserId }, this.appendChatMessage);
         };
@@ -1385,10 +1385,8 @@ class ChatComponent {
             if (this.typeMessage.message != null) {
                 this.typeMessage.userId = this.currentuserId;
                 this.typeMessage;
-                this.socket.emit("reply", { userId: this.currentuserId, message: this.typeMessage.message });
-                // to send userId & get chat data from server for user
-                // this.appendChatMessage(this.typeMessage);
-                // this.typeMessage = {};
+                this.socket.emit("reply", { userId: this.currentuserId, message: this.typeMessage.message }, this.appendChatMessage);
+                this.typeMessage.message = null;
             }
         };
         this.adminFunction = (data) => {
@@ -1398,9 +1396,12 @@ class ChatComponent {
         };
         // ctreae chat list in chat div - append new messages below
         this.appendChatMessage = (data) => {
-            console.log('------data-----', data);
+            console.log('------data-----');
             if (data && Array.isArray(data)) {
                 this.allChatArray = data;
+            }
+            else if (data.chat && Array.isArray(data.chat)) {
+                this.allChatArray = data.chat;
             }
             else {
                 this.allChatArray.push(data);

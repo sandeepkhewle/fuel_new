@@ -116,8 +116,8 @@ router.post('/appData', (req, res) => {
 
 // get member transaction
 router.post('/transactions', (req, res) => {
-    console.log('/data/transactions');
-    let appId = req.user.appId;
+    console.log('/data/transactions', req.body);
+    let appId = req.body.appId;
     let userId = req.user.userId;
     dataService.getTransaction(userId, appId).then((payload) => {
         res.status(res.statusCode).send({
@@ -138,8 +138,8 @@ router.post('/transactions', (req, res) => {
 
 // get member Plans
 router.post('/myPlans', (req, res) => {
-    console.log('/data/myPlans');
-    let appId = req.user.appId;
+    console.log('/data/myPlans', req.body);
+    let appId = req.body.appId;
     let userId = req.user.userId;
     dataService.getPlanData(userId, appId).then((payload) => {
         res.status(res.statusCode).send({
@@ -228,11 +228,11 @@ router.get('/otherUrl', (req, res) => {
         "statusCode": "001",
         "status": "Success",
         "converationTable": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg",
-        "aboutUs": "https://staging.fytrack.com/assets/img/logo.png",
-        "contactUs": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/6r7s5wblab7aagb6r7s5wblab7rrtx.png",
-        "disclaimer": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/staging/fitness/branch/ikjs5jwua0qc45cru2d58la82128k.jpg",
-        "howItWork": "https://fytrackstorage.s3.ap-south-1.amazonaws.com/fitness/fitness/admin/ikjs5jwu9m85n/Admin.jpg",
-        "termAndCondition": "http://fuelpricealert.in/home#!/privacyPolicy",
+        "aboutUs": "https://api.fuelpricealert.in/privacyPolicy",
+        "contactUs": "https://api.fuelpricealert.in/privacyPolicy",
+        "disclaimer": "https://api.fuelpricealert.in/privacyPolicy",
+        "howItWork": "https://api.fuelpricealert.in/privacyPolicy",
+        "termAndCondition": "https://api.fuelpricealert.in/privacyPolicy",
         "rateUs": "https://play.google.com/store/apps/details?id=io.FuelPreAlert.org"
     });
 })

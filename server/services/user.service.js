@@ -2,6 +2,8 @@
 const CryptoJS = require("crypto-js");
 const moment = require("moment");
 const unique = require("uniqid");
+const pLimit = require('p-limit');
+
 
 //config
 const passKey = require('../config/config').config.passKey;
@@ -13,6 +15,8 @@ const versionControlsModel = require('../models/versionControl.model')
 
 //services
 const authService = require('../services/auth.service')
+
+const userJsonData = require('../json/user.json')
 
 let makeid = async (length) => {
     var result = [];
@@ -91,7 +95,7 @@ const updateUser = async (userId, userData) => {
 
 let checkDevice = async ({ appId, deviceId, token }) => {
     try {
-        let uData = await userModel.findOneAndUpdate({ appId: appId, deviceId: deviceId }, { token: token, lastActive: new Date() }, { new: true }).select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, emailId: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1, emailId: 1 });
+        let uData = await userModel.findOneAndUpdate({ appId: appId, deviceId: deviceId }, { token: token, lastActive: new Date() }, { new: true }).select({ phoneNo: 1, userId: 1, appId: 1, phoneNo: 1, emailId: 1, fullName: 1, companyName: 1, cdCounter: 1, cdStatus: 1, cpCounter: 1, declineStatus: 1, deviceId: 1, token: 1, isOtpVerified: 1, referralCode: 1, referralPoints: 1, emailId: 1, firmName: 1, gstNumber: 1, emailId: 1 });
         if (uData) {
             return uData;
         } else {
@@ -158,6 +162,68 @@ let getUserActivePlans = async (userId) => {
     }
 }
 
+let initiateDeleteAccount = async (phoneNo, otp) => {
+    console.log('here-------', phoneNo);
+    // authService.sendOtp({ appId: "fuel", phoneNo });
+    let verifyOtp = await authService.verifyOtpForAccountDeletion({ appId: "fuel", phoneNo, otp });
+    console.log({ verifyOtp });
+    if (verifyOtp) return "We have registered your account deletion request, your account will be deleted within next 30 working days. You may receive a verification call regarding the account deletion.";
+    else throw new Error;
+}
+
+const insertUserFunction = async () => {
+    // console.log('here------------------', excelFile);
+    try {
+        //   console.log('userJsonData',userJsonData);
+        let newArray = userJsonData.userData
+        newArray.splice(0, 1)
+        const limit = pLimit(1);
+        return Promise.all(
+            newArray.map(uData => limit(() => insertData(uData)))
+        )
+    } catch (error) {
+        console.log('err--------2', error);
+        throw new Error("formating is wrong...")
+    }
+}
+
+let insertData = async (data) => {
+    try {
+        await userModel.create(data)
+    } catch (error) {
+        console.error('Error inserting data:', error);
+    }
+}
+
+const insertPaymentFunction = async () => {
+    // console.log('here------------------', excelFile);
+    try {
+        //   console.log('userJsonData',userJsonData);
+        let newArray = userJsonData.payementJson
+        newArray.splice(0, 1)
+        const limit = pLimit(1);
+        return Promise.all(
+            newArray.map(uData => limit(() => insertPaymentData(uData)))
+        )
+    } catch (error) {
+        console.log('err--------2', error);
+        throw new Error("Excel formating is wrong...")
+    }
+}
+
+let insertPaymentData = async (data) => {
+    try {
+        if (data.orderId === null) data.orderId = "fuel" + data.invoiceNo + data.phoneNo + data?.emailId + data.endDate
+        await paymenModel.create(data)
+    } catch (error) {
+        console.error('Error inserting data:', error);
+    }
+}
+
+// insertUserFunction();
+// insertPaymentFunction();
+
+
 module.exports = {
     registerNewUser: registerNewUser,
     updateUser: updateUser,
@@ -166,5 +232,6 @@ module.exports = {
     changeDeviceRequest: changeDeviceRequest,
     changeDeviceApprove: changeDeviceApprove,
     updateVersion: updateVersion,
-    getUserActivePlans: getUserActivePlans
+    getUserActivePlans: getUserActivePlans,
+    initiateDeleteAccount: initiateDeleteAccount
 }
