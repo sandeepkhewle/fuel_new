@@ -54,6 +54,11 @@
     <trends-add-trends [InutDataObj]="passObj" (onActon)="onCardAction($event)"></trends-add-trends>
 </ng-container>
 
+<ng-container *ngIf="openUpdateTrendsForm">
+    <trends-update-trends [InutDataObj]="passObj" (onActon)="onCardAction($event)"></trends-update-trends>
+</ng-container>
+
+
 
 <div class="row new-white-bg py-3">
     <div class="col-md-12 pl-0 pr-0 ml-0 mr-0">

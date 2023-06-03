@@ -41,6 +41,7 @@ export class UpdateTrendsComponent implements OnInit {
   @Input() InutDataObj: any;
   @Output() onActon = new EventEmitter<any>();
   updateTrendsObj: any = {};
+  updateTrendsFlag: boolean = false;
   status: any = 'Update'
   monthlyArray: any = [
     {
@@ -126,13 +127,11 @@ export class UpdateTrendsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.InutDataObj.appId) {
-      this.updateTrendsObj = this.InutDataObj;
-      this.status = this.InutDataObj.status;
-      this.checkUpdateFields();
-    } else {
-      this.showUpdateFields();
-    }
+    console.log(this.InutDataObj, "InutDataObj----update");
+    this.updateTrendsObj = this.InutDataObj;
+    if (this.updateTrendsObj) this.updateTrendsFlag = true
+    this.status = this.InutDataObj.status;
+    this.checkUpdateFields();
   }
 
   ngOnChanges() {
@@ -305,19 +304,12 @@ export class UpdateTrendsComponent implements OnInit {
 
   closeDialog(flag: any) {
     this.onActon.emit({ flag: flag, page: 'addTrends' });
+    this.updateTrendsFlag = false
   }
 
   updateTrend() {
-    if (this.InutDataObj.appId) {
+    if (this.InutDataObj.trendsId) {
       this.trendsService.updateTrendsFun(this.updateTrendsObj).subscribe(res => {
-        if (res.status == 'Success') {
-          this.closeDialog('cancel');
-        }
-        else {
-        }
-      });
-    } else {
-      this.trendsService.createMultipleTrends(this.updateTrendsObj).subscribe(res => {
         if (res.status == 'Success') {
           this.closeDialog('cancel');
         }
