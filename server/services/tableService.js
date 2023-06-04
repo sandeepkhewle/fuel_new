@@ -356,6 +356,7 @@ let getMonthlyProductList = (req) => {
                 furnaceOil: 1,
                 ldo: 1,
                 productName: 1,
+                trendName: 1,
                 trend: 1,
                 createdAt: 1
             }

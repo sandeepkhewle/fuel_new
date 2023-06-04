@@ -8,20 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./trends.component.css']
 })
 export class TrendsComponent implements OnInit {
-  openTrendsForm:boolean = false;
-  passObj:any={};
-  deleteTrendsFlag:boolean = false;
-  deleteTrendData:any;
-  postObj:any={
-    page :'fortnight'
+  openTrendsForm: boolean = false;
+  passObj: any = {};
+  deleteTrendsFlag: boolean = false;
+  openUpdateTrendsForm: boolean = false;
+  deleteTrendData: any;
+  postObj: any = {
+    page: 'fortnight'
   }
 
-  msdFlag:boolean = true;
-  lpgFlag:boolean = false;
-  bitumenFlag:boolean = false;
+  msdFlag: boolean = true;
+  lpgFlag: boolean = false;
+  bitumenFlag: boolean = false;
 
   constructor(
-    public trendsService:TrendsService,
+    public trendsService: TrendsService,
     public router: Router
   ) { }
 
@@ -34,7 +35,7 @@ export class TrendsComponent implements OnInit {
     this.postObj = Object.assign({}, this.postObj)
   }
 
-  changeTrends(name:any){
+  changeTrends(name: any) {
     let urlToAdd = (this.router.url.includes('?')) ? this.router.url.split('?')[0] : this.router.url;
     // console.log('urlToAdd', urlToAdd);
 
@@ -45,14 +46,14 @@ export class TrendsComponent implements OnInit {
 
     if (name == 'fortnight') {
       this.postObj = {
-        page : 'fortnight'
+        page: 'fortnight'
       }
       this.applyFilters();
       this.msdFlag = true;
     }
     if (name == 'monthly') {
       this.postObj = {
-        page : 'monthly'
+        page: 'monthly'
       }
       this.applyFilters();
       this.lpgFlag = true;
@@ -66,51 +67,55 @@ export class TrendsComponent implements OnInit {
     // }
   }
 
-  createNewTrends(){
+  createNewTrends() {
     this.passObj = {};
     this.openTrendsForm = true;
   }
-  
-  onCardAction(event:any) {
+
+  onCardAction(event: any) {
     this.openTrendsForm = false;
+    this.openUpdateTrendsForm = false;
     this.applyFilters();
     // this.postObj = {
     //   page : 'fortnight'
     // }
   }
 
-  onRowsSelected(event:any){
+  onRowsSelected(event: any) {
 
   }
 
-  onRowsSelectedSub(event:any){
+  onRowsSelectedSub(event: any) {
 
   }
 
-  onRowClick(event:any){
+  onRowClick(event: any) {
 
   }
 
-  onModalAction(event:any, $element:any){
+  onModalAction(event: any, $element: any) {
     this.openTrendsForm = false;
-  
+    this.openUpdateTrendsForm = false;
     this.deleteTrendsFlag = false;
     if (event.name == 'deleteTrend') {
       this.deleteTrendData = event.rowData;
       this.deleteTrendsFlag = true;
     }
     if (event.name == 'updateTrend') {
-        this.openTrendsForm = false;   
-      setTimeout(() => {
-        this.passObj = event.rowData;
-        this.passObj.status = 'Update';
-        this.openTrendsForm = true;
-        $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-      }, 200);
+      this.openTrendsForm = false;
+      this.passObj = event.rowData;
+      this.passObj.status = 'Update';
+      // this.openTrendsForm = true;
+      this.openUpdateTrendsForm = true;
+      console.log(event.rowData, "event.rowData");
+      // setTimeout(() => {
+     
+      //   $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+      // }, 200);
     }
   }
 
-  closeDialog(flag:any){
+  closeDialog(flag: any) {
     this.deleteTrendsFlag = false;
     this.applyFilters();
 
@@ -119,16 +124,16 @@ export class TrendsComponent implements OnInit {
     // }
   }
 
-  deleteTrends(data:any){
-    let obj={
+  deleteTrends(data: any) {
+    let obj = {
       'trendsId': data.trendsId,
-      'appId':data.appId
+      'appId': data.appId
     }
     this.trendsService.deleteTrendsFun(obj).subscribe(res => {
       if (res.status == 'Success') {
         this.closeDialog('cancel');
         this.postObj = {
-          page : 'fortnight'
+          page: 'fortnight'
         }
       }
       else {

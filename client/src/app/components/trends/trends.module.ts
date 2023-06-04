@@ -8,12 +8,14 @@ import { AngularMaterialModule } from 'src/app/shared-modules/angular.material.m
 import { TrendsService } from './trends.service';
 import { AuthService } from 'src/app/shared-modules/services/auth.service';
 import { DatatableModule } from '../generic-modules/generic-table/datatable.module';
+import { UpdateTrendsComponent } from './update-trends/update-trends.component';
 
 
 @NgModule({
   declarations: [
     TrendsComponent,
-    AddTrendsComponent
+    AddTrendsComponent,
+    UpdateTrendsComponent
   ],
   imports: [
     CommonModule,

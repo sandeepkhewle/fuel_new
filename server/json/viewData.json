@@ -303,6 +303,10 @@
                     {
                         "name": "DELETE TREND",
                         "function": "deleteTrend"
+                    },
+                    {
+                        "name": "UPDATE TREND",
+                        "function": "updateTrend"
                     }
                 ]
             }
