@@ -9,6 +9,7 @@ var planSchema = mongoose.Schema({
     duration: Number, // validity in months
     planType: { type: String, enum: ['Monthly', 'Yearly'] },
     validUptoDay: Number,  // till what day of month the plan will be valid
+    actualPlanCost: Number, // final plan cost
     planCost: Number, // final plan cost
     amount: Number, // base plan cost
     discountedPrice: { type: Number, deflaut: 0 },
