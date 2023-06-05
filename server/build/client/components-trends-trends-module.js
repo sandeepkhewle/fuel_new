@@ -1,5 +1,586 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["components-trends-trends-module"],{
 
+/***/ "1a52":
+/*!****************************************************************************!*\
+  !*** ./src/app/components/trends/update-trends/update-trends.component.ts ***!
+  \****************************************************************************/
+/*! exports provided: MY_FORMATS, UpdateTrendsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MY_FORMATS", function() { return MY_FORMATS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateTrendsComponent", function() { return UpdateTrendsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material/core */ "FKr1");
+/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material-moment-adapter */ "1yaQ");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "wd/R");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _trends_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../trends.service */ "PygI");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/form-field */ "kmnG");
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/select */ "d3UM");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/input */ "qFsG");
+/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/datepicker */ "iadO");
+
+
+
+
+// tslint:disable-next-line:no-duplicate-imports
+
+
+
+
+
+
+
+
+
+
+function UpdateTrendsComponent_mat_option_16_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const trend_r6 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", trend_r6.value);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](trend_r6.name);
+} }
+function UpdateTrendsComponent_div_41_mat_option_21_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const app1_r8 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", app1_r8.value);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](app1_r8.name);
+} }
+function UpdateTrendsComponent_div_41_Template(rf, ctx) { if (rf & 1) {
+    const _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-form-field", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "mat-label");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Product Name");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "input", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_div_41_Template_input_ngModelChange_5_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r9.updateTrendsObj.productName = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "mat-form-field", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "mat-label");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, "Trend Value");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "input", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_div_41_Template_input_ngModelChange_10_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r11.updateTrendsObj.trendValue = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "mat-form-field", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "mat-label");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "Trend Unite");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "input", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_div_41_Template_input_ngModelChange_15_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r12.updateTrendsObj.trendUnite = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "mat-form-field", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "mat-label");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "Trend");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "mat-select", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_div_41_Template_mat_select_ngModelChange_20_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r13.updateTrendsObj.trend = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](21, UpdateTrendsComponent_div_41_mat_option_21_Template, 2, 2, "mat-option", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r4.updateTrendsObj.productName);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r4.updateTrendsObj.trendValue);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r4.updateTrendsObj.trendUnite);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r4.updateTrendsObj.trend);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r4.trendArray);
+} }
+function UpdateTrendsComponent_div_42_mat_option_21_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const app1_r15 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", app1_r15.value);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](app1_r15.name);
+} }
+function UpdateTrendsComponent_div_42_Template(rf, ctx) { if (rf & 1) {
+    const _r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-form-field", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "mat-label");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Product Name");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "input", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_div_42_Template_input_ngModelChange_5_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17); const ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r16.updateTrendsObj.productName = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "mat-form-field", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "mat-label");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, "Trend Value");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "input", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_div_42_Template_input_ngModelChange_10_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17); const ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r18.updateTrendsObj.trendValue = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "mat-form-field", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "mat-label");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "Trend Unite");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "input", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_div_42_Template_input_ngModelChange_15_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17); const ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r19.updateTrendsObj.trendUnite = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 31);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "mat-form-field", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "mat-label");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "Trend");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "mat-select", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_div_42_Template_mat_select_ngModelChange_20_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17); const ctx_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r20.updateTrendsObj.trend = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](21, UpdateTrendsComponent_div_42_mat_option_21_Template, 2, 2, "mat-option", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r5.updateTrendsObj.productName);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r5.updateTrendsObj.trendValue);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r5.updateTrendsObj.trendUnite);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r5.updateTrendsObj.trend);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r5.trendArray);
+} }
+const _c0 = function () { return { standalone: true }; };
+const moment = moment__WEBPACK_IMPORTED_MODULE_3___default.a || moment__WEBPACK_IMPORTED_MODULE_3__;
+const MY_FORMATS = {
+    parse: {
+        dateInput: 'DD MMM YYYY',
+    },
+    display: {
+        dateInput: 'DD MMM YYYY',
+        monthYearLabel: 'YYYY',
+        dateA11yLabel: 'DD MMM YYYY',
+        monthYearA11yLabel: 'YYYY',
+    },
+};
+class UpdateTrendsComponent {
+    constructor(trendsService) {
+        this.trendsService = trendsService;
+        this.onActon = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.updateTrendsObj = {};
+        this.status = 'Update';
+        this.monthlyArray = [
+            {
+                "name": "LPG/GAS CYL (DOM)",
+                "value": "LPG/GAS CYL (DOM)",
+                "trendType": "lpg"
+            },
+            {
+                "name": "MTO",
+                "value": "MTO",
+                "trendType": "mto"
+            },
+            {
+                "name": "HEXANE",
+                "value": "HEXANE",
+                "trendType": "hexane"
+            },
+            {
+                "name": "KEROSENE",
+                "value": "KEROSENE",
+                "trendType": "kerosene"
+            },
+            {
+                "name": "LPG/GAS CYL (NON-DOM)",
+                "value": "LPG/GAS CYL (NON-DOM)",
+                "trendType": "lpg"
+            }
+        ];
+        this.fortnightArray = [
+            {
+                "name": "BITUMEN",
+                "value": "BITUMEN",
+                "trendType": "bitumen/fo/hsd/ldo"
+            },
+            {
+                "name": "FURNACE OIL",
+                "value": "FURNACE OIL",
+                "trendType": "bitumen/fo/hsd/ldo"
+            },
+            {
+                "name": "HSD(INSTITUTIONAL)",
+                "value": "HSD(INSTITUTIONAL)",
+                "trendType": "bitumen/fo/hsd/ldo"
+            },
+            {
+                "name": "LDO",
+                "value": "LDO",
+                "trendType": "bitumen/fo/hsd/ldo"
+            }
+        ];
+        this.trendNames = [
+            {
+                "name": "Fortnight Product",
+                "value": "fortnight"
+            },
+            {
+                "name": "Monthly Product",
+                "value": "monthly"
+            }
+        ];
+        this.trendArray = [
+            {
+                "name": "+",
+                "value": "+"
+            },
+            {
+                "name": "-",
+                "value": "-"
+            }
+        ];
+        this.msdFlag = false;
+        this.lpgFlag = false;
+        this.bitumenFlag = false;
+        this.updateFortFlag = false;
+        this.updateMonthFlag = false;
+        this.trendsUnitArray = [
+            'KL', 'CYL', 'MT'
+        ];
+    }
+    ngOnInit() {
+        console.log(this.InutDataObj, "InutDataObj----update");
+        this.updateTrendsObj = this.InutDataObj;
+        this.status = this.InutDataObj.status;
+        this.checkUpdateFields();
+    }
+    ngOnChanges() {
+    }
+    showUpdateFields() {
+        this.updateFortFlag = false;
+        this.updateMonthFlag = false;
+        if (this.updateTrendsObj.trendName == 'fortnight') {
+            this.setFortFlied();
+            this.updateFortFlag = true;
+        }
+        if (this.updateTrendsObj.trendName == 'monthly') {
+            this.setMonthlyFlied();
+            this.updateMonthFlag = true;
+        }
+    }
+    setFortFlied() {
+        // this.updateTrendsObj.trendType = "bitumen/fo/hsd/ldo"
+        this.updateTrendsObj.bitumen = {
+            productName: "BITUMEN",
+            trendValue: 0,
+            trendUnite: 'MT',
+            trend: "+",
+            trendType: "bitumen/fo/hsd/ldo"
+        };
+        this.updateTrendsObj.furanceOil = {
+            productName: "FURNACE OIL",
+            trendValue: 0,
+            trendUnite: 'MT',
+            trend: "+",
+            trendType: "bitumen/fo/hsd/ldo"
+        };
+        this.updateTrendsObj.ldo = {
+            productName: "LDO",
+            trendValue: 0,
+            trendUnite: 'KL',
+            trend: "+",
+            trendType: "bitumen/fo/hsd/ldo"
+        };
+        this.updateTrendsObj.hsd = {
+            productName: "HSD(INSTITUTIONAL)",
+            trendValue: 0,
+            trendUnite: 'KL',
+            trend: "+",
+            trendType: "bitumen/fo/hsd/ldo"
+        };
+    }
+    setMonthlyFlied() {
+        // this.updateTrendsObj.trendType = "bitumen/fo/hsd/ldo"
+        this.updateTrendsObj.lpgDoc = {
+            productName: "LPG/GAS CYL (DOM)",
+            trendValue: 0,
+            trendUnite: 'CYL',
+            trend: "+",
+            trendType: "lpg"
+        };
+        this.updateTrendsObj.mto = {
+            productName: "MTO",
+            trendValue: 0,
+            trendUnite: 'KL',
+            trend: "+",
+            trendType: "mto"
+        };
+        this.updateTrendsObj.hexane = {
+            productName: "HEXANE",
+            trendValue: 0,
+            trendUnite: 'KL',
+            trend: "+",
+            trendType: "hexane"
+        };
+        this.updateTrendsObj.kerosene = {
+            productName: "KEROSENE",
+            trendValue: 0,
+            trendUnite: 'KL',
+            trend: "+",
+            trendType: "kerosene"
+        };
+        this.updateTrendsObj.lpgNonDoc = {
+            productName: "LPG/GAS CYL (NON-DOM)",
+            trendValue: 0,
+            trendUnite: 'CYL',
+            trend: "+",
+            trendType: "lpg"
+        };
+    }
+    checkUpdateFields() {
+        this.updateFortFlag = false;
+        this.updateMonthFlag = false;
+        if (this.updateTrendsObj.trendName == 'fortnight')
+            this.updateFortFlag = true;
+        if (this.updateTrendsObj.trendName == 'monthly')
+            this.updateMonthFlag = true;
+    }
+    showInputFields(data) {
+        let selectedArray = [];
+        if (this.updateFortFlag == true)
+            selectedArray = this.fortnightArray;
+        if (this.updateMonthFlag == true)
+            selectedArray = this.monthlyArray;
+        let obj = selectedArray.find((o) => o.value === data);
+        this.updateTrendsObj.trendType = obj.trendType;
+        this.updateTrendsObj.productName = obj.value;
+    }
+    checkInputFields() {
+        this.msdFlag = false;
+        this.lpgFlag = false;
+        this.bitumenFlag = false;
+        if (this.updateTrendsObj.appId == 'msd') {
+            // this.updateTrendsObj={};
+            this.updateTrendsObj.appId = 'msd';
+            this.msdFlag = true;
+        }
+        if (this.updateTrendsObj.appId == 'lpg') {
+            // this.updateTrendsObj={};
+            this.updateTrendsObj.appId = 'lpg';
+            this.lpgFlag = true;
+        }
+        if (this.updateTrendsObj.appId == 'bitumen') {
+            // this.updateTrendsObj={};
+            this.updateTrendsObj.appId = 'bitumen';
+            this.bitumenFlag = true;
+        }
+    }
+    showInput1Fields() {
+        this.msdFlag = false;
+        this.lpgFlag = false;
+        this.bitumenFlag = false;
+        if (this.updateTrendsObj.appId2 == 'msd') {
+            this.updateTrendsObj = {};
+            this.updateTrendsObj.appId2 = 'msd';
+            this.msdFlag = true;
+        }
+        if (this.updateTrendsObj.appId2 == 'lpg') {
+            this.updateTrendsObj = {};
+            this.updateTrendsObj.appId2 = 'lpg';
+            this.lpgFlag = true;
+        }
+        if (this.updateTrendsObj.appId2 == 'bitumen') {
+            this.updateTrendsObj = {};
+            this.updateTrendsObj.appId2 = 'bitumen';
+            this.bitumenFlag = true;
+        }
+    }
+    checkInput1Fields() {
+        this.msdFlag = false;
+        this.lpgFlag = false;
+        this.bitumenFlag = false;
+        if (this.updateTrendsObj.appId2 == 'msd') {
+            // this.updateTrendsObj={};
+            this.updateTrendsObj.appId2 = 'msd';
+            this.msdFlag = true;
+        }
+        if (this.updateTrendsObj.appId2 == 'lpg') {
+            // this.updateTrendsObj={};
+            this.updateTrendsObj.appId2 = 'lpg';
+            this.lpgFlag = true;
+        }
+        if (this.updateTrendsObj.appId2 == 'bitumen') {
+            // this.updateTrendsObj={};
+            this.updateTrendsObj.appId2 = 'bitumen';
+            this.bitumenFlag = true;
+        }
+    }
+    closeDialog(flag) {
+        this.onActon.emit({ flag: flag, page: 'addTrends' });
+    }
+    updateTrend() {
+        if (this.InutDataObj.trendsId) {
+            this.trendsService.updateTrendsFun(this.updateTrendsObj).subscribe(res => {
+                if (res.status == 'Success') {
+                    this.closeDialog('cancel');
+                }
+                else {
+                }
+            });
+        }
+    }
+}
+UpdateTrendsComponent.ɵfac = function UpdateTrendsComponent_Factory(t) { return new (t || UpdateTrendsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_trends_service__WEBPACK_IMPORTED_MODULE_4__["TrendsService"])); };
+UpdateTrendsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: UpdateTrendsComponent, selectors: [["trends-update-trends"]], inputs: { InutDataObj: "InutDataObj" }, outputs: { onActon: "onActon" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([
+            {
+                provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_1__["DateAdapter"],
+                useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_2__["MomentDateAdapter"],
+                deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_1__["MAT_DATE_LOCALE"], _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_2__["MAT_MOMENT_DATE_ADAPTER_OPTIONS"]]
+            },
+            { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_1__["MAT_DATE_FORMATS"], useValue: MY_FORMATS },
+        ]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 46, vars: 24, consts: [[1, "row", "new-white-bg", "mb-10"], [1, "col-md-12", "pt-20"], [1, "fyt-display-flex"], [1, "new-000000", "new-Montserrat-Medium", "fnt-20", "pl-10"], [1, "sp"], [1, "new-Montserrat-Medium", "fyt-link-btn", "new-808080"], [2, "border-bottom", "1px solid #808080", 3, "click"], [1, "col-md-12", "py-3"], [1, "row"], [1, "col-lg-6"], ["appearance", "outline"], ["name", "trendName", "required", "", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["matInput", "", "name", "validFrom", "required", "", 3, "matDatepicker", "ngModel", "ngModelOptions", "ngModelChange", "click", "keydown"], ["matSuffix", "", 3, "for"], ["validFrom", ""], ["matInput", "", "name", "validThrough", "required", "", 3, "matDatepicker", "ngModel", "min", "ngModelOptions", "ngModelChange", "click", "keydown"], ["validThrough", ""], ["matInput", "", "name", "trendDate", "required", "", 3, "matDatepicker", "ngModel", "min", "max", "ngModelOptions", "ngModelChange", "click", "keydown"], ["trendDate", ""], ["class", "row", 4, "ngIf"], [1, "col-lg-12", "ta-c", "pb-20"], [1, "new-btn-8CC63F-popup", "px-5", "py-1", 3, "click"], [3, "value"], [1, "col-lg-4"], ["type", "text", "matInput", "", "readonly", "", "id", "app1.value", "value", "productName", 1, "form-control-plaintext", 3, "ngModel", "ngModelChange"], ["matInput", "", "type", "text", "name", "trendValue", "required", "", 3, "ngModel", "ngModelChange"], [1, "col-lg-2"], ["type", "text", "matInput", "", "readonly", "", "id", "unit", 1, "form-control-plaintext", 3, "ngModel", "ngModelChange"], ["name", "trend", "required", "", 3, "ngModel", "ngModelChange"], ["type", "text", "matInput", "", "readonly", "", "id", "app1.value", 1, "form-control-plaintext", 3, "ngModel", "ngModelChange"], [1, "col-lg-2s"]], template: function UpdateTrendsComponent_Template(rf, ctx) { if (rf & 1) {
+        const _r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "h3", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "span", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "span", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function UpdateTrendsComponent_Template_span_click_7_listener() { return ctx.closeDialog("cancel"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "Close \u00A0x");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "mat-form-field", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "Trend Name");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "mat-select", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_Template_mat_select_ngModelChange_15_listener($event) { return ctx.updateTrendsObj.trendName = $event; })("ngModelChange", function UpdateTrendsComponent_Template_mat_select_ngModelChange_15_listener() { return ctx.showUpdateFields(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, UpdateTrendsComponent_mat_option_16_Template, 2, 2, "mat-option", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "mat-form-field", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](20, "Valid From");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "input", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_Template_input_ngModelChange_21_listener($event) { return ctx.updateTrendsObj.validFrom = $event; })("click", function UpdateTrendsComponent_Template_input_click_21_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21); const _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](24); return _r1.open(); })("keydown", function UpdateTrendsComponent_Template_input_keydown_21_listener() { return false; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "mat-datepicker-toggle", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](23, "mat-datepicker", null, 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "div", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](26, "mat-form-field", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](28, "Valid Through");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "input", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_Template_input_ngModelChange_29_listener($event) { return ctx.updateTrendsObj.validThrough = $event; })("click", function UpdateTrendsComponent_Template_input_click_29_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21); const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](32); return _r2.open(); })("keydown", function UpdateTrendsComponent_Template_input_keydown_29_listener() { return false; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](30, "mat-datepicker-toggle", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](31, "mat-datepicker", null, 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "div", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "mat-form-field", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](35, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](36, "Trend Date");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "input", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function UpdateTrendsComponent_Template_input_ngModelChange_37_listener($event) { return ctx.updateTrendsObj.trendDate = $event; })("click", function UpdateTrendsComponent_Template_input_click_37_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21); const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](40); return _r3.open(); })("keydown", function UpdateTrendsComponent_Template_input_keydown_37_listener() { return false; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](38, "mat-datepicker-toggle", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](39, "mat-datepicker", null, 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](41, UpdateTrendsComponent_div_41_Template, 22, 5, "div", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](42, UpdateTrendsComponent_div_42_Template, 22, 5, "div", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](43, "div", 21);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](44, "button", 22);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function UpdateTrendsComponent_Template_button_click_44_listener() { return ctx.updateTrend(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](45);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        const _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](24);
+        const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](32);
+        const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](40);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", ctx.status, " Trends ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.updateTrendsObj.trendName);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.trendNames);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("matDatepicker", _r1)("ngModel", ctx.updateTrendsObj.validFrom)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](21, _c0));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("for", _r1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("matDatepicker", _r2)("ngModel", ctx.updateTrendsObj.validThrough)("min", ctx.updateTrendsObj.validFrom)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](22, _c0));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("for", _r2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("matDatepicker", _r3)("ngModel", ctx.updateTrendsObj.trendDate)("min", ctx.updateTrendsObj.validFrom)("max", ctx.updateTrendsObj.validThrough)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](23, _c0));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("for", _r3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.updateFortFlag);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.updateMonthFlag);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", ctx.status, " Trend");
+    } }, directives: [_angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatLabel"], _angular_material_select__WEBPACK_IMPORTED_MODULE_6__["MatSelect"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgForOf"], _angular_material_input__WEBPACK_IMPORTED_MODULE_9__["MatInput"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatDatepickerInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["DefaultValueAccessor"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatDatepickerToggle"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__["MatSuffix"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_10__["MatDatepicker"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_material_core__WEBPACK_IMPORTED_MODULE_1__["MatOption"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ1cGRhdGUtdHJlbmRzLmNvbXBvbmVudC5jc3MifQ== */"] });
+
+
+/***/ }),
+
 /***/ "FgSR":
 /*!************************************************************!*\
   !*** ./src/app/components/trends/trends-routing.module.ts ***!
@@ -1120,7 +1701,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _trends_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./trends.service */ "PygI");
 /* harmony import */ var src_app_shared_modules_services_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared-modules/services/auth.service */ "w2Rb");
 /* harmony import */ var _generic_modules_generic_table_datatable_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../generic-modules/generic-table/datatable.module */ "9D7/");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _update_trends_update_trends_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./update-trends/update-trends.component */ "1a52");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -1133,16 +1716,17 @@ __webpack_require__.r(__webpack_exports__);
 class TrendsModule {
 }
 TrendsModule.ɵfac = function TrendsModule_Factory(t) { return new (t || TrendsModule)(); };
-TrendsModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineNgModule"]({ type: TrendsModule });
-TrendsModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineInjector"]({ providers: [_trends_service__WEBPACK_IMPORTED_MODULE_5__["TrendsService"],
+TrendsModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineNgModule"]({ type: TrendsModule });
+TrendsModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineInjector"]({ providers: [_trends_service__WEBPACK_IMPORTED_MODULE_5__["TrendsService"],
         src_app_shared_modules_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"]], imports: [[
             _angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
             _trends_routing_module__WEBPACK_IMPORTED_MODULE_1__["TrendsRoutingModule"],
             src_app_shared_modules_angular_material_module__WEBPACK_IMPORTED_MODULE_4__["AngularMaterialModule"],
             _generic_modules_generic_table_datatable_module__WEBPACK_IMPORTED_MODULE_7__["DatatableModule"]
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵsetNgModuleScope"](TrendsModule, { declarations: [_trends_trends_component__WEBPACK_IMPORTED_MODULE_2__["TrendsComponent"],
-        _add_trends_add_trends_component__WEBPACK_IMPORTED_MODULE_3__["AddTrendsComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵsetNgModuleScope"](TrendsModule, { declarations: [_trends_trends_component__WEBPACK_IMPORTED_MODULE_2__["TrendsComponent"],
+        _add_trends_add_trends_component__WEBPACK_IMPORTED_MODULE_3__["AddTrendsComponent"],
+        _update_trends_update_trends_component__WEBPACK_IMPORTED_MODULE_8__["UpdateTrendsComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
         _trends_routing_module__WEBPACK_IMPORTED_MODULE_1__["TrendsRoutingModule"],
         src_app_shared_modules_angular_material_module__WEBPACK_IMPORTED_MODULE_4__["AngularMaterialModule"],
         _generic_modules_generic_table_datatable_module__WEBPACK_IMPORTED_MODULE_7__["DatatableModule"]], exports: [_add_trends_add_trends_component__WEBPACK_IMPORTED_MODULE_3__["AddTrendsComponent"]] }); })();
@@ -1167,7 +1751,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/flex-layout/extended */ "znSr");
 /* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/button */ "bTqV");
 /* harmony import */ var _add_trends_add_trends_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../add-trends/add-trends.component */ "OGrp");
-/* harmony import */ var _generic_modules_generic_table_datatable_datatable_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../generic-modules/generic-table/datatable/datatable.component */ "FczN");
+/* harmony import */ var _update_trends_update_trends_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../update-trends/update-trends.component */ "1a52");
+/* harmony import */ var _generic_modules_generic_table_datatable_datatable_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../generic-modules/generic-table/datatable/datatable.component */ "FczN");
+
 
 
 
@@ -1192,10 +1778,10 @@ function TrendsComponent_ng_container_21_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
 } }
 function TrendsComponent_ng_container_22_Template(rf, ctx) { if (rf & 1) {
-    const _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    const _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "trends-add-trends", 12);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onActon", function TrendsComponent_ng_container_22_Template_trends_add_trends_onActon_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r9.onCardAction($event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onActon", function TrendsComponent_ng_container_22_Template_trends_add_trends_onActon_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r11); const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r10.onCardAction($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
 } if (rf & 2) {
@@ -1203,38 +1789,29 @@ function TrendsComponent_ng_container_22_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("InutDataObj", ctx_r4.passObj);
 } }
-function TrendsComponent_ng_container_26_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+function TrendsComponent_ng_container_23_Template(rf, ctx) { if (rf & 1) {
     const _r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "trends-datatable", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onSelectRows", function TrendsComponent_ng_container_26_ng_container_1_Template_trends_datatable_onSelectRows_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r12.onRowsSelected($event); })("onRowClickEvent", function TrendsComponent_ng_container_26_ng_container_1_Template_trends_datatable_onRowClickEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r14.onRowClick($event); })("onActonModal", function TrendsComponent_ng_container_26_ng_container_1_Template_trends_datatable_onActonModal_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](14); return ctx_r15.onModalAction($event, _r0); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "trends-update-trends", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onActon", function TrendsComponent_ng_container_23_Template_trends_update_trends_onActon_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r12.onCardAction($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
-} if (rf & 2) {
-    const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("postObj", ctx_r11.postObj);
-} }
-function TrendsComponent_ng_container_26_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, TrendsComponent_ng_container_26_ng_container_1_Template, 2, 1, "ng-container", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
 } if (rf & 2) {
     const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r5.postObj.page);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("InutDataObj", ctx_r5.passObj);
 } }
 function TrendsComponent_ng_container_27_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    const _r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "trends-datatable", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onSelectRows", function TrendsComponent_ng_container_27_ng_container_1_Template_trends_datatable_onSelectRows_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18); const ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r17.onRowsSelected($event); })("onRowClickEvent", function TrendsComponent_ng_container_27_ng_container_1_Template_trends_datatable_onRowClickEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18); const ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r19.onRowClick($event); })("onActonModal", function TrendsComponent_ng_container_27_ng_container_1_Template_trends_datatable_onActonModal_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18); const ctx_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](14); return ctx_r20.onModalAction($event, _r0); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onSelectRows", function TrendsComponent_ng_container_27_ng_container_1_Template_trends_datatable_onSelectRows_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16); const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r15.onRowsSelected($event); })("onRowClickEvent", function TrendsComponent_ng_container_27_ng_container_1_Template_trends_datatable_onRowClickEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16); const ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r17.onRowClick($event); })("onActonModal", function TrendsComponent_ng_container_27_ng_container_1_Template_trends_datatable_onActonModal_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16); const ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](14); return ctx_r18.onModalAction($event, _r0); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
 } if (rf & 2) {
-    const ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+    const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("postObj", ctx_r16.postObj);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("postObj", ctx_r14.postObj);
 } }
 function TrendsComponent_ng_container_27_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
@@ -1246,16 +1823,16 @@ function TrendsComponent_ng_container_27_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r6.postObj.page);
 } }
 function TrendsComponent_ng_container_28_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    const _r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "trends-datatable", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onSelectRows", function TrendsComponent_ng_container_28_ng_container_1_Template_trends_datatable_onSelectRows_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23); const ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r22.onRowsSelected($event); })("onRowClickEvent", function TrendsComponent_ng_container_28_ng_container_1_Template_trends_datatable_onRowClickEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23); const ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r24.onRowClick($event); })("onActonModal", function TrendsComponent_ng_container_28_ng_container_1_Template_trends_datatable_onActonModal_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23); const ctx_r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](14); return ctx_r25.onModalAction($event, _r0); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onSelectRows", function TrendsComponent_ng_container_28_ng_container_1_Template_trends_datatable_onSelectRows_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21); const ctx_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r20.onRowsSelected($event); })("onRowClickEvent", function TrendsComponent_ng_container_28_ng_container_1_Template_trends_datatable_onRowClickEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21); const ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r22.onRowClick($event); })("onActonModal", function TrendsComponent_ng_container_28_ng_container_1_Template_trends_datatable_onActonModal_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r21); const ctx_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](14); return ctx_r23.onModalAction($event, _r0); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
 } if (rf & 2) {
-    const ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+    const ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("postObj", ctx_r21.postObj);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("postObj", ctx_r19.postObj);
 } }
 function TrendsComponent_ng_container_28_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
@@ -1266,14 +1843,35 @@ function TrendsComponent_ng_container_28_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r7.postObj.page);
 } }
+function TrendsComponent_ng_container_29_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+    const _r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "trends-datatable", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("onSelectRows", function TrendsComponent_ng_container_29_ng_container_1_Template_trends_datatable_onSelectRows_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r26); const ctx_r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r25.onRowsSelected($event); })("onRowClickEvent", function TrendsComponent_ng_container_29_ng_container_1_Template_trends_datatable_onRowClickEvent_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r26); const ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r27.onRowClick($event); })("onActonModal", function TrendsComponent_ng_container_29_ng_container_1_Template_trends_datatable_onActonModal_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r26); const ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](14); return ctx_r28.onModalAction($event, _r0); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
+} if (rf & 2) {
+    const ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("postObj", ctx_r24.postObj);
+} }
 function TrendsComponent_ng_container_29_Template(rf, ctx) { if (rf & 1) {
-    const _r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, TrendsComponent_ng_container_29_ng_container_1_Template, 2, 1, "ng-container", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
+} if (rf & 2) {
+    const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r8.postObj.page);
+} }
+function TrendsComponent_ng_container_30_Template(rf, ctx) { if (rf & 1) {
+    const _r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 14);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "span", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "span", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TrendsComponent_ng_container_29_Template_span_click_4_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r27); const ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r26.closeDialog("cancel"); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TrendsComponent_ng_container_30_Template_span_click_4_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30); const ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r29.closeDialog("cancel"); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "span", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Close \u00A0x");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1290,14 +1888,14 @@ function TrendsComponent_ng_container_29_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 22);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "button", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TrendsComponent_ng_container_29_Template_button_click_14_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r27); const ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r28.deleteTrends(ctx_r28.deleteTrendData); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TrendsComponent_ng_container_30_Template_button_click_14_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30); const ctx_r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r31.deleteTrends(ctx_r31.deleteTrendData); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](15, "img", 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](16, "\u00A0Yes");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div", 25);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "button", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TrendsComponent_ng_container_29_Template_button_click_18_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r27); const ctx_r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r29.closeDialog("cancel"); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TrendsComponent_ng_container_30_Template_button_click_18_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r30); const ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r32.closeDialog("cancel"); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](19, "img", 27);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](20, "\u00A0No");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -1305,9 +1903,9 @@ function TrendsComponent_ng_container_29_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
 } if (rf & 2) {
-    const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Delete Trend Of ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](10, 1, ctx_r8.deleteTrendData.appId), "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Delete Trend Of ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](10, 1, ctx_r9.deleteTrendData.appId), "");
 } }
 class TrendsComponent {
     constructor(trendsService, router) {
@@ -1316,6 +1914,7 @@ class TrendsComponent {
         this.openTrendsForm = false;
         this.passObj = {};
         this.deleteTrendsFlag = false;
+        this.openUpdateTrendsForm = false;
         this.postObj = {
             page: 'fortnight'
         };
@@ -1366,6 +1965,7 @@ class TrendsComponent {
     }
     onCardAction(event) {
         this.openTrendsForm = false;
+        this.openUpdateTrendsForm = false;
         this.applyFilters();
         // this.postObj = {
         //   page : 'fortnight'
@@ -1379,6 +1979,7 @@ class TrendsComponent {
     }
     onModalAction(event, $element) {
         this.openTrendsForm = false;
+        this.openUpdateTrendsForm = false;
         this.deleteTrendsFlag = false;
         if (event.name == 'deleteTrend') {
             this.deleteTrendData = event.rowData;
@@ -1386,12 +1987,14 @@ class TrendsComponent {
         }
         if (event.name == 'updateTrend') {
             this.openTrendsForm = false;
-            setTimeout(() => {
-                this.passObj = event.rowData;
-                this.passObj.status = 'Update';
-                this.openTrendsForm = true;
-                $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-            }, 200);
+            this.passObj = event.rowData;
+            this.passObj.status = 'Update';
+            // this.openTrendsForm = true;
+            this.openUpdateTrendsForm = true;
+            console.log(event.rowData, "event.rowData");
+            // setTimeout(() => {
+            //   $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+            // }, 200);
         }
     }
     closeDialog(flag) {
@@ -1419,7 +2022,7 @@ class TrendsComponent {
     }
 }
 TrendsComponent.ɵfac = function TrendsComponent_Factory(t) { return new (t || TrendsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_trends_service__WEBPACK_IMPORTED_MODULE_1__["TrendsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
-TrendsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TrendsComponent, selectors: [["trends-trends"]], decls: 30, vars: 10, consts: [[1, "row", "new-white-bg", "py-3"], [1, "col-md-4", "col-lg-4", "py-1", "ta-c"], ["type", "button", 1, "ta-c", "new-tab-head-invoice", 3, "ngClass", "click"], ["src", "../../../../assets/icons/sidenavIcons/enquiry1.png", "width", "18px", "alt", "", 2, "margin-top", "-3px"], [1, "col-md-4", "col-lg-4", "pl-0", "ml-0", "ta-c"], ["type", "button", "mat-raised-button", "", 1, "fr-side", "new-tab-side-enquiry", 2, "margin-right", "auto", 3, "click"], ["target", ""], [1, "row", 2, "margin-top", "-17px"], [1, "col-md-2", "col-lg-2", "ta-c"], [4, "ngIf"], [1, "col-md-12", "pl-0", "pr-0", "ml-0", "mr-0"], ["src", "../../../../assets/img/down-triangle.png", "width", "30px", "alt", ""], [3, "InutDataObj", "onActon"], [1, "mt-0", "mb-0", "pt-0", "pb-0", 3, "postObj", "onSelectRows", "onRowClickEvent", "onActonModal"], [1, "trends-modal-design-branch", "animated", "slideInUp", "slow", "row", 2, "z-index", "3"], [1, "col-md-12", "fyt-display-flex"], [1, "sp"], [1, "new-Montserrat-Medium", "fyt-link-btn", "new-999999", 3, "click"], [2, "border-bottom", "1px solid #999999"], [1, "col-md-12", "ta-c", 2, "border-bottom", "1px solid #999999"], [1, "ta-c", "new-Montserrat-Regular", "fnt-15", "new-333333"], [1, "fnt-15", "new-Montserrat-Regular", "new-808080", "ta-c"], [1, "col-md-6", "col-6", "py-3", "pb-20", 2, "text-align", "end"], ["type", "button", 1, "new-Montserrat-Medium", "yes-btn", 2, "text-align", "initial", 3, "click"], ["src", "../../../../assets/img/yes.png", "width", "22px", "alt", "", 2, "margin-top", "-2px"], [1, "col-md-6", "col-6", "py-3", "pb-20", 2, "text-align", "initial"], ["type", "button", 1, "new-Montserrat-Medium", "no-btn", 2, "text-align", "initial", 3, "click"], ["src", "../../../../assets/img/no.png", "width", "22px", "alt", "", 2, "margin-top", "-2px"]], template: function TrendsComponent_Template(rf, ctx) { if (rf & 1) {
+TrendsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TrendsComponent, selectors: [["trends-trends"]], decls: 31, vars: 11, consts: [[1, "row", "new-white-bg", "py-3"], [1, "col-md-4", "col-lg-4", "py-1", "ta-c"], ["type", "button", 1, "ta-c", "new-tab-head-invoice", 3, "ngClass", "click"], ["src", "../../../../assets/icons/sidenavIcons/enquiry1.png", "width", "18px", "alt", "", 2, "margin-top", "-3px"], [1, "col-md-4", "col-lg-4", "pl-0", "ml-0", "ta-c"], ["type", "button", "mat-raised-button", "", 1, "fr-side", "new-tab-side-enquiry", 2, "margin-right", "auto", 3, "click"], ["target", ""], [1, "row", 2, "margin-top", "-17px"], [1, "col-md-2", "col-lg-2", "ta-c"], [4, "ngIf"], [1, "col-md-12", "pl-0", "pr-0", "ml-0", "mr-0"], ["src", "../../../../assets/img/down-triangle.png", "width", "30px", "alt", ""], [3, "InutDataObj", "onActon"], [1, "mt-0", "mb-0", "pt-0", "pb-0", 3, "postObj", "onSelectRows", "onRowClickEvent", "onActonModal"], [1, "trends-modal-design-branch", "animated", "slideInUp", "slow", "row", 2, "z-index", "3"], [1, "col-md-12", "fyt-display-flex"], [1, "sp"], [1, "new-Montserrat-Medium", "fyt-link-btn", "new-999999", 3, "click"], [2, "border-bottom", "1px solid #999999"], [1, "col-md-12", "ta-c", 2, "border-bottom", "1px solid #999999"], [1, "ta-c", "new-Montserrat-Regular", "fnt-15", "new-333333"], [1, "fnt-15", "new-Montserrat-Regular", "new-808080", "ta-c"], [1, "col-md-6", "col-6", "py-3", "pb-20", 2, "text-align", "end"], ["type", "button", 1, "new-Montserrat-Medium", "yes-btn", 2, "text-align", "initial", 3, "click"], ["src", "../../../../assets/img/yes.png", "width", "22px", "alt", "", 2, "margin-top", "-2px"], [1, "col-md-6", "col-6", "py-3", "pb-20", 2, "text-align", "initial"], ["type", "button", 1, "new-Montserrat-Medium", "no-btn", 2, "text-align", "initial", 3, "click"], ["src", "../../../../assets/img/no.png", "width", "22px", "alt", "", 2, "margin-top", "-2px"]], template: function TrendsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 2);
@@ -1457,19 +2060,20 @@ TrendsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](22, TrendsComponent_ng_container_22_Template, 2, 1, "ng-container", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "div", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](25);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](26, TrendsComponent_ng_container_26_Template, 2, 1, "ng-container", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](23, TrendsComponent_ng_container_23_Template, 2, 1, "ng-container", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "div", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerStart"](26);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](27, TrendsComponent_ng_container_27_Template, 2, 1, "ng-container", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](28, TrendsComponent_ng_container_28_Template, 2, 1, "ng-container", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](29, TrendsComponent_ng_container_29_Template, 2, 1, "ng-container", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementContainerEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](29, TrendsComponent_ng_container_29_Template, 21, 3, "ng-container", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](30, TrendsComponent_ng_container_30_Template, 21, 3, "ng-container", 9);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", ctx.msdFlag ? "new-workout-btn" : "new-workout-btn-unselect");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", ctx.msdFlag ? "new-diet-btn" : "new-workout-btn-unselect");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", ctx.lpgFlag ? "new-diet-btn" : "new-workout-btn-unselect");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](11);
@@ -1480,6 +2084,8 @@ TrendsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.bitumenFlag);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.openTrendsForm);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.openUpdateTrendsForm);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.msdFlag);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
@@ -1488,7 +2094,7 @@ TrendsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.bitumenFlag);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.deleteTrendsFlag);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgClass"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_4__["DefaultClassDirective"], _angular_material_button__WEBPACK_IMPORTED_MODULE_5__["MatButton"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _add_trends_add_trends_component__WEBPACK_IMPORTED_MODULE_6__["AddTrendsComponent"], _generic_modules_generic_table_datatable_datatable_component__WEBPACK_IMPORTED_MODULE_7__["DataTableComponent"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["TitleCasePipe"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0cmVuZHMuY29tcG9uZW50LmNzcyJ9 */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgClass"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_4__["DefaultClassDirective"], _angular_material_button__WEBPACK_IMPORTED_MODULE_5__["MatButton"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _add_trends_add_trends_component__WEBPACK_IMPORTED_MODULE_6__["AddTrendsComponent"], _update_trends_update_trends_component__WEBPACK_IMPORTED_MODULE_7__["UpdateTrendsComponent"], _generic_modules_generic_table_datatable_datatable_component__WEBPACK_IMPORTED_MODULE_8__["DataTableComponent"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["TitleCasePipe"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0cmVuZHMuY29tcG9uZW50LmNzcyJ9 */"] });
 
 
 /***/ })
