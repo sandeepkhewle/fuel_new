@@ -12,7 +12,9 @@ const appDataSchema = mongoose.Schema({
     message6: String,
     message7: String,
     message8: String,
-    referral: String
+    referral: String,
+    showPopup: { type: Boolean, default: true },
+    popupMessage: { type: String, default: "Welcome to Fuel Price Alert /n You can check upcoming fuel trends by clicking check trends button." }
 })
 
 module.exports = mongoose.model('appdatas', appDataSchema)

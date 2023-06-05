@@ -4,7 +4,7 @@ const moment = require('moment');
 // models
 const userModel = require('../models/users.model');
 const planModel = require('../models/plan.model');
-const addDataModel = require('../models/appData.model');
+const appDataModel = require('../models/appData.model');
 const notificationModel = require('../models/notification.model');
 const paymentModel = require('../models/payments.model');
 const paymentsModel = require('../models/payments.model');
@@ -83,7 +83,7 @@ let getnotificationList = async ({ appId }) => {
 let getAppData = async (userId, { appId }) => {
     try {
         let userCount = await userModel.find({ appId: appId }).count()
-        let aData = await addDataModel.findOne({ appId: appId })
+        let aData = await appDataModel.findOne({ appId: appId })
         let newData = JSON.parse(JSON.stringify(aData));
         newData.isSubscribedPlan = false;
         let pData = await paymentModel.aggregate([{ $match: { appId: appId, userId: userId, paymentStatus: "Success", startDate: { $lte: new Date() }, endDate: { $gte: new Date() } } },
@@ -154,12 +154,25 @@ let getAppImagesConvertionTable = async () => {
     }
 }
 
+let showPopup = async (userId) => {
+    try {
+        let aData = appDataModel.findOne({});
+        let data = {
+            showPopup: aData.showPopup, message: aData.popupMessage
+        }
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
-    getPlanList: getPlanList,
-    getnotificationList: getnotificationList,
-    getAppData: getAppData,
-    getTransaction: getTransaction,
-    getAppImagesTecSpec: getAppImagesTecSpec,
-    getAppImagesConvertionTable: getAppImagesConvertionTable,
-    getPlanData: getPlanData
+    getPlanList,
+    getnotificationList,
+    getAppData,
+    getTransaction,
+    getAppImagesTecSpec,
+    getAppImagesConvertionTable,
+    getPlanData,
+    showPopup
 }
