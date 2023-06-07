@@ -11,11 +11,11 @@ const accountService = require('../services/account.service');
 router.post('/sendNotification', (req, res) => {
     console.log('/admin/sendNotification', req.body);
     let data = req.body;
-    communicationService.sendNotification(data).then(() => {
+    communicationService.sendNotification(data).then(message => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
-            "message": "Notification sent successfully"
+            "message": message
         });
     }).catch(err => {
         console.log('err', err);

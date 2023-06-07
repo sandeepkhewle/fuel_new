@@ -22,7 +22,7 @@ let createNewTrend = async ({ trendType, trend, trendName, trendDate, trendUnite
     }
 }
 
-let updateTrend = async ({ trendsId, trendType, trend, trendUnite, productName, validFrom, validThrough, trendName, trendValue }) => {
+let updateTrend = async ({ trendsId, trendType, trend, trendUnite, productName, validFrom, validThrough, trendName, trendValue, trendDate }) => {
     try {
         let updateObj = {
             updatedAt: new Date()
@@ -35,6 +35,7 @@ let updateTrend = async ({ trendsId, trendType, trend, trendUnite, productName, 
         if (validFrom) updateObj.validFrom = validFrom;
         if (validThrough) updateObj.validThrough = validThrough;
         if (trendValue) updateObj.trendValue = trendValue;
+        if (trendDate) updateObj.trendDate = trendDate;
 
         await trendsModel.findOneAndUpdate({ trendsId: trendsId }, updateObj, { new: true })
         return;
@@ -47,7 +48,7 @@ let createMultipleTrend = async (body) => {
     try {
         let trendName = body.trendName;
         let validThrough = new Date(body.validThrough);
-        let trendDate = new Date(body.trendDate);
+        let trendDate = new Date(body.trendDate).setHours(12, 0);
         let validFrom = new Date(body.validFrom);
         let newArray = []
         if (trendName === 'monthly') {
@@ -70,7 +71,7 @@ let createMultipleTrend = async (body) => {
             }))
         });
         Promise.all(promiseArray).then(() => {
-            commService.sendNotification({ appId: "fuel", category: "all members", data: {}, message: "New trend added", title: "Trends Update" }).then(() => {
+            commService.sendNotification({ appId: "fuel", category: "All Members", data: {}, message: "New trend added", title: "Trends Update" }).then(() => {
                 return;
             })
         })

@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
     userId: { type: String, default: mongoose.Types.ObjectId, index: true, required: true, unique: true, auto: true },
     appId: { type: String, index: true, required: true, default: "fuel" },
-    phoneNo: { type: String, index: true, required: true },
+    phoneNo: { type: String, index: true, required: true, unique: true },
     fullName: { type: String, index: true, default: "guest", lowercase: true, trim: true },
     emailId: { type: String, index: true, lowercase: true, trim: true },
     firmName: String,

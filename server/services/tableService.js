@@ -787,7 +787,7 @@ let chatList = (req) => {
 }
 
 module.exports = {
-    chooseTable: chooseTable,
-    getMemberList: getMemberList,
-    getPaymentsList: getPaymentsList
+    chooseTable,
+    getMemberList,
+    getPaymentsList
 }

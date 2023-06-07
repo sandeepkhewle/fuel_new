@@ -5,11 +5,11 @@
         "page": "members",
         "attributes": [
             {
-                "name": "APP ID",
-                "prop": "appId",
+                "name": "PHONE",
+                "prop": "phoneNo",
                 "sortable": true,
                 "pipe": "",
-                "class": "ta-l text-capitalize",
+                "class": "ta-c",
                 "headerClass": "ta-c",
                 "colSize": 100,
                 "label": false
@@ -35,13 +35,13 @@
                 "label": false
             },
             {
-                "name": "PHONE",
-                "prop": "phoneNo",
+                "name": "Last ACTIVE",
+                "prop": "lastActive",
                 "sortable": true,
-                "pipe": "",
-                "class": "ta-c",
+                "pipe": "date",
+                "class": "ta-l text-capitalize",
                 "headerClass": "ta-c",
-                "colSize": 200,
+                "colSize": 100,
                 "label": false
             },
             {
@@ -55,38 +55,48 @@
                 "label": false
             },
             {
-                "name": "PLAN",
-                "prop": "planName",
-                "sortable": false,
-                "pipe": "",
-                "class": "ta-c",
-                "headerClass": "ta-c",
-                "colSize": 80,
-                "label": false
-            },
-            {
-                "name": "PLAN TYPE",
-                "prop": "planType",
-                "sortable": false,
-                "pipe": "",
-                "class": "ta-c",
-                "headerClass": "ta-c",
-                "colSize": 80,
-                "label": false
-            },
-            {
-                "name": "LAST ACTIVE",
-                "prop": "lastActive",
+                "name": "REGN DATE",
+                "prop": "createdAt",
                 "sortable": true,
                 "pipe": "date",
                 "class": "ta-c",
                 "headerClass": "ta-c",
-                "colSize": 80,
+                "colSize": 120,
                 "label": false
             },
             {
-                "name": "REGN DATE",
-                "prop": "createdAt",
+                "name": "FIRM NAME",
+                "prop": "firmName",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 120,
+                "label": false
+            },
+            {
+                "name": "GST NUMBER",
+                "prop": "gstNumber",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 120,
+                "label": false
+            },
+            {
+                "name": "REF POINTS",
+                "prop": "referralPoints",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 120,
+                "label": false
+            },
+            {
+                "name": "REF CODE",
+                "prop": "referralCode",
                 "sortable": true,
                 "pipe": "date",
                 "class": "ta-c",
@@ -118,16 +128,6 @@
         "page": "subscription",
         "attributes": [
             {
-                "name": "MEMBER NAME",
-                "prop": "fullName",
-                "sortable": true,
-                "pipe": "",
-                "class": "ta-l text-capitalize",
-                "headerClass": "ta-c",
-                "colSize": 150,
-                "label": false
-            },
-            {
                 "name": "PHONE",
                 "prop": "phoneNo",
                 "sortable": true,
@@ -135,6 +135,16 @@
                 "class": "ta-c",
                 "headerClass": "ta-c",
                 "colSize": 200,
+                "label": false
+            },
+            {
+                "name": "MEMBER NAME",
+                "prop": "fullName",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
                 "label": false
             },
             {
@@ -211,7 +221,7 @@
         "page": "trends",
         "attributes": [
             {
-                "name": "Product Name",
+                "name": "PRODUCT NAME",
                 "prop": "productName",
                 "sortable": true,
                 "pipe": "",

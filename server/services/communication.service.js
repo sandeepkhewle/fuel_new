@@ -7,49 +7,57 @@ const senderId = require('../config/config').config.gcmServerKey;
 const sender = new gcm.Sender(senderId);
 
 // models
-const memberModel = require('../models/users.model');
+const userModel = require('../models/users.model');
 const notificationModel = require('../models/notification.model');
 const paymentModel = require('../models/payments.model');
 
-let sendNotification = async ({ appId, category, data, message, title }) => {
-    console.log("sendNotification", { appId, data, message, title });
-    let findObj = {};
-    if (appId) findObj.appId = appId;
-    //"all members"
-    if (category === "Active Members") {
-        let pData = await paymentModel.aggregate([{ $match: { appId: appId, paymentStatus: "Success", startDate: { $lte: new Date() }, endDate: { $gte: new Date() } } }]);
-    }
+let sendNotification = async ({ appId, catName, data, message, title }) => {
+    try {
+        console.log("sendNotification", { appId, catName, data, message, title });
+        let findObj = {};
+        if (appId) findObj.appId = appId;
+        if (catName == "Active Members") findObj.isActive = true;
+        if (catName == "Inactive Members") findObj.isActive = false;
 
-    let mData = await memberModel.aggregate([{ $match: findObj }, { $group: { _id: null, tokens: { $push: "$token" } } }]);
-    console.log('mData', JSON.stringify(mData));
-    let finalMessage = new gcm.Message({
-        priority: 'high',
-        contentAvailable: true,
-        badge: "+1",
-        notification: {
-            title: title,
-            icon: "myicon",
-            body: message
-        },
-        data: data,
-        sound: 'default'
-    });
-    let totalUser = 0;
-    if (mData && mData[0] && mData[0].tokens) totalUser = mData[0].tokens.length;
-    await notificationModel.create({ message: message, appId: appId, sentTo: totalUser, createdAt: new Date(), })
-    let registrationTokens = mData[0].tokens;
-    // registrationTokens.push(token);
-    sender.send(finalMessage, {
-        registrationTokens: registrationTokens
-    }, function (err, response) {
-        if (err) {
-            console.log("error notify response " + err);
-            throw err;
-        } else {
-            console.log('response', response);
-            return;
-        }
-    })
+        // console.log('findObj', findObj);
+
+        let mData = await userModel.aggregate([{ $match: findObj }, { $group: { _id: null, tokens: { $push: "$token" } } }]);
+        // console.log('mData', JSON.stringify(mData));
+        let finalMessage = new gcm.Message({
+            priority: 'high',
+            contentAvailable: true,
+            badge: "+1",
+            notification: {
+                title: title,
+                icon: "myicon",
+                body: message
+            },
+            data: data,
+            sound: 'default'
+        });
+        let totalUser = mData[0]?.tokens?.length || 0;
+        // console.log('totalUser', totalUser);
+        await notificationModel.create({ message: message, appId: appId, sentTo: totalUser, createdAt: new Date(), })
+        let registrationTokens = mData[0]?.tokens || [];
+        // console.log('registrationTokens', registrationTokens);
+        // registrationTokens.push(token);
+        if (registrationTokens.length > 0) {
+            sender.send(finalMessage, {
+                registrationTokens: registrationTokens
+            }, function (err, response) {
+                if (err) {
+                    console.log("error notify response " + err);
+                    throw err;
+                } else {
+                    console.log('response', response);
+                    return "Notification sent successfully";
+                }
+            })
+        } else return "No user under this category";
+    } catch (error) {
+        console.log('error', error);
+        throw "Unable to send notificatetion, something went wrong";
+    }
 }
 
 // send notification
