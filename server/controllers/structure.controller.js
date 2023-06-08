@@ -126,10 +126,11 @@ router.post('/reportList', function (req, res, next) {
 router.post('/sendNotification', (req, res) => {
     console.log('/structure/sendNotification', req.body);
     let userId = req.user.userId;
-    console.log({userId});
+    console.log({ userId });
     let title = req.body.title;
     let message = req.body.message;
-    communicationService.sendNotification("fuel", null, message, title, [userId]).then((message) => {
+    let data = req.body.data;
+    communicationService.sendNotification({ appId: "fuel", catName: null, data: {}, message: message, title: title, userId: [userId] }).then((message) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
