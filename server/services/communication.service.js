@@ -11,11 +11,12 @@ const userModel = require('../models/users.model');
 const notificationModel = require('../models/notification.model');
 const paymentModel = require('../models/payments.model');
 
-let sendNotification = async ({ appId, catName, data, message, title }) => {
+let sendNotification = async ({ appId, catName, data, message, title, userId }) => {
     try {
         console.log("sendNotification", { appId, catName, data, message, title });
         let findObj = {};
         if (appId) findObj.appId = appId;
+        if (userId && userId.length > 0) findObj.userId = { $in: userId }
         if (catName == "Active Members") findObj.isActive = true;
         if (catName == "Inactive Members") findObj.isActive = false;
 

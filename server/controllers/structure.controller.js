@@ -7,6 +7,7 @@ const fs = require('fs');
 const structureService = require('../services/structure.service');
 const tableSerivce = require('../services/tableService');
 const importExportExcelService = require('../services/importExportExcelService');
+const communicationService = require('../services/communication.service');
 
 router.post('/getSideNav', (req, res) => {
     console.log('/structure/getSideNav', req.body);
@@ -117,6 +118,29 @@ router.post('/reportList', function (req, res, next) {
             "Status": "Failed",
             "Message": "Failed to fetch report list succesfully"
         })
+    })
+})
+
+
+// test notification 
+router.get('/sendNotification', (req, res) => {
+    console.log('/data/sendNotification');
+    let userId = req.user.userId;
+    let title = req.body.title;
+    let message = req.body.message;
+    communicationService.sendNotification("fuel", null, message, title, [userId]).then((message) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": message
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to fetch app Images data"
+        });
     })
 })
 

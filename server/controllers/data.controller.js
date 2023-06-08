@@ -237,7 +237,7 @@ router.get('/otherUrl', (req, res) => {
     });
 })
 
-// Get APP Images data 
+// Get popup details 
 router.get('/popup', (req, res) => {
     console.log('/data/popup');
     let userId = req.user.userId;
