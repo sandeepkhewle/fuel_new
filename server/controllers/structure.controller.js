@@ -126,6 +126,7 @@ router.post('/reportList', function (req, res, next) {
 router.post('/sendNotification', (req, res) => {
     console.log('/structure/sendNotification', req.body);
     let userId = req.user.userId;
+    console.log({userId});
     let title = req.body.title;
     let message = req.body.message;
     communicationService.sendNotification("fuel", null, message, title, [userId]).then((message) => {
