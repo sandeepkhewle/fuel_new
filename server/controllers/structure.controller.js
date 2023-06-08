@@ -124,7 +124,7 @@ router.post('/reportList', function (req, res, next) {
 
 // test notification 
 router.post('/sendNotification', (req, res) => {
-    console.log('/data/sendNotification');
+    console.log('/structure/sendNotification', req.body);
     let userId = req.user.userId;
     let title = req.body.title;
     let message = req.body.message;
