@@ -123,7 +123,7 @@ router.post('/reportList', function (req, res, next) {
 
 
 // test notification 
-router.get('/sendNotification', (req, res) => {
+router.post('/sendNotification', (req, res) => {
     console.log('/data/sendNotification');
     let userId = req.user.userId;
     let title = req.body.title;
