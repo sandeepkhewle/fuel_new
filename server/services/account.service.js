@@ -475,6 +475,7 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
 // createinvoice("fuel_060323_cwhgoqrclex3onvy")
 
 const calculateAmount = async (user, { amount, gstNumber, referralCode, referralPoint }) => {
+    console.log({ amount, gstNumber, referralCode, referralPoint });
     let discount = 0;
     let userObj = await userModel.findOne({ referralCode: referralCode });
     let alreadyReferred = await userModel({ userId: user.userId, "referralHistory.referralCode": referralCode })
