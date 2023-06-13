@@ -481,7 +481,7 @@ const calculateAmount = async (user, { amount, gstNumber, referralCode, referral
     let alreadyReferred = await userModel.findOne({ userId: user.userId, "referralHistory.referralCode": referralCode })
     console.log(userObj, alreadyReferred);
     if (userObj && !alreadyReferred && userObj?.userId != alreadyReferred?.userId) {
-        discount = amount - (amount / 10);
+        discount = amount / 10;
     }
     let finalAmount = amount - discount;
     let sgst = 9; cgst = 9, igst = 18;
