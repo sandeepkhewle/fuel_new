@@ -93,30 +93,35 @@
                         #message8="ngModel">
                 </mat-form-field>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-12">
                 <mat-form-field appearance="outline">
-                    <mat-label>referral</mat-label>
-                    <input matInput type="text" name="referral" [(ngModel)]="dataObj.referral" required>
+                    <mat-label>Referral</mat-label>
+                    <input matInput type="text" name="referral" [(ngModel)]="updateObj.referral" id="referral"
+                        #referral="ngModel">
                 </mat-form-field>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Show Popup</mat-label>
-                    <input matInput type="text" name="referral" [(ngModel)]="dataObj.referral" required>
+                    <input matInput type="text" name="showPopup" [(ngModel)]="updateObj.showPopup" id="showPopup"
+                        #showPopup="ngModel">
                 </mat-form-field>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-12">
                 <mat-form-field appearance="outline">
-                    <mat-label>Ppup Message</mat-label>
-                    <input matInput type="text" name="popupMessage" [(ngModel)]="dataObj.popupMessage" required>
+                    <mat-label>Popup Message</mat-label>
+                    <input matInput type="text" name="popupMessage" [(ngModel)]="updateObj.popupMessage" id="popupMessage"
+                        #popupMessage="ngModel">
                 </mat-form-field>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Referral Message</mat-label>
-                    <input matInput type="text" name="referralMessage" [(ngModel)]="dataObj.referralMessage" required>
+                    <input matInput type="text" name="referralMessage" [(ngModel)]="updateObj.referralMessage" id="referralMessage"
+                        #referralMessage="ngModel">
                 </mat-form-field>
             </div>
+            
             <div class="col-lg-12 ta-c pb-20">
                 <button class="new-btn-8CC63F-popup px-5 py-1" (click)="updateAppData()">Update App Data</button>
             </div>
