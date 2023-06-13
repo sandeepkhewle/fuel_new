@@ -3,7 +3,8 @@
         <div class="fyt-display-flex">
             <h3 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">Update App Data </h3>
             <span class="sp"></span>
-            <span class="new-Montserrat-Medium fyt-link-btn new-808080" > <span style="border-bottom: 1px solid #808080;" (click)="closeDialog('cancel')">Close &nbsp;x</span>
+            <span class="new-Montserrat-Medium fyt-link-btn new-808080"> <span style="border-bottom: 1px solid #808080;"
+                    (click)="closeDialog('cancel')">Close &nbsp;x</span>
             </span>
         </div>
     </div>
@@ -21,65 +22,99 @@
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
                     <mat-label>Support Number</mat-label>
-                    <input matInput type="text" name="supportNumber" [(ngModel)]="updateObj.supportNumber" pattern="[0-9]*" minlength="10" maxlength="10" id="supportNumber" #supportNumber="ngModel">
+                    <input matInput type="text" name="supportNumber" [(ngModel)]="updateObj.supportNumber"
+                        pattern="[0-9]*" minlength="10" maxlength="10" id="supportNumber" #supportNumber="ngModel">
                 </mat-form-field>
             </div>
             <div class="col-lg-4">
                 <mat-form-field appearance="outline">
                     <mat-label>whatsApp Number</mat-label>
-                    <input matInput type="text" name="whatsAppNumber" [(ngModel)]="updateObj.whatsAppNumber" pattern="[0-9]*" minlength="10" maxlength="10" id="whatsAppNumber" #whatsAppNumber="ngModel">
+                    <input matInput type="text" name="whatsAppNumber" [(ngModel)]="updateObj.whatsAppNumber"
+                        pattern="[0-9]*" minlength="10" maxlength="10" id="whatsAppNumber" #whatsAppNumber="ngModel">
                 </mat-form-field>
             </div>
             <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Message 1</mat-label>
-                    <input matInput type="text" name="message1" [(ngModel)]="updateObj.message1" id="message1" #message1="ngModel">
+                    <input matInput type="text" name="message1" [(ngModel)]="updateObj.message1" id="message1"
+                        #message1="ngModel">
                 </mat-form-field>
             </div>
-            
+
             <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Message 2</mat-label>
-                    <input matInput type="text" name="message2" [(ngModel)]="updateObj.message2" id="message2" #message2="ngModel">
+                    <input matInput type="text" name="message2" [(ngModel)]="updateObj.message2" id="message2"
+                        #message2="ngModel">
                 </mat-form-field>
             </div>
-            
+
             <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Message 3</mat-label>
-                    <input matInput type="text" name="message3" [(ngModel)]="updateObj.message3" id="message3" #message3="ngModel">
+                    <input matInput type="text" name="message3" [(ngModel)]="updateObj.message3" id="message3"
+                        #message3="ngModel">
                 </mat-form-field>
             </div>
-            
+
             <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Message 4</mat-label>
-                    <input matInput type="text" name="message4" [(ngModel)]="updateObj.message4" id="message4" #message4="ngModel">
+                    <input matInput type="text" name="message4" [(ngModel)]="updateObj.message4" id="message4"
+                        #message4="ngModel">
                 </mat-form-field>
             </div>
-            
+
             <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Message 5</mat-label>
-                    <input matInput type="text" name="message5" [(ngModel)]="updateObj.message5" id="message5" #message5="ngModel">
+                    <input matInput type="text" name="message5" [(ngModel)]="updateObj.message5" id="message5"
+                        #message5="ngModel">
                 </mat-form-field>
             </div>
             <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Message 6</mat-label>
-                    <input matInput type="text" name="message6" [(ngModel)]="updateObj.message6" id="message6" #message6="ngModel">
+                    <input matInput type="text" name="message6" [(ngModel)]="updateObj.message6" id="message6"
+                        #message6="ngModel">
                 </mat-form-field>
             </div>
             <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Message 7</mat-label>
-                    <input matInput type="text" name="message7" [(ngModel)]="updateObj.message7" id="message7" #message7="ngModel">
+                    <input matInput type="text" name="message7" [(ngModel)]="updateObj.message7" id="message7"
+                        #message7="ngModel">
                 </mat-form-field>
             </div>
             <div class="col-lg-12">
                 <mat-form-field appearance="outline">
                     <mat-label>Message 8</mat-label>
-                    <input matInput type="text" name="message8" [(ngModel)]="updateObj.message8" id="message8" #message8="ngModel">
+                    <input matInput type="text" name="message8" [(ngModel)]="updateObj.message8" id="message8"
+                        #message8="ngModel">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>referral</mat-label>
+                    <input matInput type="text" name="referral" [(ngModel)]="dataObj.referral" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Show Popup</mat-label>
+                    <input matInput type="text" name="referral" [(ngModel)]="dataObj.referral" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Ppup Message</mat-label>
+                    <input matInput type="text" name="popupMessage" [(ngModel)]="dataObj.popupMessage" required>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Referral Message</mat-label>
+                    <input matInput type="text" name="referralMessage" [(ngModel)]="dataObj.referralMessage" required>
                 </mat-form-field>
             </div>
             <div class="col-lg-12 ta-c pb-20">
