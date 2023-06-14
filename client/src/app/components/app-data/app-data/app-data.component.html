@@ -118,7 +118,7 @@
 
                 <div class="col-lg-4">
                     <mat-form-field appearance="outline">
-                        <mat-label>referral</mat-label>
+                        <mat-label>Referral</mat-label>
                         <input matInput type="text" name="referral" [(ngModel)]="dataObj.referral" required>
                     </mat-form-field>
                 </div>
@@ -126,13 +126,17 @@
                 <div class="col-lg-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Show Popup</mat-label>
-                        <input matInput type="text" name="referral" [(ngModel)]="dataObj.referral" required>
+                        <input matInput type="text" name="showPopup" [(ngModel)]="dataObj.showPopup" required>
+                        <mat-select name="showPopup" [(ngModel)]="dataObj.showPopup">
+                            <mat-option [value]=true>True</mat-option>
+                            <mat-option [value]=false>False</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
 
                 <div class="col-lg-4">
                     <mat-form-field appearance="outline">
-                        <mat-label>Ppup Message</mat-label>
+                        <mat-label>Popup Message</mat-label>
                         <input matInput type="text" name="popupMessage" [(ngModel)]="dataObj.popupMessage" required>
                     </mat-form-field>
                 </div>
@@ -225,6 +229,27 @@
                 <span class="pt-5 new-666666 fl">Message 8</span>
                 <span class="pt-5 new-333333 fr">{{aData.message8}}</span>
             </div>
+
+            <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+                <span class="pt-5 new-666666 fl">Referral</span>
+                <span class="pt-5 new-333333 fr">{{aData.referral}}</span>
+            </div>
+
+            <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+                <span class="pt-5 new-666666 fl">Show Popup</span>
+                <span class="pt-5 new-333333 fr" style="text-transform: capitalize;">{{aData.showPopup}}</span>
+            </div>
+
+            <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+                <span class="pt-5 new-666666 fl">Popup Message</span>
+                <span class="pt-5 new-333333 fr">{{aData.popupMessage}}</span>
+            </div>
+
+            <div class="col-md-12 py-2 new-bottom-border-D4D4D4 new-Montserrat-Medium">
+                <span class="pt-5 new-666666 fl">Referral Message</span>
+                <span class="pt-5 new-333333 fr">{{aData.referralMessage}}</span>
+            </div>
+
         </div>
 
 
