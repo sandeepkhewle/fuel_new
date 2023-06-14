@@ -119,6 +119,14 @@ class PaymentsComponent {
             this.sendData = event.rowData;
             this.assignPlanFlag = true;
         }
+        if (event.name == "downloadInvoice") {
+            if (event.rowData.link) {
+                window.open(event.rowData.link, "_blank");
+            }
+            else {
+                // this.snackBar.open('No invoice generated for this record !', '', { duration: 2000 });
+            }
+        }
     }
 }
 PaymentsComponent.ɵfac = function PaymentsComponent_Factory(t) { return new (t || PaymentsComponent)(); };

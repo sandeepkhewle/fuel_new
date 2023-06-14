@@ -59,7 +59,10 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             firmName: firmName,
             gstNumber: gstNumber
         }
-        if (referralCode) createobj.referralCode = referralCode;
+        if (referralCode) {
+            createobj.referralCode = referralCode;
+            createobj.referralPoint = discount;
+        }
         createobj.planForTrend = pD.planForTrend;
         // let cData = await counterSchema.findOneAndUpdate({ appId: appId, counterName: "Invoice Number" }, { $inc: { counter: 1 } }, { new: true })
         createobj.invoiceNo = 1

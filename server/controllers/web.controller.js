@@ -177,40 +177,6 @@ router.post('/verifyOtp', (req, res) => {
     })
 })
 
-// // Update Token 
-// router.post('/updateToken', (req, res) => {
-//     console.log('/web/updateToken', req.body);
-//     let userId = req.body.userId;
-//     let token = req.body.token;
-//     let payload;
-//     authhService.updateToken(userId, token).then((userData) => {
-//         try {
-//             payload = JSON.parse(JSON.stringify(userData));
-//             let token = jwt.sign(payload, jwtSecret, {
-//                 expiresIn: 32000000 // expires in one year
-//             });
-//             return token;
-//         } catch (error) {
-//             throw new Error("Failed")
-//         }
-//     }).then((tokenData) => {
-//         res.status(res.statusCode).send({
-//             "statusCode": "001",
-//             "status": "Success",
-//             "message": "OTP verification success",
-//             "payload": payload,
-//             "jwt": tokenData
-//         });
-//     }).catch(err => {
-//         console.log('err', err);
-//         res.status(res.statusCode).send({
-//             "statusCode": "002",
-//             "status": "Failed",
-//             "message": err.message
-//         });
-//     })
-// })
-
 // check device 
 router.post('/checkDevice', (req, res) => {
     console.log('/web/checkDevice', req.body);
@@ -307,46 +273,6 @@ router.post('/checkVersion', (req, res) => {
     })
 });
 
-// // change device request 
-// router.post('/changeDevice', (req, res) => {
-//     console.log('/web/changeDevice', req.body);
-//     let data = req.body;
-//     userService.changeDeviceRequest(data).then((payload) => {
-//         res.status(res.statusCode).send({
-//             "statusCode": "001",
-//             "status": "Success",
-//             "message": "Change device request success"
-//         });
-//     }).catch(err => {
-//         console.log('err', err);
-//         res.status(res.statusCode).send({
-//             "statusCode": "002",
-//             "status": "Failed",
-//             "message": err.message
-//         });
-//     })
-// })
-
-// // change device request approve tepmrory in web controller  
-// router.post('/changeDeviceApprove', (req, res) => {
-//     console.log('/web/changeDeviceApprove', req.body);
-//     let data = req.body;
-//     userService.changeDeviceApprove(data).then((payload) => {
-//         res.status(res.statusCode).send({
-//             "statusCode": "001",
-//             "status": "Success",
-//             "message": "Change device request approved successfully"
-//         });
-//     }).catch(err => {
-//         console.log('err', err);
-//         res.status(res.statusCode).send({
-//             "statusCode": "002",
-//             "status": "Failed",
-//             "message": err.message
-//         });
-//     })
-// })
-
 // get latest review  
 router.post('/getReview', (req, res) => {
     console.log('/web/getReview', req.body);
@@ -369,24 +295,24 @@ router.post('/getReview', (req, res) => {
 })
 
 // get latest review  
-router.post('/checkReferral', (req, res) => {
-    console.log('/web/checkReferral', req.body);
-    let data = req.body;
-    adminService.checkReferral(data).then((payload) => {
-        res.status(res.statusCode).send({
-            "statusCode": "001",
-            "status": "Success",
-            "message": "Referral code is valid"
-        });
-    }).catch(err => {
-        console.log('err', err);
-        res.status(res.statusCode).send({
-            "statusCode": "002",
-            "status": "Failed",
-            "message": "Invalid referral code"
-        });
-    })
-})
+// router.post('/checkReferral', (req, res) => {
+//     console.log('/web/checkReferral', req.body);
+//     let data = req.body;
+//     adminService.checkReferral(data).then((payload) => {
+//         res.status(res.statusCode).send({
+//             "statusCode": "001",
+//             "status": "Success",
+//             "message": "Referral code is valid"
+//         });
+//     }).catch(err => {
+//         console.log('err', err);
+//         res.status(res.statusCode).send({
+//             "statusCode": "002",
+//             "status": "Failed",
+//             "message": "Invalid referral code"
+//         });
+//     })
+// })
 
 /*------------------- paytm response check api -------------------*/
 router.post('/response', (req, res) => {

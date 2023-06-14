@@ -38,6 +38,7 @@ var paymentSchema = mongoose.Schema({
   createdAt: Date,
   link: String,
   referralCode: String,
+  referralPoints: Number,
 
   // paytm data
   currency: String,
