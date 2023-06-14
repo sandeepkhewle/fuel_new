@@ -7,8 +7,12 @@
 
 <div class="container-fluid  pl-0 pr-0 ml-0 mr-0">
     <div class="row new-white-bg py-3 ">
-        <div class="col-md-12 py-3">
-            <h6 class="new-006837 fnt-20 new-Montserrat-Medium">ALL REPORTS</h6>
+        <div class="col-md-4 py-3">
+            <button type="button" class="ta-c new-tab-head-invoice">
+                <!-- <img src="../../../../assets/icons/sidenavIcons/enquiry1.png" width="18px" style="margin-top: -3px;"
+                    alt="">&nbsp; -->
+                    ALL REPORTS</button>
+            <!-- <h6 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">ALL REPORTS</h6> -->
             <!-- <img src="../../../../assets/icons/new/all reports@2x.png" width="30px" alt="">&nbsp; ADD LATER -->
         </div>
         <!-- <div class="col-md-12">
@@ -59,6 +63,7 @@
 
             </ng-container>            
         </div> -->
+        <div class="col-md-8"></div>
 
         <div class="col-md-4 col-12">
             <div class="row py-3">
@@ -72,7 +77,8 @@
                 </ng-container>
             </div>
         </div>
-        <div class="col-md-8 col-12 py-4 pl-0 ml-0 ">
+        
+        <div class="col-md-8 col-12 py-4 pl-0 ml-0 mt-5">
             <div class="row" style="background-color: #F2F2F2; border-radius: 4px;" *ngIf="reportsSideData">
                 <ng-container *ngFor="let re of reportsSideData.List;let m = index">
 
@@ -147,14 +153,11 @@
                             </div>
                             <div class="col-md-3 py-2 pl-0 pr-0 ml-0 mr-0">
                                 <!-- <h6 class="fnt-18 new-2E7D32 new-Montserrat-Medium"> -->
-                                <button type="button" class="ta-c new-corner-btn px-2 fr" (click)="!isRestricted && restrict() || isRestricted && getReport(reportsSideData.table, re)">
-                                    <!--  -->
-
-                                    <img src="../../../../assets/icons/new/EXCEL@1.5x.png" width="20px" alt="">
-                                    &nbsp;&nbsp;&nbsp;
-                                    <span class="fnt-15 fr new-2E7D32 new-Montserrat-Medium">Download</span></button>
+                                <button type="button" mat-raised-button class="new-tab-side-enquiry new-Montserrat-Medium" (click)="!isRestricted && restrict() || isRestricted && getReport(reportsSideData.table, re)">
+                                    Download
+                                </button>
                             </div>
-                            <div class="col-md-12" style="border-bottom: 0.5px solid #1A1A1A;"></div>
+                            <!-- <div class="col-md-12" style="border-bottom: 0.5px solid #1A1A1A;"></div> -->
 
                         </div>
                     </div>

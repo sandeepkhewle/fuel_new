@@ -49,6 +49,13 @@ export class SubscriptionsComponent implements OnInit {
       
       this.deactiveMemberFlag = true;
     }
+    if (event.name == "downloadInvoice") {
+      if (event.rowData.link) {
+        window.open(event.rowData.link, "_blank");
+      } else {
+        // this.snackBar.open('No invoice generated for this record !', '', { duration: 2000 });
+      }
+    }
   }
 
   onCardAction(event:any) {
