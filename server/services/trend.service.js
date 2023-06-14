@@ -3,6 +3,7 @@ const moment = require('moment');
 
 // models
 const trendsModel = require('../models/trends.model');
+const userModel = require('../models/users.model');
 
 //services
 const commService = require('./communication.service');
@@ -159,10 +160,16 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
         }]);
         let arrayToSend = [];
 
+
+        let last7days = moment().subtract(7, 'days')
+        let uData = await userModel.findOne({ userId: userId, createDate: { $gte: last7days } });
         // to add is have active plan against trendType
         if (tData) {
             tData.forEach(e1 => {
                 e1.activePlan = false
+                // show all future trends free for 7 days
+                if (uData) e1.activePlan = true
+                // show active plans
                 if (userActivePlans) {
                     userActivePlans.forEach(e2 => {
                         if (e2._id == e1._id) e1.activePlan = true

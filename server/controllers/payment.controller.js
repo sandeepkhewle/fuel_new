@@ -25,6 +25,7 @@ router.post('/initiate', (req, res) => {
     })
 })
 
+// calculate GST and discount on referral code 
 router.post('/calculateGst', (req, res) => {
     console.log("/payment/calculateGst " + JSON.stringify(req.body));
     let user = req.user;

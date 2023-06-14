@@ -150,7 +150,7 @@ router.post('/summary', (req, res) => {
     })
 })
 
-// desktop summary
+// Assign plan from the dashboard - no payment required
 router.post('/assignPlanManually', (req, res) => {
     console.log('/admin/assignPlanManually');
     let data = req.body;
@@ -170,6 +170,7 @@ router.post('/assignPlanManually', (req, res) => {
     })
 })
 
+// get list of plan
 router.post('/getPlanListByTreads', (req, res) => {
     console.log('/admin/getPlanListByTreads', req.body);
     let planForTrend = req.body.trendName;
@@ -190,6 +191,7 @@ router.post('/getPlanListByTreads', (req, res) => {
     })
 })
 
+// get user details from userId
 router.post('/getUserDetials', (req, res) => {
     console.log('/admin/getUserDetials', req.user);
     let userId = req.user.userId;

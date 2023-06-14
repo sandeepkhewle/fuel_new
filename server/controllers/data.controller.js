@@ -221,7 +221,7 @@ router.get('/appImagesConvertionTable', (req, res) => {
     })
 })
 
-// App URl 
+// App URl - All app url
 router.get('/otherUrl', (req, res) => {
     console.log('/data/otherUrl');
     res.status(res.statusCode).send({
@@ -237,7 +237,7 @@ router.get('/otherUrl', (req, res) => {
     });
 })
 
-// Get popup details 
+// Get popup details - mobile app generic popup
 router.get('/popup', (req, res) => {
     console.log('/data/popup');
     let userId = req.user.userId;

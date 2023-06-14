@@ -121,7 +121,6 @@ router.post('/reportList', function (req, res, next) {
     })
 })
 
-
 // test notification 
 router.post('/sendNotification', (req, res) => {
     console.log('/structure/sendNotification', req.body);
