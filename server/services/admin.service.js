@@ -60,7 +60,7 @@ let createPlan = async ({ planId, planName, description, appId, planType, durati
     }
 }
 
-let addUpdateAppData = async ({ _id, appId, supportNumber, whatsAppNumber, message1, message2, message3, message4, message5, message6, referral, showPopup, popupMessage, referralMessage }) => {
+let addUpdateAppData = async ({ _id, appId, supportNumber, whatsAppNumber, message1, message2, message3, message4, message5, message6, message7, message8, referral, showPopup, popupMessage, referralMessage }) => {
     try {
         await appDataModel.findOneAndUpdate({ _id: _id }, {
             appId: appId,
