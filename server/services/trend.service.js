@@ -92,12 +92,14 @@ let deleteTrend = async ({ trendsId }) => {
 
 let getFutureTrend = async ({ trendName, trendType }) => {
     try {
+        console.log({ trendName, trendType });
         // let dateToday = new Date()
         let matchObj = {
             trendName: trendName,
             trendDate: { $gte: new Date() },
         }
         if (trendType) matchObj.trendType = trendType;
+        console.log({ matchObj });
         let tData = await trendsModel.aggregate([{
             $match: matchObj
         }, {
@@ -117,6 +119,8 @@ let getFutureTrend = async ({ trendName, trendType }) => {
             $group: { _id: "$trendType", data: { "$push": "$$ROOT" } }
         }]);
 
+        console.log('tData--1', tData);
+
         // to add is have active plan against trendType
         if (tData) {
             tData.forEach(e1 => {
@@ -125,6 +129,8 @@ let getFutureTrend = async ({ trendName, trendType }) => {
                 })
             })
         }
+
+        console.log('tData', tData);
         return tData;
     } catch (error) {
         throw error;
