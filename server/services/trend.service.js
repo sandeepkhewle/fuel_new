@@ -119,7 +119,7 @@ let getFutureTrend = async ({ trendName, trendType }) => {
             $group: { _id: "$trendType", data: { "$push": "$$ROOT" } }
         }]);
 
-        console.log('tData--1', tData);
+        console.log('tData--1', JSON.stringify(tData));
 
         // to add is have active plan against trendType
         if (tData) {
@@ -130,7 +130,7 @@ let getFutureTrend = async ({ trendName, trendType }) => {
             })
         }
 
-        console.log('tData', tData);
+        console.log('tData', JSON.stringify(tData));
         return tData;
     } catch (error) {
         throw error;
