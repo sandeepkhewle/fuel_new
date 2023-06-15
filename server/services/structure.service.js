@@ -58,7 +58,7 @@ let getFilters = ({ page }) => {
 // }
 
 // get report list
-let getReportList = async (branchId, adminUserId, role, type) => {
+let getReportList = async () => {
     try {
         let reportList = list["Reports"];
         return reportList;

@@ -103,6 +103,27 @@
                     "options": []
                 }
             ]
+        },
+        {
+            "name": "GST Report",
+            "table": "payment",
+            "icon": "members@1.5x.png",
+            "List": [
+                {
+                    "name": "All Members",
+                    "table": "members",
+                    "value": "allMember",
+                    "type": "String",
+                    "active": true,
+                    "pipe": "",
+                    "method": "",
+                    "service": "dummy",
+                    "filters": {
+                        "paymentStatus": "Success"
+                    },
+                    "options": []
+                }
+            ]
         }
     ]
 }

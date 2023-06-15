@@ -51,7 +51,7 @@ router.post('/plaList', (req, res) => {
 
 // get future trend
 router.post('/future', (req, res) => {
-    console.log('/data/future');
+    console.log('/data/future', req.body);
     let data = req.body;
     trendService.getFutureTrend(data).then((payload) => {
         res.status(res.statusCode).send({
