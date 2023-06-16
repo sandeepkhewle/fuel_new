@@ -203,7 +203,7 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
                 if (trendName === 'fortnight') {
                     arrayToSend.push(e1)
                 }
-                e1.trendValue = 0;
+                e1.datatrendValue = 0;
             })
         }
         let dataToSend = arrayToSend.filter(Boolean);
