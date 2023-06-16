@@ -170,6 +170,9 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
 
         let last7days = moment().subtract(7, 'days')
         let uData = await userModel.findOne({ userId: userId, createDate: { $gte: last7days } });
+
+        console.log({ tData });
+
         // to add is have active plan against trendType
         if (tData) {
             tData.forEach(e1 => {
@@ -208,7 +211,7 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
         }
         let dataToSend = arrayToSend.filter(Boolean);
 
-        console.log({dataToSend});
+        console.log({ dataToSend });
 
         return dataToSend;
     } catch (error) {
