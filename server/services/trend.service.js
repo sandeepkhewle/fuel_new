@@ -208,6 +208,8 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
         }
         let dataToSend = arrayToSend.filter(Boolean);
 
+        console.log({dataToSend});
+
         return dataToSend;
     } catch (error) {
         throw error;
