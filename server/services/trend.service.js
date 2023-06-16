@@ -126,6 +126,7 @@ let getFutureTrend = async ({ trendName, trendType }) => {
             tData.forEach(e1 => {
                 e1.data.forEach(e2 => {
                     e2.newTrendValue = `${e2.trend} ${e2.trendValue}/${e2.trendUnite}`
+                    e2.trendValue = 0;
                 })
             })
         }
