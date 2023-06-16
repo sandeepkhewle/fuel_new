@@ -9,7 +9,7 @@ let trendsSchema = mongoose.Schema({
     validThrough: Date,
     trendDate: Date,
     trendUnite: String,
-    trendValue: String,
+    trendValue: Number,
     productName: {
         type: String,
         // enum: ["BITUMEN", "FURNACEOIL", "HSD(INSTITUTIONAL)", "LDO", "LPG/GAS CYL (DOM)", "LPG/GAS CYL (NON-DOM)", "MTO", "HEXANE", "KEROSENE"]
