@@ -192,6 +192,7 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
                         if (e2.productName === 'HSD(INSTITUTIONAL)') { newArray[2] = e2 };
                         if (e2.productName === 'LDO') { newArray[3] = e2 };
                     }
+                    e2.trendValue = 0;
                 })
                 e1.data = newArray.filter(Boolean);
                 if (trendName === 'monthly') {
@@ -203,7 +204,6 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
                 if (trendName === 'fortnight') {
                     arrayToSend.push(e1)
                 }
-                e1.datatrendValue = 0;
             })
         }
         let dataToSend = arrayToSend.filter(Boolean);
