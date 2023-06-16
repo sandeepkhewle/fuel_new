@@ -147,6 +147,7 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
             trendDate: { $lte: new Date() },
         }
         if (trendType) matchObj.trendType = trendType;
+        console.log('matchObj', matchObj);
         let tData = await trendsModel.aggregate([{
             $match: matchObj
         }, {
@@ -220,51 +221,51 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
     }
 }
 
-let getPastFortnightTrend = async (userId) => {
-    try {
-        let userActivePlans = await userService.getUserActivePlans(userId);
-        let matchObj = {
-            trendName: "fortnight",
-            trendDate: { $lte: new Date() },
-        }
-        // if (trendType) matchObj.trendType = trendType;
-        let tData = await trendsModel.aggregate([{
-            $match: matchObj
-        }, {
-            $sort: { trendDate: -1 }
-        }, {
-            $group: {
-                _id: {
-                    "trendType": "$trendType", "productName": "$productName"
-                },
-                data: { $push: "$$ROOT" }
-            }
-        }, {
-            $project: { first: { $arrayElemAt: ["$data", 0] } }
-        }, {
-            $replaceRoot: { newRoot: "$first" }
-        }, {
-            $group: { _id: "$trendType", data: { "$push": "$$ROOT" } }
-        }]);
-        // to add is have active plan against trendType
-        if (tData) {
-            tData.forEach(e1 => {
-                e1.activePlan = false
-                e1.data.forEach(e2 => {
-                    e2.newTrendValue = `${e2.trend} ${e2.trendValue}/${e2.trendUnite}`
-                })
-                if (userActivePlans) {
-                    userActivePlans.forEach(e2 => {
-                        if (e2._id == e1.trendType) e1.activePlan = true
-                    })
-                }
-            })
-        }
-        return tData;
-    } catch (error) {
-        throw error;
-    }
-}
+// let getPastFortnightTrend = async (userId) => {
+//     try {
+//         let userActivePlans = await userService.getUserActivePlans(userId);
+//         let matchObj = {
+//             trendName: "fortnight",
+//             trendDate: { $lte: new Date() },
+//         }
+//         // if (trendType) matchObj.trendType = trendType;
+//         let tData = await trendsModel.aggregate([{
+//             $match: matchObj
+//         }, {
+//             $sort: { trendDate: -1 }
+//         }, {
+//             $group: {
+//                 _id: {
+//                     "trendType": "$trendType", "productName": "$productName"
+//                 },
+//                 data: { $push: "$$ROOT" }
+//             }
+//         }, {
+//             $project: { first: { $arrayElemAt: ["$data", 0] } }
+//         }, {
+//             $replaceRoot: { newRoot: "$first" }
+//         }, {
+//             $group: { _id: "$trendType", data: { "$push": "$$ROOT" } }
+//         }]);
+//         // to add is have active plan against trendType
+//         if (tData) {
+//             tData.forEach(e1 => {
+//                 e1.activePlan = false
+//                 e1.data.forEach(e2 => {
+//                     e2.newTrendValue = `${e2.trend} ${e2.trendValue}/${e2.trendUnite}`
+//                 })
+//                 if (userActivePlans) {
+//                     userActivePlans.forEach(e2 => {
+//                         if (e2._id == e1.trendType) e1.activePlan = true
+//                     })
+//                 }
+//             })
+//         }
+//         return tData;
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 
 module.exports = {
     createNewTrend: createNewTrend,
@@ -273,5 +274,5 @@ module.exports = {
     deleteTrend: deleteTrend,
     getFutureTrend: getFutureTrend,
     getPastTrend: getPastTrend,
-    getPastFortnightTrend: getPastFortnightTrend
+    // getPastFortnightTrend: getPastFortnightTrend
 }
