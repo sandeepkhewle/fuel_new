@@ -76,6 +76,7 @@ router.post('/past', (req, res) => {
     let data = req.body;
     let userId = req.user.userId
     trendService.getPastTrend(data, userId).then((payload) => {
+        console.log('payload------------------', payload);
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
@@ -158,27 +159,27 @@ router.post('/myPlans', (req, res) => {
     })
 })
 
-// get past trend
-router.post('/pastFortnight', (req, res) => {
-    console.log('/data/pastFortnight');
-    let data = req.body;
-    let userId = req.user.userId
-    trendService.getPastFortnightTrend(userId).then((payload) => {
-        res.status(res.statusCode).send({
-            "statusCode": "001",
-            "status": "Success",
-            "message": "Trend fetched successfully",
-            "payload": payload
-        });
-    }).catch(err => {
-        console.log('err', err);
-        res.status(res.statusCode).send({
-            "statusCode": "002",
-            "status": "Failed",
-            "message": "Failed to fetch trend"
-        });
-    })
-})
+// // get past trend
+// router.post('/pastFortnight', (req, res) => {
+//     console.log('/data/pastFortnight');
+//     let data = req.body;
+//     let userId = req.user.userId
+//     trendService.getPastFortnightTrend(userId).then((payload) => {
+//         res.status(res.statusCode).send({
+//             "statusCode": "001",
+//             "status": "Success",
+//             "message": "Trend fetched successfully",
+//             "payload": payload
+//         });
+//     }).catch(err => {
+//         console.log('err', err);
+//         res.status(res.statusCode).send({
+//             "statusCode": "002",
+//             "status": "Failed",
+//             "message": "Failed to fetch trend"
+//         });
+//     })
+// })
 
 // Get APP Images data 
 router.post('/appImagesTecSpec', (req, res) => {
