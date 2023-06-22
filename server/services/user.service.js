@@ -221,7 +221,7 @@ let insertPaymentData = async (data) => {
 }
 
 // insertUserFunction();
-// insertPaymentFunction();
+insertPaymentFunction();
 
 
 module.exports = {
