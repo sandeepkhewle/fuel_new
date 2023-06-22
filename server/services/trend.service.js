@@ -147,7 +147,7 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
             trendDate: { $lte: new Date() },
         }
         if (trendType) matchObj.trendType = trendType;
-        console.log('matchObj', matchObj);
+        // console.log('matchObj', matchObj);
         let tData = await trendsModel.aggregate([{
             $match: matchObj
         }, {
@@ -172,7 +172,7 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
         let last7days = moment().subtract(7, 'days')
         let uData = await userModel.findOne({ userId: userId, createDate: { $gte: last7days } });
 
-        console.log("tData--------", JSON.stringify(tData));
+        // console.log("tData--------", JSON.stringify(tData));
 
 
         // to add is have active plan against trendType
@@ -213,7 +213,7 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
         }
         let dataToSend = arrayToSend.filter(Boolean);
 
-        console.log("dataToSend--------", JSON.stringify(dataToSend));
+        // console.log("dataToSend--------", JSON.stringify(dataToSend));
 
         return dataToSend;
     } catch (error) {
