@@ -157,12 +157,11 @@ let getAppImagesConvertionTable = async () => {
 let showPopup = async (userId) => {
     try {
         let aData = await appDataModel.findOne({});
-        console.log('aData', aData);
+        // console.log('aData', aData);
         let data = {
             showPopup: aData.showPopup, message: aData.popupMessage
         }
-        console.log('data', data);
-
+        // console.log('data', data);
         return data;
     } catch (error) {
         throw error;
