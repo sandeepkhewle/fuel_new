@@ -37,15 +37,20 @@ let sendNotification = async ({ appId, catName, data, message, title, userId }) 
         // console.log('totalUser', totalUser);
         await notificationModel.create({ message: message, appId: appId, sentTo: totalUser, createdAt: new Date(), })
         let registrationTokens = mData[0]?.tokens || [];
-        console.log('registrationTokens', registrationTokens.length);
-        let it = parseInt(registrationTokens.length / 1000) + 1;
-        console.log('it', it);
-        let promiseArray = []
-        for (let i = 0; i < it; i++) {
-            let subToken = registrationTokens.slice(i * 1000, (i + 1) * 1000);
-            promiseArray.push(sendBulkNotification(finalMessage, subToken));
-        }
-        Promise.all(promiseArray).then("All notifiation sent");
+        if (registrationTokens.length > 0) {
+            console.log('registrationTokens', registrationTokens.length);
+            let it = parseInt(registrationTokens.length / 1000) + 1;
+            console.log('it', it);
+            let promiseArray = []
+            for (let i = 0; i < it; i++) {
+                let subToken = registrationTokens.slice(i * 1000, (i + 1) * 1000);
+                promiseArray.push(sendBulkNotification(finalMessage, subToken));
+            }
+            Promise.all(promiseArray).then(() => {
+                console.log('All Notofication Sent');
+                return "Notification sent successfully";
+            });
+        } else return "No user under this category";
     } catch (error) {
         console.log('error', error);
         throw "Unable to send notificatetion, something went wrong";
@@ -53,12 +58,12 @@ let sendNotification = async ({ appId, catName, data, message, title, userId }) 
 }
 
 // send notification
-const sendBulkNotification = async (finalMessage, registrationTokens) => {
+const sendBulkNotification = async (finalMessage, tokes) => {
     try {
         console.log('------sendBulkNotification-------');
-        if (registrationTokens.length > 0) {
+        if (tokes.length > 0) {
             sender.send(finalMessage, {
-                registrationTokens: registrationTokens
+                tokes: tokes
             }, function (err, response) {
                 if (err) {
                     console.log("error notify response " + err);
@@ -68,7 +73,7 @@ const sendBulkNotification = async (finalMessage, registrationTokens) => {
                     return "Notification sent successfully";
                 }
             })
-        } else return "No user under this category";
+        } else return;
     } catch (error) {
         throw error;
     }
