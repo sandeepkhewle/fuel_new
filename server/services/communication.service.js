@@ -13,7 +13,7 @@ const notificationModel = require('../models/notification.model');
 let sendNotification = async ({ appId, catName, data, message, title, userId }) => {
     try {
         console.log("sendNotification", { appId, catName, data, message, title });
-        let findObj = {};
+        let findObj = { token: { $exists: true, $ne: null } };
         if (appId) findObj.appId = appId;
         if (userId && userId.length > 0) findObj.userId = { $in: userId }
         if (catName == "Active Members") findObj.isActive = true;

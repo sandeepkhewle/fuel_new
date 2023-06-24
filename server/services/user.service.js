@@ -223,7 +223,6 @@ let insertPaymentData = async (data) => {
 // insertUserFunction();
 // insertPaymentFunction();
 
-
 module.exports = {
     registerNewUser: registerNewUser,
     updateUser: updateUser,
