@@ -43,7 +43,7 @@ let sendNotification = async ({ appId, catName, data, message, title, userId }) 
             console.log('it', it);
             let promiseArray = []
             for (let i = 0; i < it; i++) {
-                let subToken = registrationTokens.slice(i * 1000, (i + 1) * 1000);
+                let subToken = registrationTokens.slice(i * 1000, ((i + 1) * 1000) - 1);
                 promiseArray.push(sendBulkNotification(finalMessage, subToken));
             }
             Promise.all(promiseArray).then(() => {
@@ -58,12 +58,12 @@ let sendNotification = async ({ appId, catName, data, message, title, userId }) 
 }
 
 // send notification
-const sendBulkNotification = async (finalMessage, tokes) => {
+const sendBulkNotification = async (finalMessage, registrationTokens) => {
     try {
         console.log('------sendBulkNotification-------');
-        if (tokes.length > 0) {
+        if (registrationTokens.length > 0) {
             sender.send(finalMessage, {
-                tokes: tokes
+                registrationTokens: registrationTokens
             }, function (err, response) {
                 if (err) {
                     console.log("error notify response " + err);
