@@ -16,7 +16,7 @@ var paymentSchema = mongoose.Schema({
   igst: { type: Number, default: 0 },
   payableAmount: { type: Number, default: 0 },     // total amount
   gstNumber: { type: String, index: true },
-  date: { type: Date },
+  date: { type: Date, default: new Date() },
   startDate: Date,
   endDate: Date,
   // validity: Date,
@@ -35,7 +35,7 @@ var paymentSchema = mongoose.Schema({
   packageName: String,
   paymentStatus: { type: String, default: 'Pending', enum: ['Pending', 'Success', 'Cancled', 'Failed', 'Blocked'] }, // 'Success'or Failed
   updatedAt: Date,
-  createdAt: Date,
+  createdAt: { type: Date, default: new Date() },
   link: String,
   referralCode: String,
   referralPoints: Number,

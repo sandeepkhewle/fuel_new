@@ -101,7 +101,7 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  getReport(page:any, data:any) {
+  getReport(page: any, data: any) {
     console.log("data", data);
     let sendObj = {
       "filters": { ...(data.filters), ...(this.postObj.filters) },
@@ -119,15 +119,17 @@ export class ReportsComponent implements OnInit {
   // onChangeFilter(param1, model, event) {
   // }
 
-  // openDetails(data) {
-  //   let pageMap = { 'excelMembers': "91", 'subscription': "92", 'enquiryExcel': "93", 'staff': "94", 'trainer': "95", 'accounts': "96", 'getMemberPayment': "97", 'expense': "98" }
-  //   let pageNo = pageMap[data.table];
-  //   if (this.settingsRestrictions && this.settingsRestrictions.includes(pageNo)) {
-  //     this.isRestricted = false;
-  //   } else this.isRestricted = true;
-  //   this.reportsSideData = data;
-  //   this.selectedReportName = this.reportsSideData.name;
-  // }
+  openDetails(data: any) {
+    // let pageMap = { 'excelMembers': "91", 'subscription': "92", 'enquiryExcel': "93", 'staff': "94", 'trainer': "95", 'accounts': "96", 'getMemberPayment': "97", 'expense': "98" }
+    // let pageNo = pageMap[data.table];
+    // if (this.settingsRestrictions && this.settingsRestrictions.includes(pageNo)) {
+    //   this.isRestricted = false;
+    // } else this.isRestricted = true;
+    console.log('openDetails', data);
+
+    this.reportsSideData = data;
+    this.selectedReportName = this.reportsSideData.name;
+  }
 
   restrict() {
     this.restrictionFlag = true;

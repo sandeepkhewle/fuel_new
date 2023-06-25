@@ -11,7 +11,7 @@
             <button type="button" class="ta-c new-tab-head-invoice">
                 <!-- <img src="../../../../assets/icons/sidenavIcons/enquiry1.png" width="18px" style="margin-top: -3px;"
                     alt="">&nbsp; -->
-                    ALL REPORTS</button>
+                ALL REPORTS</button>
             <!-- <h6 class="new-000000 new-Montserrat-Medium fnt-20 pl-10">ALL REPORTS</h6> -->
             <!-- <img src="../../../../assets/icons/new/all reports@2x.png" width="30px" alt="">&nbsp; ADD LATER -->
         </div>
@@ -69,15 +69,15 @@
             <div class="row py-3">
                 <ng-container *ngFor="let repL of reportList;let m = index">
                     <div class="col-md-12 col-12 py-2">
-                        <h6 class="new-1A1A1A fnt-15 new-Montserrat-Medium fyt-link-btn" >
-                            <!-- (click)="openDetails(repL)" -->
-                            {{repL.name}}</h6>
-                            <!-- [ngClass]="(repL.name == selectedReportName) ? 'fyt-underline' : ''" Add above later -->
+                        <h6 class="new-1A1A1A fnt-15 new-Montserrat-Medium fyt-link-btn" (click)="openDetails(repL)">
+                            {{repL.name}}
+                        </h6>
+                        <!-- [ngClass]="(repL.name == selectedReportName) ? 'fyt-underline' : ''" Add above later -->
                     </div>
                 </ng-container>
             </div>
         </div>
-        
+
         <div class="col-md-8 col-12 py-4 pl-0 ml-0 mt-5">
             <div class="row" style="background-color: #F2F2F2; border-radius: 4px;" *ngIf="reportsSideData">
                 <ng-container *ngFor="let re of reportsSideData.List;let m = index">
@@ -85,7 +85,8 @@
                     <div class="col-md-12 py-2">
                         <div class="row pt-5">
                             <div class="col-md-4">
-                                <h6 class="fnt-18 pt-15 new-4D4D4D new-Montserrat-Medium">
+                                <h6 class="new-1A1A1A fnt-15 new-Montserrat-Medium fyt-link-btn"
+                                    (click)="openDetails(re)">
                                     <!-- <img src="../../../../assets/icons/new/{{re.name}}.png" width="25px" alt=""> &nbsp;&nbsp;&nbsp; -->
                                     {{re.name}}
                                 </h6>
@@ -153,7 +154,9 @@
                             </div>
                             <div class="col-md-3 py-2 pl-0 pr-0 ml-0 mr-0">
                                 <!-- <h6 class="fnt-18 new-2E7D32 new-Montserrat-Medium"> -->
-                                <button type="button" mat-raised-button class="new-tab-side-enquiry new-Montserrat-Medium" (click)="!isRestricted && restrict() || isRestricted && getReport(reportsSideData.table, re)">
+                                <button type="button" mat-raised-button
+                                    class="new-tab-side-enquiry new-Montserrat-Medium"
+                                    (click)="!isRestricted && restrict() || isRestricted && getReport(reportsSideData.table, re)">
                                     Download
                                 </button>
                             </div>

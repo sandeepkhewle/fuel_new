@@ -787,6 +787,179 @@
             }
         ]
     },
+    "gstReport": {
+        "index": 0,
+        "name": "Gst Report",
+        "page": "gstReport",
+        "attributes": [
+            {
+                "name": "APP NAME",
+                "prop": "appId",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-l text-capitalize",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "CREATE DATE",
+                "prop": "createdAt",
+                "sortable": true,
+                "pipe": "date",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "INVOICE NO",
+                "prop": "invoiceNo",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-r",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "NAME",
+                "prop": "fullName",
+                "sortable": true,
+                "pipe": "",
+                "class": "ta-c",
+                "headerClass": "ta-c",
+                "colSize": 150,
+                "label": false
+            },
+            {
+                "name": "PHONE NO",
+                "prop": "phoneNo",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "EMAIL ID",
+                "prop": "emailId",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "FIRM NAME",
+                "prop": "firmName",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "PLAN TYPE",
+                "prop": "planType",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "START DATE",
+                "prop": "startDate",
+                "sortable": false,
+                "pipe": "date",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "END DATE",
+                "prop": "endDate",
+                "sortable": false,
+                "pipe": "date",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "PAID AMOUNT",
+                "prop": "txnAmount",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "TRANSACTION ID",
+                "prop": "orderId",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "PAYMENT MODE",
+                "prop": "paymentMode",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "TRANSACTION STATUS",
+                "prop": "paymentStatus",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "INVOICE LINK",
+                "prop": "link",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
+                "name": "",
+                "prop": "button",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "headerClass": "ta-c",
+                "colSize": 100,
+                "label": false,
+                "actions": [
+                    {
+                        "name": "Download Invoice",
+                        "function": "downloadInvoice"
+                    }
+                ]
+            }
+        ]
+    },
     "device": {
         "index": 0,
         "name": "Device",

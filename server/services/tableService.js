@@ -37,6 +37,9 @@ let chooseTable = (page, req) => {
             case 'payments':
                 resolve(getPaymentsList(req))
                 break;
+            case 'gstReport':
+                resolve(getGstReport(req))
+                break;
             case 'device':
                 resolve(changeDevice(req))
                 break;
@@ -556,6 +559,106 @@ let getPaymentsList = (req) => {
                 { phoneNo: { $regex: search, $options: 'i' } }
             ]
         }
+
+        Object.keys(filters).forEach(element => {
+            if (filters[element] && Array.isArray(filters[element]) && filters[element].length > 0 && filters[element].length > 0) {
+                matchObj[element] = { $in: filters[element] }
+            }
+        });
+
+        // filter on enrollment date
+        if (filters && (filters.startDate || filters.endDate)) {
+            matchObj.createdAt = {};
+            if (filters.startDate) matchObj.createdAt['$gte'] = new Date(moment(filters.startDate).startOf('day'));
+            if (filters.endDate) matchObj.createdAt['$lte'] = new Date(moment(filters.endDate).endOf('day'));
+        }
+
+        query.push({ $match: matchObj });
+        query.push({ $sort: sort });
+        query.push({ $skip: skip });
+        query.push({ $limit: limit });
+        query.push({
+            $project: {
+                appId: 1,
+                paymentId: 1,
+                userId: 1,
+                planName: 1,
+                planType: 1,
+                amount: 1,
+                discount: 1,
+                tax: 1,
+                cgst: 1,
+                sgst: 1,
+                igst: 1,
+                payableAmount: 1,
+                gstNumber: 1,
+                startDate: 1,
+                endDate: 1,
+                invoiceNo: 1,
+                fullName: 1,
+                emailId: 1,
+                mailStatus: 1,
+                phoneNo: 1,
+                paymentStatus: 1,
+                updatedAt: 1,
+                createdAt: 1,
+                firmName: 1,
+                phoneNo: 1,
+                currency: 1,
+                txntype: 1,
+                respcode: 1,
+                respmsg: 1,
+                gatewayName: 1,
+                banktxnid: 1,
+                bankname: 1,
+                paymentMode: 1,
+                txnAmount: 1,
+                refundAmount: 1,
+                transactionId: 1,
+                transactionDate: 1,
+                status: 1,
+                orderId: 1,
+                link: 1
+            }
+        })
+
+        paymentModel.aggregate(query).then(async userData => {
+            let total = await paymentModel.aggregate([{ $match: matchObj }, { $count: "count" }])
+            sendObj.userData = userData;
+            sendObj.count = 0;
+            if (total[0] && total[0].count) {
+                sendObj.count = (total[0].count);
+            }
+            return structurService.getViewData(page)
+        }).then(data => {
+            sendObj.attributeList = data;
+            resolve(sendObj)
+        }).catch(err => {
+            reject(err);
+        })
+    })
+}
+
+// get Gst report for last month
+let getGstReport = (req) => {
+    return new Promise((resolve, reject) => {
+        let sendObj = {};
+        let query = [];
+        let page = req.body.page;
+        console.log('page-----------', page);
+        let limit = req.body.limit ? req.body.limit : 500;
+        let skip = req.body.skip ? req.body.skip : 0;
+        let orderby = req.body.orderby ? req.body.orderby : 'createdAt';
+        let orderin = 1;
+        if (req.body.orderin === 'desc') orderin = -1;
+        let sort = {};
+        sort[orderby] = orderin;
+        let filters = req.body.filters;
+        const appId = req.body.appId;
+        let lastMonthStartDate = moment().subtract(1, 'month').startOf('month');
+        let lastMonthEndDate = moment().subtract(1, 'month').endOf('month');
+        let matchObj = { createdAt: { $gte: lastMonthStartDate, $lte: lastMonthEndDate } }
+        if (appId) matchObj.appId = appId
 
         Object.keys(filters).forEach(element => {
             if (filters[element] && Array.isArray(filters[element]) && filters[element].length > 0 && filters[element].length > 0) {

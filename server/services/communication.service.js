@@ -38,9 +38,7 @@ let sendNotification = async ({ appId, catName, data, message, title, userId }) 
         await notificationModel.create({ message: message, appId: appId, sentTo: totalUser, createdAt: new Date(), })
         let registrationTokens = mData[0]?.tokens || [];
         if (registrationTokens.length > 0) {
-            console.log('registrationTokens', registrationTokens.length);
             let it = parseInt(registrationTokens.length / 1000) + 1;
-            console.log('it', it);
             let promiseArray = []
             for (let i = 0; i < it; i++) {
                 let subToken = registrationTokens.slice(i * 1000, ((i + 1) * 1000) - 1);
