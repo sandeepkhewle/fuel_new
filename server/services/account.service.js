@@ -65,7 +65,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         }
         createobj.planForTrend = pD.planForTrend;
         // let cData = await counterSchema.findOneAndUpdate({ appId: appId, counterName: "Invoice Number" }, { $inc: { counter: 1 } }, { new: true })
-        createobj.invoiceNo = 1
+        // createobj.invoiceNo = 1
         let pT = (pD.planType === 'Monthly') ? 'months' : 'years';
 
         let validUpto = moment().add('months', pD.duration).set("date", pD.validUptoDay);
@@ -138,42 +138,45 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
     })
 }
 
+// update payment status after payment - Success or Failed 
 const paymentUpdate = async (orderId, CHECKSUMHASH) => {
-    return new Promise((resolve, reject) => {
-        var JsonData = { "MID": MID, "ORDER_ID": orderId, "CHECKSUMHASH": CHECKSUMHASH };
-        var urlLink = PAYTMRESPONSE_URL + JSON.stringify(JsonData);
-        console.log("url link ", urlLink);
-        request.get({ url: urlLink }, function (err, httpRes, body) {
-            if (err) reject(err);
-            else {
-                let updateObj = {}
-                let responseCode = JSON.parse(httpRes.body);
-                console.log("responseCode ", (responseCode));
-                updateObj.currency = responseCode.currency;
-                updateObj.txntype = responseCode.TXNTYPE;
-                updateObj.respcode = responseCode.RESPCODE;
-                updateObj.respmsg = responseCode.RESPMSG;
-                updateObj.gatewayName = responseCode.GATEWAYNAME;
-                updateObj.banktxnid = responseCode.BANKTXNID;
-                updateObj.bankname = responseCode.BANKNAME;
-                updateObj.paymentMode = responseCode.PAYMENTMODE;
-                updateObj.txnAmount = responseCode.TXNAMOUNT;
-                updateObj.refundAmount = responseCode.REFUNDAMT;
-                updateObj.transactionId = responseCode.TXNID;
-                updateObj.transactionDate = responseCode.TXNDATE;
-                updateObj.status = responseCode.STATUS;
-                if (responseCode.STATUS === 'TXN_FAILURE') updateObj.paymentStatus = "Failed";
-                if (responseCode.STATUS === 'TXN_SUCCESS') updateObj.paymentStatus = "Success";
-                paymentsModel.findOneAndUpdate({ orderId: orderId }, updateObj, { new: true }).then(data => {
-                    console.log('data', data);
-                    createinvoice(orderId).then(data => {
-                        console.log("invoice generated successfully");
-                    });
-                    if (updateObj.respcode === "01") resolve();
-                    else reject()
-                })
+    var JsonData = { "MID": MID, "ORDER_ID": orderId, "CHECKSUMHASH": CHECKSUMHASH };
+    var urlLink = PAYTMRESPONSE_URL + JSON.stringify(JsonData);
+    console.log("url link ", urlLink);
+    request.get({ url: urlLink }, async (err, httpRes, body) => {
+        if (err) throw err;
+        else {
+            let updateObj = {}
+            let responseCode = JSON.parse(httpRes.body);
+            console.log("responseCode ", (responseCode));
+            updateObj.currency = responseCode.currency;
+            updateObj.txntype = responseCode.TXNTYPE;
+            updateObj.respcode = responseCode.RESPCODE;
+            updateObj.respmsg = responseCode.RESPMSG;
+            updateObj.gatewayName = responseCode.GATEWAYNAME;
+            updateObj.banktxnid = responseCode.BANKTXNID;
+            updateObj.bankname = responseCode.BANKNAME;
+            updateObj.paymentMode = responseCode.PAYMENTMODE;
+            updateObj.txnAmount = responseCode.TXNAMOUNT;
+            updateObj.refundAmount = responseCode.REFUNDAMT;
+            updateObj.transactionId = responseCode.TXNID;
+            updateObj.transactionDate = responseCode.TXNDATE;
+            updateObj.status = responseCode.STATUS;
+            if (responseCode.STATUS === 'TXN_FAILURE') updateObj.paymentStatus = "Failed";
+            if (responseCode.STATUS === 'TXN_SUCCESS') {
+                updateObj.paymentStatus = "Success";
+                let cData = await counterSchema.findOneAndUpdate({ appId: "fuel", counterName: "Invoice Number" }, { $inc: { counter: 1 }, updatedAt: new Date() }, { new: true })
+                updateObj.invoiceNo = cData.counter;
             }
-        })
+            paymentsModel.findOneAndUpdate({ orderId: orderId }, updateObj, { new: true }).then(data => {
+                console.log('data', data);
+                createinvoice(orderId).then(data => {
+                    console.log("invoice generated successfully");
+                });
+                if (updateObj.respcode === "01") return;
+                else throw new Error("Unable to update payment")
+            })
+        }
     })
 }
 
@@ -533,10 +536,10 @@ const calculateAmount = async (user, { amount, gstNumber, referralCode, referral
 }
 
 module.exports = {
-    initiatePayment: initiatePayment,
-    paymentUpdate: paymentUpdate,
-    createinvoice: createinvoice,
-    assignFreePlan: assignFreePlan,
-    generateInvoice: generateInvoice,
-    calculateAmount: calculateAmount
+    initiatePayment,
+    paymentUpdate,
+    createinvoice,
+    assignFreePlan,
+    generateInvoice,
+    calculateAmount
 }
