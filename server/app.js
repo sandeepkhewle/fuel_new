@@ -11,6 +11,8 @@ const fs = require('fs');
 var io = require('socket.io')(server, { cors: { origin: '*' } });
 var httpsServer;
 
+const cronService = require('./services/cronService');
+
 
 // config
 const config = require('./config/config').config;
@@ -117,6 +119,7 @@ mongoose.connect(config.database, {
     autoIndex: config.autoIndex // need to be false in production
 }).then(function () {
     console.log("DB connetion success");
+    cronService.RegisterAllCron();
 }, function (err) {
     console.log("DB connetion error", err);
 });
@@ -135,4 +138,3 @@ server.listen(app.get('port'));
 
 
 module.exports = app;
-

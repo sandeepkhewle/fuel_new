@@ -140,6 +140,7 @@ let dashBoardSummary = async () => {
         totalUser[0].totalUser.forEach(element => {
             if (element._id === 'fuel') msdTotalUsers = element.count;
         });
+
         totalUser[0].actInactuser.forEach(element => {
             if (element._id.app === 'fuel') {
                 if (element._id.status === true) msdActiveUsers = element.count;
