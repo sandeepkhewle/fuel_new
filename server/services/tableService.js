@@ -681,7 +681,7 @@ let getGstReport = (req) => {
         query.push({ $limit: limit });
 
         paymentModel.aggregate(query).then(async userData => {
-            console.log('userData', userData);
+            // console.log('userData', userData);
             let total = await paymentModel.aggregate([{ $match: matchObj }, { $count: "count" }])
             sendObj.userData = userData;
             sendObj.count = 0;
