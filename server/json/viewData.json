@@ -943,6 +943,16 @@
                 "headerClass": ""
             },
             {
+                "name": "GST Number",
+                "prop": "gstNumber",
+                "sortable": false,
+                "pipe": "",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
                 "name": "",
                 "prop": "button",
                 "sortable": false,

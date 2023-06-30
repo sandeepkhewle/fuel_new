@@ -646,7 +646,7 @@ let getGstReport = (req) => {
         let query = [];
         let page = req.body.page;
         console.log('page-----------', page);
-        let limit = req.body.limit ? req.body.limit : 500;
+        let limit = req.body.limit ? req.body.limit : 1000;
         let skip = req.body.skip ? req.body.skip : 0;
         let orderby = req.body.orderby ? req.body.orderby : 'createdAt';
         let orderin = 1;
@@ -673,56 +673,15 @@ let getGstReport = (req) => {
             if (filters.endDate) matchObj.createdAt['$lte'] = new Date(moment(filters.endDate).endOf('day'));
         }
 
+        console.log("matchObj", matchObj);
+
         query.push({ $match: matchObj });
         query.push({ $sort: sort });
         query.push({ $skip: skip });
         query.push({ $limit: limit });
-        query.push({
-            $project: {
-                appId: 1,
-                paymentId: 1,
-                userId: 1,
-                planName: 1,
-                planType: 1,
-                amount: 1,
-                discount: 1,
-                tax: 1,
-                cgst: 1,
-                sgst: 1,
-                igst: 1,
-                payableAmount: 1,
-                gstNumber: 1,
-                startDate: 1,
-                endDate: 1,
-                invoiceNo: 1,
-                fullName: 1,
-                emailId: 1,
-                mailStatus: 1,
-                phoneNo: 1,
-                paymentStatus: 1,
-                updatedAt: 1,
-                createdAt: 1,
-                firmName: 1,
-                phoneNo: 1,
-                currency: 1,
-                txntype: 1,
-                respcode: 1,
-                respmsg: 1,
-                gatewayName: 1,
-                banktxnid: 1,
-                bankname: 1,
-                paymentMode: 1,
-                txnAmount: 1,
-                refundAmount: 1,
-                transactionId: 1,
-                transactionDate: 1,
-                status: 1,
-                orderId: 1,
-                link: 1
-            }
-        })
 
         paymentModel.aggregate(query).then(async userData => {
+            console.log('userData', userData);
             let total = await paymentModel.aggregate([{ $match: matchObj }, { $count: "count" }])
             sendObj.userData = userData;
             sendObj.count = 0;
