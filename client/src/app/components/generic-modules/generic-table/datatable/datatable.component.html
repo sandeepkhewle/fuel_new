@@ -17,7 +17,7 @@
             
             <!-- [selectionType]="'checkbox'" -->
             <!-- [columns]="columns" -->
-            <ngx-datatable #dataTable class='fyt-line-hight material fixed-header striped' [rows]="membersList" [scrollbarV]="false" [headerHeight]="35" [footerHeight]="50"  [rowHeight]="35" [rowClass]="getRowClass" [columnMode]="'force'" [scrollbarH]="false"
+            <ngx-datatable #dataTable class='fyt-line-hight material fixed-header striped' [rows]="membersList" [scrollbarV]="false" [headerHeight]="35" [footerHeight]="50"  [rowHeight]="35" [rowClass]="getRowClass" [columnMode]="'force'" [scrollbarH]="true"
                 [externalPaging]="true" [count]="membersListCount" [loadingIndicator]="loader" [externalSorting]="true" (sort)="onSort($event)"  [limit]="filterObj.limit" (page)="onPage($event)" (select)='onSelect($event)'>
 
                 <!-- <ng-container *ngIf="postObj.page != 'attendanceMember' && postObj.page != 'attendanceTrainer' && postObj.page != 'communication' && postObj.page !='collection' && postObj.page !='accounts' && postObj.page !='expense'">

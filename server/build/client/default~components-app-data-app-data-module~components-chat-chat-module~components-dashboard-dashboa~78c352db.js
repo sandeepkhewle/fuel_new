@@ -1246,7 +1246,7 @@ function DataTableComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("rows", ctx_r1.membersList)("scrollbarV", false)("headerHeight", 35)("footerHeight", 50)("rowHeight", 35)("rowClass", ctx_r1.getRowClass)("columnMode", "force")("scrollbarH", false)("externalPaging", true)("count", ctx_r1.membersListCount)("loadingIndicator", ctx_r1.loader)("externalSorting", true)("limit", ctx_r1.filterObj.limit);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("rows", ctx_r1.membersList)("scrollbarV", false)("headerHeight", 35)("footerHeight", 50)("rowHeight", 35)("rowClass", ctx_r1.getRowClass)("columnMode", "force")("scrollbarH", true)("externalPaging", true)("count", ctx_r1.membersListCount)("loadingIndicator", ctx_r1.loader)("externalSorting", true)("limit", ctx_r1.filterObj.limit);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r1.membersAttributeList);
 } }

@@ -111,7 +111,7 @@
                 "pipe": "",
                 "class": "ta-l",
                 "headerClass": "ta-c",
-                "colSize": 0,
+                "colSize": 100,
                 "label": false,
                 "actions": [
                     {
@@ -204,7 +204,7 @@
                 "pipe": "",
                 "class": "ta-l",
                 "headerClass": "ta-c",
-                "colSize": 60,
+                "colSize": 100,
                 "label": false,
                 "actions": [
                     {
@@ -1099,7 +1099,7 @@
                 "pipe": "",
                 "class": "ta-l",
                 "headerClass": "ta-c",
-                "colSize": 60,
+                "colSize": 100,
                 "label": false,
                 "actions": [
                     {
