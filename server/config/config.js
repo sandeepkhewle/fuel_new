@@ -14,7 +14,7 @@ let config = {
         //aws config details
         accessKeyId: "AKIATKGLISTWSADKJHYV",
         secretAccessKey: "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",
-        s3url: "https://s3.ap-south-1.amazonaws.com/infotecindia",
+        s3url: "https://s3.ap-south-1.amazonaws.com/fuelprealert",
 
         // database
         database: 'mongodb://localhost:27017/fuledb',
@@ -23,7 +23,7 @@ let config = {
         mongooseDebug: false,
 
         // s3 bucket
-        Bucket: 'infotecindia/production',
+        Bucket: 'fuelprealert/production',
 
         // mailjet credentials
         mailjetPublicKey: '68c75fdc5e51f6e5da878d1d2c711c3c',
@@ -63,7 +63,7 @@ let config = {
         //aws config details
         accessKeyId: "AKIATKGLISTWSADKJHYV",
         secretAccessKey: "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",
-        s3url: "https://s3.ap-south-1.amazonaws.com/infotecindia",
+        s3url: "https://s3.ap-south-1.amazonaws.com/fuelprealert",
 
         // database
         database: 'mongodb://localhost:27017/fuledb',
@@ -72,7 +72,7 @@ let config = {
         mongooseDebug: false,
 
         // s3 bucket
-        Bucket: 'infotecindia/staging',
+        Bucket: 'fuelprealert/staging',
 
         // mailjet credentials
         mailjetPublicKey: '68c75fdc5e51f6e5da878d1d2c711c3c',

@@ -337,7 +337,8 @@ const createinvoice = async (orderId) => {
     try {
         console.log('createinvoice', orderId);
         let pData = await paymentsModel.findOne({ orderId: orderId });
-        await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, pData.paymentMode)
+        let invoiceLink = await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, pData.paymentMode);
+        paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: invoiceLink })
     } catch (error) {
         console.log('error------1----', error);
         throw error;
@@ -355,13 +356,13 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
             const stepFinished = async () => {
                 if (--pendingStepCount == 0) {
                     console.log('--------in createinvoice---------', pdfFile);
-                    // awsService.uploLocalFileToAws(`Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
-                    //     console.log('link', link);
-                    //     return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link }, { new: true })
-                    // }).then((data) => {
-                    //     // resolve();
-                    //     return;
-                    // })
+                    awsService.uploLocalFileToAws(`Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
+                        console.log('link', link);
+                        return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link }, { new: true })
+                    }).then((data) => {
+                        // resolve();
+                        return;
+                    })
                     return;
                 }
             };
@@ -478,7 +479,6 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
         throw error;
     }
 }
-// createinvoice("fuel_060323_cwhgoqrclex3onvy")
 
 const calculateAmount = async (user, { amount, gstNumber, referralCode, referralPoint }) => {
     console.log({ amount, gstNumber, referralCode, referralPoint });
