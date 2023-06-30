@@ -41,8 +41,6 @@ let userActiveInactive = async () => {
   }
 }
 
-userActiveInactive()
-
 module.exports = {
   RegisterAllCron
 }
