@@ -657,7 +657,7 @@ let getGstReport = (req) => {
         const appId = req.body.appId;
         let lastMonthStartDate = moment().subtract(1, 'month').startOf('month');
         let lastMonthEndDate = moment().subtract(1, 'month').endOf('month');
-        let matchObj = { createdAt: { $gte: lastMonthStartDate, $lte: lastMonthEndDate } }
+        let matchObj = { createdAt: { $gte: new Date(lastMonthStartDate), $lte: new Date(lastMonthEndDate) } }
         if (appId) matchObj.appId = appId
 
         Object.keys(filters).forEach(element => {
