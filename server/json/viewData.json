@@ -700,6 +700,16 @@
                 "headerClass": ""
             },
             {
+                "name": "TRANSACTION DATE",
+                "prop": "date",
+                "sortable": false,
+                "pipe": "date",
+                "class": "ta-l",
+                "colSize": 150,
+                "label": false,
+                "headerClass": ""
+            },
+            {
                 "name": "START DATE",
                 "prop": "startDate",
                 "sortable": false,
@@ -804,7 +814,7 @@
             },
             {
                 "name": "CREATE DATE",
-                "prop": "createdAt",
+                "prop": "date",
                 "sortable": true,
                 "pipe": "date",
                 "class": "ta-l",
