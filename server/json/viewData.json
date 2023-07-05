@@ -731,7 +731,7 @@
             },
             {
                 "name": "PAID AMOUNT",
-                "prop": "txnAmount",
+                "prop": "payableAmount",
                 "sortable": false,
                 "pipe": "",
                 "class": "ta-l",
@@ -904,7 +904,7 @@
             },
             {
                 "name": "PAID AMOUNT",
-                "prop": "txnAmount",
+                "prop": "payableAmount",
                 "sortable": false,
                 "pipe": "",
                 "class": "ta-l",
