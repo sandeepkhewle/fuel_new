@@ -31,10 +31,10 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 
-// api.automi.in
-app.use('/.well-known/acme-challenge/ReMbp1bncqDyefSR1_0oU8VssxFYLvtpq6RvTcuLDgU', (req, res) => {
+// api.fuelpricealert.in
+app.use('/.well-known/acme-challenge/VgojwOZpYluwql25h2JiEMHY5cyvRgrf_pl5IhZEVUk', (req, res) => {
     try {
-        res.send("ReMbp1bncqDyefSR1_0oU8VssxFYLvtpq6RvTcuLDgU.SlFxx5G2l2gxWmrU5Nv0Oq6vqJZdXuh-G7ccKHaWd8Q")
+        res.send("VgojwOZpYluwql25h2JiEMHY5cyvRgrf_pl5IhZEVUk.SlFxx5G2l2gxWmrU5Nv0Oq6vqJZdXuh-G7ccKHaWd8Q")
     } catch (error) {
         console.log('error', error);
     }
