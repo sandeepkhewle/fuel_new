@@ -32,7 +32,7 @@ app.set('view engine', 'ejs');
 
 
 // api.automi.in
-app.use('/.well-known/acme-challenge//ReMbp1bncqDyefSR1_0oU8VssxFYLvtpq6RvTcuLDgU', (req, res) => {
+app.use('/.well-known/acme-challenge/ReMbp1bncqDyefSR1_0oU8VssxFYLvtpq6RvTcuLDgU', (req, res) => {
     try {
         res.send("ReMbp1bncqDyefSR1_0oU8VssxFYLvtpq6RvTcuLDgU.SlFxx5G2l2gxWmrU5Nv0Oq6vqJZdXuh-G7ccKHaWd8Q")
     } catch (error) {
