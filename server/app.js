@@ -32,9 +32,9 @@ app.set('view engine', 'ejs');
 
 
 // api.automi.in
-app.use('/.well-known/acme-challenge/KvmIqbTsTNypSAzuglWFzQXrs0EbT_wJgsfa5cxhnA8', (req, res) => {
+app.use('/.well-known/acme-challenge//ReMbp1bncqDyefSR1_0oU8VssxFYLvtpq6RvTcuLDgU', (req, res) => {
     try {
-        res.send("KvmIqbTsTNypSAzuglWFzQXrs0EbT_wJgsfa5cxhnA8.SlFxx5G2l2gxWmrU5Nv0Oq6vqJZdXuh-G7ccKHaWd8Q")
+        res.send("ReMbp1bncqDyefSR1_0oU8VssxFYLvtpq6RvTcuLDgU.SlFxx5G2l2gxWmrU5Nv0Oq6vqJZdXuh-G7ccKHaWd8Q")
     } catch (error) {
         console.log('error', error);
     }
