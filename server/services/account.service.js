@@ -406,7 +406,7 @@ const creteOldInvoice = async () => {
     }
 }
 
-// creteOldInvoice()
+creteOldInvoice()
 
 // createinvoice("fuel_140823_5w3k8krwllasonf4")
 
