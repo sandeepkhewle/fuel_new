@@ -5,6 +5,7 @@ const uniqid = require('uniqid')
 const pdfkit = require('pdfkit');
 const fs = require('fs');
 const request = require('request');
+const pLimit = require('p-limit');
 
 // config
 const config = require('../config/config').config;
@@ -37,8 +38,8 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         if (firmName) updateObj.firmName = firmName;
         if (emailId) updateObj.emailId = emailId;
 
-        let uD = await userModel.findOneAndUpdate({ appId: appId, userId: userId }, updateObj, { new: true });
-        let pD = await plansModel.findOne({ appId: appId, planId: planId });
+        let uD = await userModel.findOneAndUpdate({ userId: userId }, updateObj, { new: true });
+        let pD = await plansModel.findOne({ planId: planId });
         let phoneNo = uD.phoneNo;
         let planName = pD.planName;
         let planType = pD.planType;
@@ -68,8 +69,8 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         // createobj.invoiceNo = 1
         let pT = (pD.planType === 'Monthly') ? 'months' : 'years';
 
-        let validUpto = moment().add('months', pD.duration).set("date", pD.validUptoDay);
-        if (pD.validUptoDay === 0) validUpto = moment().add(pT, pD.duration)
+        let validUpto = moment().add(pD.duration, 'months').set("date", pD.validUptoDay);
+        if (pD.validUptoDay === 0) validUpto = moment().add(pD.duration, pT)
         // console.log('validUpto', validUpto);
         createobj.endDate = new Date(validUpto);
         createobj.startDate = new Date();
@@ -80,18 +81,17 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         let payableAmount = pD.planCost - discount;
         createobj.payableAmount = payableAmount;
         createobj.amount = pD.planCost;
-        let sgst = 9; cgst = 9, igst = 18;
-        let total = payableAmount * cgst / 100;
-        createobj.payableAmount = (payableAmount + total + total).toFixed(2)
+        // let sgst = 9; cgst = 9, igst = 18;
+        // let total = payableAmount * cgst / 100;
 
-        /** ************  do not delete will be used in future ************ */
-        // calculate gst
+        /** ************ inclusive GST - do not delete will be used in future ************ */
+        // // calculate gst
         // let singlePercent = Number(payableAmount) / (100 + 18);
         // let gst = singlePercent * 18;
         // let tax = Number((singlePercent * 18).toFixed(2));
         // createobj.amount = Number((singlePercent * 100).toFixed(2));
 
-        // set igst or sgst cgst depending on the gst number
+        // // set igst or sgst cgst depending on the gst number
         // if (gstNumber) {
         //     let stateCode = gstNumber.substring(0, 2);
         //     if (stateCode === "27") {
@@ -104,6 +104,21 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         //     createobj.cgst = Number((tax / 2).toFixed(2));
         //     createobj.sgst = Number((tax / 2).toFixed(2));
         // }
+
+        // calculate gst
+        let singlePercent = Number(payableAmount) / (100 + 18);
+        createobj.tax = Number((singlePercent * 18).toFixed(2));
+
+        // set igst or sgst cgst depending on the gst number
+        let stateCode = gstNumber?.substring(0, 2);
+        if (stateCode === "27" || !gstNumber) {
+            createobj.cgst = Number((singlePercent * 9).toFixed(2));
+            createobj.sgst = Number((singlePercent * 9).toFixed(2));
+        } else {
+            createobj.igst = Number((singlePercent * 18).toFixed(2));
+        }
+
+        createobj.payableAmount = Number(singlePercent * 18).toFixed(2)
 
         let CUST_ID = userId;
         let ORDER_ID = `${appId}_${moment().format('DDMMYY')}_${uniqid()}`;
@@ -168,7 +183,7 @@ const paymentUpdate = async (orderId, CHECKSUMHASH) => {
                 let cData = await counterSchema.findOneAndUpdate({ appId: "fuel", counterName: "Invoice Number" }, { $inc: { counter: 1 }, updatedAt: new Date() }, { new: true })
                 updateObj.invoiceNo = cData.counter;
             }
-            paymentsModel.findOneAndUpdate({ orderId: orderId }, updateObj, { new: true }).then(data => {
+            await paymentsModel.findOneAndUpdate({ orderId: orderId }, updateObj, { new: true }).then(data => {
                 console.log('data', data);
                 createinvoice(orderId).then(data => {
                     console.log("invoice generated successfully");
@@ -338,14 +353,64 @@ const createinvoice = async (orderId) => {
         console.log('createinvoice', orderId);
         let pData = await paymentsModel.findOne({ orderId: orderId });
         let invoiceLink = await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, pData.paymentMode);
-        paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: invoiceLink })
+        await paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: invoiceLink })
+        return;
     } catch (error) {
         console.log('error------1----', error);
         throw error;
     }
 }
 
-const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus) => {
+// paymentUpdate("fuel_140823_5w3k8krwllasonf4", "GvQSkSQ/0v6LPKid32DcqX1JGlqOr1iwEQhKP0AT4s7Yoa8PrjbC7FKUQbmGKM47s4rmcpvjJ0vqh+TGwlsu4WmEcdhS2YG0jrisHoCfsGg=")
+
+const creteOldInvoice = async () => {
+    try {
+        let pData = await paymentsModel.find({ "paymentStatus": "Success" }, { orderId: 1, igst: 1, sgst: 1, amount: 1, gstNumber: 1 });
+        const limit = pLimit(1);
+        console.log('pData', pData);
+
+        Promise.all(
+            pData.map((e, i) => limit(async () => {
+                console.log("e.igst", e.igst);
+                console.log("e.sgst", e.sgst);
+                if (e.igst === 0 && e.sgst === 0) {
+                    console.log('invoice started', i, "amount", e.amount);
+
+                    const singlePercent = Number(e.amount) / 100;
+                    console.log('singlePercent', singlePercent);
+                    const updateObj = {};
+                    updateObj.tax = Number((singlePercent * 18).toFixed(2));
+
+                    // set igst or sgst cgst depending on the gst number
+                    const stateCode = e.gstNumber?.substring(0, 2);
+                    if (stateCode === "27" || !e.gstNumber) {
+                        updateObj.cgst = Number((singlePercent * 9).toFixed(2));
+                        updateObj.sgst = Number((singlePercent * 9).toFixed(2));
+                    } else {
+                        updateObj.igst = Number((singlePercent * 18).toFixed(2));
+                    }
+                    console.log({ updateObj });
+                    await paymentsModel.findOneAndUpdate({ orderId: e.orderId }, updateObj, { new: true }).then(() => {
+                        console.log('here');
+                    })
+                }
+
+                createinvoice(e.orderId)
+            }))
+        ).then(d => {
+            console.log("all invoice created");
+        })
+
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+// creteOldInvoice()
+
+// createinvoice("fuel_140823_5w3k8krwllasonf4")
+
+const generateInvoice = async (orderId, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus) => {
     try {
         return new Promise((resolve, reject) => {
             // console.log("in function 27 ");
@@ -395,7 +460,7 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
             doc.text('Invoice No.', 60, 220)
             doc.text(": " + invoiceNo, 130, 220)
             doc.text('Invoice Date', 60, 240)
-            doc.text(": " + newdate, 130, 240)
+            doc.text(": " + moment(newdate).format("DD MMM YYYY"), 130, 240)
             doc.fontSize(8)
             doc.font('Helvetica-Bold')
             doc.text('Bill To', 350, 190)
@@ -407,7 +472,7 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
             doc.text(email, 350, 210)
             doc.text(mobile, 350, 220)
             doc.text("Buyer GSTIN No", 350, 240)
-            doc.text(": " + gstNumber, 410, 240)
+            doc.text(": " + gstNumber ? gstNumber : "", 410, 240)
             doc.fontSize(8)
             doc.text('SNo', 70, 325)
             doc.text('Description', 100, 325)
@@ -424,7 +489,7 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
             doc.font('Times-Roman')
             doc.text(plan_name, 100, 370)
             doc.font('Times-Roman')
-            doc.text('Valid Upto:  ' + validdate, 100, 380)
+            doc.text('Valid Upto:  ' + moment(validdate).format("DD MMM YYYY"), 100, 380)
             doc.font('Helvetica-Bold')
             doc.text('1', 275, 350)
             doc.font('Helvetica-Bold')
@@ -464,11 +529,11 @@ const generateInvoice = async (orderId, fileName, invoiceNo, newdate, firm_name,
             doc.text('Notes:', 70, 550)
             doc.font('Times-Roman')
             if (paymentModeStatus == "paytm") {
-                doc.text('Payment Recieved Through Paytm Gateway', 70, 570)
-                doc.text('Paytm Transaction Id: ' + TXNID, 70, 580)
+                // doc.text('Payment Recieved Through Paytm Gateway', 70, 570)
+                doc.text('Transaction Id: ' + TXNID, 70, 580)
             } else {
-                doc.text('Payment Recieved Through Payu Gateway', 70, 570)
-                doc.text('Payu Payment Id: ' + mihpayid, 70, 580)
+                // doc.text('Payment Recieved Through Payu Gateway', 70, 570)
+                doc.text('Payment Id: ' + mihpayid, 70, 580)
             }
             doc.font('Helvetica-Bold')
             doc.text('This is a computer generated invoice hence signature is not required', 150, 610)

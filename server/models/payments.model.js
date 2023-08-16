@@ -46,6 +46,7 @@ var paymentSchema = mongoose.Schema({
   respcode: String,
   respmsg: String,
   gatewayName: String,
+  paymentGateway: { type: String, default: "paytm" },
   banktxnid: String,
   bankname: String,
   paymentMode: String,
