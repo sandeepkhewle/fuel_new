@@ -294,6 +294,7 @@ const paymentUpdate = async (orderId, CHECKSUMHASH) => {
 //     }
 // }
 
+// assign free plan to user from the panel
 const assignFreePlan = async ({ appId, userId, planId, startDate, endDate }) => {
     try {
         let createObj = {
@@ -348,6 +349,7 @@ const convertImg = (imgLink) => {
     })
 }
 
+// generate invoice
 const createinvoice = async (orderId) => {
     try {
         console.log('createinvoice', orderId);
@@ -361,54 +363,49 @@ const createinvoice = async (orderId) => {
     }
 }
 
-// paymentUpdate("fuel_140823_5w3k8krwllasonf4", "GvQSkSQ/0v6LPKid32DcqX1JGlqOr1iwEQhKP0AT4s7Yoa8PrjbC7FKUQbmGKM47s4rmcpvjJ0vqh+TGwlsu4WmEcdhS2YG0jrisHoCfsGg=")
+// do not delte - create invoice for the old transactions
+// const creteOldInvoice = async () => {
+//     try {
+//         let pData = await paymentsModel.find({ "paymentStatus": "Success" }, { orderId: 1, igst: 1, sgst: 1, amount: 1, gstNumber: 1 });
+//         const limit = pLimit(1);
+//         console.log('pData', pData);
 
-const creteOldInvoice = async () => {
-    try {
-        let pData = await paymentsModel.find({ "paymentStatus": "Success" }, { orderId: 1, igst: 1, sgst: 1, amount: 1, gstNumber: 1 });
-        const limit = pLimit(1);
-        console.log('pData', pData);
+//         Promise.all(
+//             pData.map((e, i) => limit(async () => {
+//                 console.log("e.igst", e.igst);
+//                 console.log("e.sgst", e.sgst);
+//                 if (e.igst === 0 && e.sgst === 0) {
+//                     console.log('invoice started', i, "amount", e.amount);
 
-        Promise.all(
-            pData.map((e, i) => limit(async () => {
-                console.log("e.igst", e.igst);
-                console.log("e.sgst", e.sgst);
-                if (e.igst === 0 && e.sgst === 0) {
-                    console.log('invoice started', i, "amount", e.amount);
+//                     const singlePercent = Number(e.amount) / 100;
+//                     console.log('singlePercent', singlePercent);
+//                     const updateObj = {};
+//                     updateObj.tax = Number((singlePercent * 18).toFixed(2));
 
-                    const singlePercent = Number(e.amount) / 100;
-                    console.log('singlePercent', singlePercent);
-                    const updateObj = {};
-                    updateObj.tax = Number((singlePercent * 18).toFixed(2));
+//                     // set igst or sgst cgst depending on the gst number
+//                     const stateCode = e.gstNumber?.substring(0, 2);
+//                     if (stateCode === "27" || !e.gstNumber) {
+//                         updateObj.cgst = Number((singlePercent * 9).toFixed(2));
+//                         updateObj.sgst = Number((singlePercent * 9).toFixed(2));
+//                     } else {
+//                         updateObj.igst = Number((singlePercent * 18).toFixed(2));
+//                     }
+//                     console.log({ updateObj });
+//                     await paymentsModel.findOneAndUpdate({ orderId: e.orderId }, updateObj, { new: true }).then(() => {
+//                         console.log('here');
+//                     })
+//                 }
 
-                    // set igst or sgst cgst depending on the gst number
-                    const stateCode = e.gstNumber?.substring(0, 2);
-                    if (stateCode === "27" || !e.gstNumber) {
-                        updateObj.cgst = Number((singlePercent * 9).toFixed(2));
-                        updateObj.sgst = Number((singlePercent * 9).toFixed(2));
-                    } else {
-                        updateObj.igst = Number((singlePercent * 18).toFixed(2));
-                    }
-                    console.log({ updateObj });
-                    await paymentsModel.findOneAndUpdate({ orderId: e.orderId }, updateObj, { new: true }).then(() => {
-                        console.log('here');
-                    })
-                }
+//                 createinvoice(e.orderId)
+//             }))
+//         ).then(d => {
+//             console.log("all invoice created");
+//         })
 
-                createinvoice(e.orderId)
-            }))
-        ).then(d => {
-            console.log("all invoice created");
-        })
-
-    } catch (error) {
-        console.log('error', error);
-    }
-}
-
-creteOldInvoice()
-
-// createinvoice("fuel_140823_5w3k8krwllasonf4")
+//     } catch (error) {
+//         console.log('error', error);
+//     }
+// }
 
 const generateInvoice = async (orderId, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus) => {
     try {
