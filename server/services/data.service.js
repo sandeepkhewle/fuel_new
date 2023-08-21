@@ -13,6 +13,9 @@ const counterModel = require('../models/counter.model');
 // json
 const paymentJSON = require('../json/payment.json');
 
+// services
+const accountService = require('./account.service');
+
 // get plan list as per the app id
 let getPlanList = async ({ appId, gstNumber }) => {
     try {
@@ -264,6 +267,7 @@ let migrateOldPayment = async ({ ORDER_ID,
         }
         console.log('newObj', JSON.stringify(newObj));
         await paymentModel.create(newObj);
+        await accountService.createinvoice(ORDER_ID);
     } catch (error) {
         console.log('error', error);
     }
