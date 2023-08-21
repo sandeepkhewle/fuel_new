@@ -8,6 +8,10 @@ const appDataModel = require('../models/appData.model');
 const notificationModel = require('../models/notification.model');
 const paymentModel = require('../models/payments.model');
 const paymentsModel = require('../models/payments.model');
+const counterModel = require('../models/counter.model');
+
+// json
+const paymentJSON = require('../json/payment.json');
 
 // get plan list as per the app id
 let getPlanList = async ({ appId, gstNumber }) => {
@@ -118,7 +122,7 @@ let getPlanData = async (userId, appId) => {
     try {
         console.log({ userId, appId });
         let pData = await paymentsModel.find({ appId: appId, userId: userId, paymentStatus: "Success" }, { planName: 1, invoiceNo: 1, startDate: 1, endDate: 1, payableAmount: 1, planType: 1, link: 1 });
-        console.log({ pData });
+        // console.log({ pData });
         return pData;
     } catch (error) {
         throw error;
@@ -168,6 +172,111 @@ let showPopup = async (userId) => {
     }
 }
 
+let migrateOldPayment = async ({ ORDER_ID,
+    user_id,
+    plan_id,
+    plan_name,
+    package_name,
+    amount,
+    TXNAMOUNT,
+    cgstAmount,
+    sgstAmount,
+    igstAmount,
+    gstNumber,
+    date,
+    validity,
+    state,
+    invoiceNo,
+    email,
+    phone,
+    mihpayid,
+    TXNID,
+    productinfo,
+    firm_name,
+    CURRENCY,
+    RESPCODE,
+    RESPMSG,
+    GATEWAYNAME,
+    BANKTXNID,
+    BANKNAME,
+    paymentModeStatus }) => {
+    try {
+        console.log('user_id', user_id);
+        let uData = await userModel.findOne({ userId: user_id });
+        let counter = await counterModel.findOneAndUpdate({
+            "appId": "fuel",
+            "counterName": "Invoice Number",
+        }, {
+            $inc: { counter: 1 }
+        }, {
+            new: true
+        })
+        let newObj = {
+            appId: "fuel",
+            fullName: uData?.fullName,
+            orderId: ORDER_ID,
+            userId: user_id,
+            planId: plan_id,
+            planName: plan_name,
+            planType: package_name,
+            planForTrend: plan_name,
+            amount: amount,
+            discount: 0,
+            tax: TXNAMOUNT,
+            cgst: cgstAmount,
+            sgst: sgstAmount,
+            igst: igstAmount,
+            payableAmount: TXNAMOUNT,
+            gstNumber: gstNumber,
+            date: date,
+            startDate: moment(new Date(validity)).subtract(1, 'year'),
+            endDate: validity,
+            state: state,
+            invoiceNo: counter.counter,
+            emailId: email,
+            phoneNo: phone,
+            mihpayId: mihpayid,
+            txnId: TXNID,
+            key: "",
+            productInfo: productinfo,
+            serviceProvider: "",
+            firmName: firm_name,
+            packageName: package_name,
+            paymentStatus: "Success",
+            updatedAt: new Date(),
+            createdAt: date,
+            referralCode: null,
+            referralPoints: null,
+            currency: CURRENCY,
+            txntype: "",
+            respcode: RESPCODE,
+            respmsg: RESPMSG,
+            gatewayName: GATEWAYNAME,
+            paymentGateway: GATEWAYNAME,
+            banktxnid: BANKTXNID,
+            bankname: BANKNAME,
+            paymentMode: paymentModeStatus,
+            txnAmount: TXNAMOUNT,
+            refundAmount: null,
+            transactionId: TXNID,
+            transactionDate: date,
+            status: "Active",
+        }
+        console.log('newObj', JSON.stringify(newObj));
+        await paymentModel.create(newObj);
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+let oldPayToNew = async () => {
+    paymentJSON.forEach(e => {
+        migrateOldPayment({ ...e })
+    });
+}
+
+oldPayToNew();
+
 module.exports = {
     getPlanList,
     getnotificationList,
@@ -176,5 +285,6 @@ module.exports = {
     getAppImagesTecSpec,
     getAppImagesConvertionTable,
     getPlanData,
-    showPopup
+    showPopup,
+    migrateOldPayment
 }
