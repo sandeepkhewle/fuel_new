@@ -279,7 +279,7 @@ let oldPayToNew = async () => {
     });
 }
 
-oldPayToNew();
+// oldPayToNew();
 
 module.exports = {
     getPlanList,
