@@ -40,7 +40,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
 
         let uD = await userModel.findOneAndUpdate({ userId: userId }, updateObj, { new: true });
         let pD = await plansModel.findOne({ planId: planId });
-        console.log('pD', pD);
+        // console.log('pD', pD);
         let phoneNo = uD.phoneNo;
         let planName = pD.planName;
         let planType = pD.planType;
@@ -119,11 +119,10 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             createobj.igst = Number((singlePercent * 18).toFixed(2));
         }
 
-        createobj.payableAmount = pD.planCost + Number(singlePercent * 18).toFixed(2)
+        createobj.payableAmount = Number(pD.planCost) + Number(singlePercent * 18).toFixed(2)
 
         let CUST_ID = userId;
         let ORDER_ID = `${appId}_${moment().format('DDMMYY')}_${uniqid()}`;
-        console.log('pD.planCost', pD.planCost);
         let TXN_AMOUNT = createobj.payableAmount.toString();
 
         createobj.orderId = ORDER_ID;
