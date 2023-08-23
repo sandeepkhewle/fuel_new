@@ -107,7 +107,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         // }
 
         // calculate gst
-        let singlePercent = Number(payableAmount) / (100 + 18);
+        let singlePercent = Number(payableAmount) / 100;
         createobj.tax = Number((singlePercent * 18).toFixed(2));
 
         // set igst or sgst cgst depending on the gst number
