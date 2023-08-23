@@ -119,7 +119,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             createobj.igst = Number((singlePercent * 18).toFixed(2));
         }
 
-        createobj.payableAmount = Number(pD.planCost) + Number(singlePercent * 18).toFixed(2);
+        createobj.payableAmount = (Number(pD.planCost) + Number(singlePercent * 18)).toFixed(2);
 
         console.log('createobj.payableAmount', createobj.payableAmount);
 
