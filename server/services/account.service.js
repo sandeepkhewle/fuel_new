@@ -122,7 +122,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
 
         let CUST_ID = userId;
         let ORDER_ID = `${appId}_${moment().format('DDMMYY')}_${uniqid()}`;
-        let TXN_AMOUNT = createobj.payableAmount.toString();
+        let TXN_AMOUNT = pD.amount + createobj.payableAmount.toString();
 
         createobj.orderId = ORDER_ID;
 
