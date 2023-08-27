@@ -1610,7 +1610,8 @@ class GlobalApiService {
         this.API_SERVER_PORTSTRING = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
         this.SOCKET_SERVER_PORTSTRING = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
         // public CUSTOM_API = 'http://65.0.75.20:4108';
-        this.CUSTOM_API = '192.168.1.115';
+        // public CUSTOM_API = '192.168.1.115';
+        this.CUSTOM_API = 'https://api.fuelpricealert.in/';
     }
     getApiUrl() {
         let urlString = `${window.location.protocol}//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
@@ -1621,7 +1622,8 @@ class GlobalApiService {
     }
     getSocketUrl() {
         // const socketUrl: string = `${window.location.protocol}//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
-        const socketUrl = `http//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
+        // const socketUrl: string = `http//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
+        const socketUrl = this.CUSTOM_API;
         console.log("getSocketUrl", socketUrl);
         return `${socketUrl}`;
     }

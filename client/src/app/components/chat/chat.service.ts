@@ -15,6 +15,8 @@ export class ChatService {
 
 
   initializeSocketIO() {
+    console.log('initializeSocketIO', this.url);
+
     this.socket = socketIO.connect(this.url, { transports: ['websocket'] });
   }
 

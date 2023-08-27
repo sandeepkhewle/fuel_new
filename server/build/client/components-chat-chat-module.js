@@ -1355,8 +1355,9 @@ class ChatComponent {
             page: 'chat'
         };
         this.start = () => {
+            console.log('this.globalApiService.getSocketUrl()', this.globalApiService.getSocketUrl());
             this.socket = Object(socket_io_client__WEBPACK_IMPORTED_MODULE_0__["default"])(this.globalApiService.getSocketUrl());
-            // console.log("this.socket", this.socket);
+            console.log("this.socket", this.socket);
             // this.socket.on('message', this.appendChatMessage);
             this.socket.emit("userSocket", { userId: this.currentuserId }, this.callbackfunct);
             // to send userId & get chat data from server for user
@@ -1411,6 +1412,7 @@ class ChatComponent {
         this.userDetails = localStorage.getItem('userDetails');
     }
     ngOnInit() {
+        console.log('here--------');
         // this.start();
         this.applyFilters();
         // this.openChatWindow(event);
@@ -1784,6 +1786,7 @@ class ChatService {
         this.url = this.globalService.getSocketUrl();
     }
     initializeSocketIO() {
+        console.log('initializeSocketIO', this.url);
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1__["connect"](this.url, { transports: ['websocket'] });
     }
     sendMessage(message) {

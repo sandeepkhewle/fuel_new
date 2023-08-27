@@ -35,6 +35,8 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('here--------');
+
     // this.start();
     this.applyFilters();
     // this.openChatWindow(event);
@@ -67,8 +69,10 @@ export class ChatComponent implements OnInit {
   }
 
   start = () => {
+    console.log('this.globalApiService.getSocketUrl()', this.globalApiService.getSocketUrl());
+
     this.socket = openSocket(this.globalApiService.getSocketUrl());
-    // console.log("this.socket", this.socket);
+    console.log("this.socket", this.socket);
 
     // this.socket.on('message', this.appendChatMessage);
 
