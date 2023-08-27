@@ -5,7 +5,9 @@ export class GlobalApiService {
   public SOCKET_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
 
   // public CUSTOM_API = 'http://65.0.75.20:4108';
-  public CUSTOM_API = '192.168.1.115';
+  // public CUSTOM_API = '192.168.1.115';
+  public CUSTOM_API = 'https://api.fuelpricealert.in/';
+
 
   public getApiUrl(): string {
     let urlString: string = `${window.location.protocol}//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
@@ -17,7 +19,8 @@ export class GlobalApiService {
 
   public getSocketUrl(): string {
     // const socketUrl: string = `${window.location.protocol}//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
-    const socketUrl: string = `http//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
+    // const socketUrl: string = `http//${window.location.hostname}${this.API_SERVER_PORTSTRING}`;
+    const socketUrl: string = this.CUSTOM_API;
     console.log("getSocketUrl", socketUrl);
     return `${socketUrl}`
   }
