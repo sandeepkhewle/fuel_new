@@ -25,6 +25,7 @@ export class ChatComponent implements OnInit {
   userDetails: any;
   currentuserId: any;
   allChatArray: any;
+  adminUserId: any;
 
   constructor(
     private chatService: ChatService,
@@ -35,8 +36,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('here--------');
-
+    this.adminUserId = JSON.parse(this.userDetails).adminUserId;
     // this.start();
     this.applyFilters();
     // this.openChatWindow(event);
@@ -70,15 +70,26 @@ export class ChatComponent implements OnInit {
 
   start = () => {
     console.log('this.globalApiService.getSocketUrl()', this.globalApiService.getSocketUrl());
-
     this.socket = openSocket(this.globalApiService.getSocketUrl());
     console.log("this.socket", this.socket);
+    this.socket.emit("adminSocket", { adminUserId: this.adminUserId })
 
-    // this.socket.on('message', this.appendChatMessage);
+    // this.socket.on('message', (data: any) => {
+    //   console.log('message on', data);
+    //   this.appendChatMessage
+    // });
+
+    this.socket.on('test', (data: any) => {
+      console.log("Received message from Websocket Server", data)
+    })
 
     this.socket.emit("userSocket", { userId: this.currentuserId }, this.callbackfunct);
     // to send userId & get chat data from server for user
     this.socket.emit("getChat", { userId: this.currentuserId }, this.appendChatMessage);
+
+    this.chatService.getMessages().subscribe(msg => {
+      console.log(msg);
+    })
   }
 
   callbackfunct = (data: any) => {
@@ -104,7 +115,7 @@ export class ChatComponent implements OnInit {
 
   // send chat message
   sendMessage = () => {
-    // console.log('------sendMessage-----');
+    console.log('------sendMessage-----', this.typeMessage.message);
     if (this.typeMessage.message != null) {
       this.typeMessage.userId = this.currentuserId;
       this.typeMessage;
@@ -123,7 +134,7 @@ export class ChatComponent implements OnInit {
 
   // ctreae chat list in chat div - append new messages below
   appendChatMessage = (data: any) => {
-    console.log('------data-----',);
+    console.log('------data-----', data);
     if (data && Array.isArray(data)) {
       this.allChatArray = data;
     } else if (data.chat && Array.isArray(data.chat)) {

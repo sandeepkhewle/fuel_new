@@ -30,8 +30,15 @@ export class ChatService {
 
   getMessages(): Observable<any> {
     return new Observable<any>(observer => {
-      this.socket.on('reply', (data: any) =>
-        observer.next(data));
+      // this.socket.on('reply', (data: any) =>
+      //   observer.next(data));
+      console.log('this is obeserver');
+
+
+      this.socket.on('message', (data: any) => {
+        console.log("Received message from Websocket Server", data)
+        observer.next(data);
+      })
     });
   }
 
@@ -41,6 +48,7 @@ export class ChatService {
         observer.next(data));
     });
   }
+
   public onEvent(event: Event): Observable<any> {
     return new Observable<Event>(observer => {
       this.socket.on(event, () => observer.next());
