@@ -37,9 +37,11 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("ng onit");
+
     this.adminUserId = JSON.parse(this.userDetails).adminUserId;
-    // this.start();
     this.applyFilters();
+    // this.start();
     // this.openChatWindow(event);
   }
 
@@ -67,13 +69,15 @@ export class ChatComponent implements OnInit {
       this.start();
       this.chatWindowStatus = true;
     }
+    this.openChatWindow(event);
   }
 
   start = () => {
+    this.chatService.initializeSocketIO(this.adminUserId)
     console.log('this.globalApiService.getSocketUrl()', this.globalApiService.getSocketUrl());
-    this.socket = openSocket(this.globalApiService.getSocketUrl());
-    console.log("this.socket", this.socket);
-    this.socket.emit("adminSocket", { adminUserId: this.adminUserId })
+    // this.socket = openSocket(this.globalApiService.getSocketUrl());
+    // console.log("this.socket", this.socket);
+    // this.socket.emit("adminSocket", { adminUserId: this.adminUserId })
 
     // this.socket.on('message', (data: any) => {
     //   console.log('message on', data);
@@ -84,14 +88,14 @@ export class ChatComponent implements OnInit {
     //   console.log("Received message from Websocket Server", data)
     // })
 
-    this.socket.on('test', (data: any) => {
-      console.log("Received message from Websocket Server", data);
-      this.messages.push(data.message);
-    })
+    // this.socket.on('test', (data: any) => {
+    //   console.log("Received message from Websocket Server", data);
+    //   this.messages.push(data.message);
+    // })
 
-    this.socket.emit("userSocket", { userId: this.currentuserId }, this.callbackfunct);
+    // this.socket.emit("userSocket", { userId: this.currentuserId }, this.callbackfunct);
     // to send userId & get chat data from server for user
-    this.socket.emit("getChat", { userId: this.currentuserId }, this.appendChatMessage);
+    // this.socket.emit("getChat", { userId: this.currentuserId }, this.appendChatMessage);
 
     this.chatService.getMessages().subscribe(msg => {
       console.log(msg);
@@ -99,15 +103,20 @@ export class ChatComponent implements OnInit {
   }
 
   callbackfunct = (data: any) => {
-    console.log("callbackfunct data", data);
+    // console.log("callbackfunct data", data);
   }
 
   openChatWindow = (event: any) => {
-    // console.log("event", event);
+    console.log("openChatWindow", event);
     this.chatWindowStatus = true;
     this.chatId = event.chatId;
     this.chatName = event.chatName;
-    this.socket.emit("getChat", { chatId: this.chatId, entityId: this.entityId }, this.callLast);
+    // this.socket.emit("getChat", { chatId: this.chatId, entityId: this.entityId }, this.callLast);
+    this.chatService.getChat({ chatId: this.chatId, entityId: this.entityId }).subscribe((msg: any) => {
+      console.log("callLast------", msg);
+      // this.callLast(msg)
+      this.appendChatMessage(msg);
+    });
   }
 
   callLast = (data: any) => {
@@ -116,7 +125,6 @@ export class ChatComponent implements OnInit {
       this.appendChatMessage(element);
     });
     console.log('data', data);
-
   }
 
   // send chat message
@@ -125,7 +133,11 @@ export class ChatComponent implements OnInit {
     if (this.typeMessage.message != null) {
       this.typeMessage.userId = this.currentuserId;
       this.typeMessage;
-      this.socket.emit("reply", { userId: this.currentuserId, message: this.typeMessage.message }, this.appendChatMessage)
+      // this.socket.emit("reply", { userId: this.currentuserId, message: this.typeMessage.message }, this.appendChatMessage)
+      this.chatService.sendMessage({ userId: this.currentuserId, message: this.typeMessage.message }).subscribe((msg: any) => {
+        console.log("msg------", msg);
+        this.appendChatMessage(msg)
+      });
       this.typeMessage.message = null
     }
   }

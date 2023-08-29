@@ -14,14 +14,28 @@ export class ChatService {
   ) { }
 
 
-  initializeSocketIO() {
+  initializeSocketIO(adminUserId: any) {
     console.log('initializeSocketIO', this.url);
 
     this.socket = socketIO.connect(this.url, { transports: ['websocket'] });
+    this.socket.emit("adminSocket", { adminUserId: adminUserId })
   }
 
-  public sendMessage(message: any): void {
-    this.socket.emit('new-message', message);
+  public sendMessage(message: any): any {
+    return new Observable<any>(observer => {
+      this.socket.emit('reply', message, (data: any) => {
+        observer.next(data)
+      });
+    });
+  }
+
+  public getChat(message: any): any {
+    return new Observable<any>(observer => {
+      this.socket.emit('getChat', message, (data: any) => {
+        console.log("getChat", data)
+        observer.next(data)
+      });
+    });
   }
 
   public notificationConnection(message: any): void {
@@ -30,13 +44,8 @@ export class ChatService {
 
   getMessages(): Observable<any> {
     return new Observable<any>(observer => {
-      // this.socket.on('reply', (data: any) =>
-      //   observer.next(data));
-      console.log('this is obeserver');
-
-
-      this.socket.on('message', (data: any) => {
-        console.log("Received message from Websocket Server", data)
+      this.socket.on('chatMessage', (data: any) => {
+        // console.log("Received message from Websocket Server", data)
         observer.next(data);
       })
     });

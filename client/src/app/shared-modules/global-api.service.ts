@@ -5,8 +5,8 @@ export class GlobalApiService {
   public SOCKET_SERVER_PORTSTRING: string = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
 
   // public CUSTOM_API = 'http://65.0.75.20:4108';
-  // public CUSTOM_API = '192.168.1.115';
-  public CUSTOM_API = 'https://api.fuelpricealert.in/';
+  public CUSTOM_API = "http://localhost:4108";
+  // public CUSTOM_API = 'https://api.fuelpricealert.in/';
 
 
   public getApiUrl(): string {
