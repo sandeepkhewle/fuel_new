@@ -26,6 +26,7 @@ export class ChatComponent implements OnInit {
   currentuserId: any;
   allChatArray: any;
   adminUserId: any;
+  messages: string[] = [];
 
   constructor(
     private chatService: ChatService,
@@ -79,8 +80,13 @@ export class ChatComponent implements OnInit {
     //   this.appendChatMessage
     // });
 
+    // this.socket.on('test', (data: any) => {
+    //   console.log("Received message from Websocket Server", data)
+    // })
+
     this.socket.on('test', (data: any) => {
-      console.log("Received message from Websocket Server", data)
+      console.log("Received message from Websocket Server", data);
+      this.messages.push(data.message);
     })
 
     this.socket.emit("userSocket", { userId: this.currentuserId }, this.callbackfunct);
