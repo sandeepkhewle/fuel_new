@@ -1610,7 +1610,7 @@ class GlobalApiService {
         this.API_SERVER_PORTSTRING = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
         this.SOCKET_SERVER_PORTSTRING = (window.location.hostname === 'localhost' || window.location.hostname === '65.0.75.20') ? ':4108' : '';
         // public CUSTOM_API = 'http://65.0.75.20:4108';
-        // public CUSTOM_API = '192.168.1.115';
+        // public CUSTOM_API = "http://localhost:4108";
         this.CUSTOM_API = 'https://api.fuelpricealert.in/';
     }
     getApiUrl() {
