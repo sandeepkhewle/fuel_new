@@ -15,8 +15,7 @@ export class ChatService {
 
 
   initializeSocketIO(adminUserId: any) {
-    console.log('initializeSocketIO', this.url);
-
+    // console.log('initializeSocketIO', this.url);
     this.socket = socketIO.connect(this.url, { transports: ['websocket'] });
     this.socket.emit("adminSocket", { adminUserId: adminUserId })
   }
@@ -32,7 +31,7 @@ export class ChatService {
   public getChat(message: any): any {
     return new Observable<any>(observer => {
       this.socket.emit('getChat', message, (data: any) => {
-        console.log("getChat", data)
+        // console.log("getChat", data)
         observer.next(data)
       });
     });

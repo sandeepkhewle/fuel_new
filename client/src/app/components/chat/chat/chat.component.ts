@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import openSocket from 'socket.io-client';
+// import openSocket from 'socket.io-client';
 import { GlobalApiService } from 'src/app/shared-modules/global-api.service';
 import { ChatService } from '../chat.service';
 import { Router } from '@angular/router';
@@ -19,9 +19,7 @@ export class ChatComponent implements OnInit {
   teacherName: any;
   socket: any;
   entityId: any;
-  postObj: any = {
-    page: 'chat'
-  };
+  postObj: any = { page: 'chat' };
   userDetails: any;
   currentuserId: any;
   allChatArray: any;
@@ -37,30 +35,18 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("ng onit");
-
+    // console.log("ng onit");
     this.adminUserId = JSON.parse(this.userDetails).adminUserId;
-    this.applyFilters();
-    // this.start();
-    // this.openChatWindow(event);
+    // this.applyFilters();
   }
 
-  applyFilters() {
-    this.postObj = Object.assign({}, this.postObj)
-  }
+  // applyFilters() {
+  //   this.postObj = Object.assign({}, this.postObj)
+  // }
 
-  onRowsSelected(event: any) {
-
-  }
-
-  onRowsSelectedSub(event: any) {
-
-  }
-
-  onRowClick(event: any) {
-
-  }
-
+  onRowsSelected(event: any) { }
+  onRowsSelectedSub(event: any) { }
+  onRowClick(event: any) { }
 
   onModalAction(event: any) {
     console.log('event', event);
@@ -98,7 +84,8 @@ export class ChatComponent implements OnInit {
     // this.socket.emit("getChat", { userId: this.currentuserId }, this.appendChatMessage);
 
     this.chatService.getMessages().subscribe(msg => {
-      console.log(msg);
+      // console.log(msg)
+      this.appendChatMessage(msg);
     })
   }
 
@@ -107,35 +94,35 @@ export class ChatComponent implements OnInit {
   }
 
   openChatWindow = (event: any) => {
-    console.log("openChatWindow", event);
+    // console.log("openChatWindow", event);
     this.chatWindowStatus = true;
     this.chatId = event.chatId;
     this.chatName = event.chatName;
     // this.socket.emit("getChat", { chatId: this.chatId, entityId: this.entityId }, this.callLast);
-    this.chatService.getChat({ chatId: this.chatId, entityId: this.entityId }).subscribe((msg: any) => {
-      console.log("callLast------", msg);
+    this.chatService.getChat({ userId: this.currentuserId }).subscribe((msg: any) => {
+      // console.log("callLast------", msg);
       // this.callLast(msg)
       this.appendChatMessage(msg);
     });
   }
 
-  callLast = (data: any) => {
-    // console.log('data', data);
-    data.data.forEach((element: any) => {
-      this.appendChatMessage(element);
-    });
-    console.log('data', data);
-  }
+  // callLast = (data: any) => {
+  //   // console.log('data', data);
+  //   data.data.forEach((element: any) => {
+  //     this.appendChatMessage(element);
+  //   });
+  //   console.log('data', data);
+  // }
 
   // send chat message
   sendMessage = () => {
-    console.log('------sendMessage-----', this.typeMessage.message);
+    // console.log('------sendMessage-----', this.typeMessage.message);
     if (this.typeMessage.message != null) {
       this.typeMessage.userId = this.currentuserId;
       this.typeMessage;
       // this.socket.emit("reply", { userId: this.currentuserId, message: this.typeMessage.message }, this.appendChatMessage)
       this.chatService.sendMessage({ userId: this.currentuserId, message: this.typeMessage.message }).subscribe((msg: any) => {
-        console.log("msg------", msg);
+        // console.log("msg------", msg);
         this.appendChatMessage(msg)
       });
       this.typeMessage.message = null
@@ -152,7 +139,7 @@ export class ChatComponent implements OnInit {
 
   // ctreae chat list in chat div - append new messages below
   appendChatMessage = (data: any) => {
-    console.log('------data-----', data);
+    // console.log('------data-----', data);
     if (data && Array.isArray(data)) {
       this.allChatArray = data;
     } else if (data.chat && Array.isArray(data.chat)) {
@@ -160,7 +147,7 @@ export class ChatComponent implements OnInit {
     } else {
       this.allChatArray.push(data);
     }
-    console.log('------this.allChatArray-----', this.allChatArray);
+    // console.log('------this.allChatArray-----', this.allChatArray);
   }
 
   closeDialog(flag: any) {
