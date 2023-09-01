@@ -15,12 +15,13 @@ module.exports.dummy = (socket_io) => {
     // update admnisocket id in admin table
     socket_io.on('adminSocket', async (data) => {
         console.log("adminSocket", { data });
+        console.log('admin socket id', socket_io.id);
         await adminModel.findOneAndUpdate({ adminUserId: data.adminUserId }, { adminSocketId: socket_io.id }, { new: true })
     });
 
     // update user scoket id in chat table
     socket_io.on('userSocket', async (data, callback) => {
-        console.log("userSocket", data);
+        // console.log("userSocket", data);
         let uData = await usersModel.findOne({ userId: data.userId });
 
         chatModel.findOneAndUpdate({ userId: data.userId }, { userSocketId: socket_io.id, $setOnInsert: { createDate: new Date(), fullName: uData.fullName, appId: uData.appId } }, { new: true, upsert: true }).then(data => {
@@ -50,15 +51,15 @@ module.exports.dummy = (socket_io) => {
     });
 
     // user to send message to admin
-    socket_io.on('message', async (data) => {
-        console.log("message", { data });
-        await chatModel.findOneAndUpdate({ userId: data.userId }, {
-            userSocketId: socket_io.id, status: "Pending", updateDate: new Date(), $push: { chat: { message: data.message, userFlag: "User", chatTime: new Date() } }
+    socket_io.on('message', async (payload) => {
+        console.log("message", { payload });
+        await chatModel.findOneAndUpdate({ userId: payload.userId }, {
+            userSocketId: socket_io.id, status: "Pending", updateDate: new Date(), $push: { chat: { message: payload.message, userFlag: "User", chatTime: new Date() } }
         }, { new: true, upsert: true })
-        // console.log("cData", cData);
-        // let socketId = cData.userSocketId;
         let aData = await adminModel.findOne({});
-        socket_io.to(aData.adminSocketId).emit('message', { "userId": data.userId, "message": data.message, "userFlag": "User", "chatTime": new Date() });
+        console.log('aData.adminSocketId', aData.adminSocketId);
+        socket_io.to(aData.adminSocketId).emit('chatMessage', { "userId": payload.userId, "message": payload.message, "userFlag": "User", "chatTime": new Date() });
+        // socket_io.emit('test1', { ss: "ss" });
     });
 
     // admin to send message to user
