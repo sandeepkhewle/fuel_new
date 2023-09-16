@@ -26,8 +26,8 @@ let config = {
         Bucket: 'fuelprealert/production',
 
         // mailjet credentials
-        mailjetPublicKey: '68c75fdc5e51f6e5da878d1d2c711c3c',
-        mailjetSecretKey: '0c657470719b61e904baf0680beb6c75',
+        mailjetPublicKey: '87723a35486d0d0db64ffa4da468c9a3',
+        mailjetSecretKey: 'be988942db3c75beb5077aad6b8c9887',
 
         //jwt credentials
         jwtSecret: 'f;&4sa?xZwS-Kd?,`52Z2d75(~xD#X58',
@@ -75,8 +75,8 @@ let config = {
         Bucket: 'fuelprealert/staging',
 
         // mailjet credentials
-        mailjetPublicKey: '68c75fdc5e51f6e5da878d1d2c711c3c',
-        mailjetSecretKey: '0c657470719b61e904baf0680beb6c75',
+        mailjetPublicKey: '87723a35486d0d0db64ffa4da468c9a3',
+        mailjetSecretKey: 'be988942db3c75beb5077aad6b8c9887',
 
         //jwt credentials
         jwtSecret: 'f;&4sa?xZwS-Kd?,`52Z2d75(~xD#X58',
