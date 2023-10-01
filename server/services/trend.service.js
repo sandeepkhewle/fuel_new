@@ -190,7 +190,7 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
                 let newArray = []
                 e1.data.forEach(e2 => {
                     e2.newTrendValue = `${e2.trend} ${e2.trendValue}/${e2.trendUnite}`
-                    // e2.trendValue = 0;
+                    e2.trendValue = "0";
                     if (trendName === 'monthly') newArray.push(e2)
                     if (trendName === 'fortnight') {
                         if (e2.productName === 'BITUMEN') { newArray[0] = e2 };
@@ -200,6 +200,7 @@ let getPastTrend = async ({ trendName, trendType }, userId) => {
                     }
                 })
                 e1.data = newArray.filter(Boolean);
+                e1.data.trendValue = "0";
                 if (trendName === 'monthly') {
                     if (e1._id === 'lpg') { arrayToSend[0] = e1 };
                     if (e1._id === 'kerosene') { arrayToSend[1] = e1 };
