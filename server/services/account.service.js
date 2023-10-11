@@ -384,7 +384,7 @@ const createinvoice = async (orderId, sendMail) => {
 
         return invoiceLink;
     } catch (error) {
-        // console.log('error------1----', error);
+        console.log('error------1----', error);
         throw error;
     }
 }
@@ -448,7 +448,7 @@ const generateInvoice = async (orderId, invoiceNo, newdate, firm_name, email, mo
                         console.log('link', link);
                         if (sendMail && email) {
                             sendMailToClient(link, invoiceNo, email, orderId)
-                            // sendMailToAdmin(link, invoiceNo, orderId)
+                            sendMailToAdmin(link, invoiceNo, amountTotal)
                         } else {
                             return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link, mailStatus: false }, { new: true })
                         }
@@ -642,7 +642,9 @@ const sendMailToClient = async (link, invoiceNo, email, orderId) => {
             let text = ""
             let html = "<p><b>Dear Sir/Madam,</b></p><br><br><p>Thanks for subscription to FuelPreAlert.</p><br><p>Your subscription invoice enclosed herewith.</p><br><p>Thanks & Regards</p><p><b>Team FuelPreAlert</b></p><p><b>What's App :7709225499</b></p>"
             mailjetService.sendMail(to, subject, text, html, attachments).then(data => {
-                return paymentsModel.findOneAndUpdate({ orderId: orderId }, { mailStatus: true }, { new: true })
+                return paymentsModel.findOneAndUpdate({ orderId: orderId }, { mailStatus: true });
+            }).then(() => {
+                return
             })
         })
     } catch (error) {
@@ -650,7 +652,7 @@ const sendMailToClient = async (link, invoiceNo, email, orderId) => {
     }
 }
 
-const sendMailToAdmin = async (link, invoiceNo, orderId) => {
+const sendMailToAdmin = async (link, invoiceNo, paymentAmount) => {
     try {
         pdf2base64(link).then(data1 => {
             let pdfName = invoiceNo + ".pdf";
@@ -659,19 +661,21 @@ const sendMailToAdmin = async (link, invoiceNo, orderId) => {
                 path: link,
                 base64: data1
             }]
-            let to = "nilay@4ibiz.in"
+            let to = "meeaurnee@gmail.com"
             let subject = "New Subscription Done"
             let text = ""
-            let html = " "
-            mailjetService.sendMail(to, subject, text, html, attachments).then(data => {
-                console.log("mail send to admin");
-            })
+            let html = `<p><b>Dear Sir,</b></p><br><br><p>Payment received of amount ${paymentAmount}</p><p>Thanks & Regards</p>`
+            // console.log(to, subject, text, html, attachments);
+            mailjetService.sendMail(to, subject, text, html, attachments)
+                .then(() => {
+                    console.log("mail send to admin");
+                    return;
+                })
         })
     } catch (error) {
         throw error;
     }
 }
-
 
 module.exports = {
     initiatePayment,

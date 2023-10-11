@@ -1,4 +1,3 @@
-
 // mailjet credentials
 const mailjetPublicKey = require('../config/config').config.mailjetPublicKey;
 const mailjetSecretKey = require('../config/config').config.mailjetSecretKey;
@@ -13,7 +12,7 @@ const mailjet = new Mailjet({
 const sendMail = async (to, subject, text, html, attachments) => {
     try {
         if (attachments) {
-            // console.log("base 68 data ---- ", attachments);
+            // console.log("base 68 data ---- ", to, subject, text, html, attachments);
             console.log("base 49 data ---- ", to);
             // let base64String = data;
             let fileName = attachments[0].fileName;
@@ -69,6 +68,7 @@ const sendMail = async (to, subject, text, html, attachments) => {
             return request;
         }
     } catch (error) {
+        console.error("error ---- ", error);
         throw error
     }
 }
