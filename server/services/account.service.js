@@ -6,6 +6,7 @@ const pdfkit = require('pdfkit');
 const fs = require('fs');
 const request = require('request');
 const pLimit = require('p-limit');
+const pdf2base64 = require('pdf-to-base64');
 
 // config
 const config = require('../config/config').config;
@@ -28,6 +29,7 @@ const counterSchema = require('../models/counter.model');
 // servies
 const paytm_checksum = require('./checksum');
 const awsService = require('../services/aws.service');
+const mailjetService = require('../services/mailjet.service');
 
 // initiate payment
 const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId, referralCode }) => {
@@ -180,17 +182,19 @@ const paymentUpdate = async (orderId, CHECKSUMHASH) => {
             updateObj.transactionId = responseCode.TXNID;
             updateObj.transactionDate = responseCode.TXNDATE;
             updateObj.status = responseCode.STATUS;
+            let sendMail = false;
             if (responseCode.STATUS === 'TXN_FAILURE') updateObj.paymentStatus = "Failed";
             if (responseCode.STATUS === 'TXN_SUCCESS') {
                 updateObj.paymentStatus = "Success";
                 let cData = await counterSchema.findOneAndUpdate({ appId: "fuel", counterName: "Invoice Number" }, { $inc: { counter: 1 }, updatedAt: new Date() }, { new: true })
                 updateObj.invoiceNo = cData.counter;
+                sendMail = true;
             }
             await paymentsModel.findOneAndUpdate({ orderId: orderId }, updateObj, { new: true }).then(data => {
                 console.log('data', data);
-                createinvoice(orderId).then(data => {
+                createinvoice(orderId, sendMail).then(data => {
                     console.log("invoice generated successfully");
-                });
+                })
                 if (updateObj.respcode === "01") return;
                 else throw new Error("Unable to update payment")
             })
@@ -353,13 +357,32 @@ const convertImg = (imgLink) => {
 }
 
 // generate invoice
-const createinvoice = async (orderId) => {
+const createinvoice = async (orderId, sendMail) => {
     try {
-        console.log('createinvoice', orderId);
+        console.log('createinvoice', orderId, sendMail);
         let pData = await paymentsModel.findOne({ orderId: orderId });
-        let invoiceLink = await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, pData.paymentMode);
-        await paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: invoiceLink })
-        return;
+        let invoiceLink = await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, pData.paymentMode, sendMail);
+        // if (sendMail) {
+        // console.log("invoiceLink---------", fileName);
+        // let fileName = invoiceLink;
+        // let base64 = await pdf2base64(fileName)
+        // let pdfName = pData.invoiceNo + ".pdf";
+        // let attachments = [{
+        //     fileName: pdfName,
+        //     path: fileName,
+        //     base64: base64
+        // }]
+        // let to = pData.emailId
+        // let subject = "Your Plan Subscription Invoice"
+        // let text = ""
+        // let html = "<p><b>Dear Sir/Madam,</b></p><br><br><p>Thanks for subscription to FuelPreAlert.</p><br><p>Your subscription invoice enclosed herewith.</p><br><p>Thanks & Regards</p><p><b>Team FuelPreAlert</b></p><p><b>What's App :7709225499</b></p>"
+        // mailjetService.sendMail(to, subject, text, html, attachments).then(data => {
+        //     console.log("mail sent successfully");
+        // })
+        // }
+        await paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: invoiceLink, mailStatus: sendMail })
+
+        return invoiceLink;
     } catch (error) {
         console.log('error------1----', error);
         throw error;
@@ -410,7 +433,7 @@ const createinvoice = async (orderId) => {
 //     }
 // }
 
-const generateInvoice = async (orderId, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus) => {
+const generateInvoice = async (orderId, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus, sendMail) => {
     try {
         return new Promise((resolve, reject) => {
             // console.log("in function 27 ");
@@ -423,7 +446,12 @@ const generateInvoice = async (orderId, invoiceNo, newdate, firm_name, email, mo
                     console.log('--------in createinvoice---------', pdfFile);
                     awsService.uploLocalFileToAws(`Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
                         console.log('link', link);
-                        return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link }, { new: true })
+                        if (sendMail && email) {
+                            sendMailToClient(link, invoiceNo, email, orderId)
+                            sendMailToAdmin(link, invoiceNo, amountTotal)
+                        } else {
+                            return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link, mailStatus: false }, { new: true })
+                        }
                     }).then((data) => {
                         // resolve();
                         return;
@@ -598,6 +626,55 @@ const calculateAmount = async (user, { amount, gstNumber, referralCode, referral
     }
     console.log({ returnData });
     return returnData;
+}
+
+const sendMailToClient = async (link, invoiceNo, email, orderId) => {
+    try {
+        pdf2base64(link).then(data1 => {
+            let pdfName = invoiceNo + ".pdf";
+            let attachments = [{
+                fileName: pdfName,
+                path: link,
+                base64: data1
+            }]
+            let to = email
+            let subject = "Your Plan Subscription Invoice"
+            let text = ""
+            let html = "<p><b>Dear Sir/Madam,</b></p><br><br><p>Thanks for subscription to FuelPreAlert.</p><br><p>Your subscription invoice enclosed herewith.</p><br><p>Thanks & Regards</p><p><b>Team FuelPreAlert</b></p><p><b>What's App :7709225499</b></p>"
+            mailjetService.sendMail(to, subject, text, html, attachments).then(data => {
+                return paymentsModel.findOneAndUpdate({ orderId: orderId }, { mailStatus: true });
+            }).then(() => {
+                return
+            })
+        })
+    } catch (error) {
+        throw error;
+    }
+}
+
+const sendMailToAdmin = async (link, invoiceNo, paymentAmount) => {
+    try {
+        pdf2base64(link).then(data1 => {
+            let pdfName = invoiceNo + ".pdf";
+            let attachments = [{
+                fileName: pdfName,
+                path: link,
+                base64: data1
+            }]
+            let to = "meeaurnee@gmail.com"
+            let subject = "New Subscription Done"
+            let text = ""
+            let html = `<p><b>Dear Sir,</b></p><br><br><p>Payment received of amount ${paymentAmount}</p><p>Thanks & Regards</p>`
+            // console.log(to, subject, text, html, attachments);
+            mailjetService.sendMail(to, subject, text, html, attachments)
+                .then(() => {
+                    console.log("mail send to admin");
+                    return;
+                })
+        })
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = {
