@@ -96,8 +96,8 @@
                                     <ng-container *ngFor="let filter of re.options;let i = index;">
                                         <ng-container
                                             *ngIf="filter.type == 'select' && filter.options && filter.options.length > 0">
-                                            <div class="col-md-6 col-lg-6">
-                                                <!-- <mat-form-field>
+                                            <div class="col-md-12 col-lg-12">
+                                                <mat-form-field>
                                                     <mat-label>{{filter.name}}</mat-label>
                                                     <mat-select [(ngModel)]="postObj.filters[filter.model]"
                                                         [name]="filter.model"
@@ -120,7 +120,7 @@
                                                             </mat-option>
                                                         </ng-container>
                                                     </mat-select>
-                                                </mat-form-field> -->
+                                                </mat-form-field>
                                             </div>
                                         </ng-container>
                                         <ng-container *ngIf="filter.type == 'date'">

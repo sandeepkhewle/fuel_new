@@ -210,6 +210,10 @@
                     {
                         "name": "Download Invoice",
                         "function": "downloadInvoice"
+                    },
+                    {
+                        "name": "Send Invoice",
+                        "function": "sendInvoice"
                     }
                 ]
             }
