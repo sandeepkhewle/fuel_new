@@ -688,6 +688,7 @@ const sendInvoiceToUser = async (orderId) => {
     try {
         createinvoice(orderId, true, false).then(data => {
             console.log("invoice generated successfully");
+            return;
         })
     } catch (error) {
         throw error;
