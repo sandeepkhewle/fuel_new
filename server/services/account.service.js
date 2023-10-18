@@ -686,7 +686,7 @@ const sendMailToAdmin = async (link, invoiceNo, paymentAmount) => {
 
 const sendInvoiceToUser = async (orderId) => {
     try {
-        createinvoice(orderId, true, true).then(data => {
+        createinvoice(orderId, true, false).then(data => {
             console.log("invoice generated successfully");
         })
     } catch (error) {
