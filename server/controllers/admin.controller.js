@@ -212,4 +212,25 @@ router.post('/getUserDetials', (req, res) => {
     })
 })
 
+// send invoice for subscription
+router.post('/sendInvoice', (req, res) => {
+    console.log('/admin/sendInvoice', req.user);
+    let orderId = req.body.orderId;
+    accountService.sendInvoiceToUser(orderId).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "Invoice Sendt successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to send invoice"
+        });
+    })
+})
+
 module.exports = router;

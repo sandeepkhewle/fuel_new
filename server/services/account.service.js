@@ -192,7 +192,7 @@ const paymentUpdate = async (orderId, CHECKSUMHASH) => {
             }
             await paymentsModel.findOneAndUpdate({ orderId: orderId }, updateObj, { new: true }).then(data => {
                 console.log('data', data);
-                createinvoice(orderId, sendMail).then(data => {
+                createinvoice(orderId, true, true).then(data => {
                     console.log("invoice generated successfully");
                 })
                 if (updateObj.respcode === "01") return;
@@ -357,11 +357,11 @@ const convertImg = (imgLink) => {
 }
 
 // generate invoice
-const createinvoice = async (orderId, sendMail) => {
+const createinvoice = async (orderId, isSendMailToClient, isSendMailToAdmin) => {
     try {
-        console.log('createinvoice', orderId, sendMail);
+        console.log('createinvoice', orderId, isSendMailToClient, isSendMailToAdmin);
         let pData = await paymentsModel.findOne({ orderId: orderId });
-        let invoiceLink = await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, pData.paymentMode, sendMail);
+        let invoiceLink = await generateInvoice(orderId, pData.invoiceNo, pData.createdAt, pData.firmName, pData.emailId, pData.phoneNo, pData.gstNumber, pData.packageName, pData.planName, pData.endDate, pData.amount, pData.discount, pData.cgst, pData.sgst, pData.igst, pData.payableAmount, '', pData.txnId, pData.mihpayId, pData.paymentMode, isSendMailToClient, isSendMailToAdmin);
         // if (sendMail) {
         // console.log("invoiceLink---------", fileName);
         // let fileName = invoiceLink;
@@ -433,7 +433,7 @@ const createinvoice = async (orderId, sendMail) => {
 //     }
 // }
 
-const generateInvoice = async (orderId, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus, sendMail) => {
+const generateInvoice = async (orderId, invoiceNo, newdate, firm_name, email, mobile, gstNumber, package_name, plan_name, validdate, amount, discount, cgstAmount, sgstAmount, igstAmount, amountTotal, moneyInwords, TXNID, mihpayid, paymentModeStatus, isSendMailToClient, isSendMailToAdmin) => {
     try {
         return new Promise((resolve, reject) => {
             // console.log("in function 27 ");
@@ -446,12 +446,19 @@ const generateInvoice = async (orderId, invoiceNo, newdate, firm_name, email, mo
                     console.log('--------in createinvoice---------', pdfFile);
                     awsService.uploLocalFileToAws(`Invoice/`, pdfFile, `${orderId}.pdf`).then((link) => {
                         console.log('link', link);
-                        if (sendMail && email) {
-                            sendMailToClient(link, invoiceNo, email, orderId)
-                            sendMailToAdmin(link, invoiceNo, amountTotal)
-                        } else {
-                            return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link, mailStatus: false }, { new: true })
+                        let mailStatus = false;
+                        if (isSendMailToClient && email) {
+                            sendMailToClient(link, invoiceNo, email, orderId).then((data) => {
+                                mailStatus = true;
+                            })
                         }
+                        if (isSendMailToAdmin) {
+                            sendMailToAdmin(link, invoiceNo, amountTotal).then((data) => {
+                                mailStatus = true;
+                            })
+                        }
+                        return paymentsModel.findOneAndUpdate({ orderId: orderId }, { link: link, mailStatus: false }, { new: true })
+
                     }).then((data) => {
                         // resolve();
                         return;
@@ -677,11 +684,23 @@ const sendMailToAdmin = async (link, invoiceNo, paymentAmount) => {
     }
 }
 
+const sendInvoiceToUser = async (orderId) => {
+    try {
+        createinvoice(orderId, true, true).then(data => {
+            console.log("invoice generated successfully");
+        })
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 module.exports = {
     initiatePayment,
     paymentUpdate,
     createinvoice,
     assignFreePlan,
     generateInvoice,
-    calculateAmount
+    calculateAmount,
+    sendInvoiceToUser
 }
