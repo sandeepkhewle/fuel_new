@@ -32,9 +32,9 @@ app.set('view engine', 'ejs');
 
 
 // api.fuelpricealert.in
-app.use('/.well-known/acme-challenge/VgojwOZpYluwql25h2JiEMHY5cyvRgrf_pl5IhZEVUk', (req, res) => {
+app.use('/.well-known/acme-challenge/8uXNNxXKY-k1jbmu_1UDp8EYJBep81miCrqNQzU2y7c', (req, res) => {
     try {
-        res.send("VgojwOZpYluwql25h2JiEMHY5cyvRgrf_pl5IhZEVUk.SlFxx5G2l2gxWmrU5Nv0Oq6vqJZdXuh-G7ccKHaWd8Q")
+        res.send("8uXNNxXKY-k1jbmu_1UDp8EYJBep81miCrqNQzU2y7c.SlFxx5G2l2gxWmrU5Nv0Oq6vqJZdXuh-G7ccKHaWd8Q")
     } catch (error) {
         console.log('error', error);
     }
