@@ -57,7 +57,7 @@ export class ReportsComponent implements OnInit {
   reportsObj: any = {};
   reportList: any;
   loader: any = false;
-  // today: any;
+// today: any;
   // reportsObj: any = {};
   // reportList: any;
   selectedReportName: any;
@@ -76,13 +76,13 @@ export class ReportsComponent implements OnInit {
   }
 
   // setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, filter) {
-  //   console.log("-----", normalizedMonthAndYear, datepicker, filter);
-  //   const ctrlValue = this.date.value!;
-  //   ctrlValue.month(normalizedMonthAndYear.month());
-  //   ctrlValue.year(normalizedMonthAndYear.year());
-  //   this.date.setValue(ctrlValue);
-  //   datepicker.close();
-  //   this.postObj.filters[filter.model] = [`${normalizedMonthAndYear.month()} ${normalizedMonthAndYear.year()}`];
+    //   console.log("-----", normalizedMonthAndYear, datepicker, filter);
+    //   const ctrlValue = this.date.value!;
+    //   ctrlValue.month(normalizedMonthAndYear.month());
+    //   ctrlValue.year(normalizedMonthAndYear.year());
+    //   this.date.setValue(ctrlValue);
+    //   datepicker.close();
+    //   this.postObj.filters[filter.model] = [`${normalizedMonthAndYear.month()} ${normalizedMonthAndYear.year()}`];
   // }
 
   ngOnInit(): void {
