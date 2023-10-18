@@ -116,8 +116,8 @@ export class ReportsComponent implements OnInit {
   }
 
   // for filters
-  // onChangeFilter(param1, model, event) {
-  // }
+  onChangeFilter(param1: any, model: any, event: any) {
+  }
 
   openDetails(data: any) {
     // let pageMap = { 'excelMembers': "91", 'subscription': "92", 'enquiryExcel': "93", 'staff': "94", 'trainer': "95", 'accounts': "96", 'getMemberPayment': "97", 'expense': "98" }
