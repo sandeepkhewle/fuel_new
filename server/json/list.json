@@ -125,6 +125,14 @@
                     },
                     "options": [
                         {
+                            "name": "Month",
+                            "model": "monthYear",
+                            "multiple": false,
+                            "type": "monthYear",
+                            "min": "",
+                            "max": ""
+                        },
+                        {
                             "name": "Year",
                             "model": "year",
                             "multiple": true,
