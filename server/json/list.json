@@ -123,7 +123,116 @@
                             "Success"
                         ]
                     },
-                    "options": []
+                    "options": [
+                        {
+                            "name": "Month",
+                            "model": "monthYear",
+                            "multiple": false,
+                            "type": "monthYear",
+                            "min": "",
+                            "max": ""
+                        },
+                        {
+                            "name": "Year",
+                            "model": "year",
+                            "multiple": true,
+                            "type": "select",
+                            "min": "",
+                            "max": "",
+                            "options": [
+                                {
+                                    "name": "2016",
+                                    "id": 2016
+                                },
+                                {
+                                    "name": "2017",
+                                    "id": 2017
+                                },
+                                {
+                                    "name": "2018",
+                                    "id": 2018
+                                },
+                                {
+                                    "name": "2019",
+                                    "id": 2019
+                                },
+                                {
+                                    "name": "2020",
+                                    "id": 2020
+                                },
+                                {
+                                    "name": "2021",
+                                    "id": 2021
+                                },
+                                {
+                                    "name": "2022",
+                                    "id": 2022
+                                },
+                                {
+                                    "name": "2023",
+                                    "id": 2023
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Month",
+                            "model": "month",
+                            "multiple": true,
+                            "type": "select",
+                            "min": "",
+                            "max": "",
+                            "options": [
+                                {
+                                    "name": "January",
+                                    "id": 1
+                                },
+                                {
+                                    "name": "February",
+                                    "id": 2
+                                },
+                                {
+                                    "name": "March",
+                                    "id": 3
+                                },
+                                {
+                                    "name": "April",
+                                    "id": 4
+                                },
+                                {
+                                    "name": "May",
+                                    "id": 5
+                                },
+                                {
+                                    "name": "June",
+                                    "id": 6
+                                },
+                                {
+                                    "name": "July",
+                                    "id": 7
+                                },
+                                {
+                                    "name": "August",
+                                    "id": 8
+                                },
+                                {
+                                    "name": "September",
+                                    "id": 9
+                                },
+                                {
+                                    "name": "October",
+                                    "id": 10
+                                },
+                                {
+                                    "name": "November",
+                                    "id": 11
+                                },
+                                {
+                                    "name": "December",
+                                    "id": 12
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }

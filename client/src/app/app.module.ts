@@ -15,36 +15,36 @@ import { AuthGuard } from './shared-modules/guards/auth.guard';
 import { NotAuthGuard } from './shared-modules/guards/notAuth.guard';
 import { SidenavService } from './components/sidenav/sidenav.service';
 import { AuthService } from './shared-modules/services/auth.service';
-import { ReportsComponent } from './components/reports/reports/reports.component';
+// import { ReportsComponent } from './components/reports/reports/reports.component';
 import { UpdateTrendsComponent } from './components/trends/update-trends/update-trends.component';
+import { SelectAllModule } from "./components/generic-modules/select-all/select-all.module";
 // import { SubscriptionsComponent } from './components/subscriptions/subscriptions/subscriptions.component';
 // import { RestrictionPopupComponent } from './components/restriction-popup/restriction-popup.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidenavComponent,
-    DefaultSettingsComponent,
-    ReportsComponent,
-    // SubscriptionsComponent,
-    // RestrictionPopupComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    AngularMaterialModule,
-    BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: false })
-  ],
-  providers: [
-    GlobalApiService,
-    PWAService,
-    AuthGuard,
-    NotAuthGuard,
-    SidenavService,
-    AuthService
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        SidenavComponent,
+        DefaultSettingsComponent,
+        // SubscriptionsComponent,
+        // RestrictionPopupComponent
+    ],
+    providers: [
+        GlobalApiService,
+        PWAService,
+        AuthGuard,
+        NotAuthGuard,
+        SidenavService,
+        AuthService
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        AngularMaterialModule,
+        BrowserAnimationsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+    ]
 })
 export class AppModule { }

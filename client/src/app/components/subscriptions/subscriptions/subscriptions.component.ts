@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SubscriptionsService } from '../subscriptions.service';
 
 @Component({
   selector: 'trends-subscriptions',
@@ -14,7 +15,9 @@ export class SubscriptionsComponent implements OnInit {
   postObj: any = {
     page: 'subscription'
   };
-  constructor() { }
+  constructor(
+    private subscriptionsService: SubscriptionsService
+  ) { }
 
   ngOnInit(): void {
     this.applyFilters();
@@ -55,6 +58,17 @@ export class SubscriptionsComponent implements OnInit {
       } else {
         // this.snackBar.open('No invoice generated for this record !', '', { duration: 2000 });
       }
+    }
+    if (event.name == "sendInvoice") {
+      console.log("Hello123s",event.rowData.orderId);
+      this.subscriptionsService.sendInvoice({'orderId': event.rowData.orderId}).subscribe(res => {
+        if (res.statusCode == '001') {
+          console.log("Hello",event.rowData.orderId);
+          
+        }
+        else {
+        }
+      });
     }
   }
 

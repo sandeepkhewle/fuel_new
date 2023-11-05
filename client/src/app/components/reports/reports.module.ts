@@ -11,11 +11,12 @@ import { SelectAllModule } from '../generic-modules/select-all/select-all.module
 import { RestrictionModule } from '../generic-modules/restriction/restriction.module';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatNativeDateModule } from '@angular/material/core';
+
 // import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ReportsComponent],
   imports: [
     CommonModule,
     ReportsRoutingModule,

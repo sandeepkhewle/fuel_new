@@ -57,7 +57,7 @@ export class ReportsComponent implements OnInit {
   reportsObj: any = {};
   reportList: any;
   loader: any = false;
-  // today: any;
+// today: any;
   // reportsObj: any = {};
   // reportList: any;
   selectedReportName: any;
@@ -76,13 +76,13 @@ export class ReportsComponent implements OnInit {
   }
 
   // setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, filter) {
-  //   console.log("-----", normalizedMonthAndYear, datepicker, filter);
-  //   const ctrlValue = this.date.value!;
-  //   ctrlValue.month(normalizedMonthAndYear.month());
-  //   ctrlValue.year(normalizedMonthAndYear.year());
-  //   this.date.setValue(ctrlValue);
-  //   datepicker.close();
-  //   this.postObj.filters[filter.model] = [`${normalizedMonthAndYear.month()} ${normalizedMonthAndYear.year()}`];
+    //   console.log("-----", normalizedMonthAndYear, datepicker, filter);
+    //   const ctrlValue = this.date.value!;
+    //   ctrlValue.month(normalizedMonthAndYear.month());
+    //   ctrlValue.year(normalizedMonthAndYear.year());
+    //   this.date.setValue(ctrlValue);
+    //   datepicker.close();
+    //   this.postObj.filters[filter.model] = [`${normalizedMonthAndYear.month()} ${normalizedMonthAndYear.year()}`];
   // }
 
   ngOnInit(): void {
@@ -116,8 +116,8 @@ export class ReportsComponent implements OnInit {
   }
 
   // for filters
-  // onChangeFilter(param1, model, event) {
-  // }
+  onChangeFilter(param1: any, model: any, event: any) {
+  }
 
   openDetails(data: any) {
     // let pageMap = { 'excelMembers': "91", 'subscription': "92", 'enquiryExcel': "93", 'staff': "94", 'trainer': "95", 'accounts': "96", 'getMemberPayment': "97", 'expense': "98" }

@@ -181,8 +181,8 @@ let getSubscription = (req) => {
         let limit = req.body.limit ? req.body.limit : 10;
         let skip = req.body.skip ? req.body.skip : 0;
         let orderby = req.body.orderby ? req.body.orderby : 'createDate';
-        let orderin = 1;
-        if (req.body.orderin === 'desc') orderin = -1;
+        let orderin = -1;
+        if (req.body.orderin === 'asc') orderin = 1;
         let sort = {};
         sort[orderby] = orderin;
         let search = req.body.search;
