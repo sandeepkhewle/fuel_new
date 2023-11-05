@@ -8,9 +8,11 @@ const pLimit = require('p-limit');
 const userModel = require('../models/users.model');
 const paymentModel = require('../models/payments.model');
 
-// const isPrimary = JSON.parse(JSON.stringify(process.env)).PRIMARYSERVER ? true : false;
-// const node_env = JSON.parse(JSON.stringify(process.env)).NODE_ENV;
+const isPrimary = JSON.parse(JSON.stringify(process.env)).PRIMARYSERVER ? true : false;
+const node_env = JSON.parse(JSON.stringify(process.env)).NODE_ENV;
 
+// services 
+const accountService = require('../services/account.service');
 
 let RegisterAllCron = () => {
   console.log('-----------cron registation started--------');
@@ -20,6 +22,12 @@ let RegisterAllCron = () => {
   const job1 = new CronJob(cronString1, function () { userActiveInactive(); }, null, true, 'Asia/Kolkata');
   job1.start();
   console.log('cron job1 will run --- ', job1.running, '---', cronstrue.toString(cronString1));
+
+  // send notification to payment due today
+  let cronString2 = '0 */15 * * * *';
+  const job2 = new CronJob(cronString2, function () { checkPaymentStatus(); }, null, true, 'Asia/Kolkata');
+  job2.start();
+  console.log('cron job2 will run --- ', job2.running, '---', cronstrue.toString(cronString2));
 
   console.log('-----------cron registation ended--------');
 }
@@ -38,6 +46,27 @@ let userActiveInactive = async () => {
     console.log('user inactivated');
   } catch (error) {
     console.error("error at userActiveInactive", error);
+  }
+}
+
+
+// check pending payment status for paytm every 15 minutes
+let checkPaymentStatus = async () => {
+  try {
+    if (node_env == 'production' && isPrimary && isPrimary === true) {
+      console.log('----------checkPaymentStatus--------------', moment().format('LT'));
+      let last45Min = moment().add(-45, 'minutes');
+      let PayData = await paymentModel.find({ "paymentStatus": "Pending", createdAt: { $gte: last45Min } });
+      let peomiseArray = [];
+      PayData.forEach(e => {
+        peomiseArray.push(accountService.paymentUpdate(e.orderId, e.CHECKSUMHASH))
+      });
+      Promise.all(peomiseArray).then(() => {
+        console.log("checkPaymentStatus completed");
+      })
+    }
+  } catch (error) {
+    console.error('error in running cron -- checkPaymentStatus--', error);
   }
 }
 

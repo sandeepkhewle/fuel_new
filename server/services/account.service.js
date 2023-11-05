@@ -143,7 +143,6 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         paramarray['WEBSITE'] = WEBSITE;
         // paramarray['THEME'] = "merchant";
         paramarray['CALLBACK_URL'] = CALLBACK_URL
-        await paymentsModel.create(createobj);
         // await createinvoice(ORDER_ID)
         paytm_checksum.genchecksum(paramarray, MERCHANT_KEY, function (err, res) {
             if (err) {
@@ -151,8 +150,11 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             } else {
                 // console.log("here in  genchecksum " + res);
                 paramarray['CHECKSUMHASH'] = res;
+                createobj.CHECKSUMHASH = res;
+                paymentsModel.create(createobj).then(() => {
+                    resolve(paramarray);
+                })
                 // console.log('paramarray', paramarray);
-                resolve(paramarray);
             }
         })
     })

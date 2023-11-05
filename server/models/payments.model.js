@@ -54,7 +54,8 @@ var paymentSchema = mongoose.Schema({
   refundAmount: String,
   transactionId: String,
   transactionDate: String,
-  status: String
+  status: String,
+  CHECKSUMHASH: String
 });
 
 paymentSchema.index({ invoiceNo: 'text', fullName: 'text', emailId: 'text', phoneNo: 'text' })
