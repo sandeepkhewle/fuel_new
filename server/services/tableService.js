@@ -655,10 +655,18 @@ let getGstReport = (req) => {
         sort[orderby] = orderin;
         let filters = req.body.filters;
         const appId = req.body.appId;
-        let lastMonthStartDate = moment().subtract(1, 'month').startOf('month');
-        let lastMonthEndDate = moment().subtract(1, 'month').endOf('month');
-        let matchObj = { date: { $gte: new Date(lastMonthStartDate), $lte: new Date(lastMonthEndDate) } }
+        let matchObj = {}
         if (appId) matchObj.appId = appId
+
+        let year = filters.year ? filters.year : moment().year;
+        delete filters.year;
+        let month = filters.month ? filters.month : moment().subtract(1, 'months').month();
+        delete filters.month;
+        console.log('year', year);
+        console.log('month', month);
+        let lastMonthStartDate = moment().year(year).month(month).startOf('month');
+        let lastMonthEndDate = moment().year(year).month(month).endOf('month');
+        matchObj = { date: { $gte: new Date(lastMonthStartDate), $lte: new Date(lastMonthEndDate) } }
 
         Object.keys(filters).forEach(element => {
             if (filters[element] && Array.isArray(filters[element]) && filters[element].length > 0 && filters[element].length > 0) {
