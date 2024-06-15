@@ -48,34 +48,34 @@ let registerNewUser = async ({ appId, fullName, phoneNo, emailId, deviceId, pass
                 console.log("Otp send successfully");
             })
         })
-        let payObj = {
-            "mailStatus": false,
-            "paymentStatus": "Success",
-            "appId": appId,
-            "userId": uData?.userId,
-            "planId": "trialPlan",
-            "planName": "TRIAL PLAN",
-            "planType": "TRIAL PLAN",
-            "fullName": fullName,
-            "emailId": emailId,
-            "phoneNo": phoneNo,
-            "date": new Date(),
-            "updatedAt": new Date(),
-            "createdAt": new Date(),
-            "firmName": "",
-            "invoiceNo": "10029",
-            // do not delete - will be used in future to set free plan for 10 days
-            "endDate": new Date(moment().add(60, 'days')),
-            "startDate": new Date(),
-            "discount": 0,
-            "payableAmount": 0,
-            "amount": 0,
-            "cgst": 0,
-            "sgst": 0,
-            "paymentId": "trialPlan",
-            "orderId": unique()
-        }
-        await paymenModel.create(payObj);
+        // let payObj = {
+        //     "mailStatus": false,
+        //     "paymentStatus": "Success",
+        //     "appId": appId,
+        //     "userId": uData?.userId,
+        //     "planId": "trialPlan",
+        //     "planName": "TRIAL PLAN",
+        //     "planType": "TRIAL PLAN",
+        //     "fullName": fullName,
+        //     "emailId": emailId,
+        //     "phoneNo": phoneNo,
+        //     "date": new Date(),
+        //     "updatedAt": new Date(),
+        //     "createdAt": new Date(),
+        //     "firmName": "",
+        //     "invoiceNo": "10029",
+        //     // do not delete - will be used in future to set free plan for 10 days
+        //     "endDate": new Date(moment().add(60, 'days')),
+        //     "startDate": new Date(),
+        //     "discount": 0,
+        //     "payableAmount": 0,
+        //     "amount": 0,
+        //     "cgst": 0,
+        //     "sgst": 0,
+        //     "paymentId": "trialPlan",
+        //     "orderId": unique()
+        // }
+        // await paymenModel.create(payObj);
         return uData;
     } catch (error) {
         throw error;
