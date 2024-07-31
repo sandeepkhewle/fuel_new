@@ -5,6 +5,7 @@ const router = express.Router();
 // services
 const dataService = require('../services/data.service');
 const trendService = require('../services/trend.service');
+const userService = require('../services/user.service');
 
 // create new trend
 router.post('/notificationList', (req, res) => {
@@ -255,6 +256,26 @@ router.get('/popup', (req, res) => {
             "statusCode": "002",
             "status": "Failed",
             "message": "Failed to fetch app Images data"
+        });
+    })
+})
+
+router.post('/updateUserDetails', (req, res) => {
+    console.log('/data/updateUserDetails', req.user);
+    let userId = req.user.userId;
+    userService.updateUser(userId, req.body).then((payload) => {
+        res.status(res.statusCode).send({
+            "statusCode": "001",
+            "status": "Success",
+            "message": "User details updated successfully",
+            "payload": payload
+        });
+    }).catch(err => {
+        console.log('err', err);
+        res.status(res.statusCode).send({
+            "statusCode": "002",
+            "status": "Failed",
+            "message": "Failed to update user details"
         });
     })
 })

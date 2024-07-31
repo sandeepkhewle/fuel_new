@@ -106,7 +106,7 @@ router.post('/updateUserDetails', (req, res) => {
         res.status(res.statusCode).send({
             "statusCode": "001",
             "status": "Success",
-            "message": "Plan list fetched successfully",
+            "message": "User details updated successfully",
             "payload": payload
         });
     }).catch(err => {
@@ -114,7 +114,7 @@ router.post('/updateUserDetails', (req, res) => {
         res.status(res.statusCode).send({
             "statusCode": "002",
             "status": "Failed",
-            "message": "Failed to get plan list"
+            "message": "Failed to update user details"
         });
     })
 })
