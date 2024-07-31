@@ -261,7 +261,7 @@ router.get('/popup', (req, res) => {
 })
 
 router.post('/updateUserDetails', (req, res) => {
-    console.log('/data/updateUserDetails', req.user);
+    console.log('/data/updateUserDetails', req.body);
     let userId = req.user.userId;
     userService.updateUser(userId, req.body).then((payload) => {
         res.status(res.statusCode).send({
