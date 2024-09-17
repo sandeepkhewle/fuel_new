@@ -30,9 +30,10 @@ const counterSchema = require('../models/counter.model');
 const paytm_checksum = require('./checksum');
 const awsService = require('../services/aws.service');
 const mailjetService = require('../services/mailjet.service');
+const razorpayService = require("../services/razorpay.service");
 
 // initiate payment
-const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId, referralCode }) => {
+const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId, referralCode, paymentGateway }) => {
     return new Promise(async (resolve, reject) => {
 
         let updateObj = {};
@@ -144,19 +145,25 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         // paramarray['THEME'] = "merchant";
         paramarray['CALLBACK_URL'] = CALLBACK_URL
         // await createinvoice(ORDER_ID)
-        paytm_checksum.genchecksum(paramarray, MERCHANT_KEY, function (err, res) {
-            if (err) {
-                reject(err);
-            } else {
-                // console.log("here in  genchecksum " + res);
-                paramarray['CHECKSUMHASH'] = res;
-                createobj.CHECKSUMHASH = res;
-                paymentsModel.create(createobj).then(() => {
-                    resolve(paramarray);
-                })
-                // console.log('paramarray', paramarray);
-            }
-        })
+        if (paymentGateway === "razorpay") {
+            let payload = await razorpayService.createOrder(TXN_AMOUNT)
+            resolve(payload);
+        }
+        if (paymentGateway === "paytm") {
+            paytm_checksum.genchecksum(paramarray, MERCHANT_KEY, function (err, res) {
+                if (err) {
+                    reject(err);
+                } else {
+                    // console.log("here in  genchecksum " + res);
+                    paramarray['CHECKSUMHASH'] = res;
+                    createobj.CHECKSUMHASH = res;
+                    paymentsModel.create(createobj).then(() => {
+                        resolve(paramarray);
+                    })
+                    // console.log('paramarray', paramarray);
+                }
+            })
+        }
     })
 }
 

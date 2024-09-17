@@ -13,13 +13,13 @@ router.post('/initiate', (req, res) => {
     let userId = req.user.userId;
     let appId = req.user.appId;
     accountService.initiatePayment(appId, userId, data).then(payload => {
-        if (paymentGateway === "paytm") {            
-            res.render('pgredirect.ejs', {
+        if (paymentGateway === "razorpay") {
+            res.render('razorpay.ejs', {
                 'restdata': payload
             });
         }
         else {
-            res.render('razorpay.ejs', {
+            res.render('pgredirect.ejs', {
                 'restdata': payload
             });
         }
