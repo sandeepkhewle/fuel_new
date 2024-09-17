@@ -9,12 +9,20 @@ const accountService = require('../services/account.service');
 router.post('/initiate', (req, res) => {
     console.log('/payment/initiate', req.body);
     let data = req.body;
+    let paymentGateway = req.body.paymentGateway ? req.body.paymentGateway : 'paytm';
     let userId = req.user.userId;
     let appId = req.user.appId;
     accountService.initiatePayment(appId, userId, data).then(payload => {
-        res.render('pgredirect.ejs', {
-            'restdata': payload
-        });
+        if (paymentGateway === "paytm") {            
+            res.render('pgredirect.ejs', {
+                'restdata': payload
+            });
+        }
+        else {
+            res.render('razorpay.ejs', {
+                'restdata': payload
+            });
+        }
     }).catch(err => {
         console.log('err', err);
         res.status(res.statusCode).send({

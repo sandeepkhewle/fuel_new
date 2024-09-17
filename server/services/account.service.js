@@ -30,11 +30,14 @@ const counterSchema = require('../models/counter.model');
 const paytm_checksum = require('./checksum');
 const awsService = require('../services/aws.service');
 const mailjetService = require('../services/mailjet.service');
+const razorpayService = require('../services/razorpay.service');
 
 // initiate payment
-const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId, referralCode }) => {
+const initiatePayment = async (appId, userId, { planId, discount, gstNumber, firmName, emailId, referralCode, paymentGateway }) => {
     return new Promise(async (resolve, reject) => {
 
+        console.log({paymentGateway});
+        
         let updateObj = {};
         if (gstNumber) updateObj.gstNumber = gstNumber;
         if (firmName) updateObj.firmName = firmName;
@@ -130,33 +133,42 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         let TXN_AMOUNT = createobj.payableAmount.toString();
 
         createobj.orderId = ORDER_ID;
+        if (paymentGateway= "razorpay") {
+            razorpayService.createOrder(TXN_AMOUNT).then(payload => {
+                console.log('payload', payload);
+                resolve(payload)
+            })
+            
+        }
 
-        var paramarray = {};
-        paramarray['MID'] = MID;
-        paramarray['ORDER_ID'] = ORDER_ID;
-        paramarray['CUST_ID'] = CUST_ID;
-        paramarray['TXN_AMOUNT'] = TXN_AMOUNT;
-        paramarray['CHANNEL_ID'] = CHANNEL_ID;
-        if (emailId) paramarray['EMAIL'] = emailId;
-        if (phoneNo) paramarray['MOBILE_NO'] = phoneNo;
-        paramarray['INDUSTRY_TYPE_ID'] = INDUSTRY_TYPE_ID;
-        paramarray['WEBSITE'] = WEBSITE;
-        // paramarray['THEME'] = "merchant";
-        paramarray['CALLBACK_URL'] = CALLBACK_URL
-        // await createinvoice(ORDER_ID)
-        paytm_checksum.genchecksum(paramarray, MERCHANT_KEY, function (err, res) {
-            if (err) {
-                reject(err);
-            } else {
-                // console.log("here in  genchecksum " + res);
-                paramarray['CHECKSUMHASH'] = res;
-                createobj.CHECKSUMHASH = res;
-                paymentsModel.create(createobj).then(() => {
-                    resolve(paramarray);
-                })
-                // console.log('paramarray', paramarray);
-            }
-        })
+        if (paymentGateway === "paytm") {
+                    var paramarray = {};
+                    paramarray['MID'] = MID;
+                    paramarray['ORDER_ID'] = ORDER_ID;
+                    paramarray['CUST_ID'] = CUST_ID;
+                    paramarray['TXN_AMOUNT'] = TXN_AMOUNT;
+                    paramarray['CHANNEL_ID'] = CHANNEL_ID;
+                    if (emailId) paramarray['EMAIL'] = emailId;
+                    if (phoneNo) paramarray['MOBILE_NO'] = phoneNo;
+                    paramarray['INDUSTRY_TYPE_ID'] = INDUSTRY_TYPE_ID;
+                    paramarray['WEBSITE'] = WEBSITE;
+                    // paramarray['THEME'] = "merchant";
+                    paramarray['CALLBACK_URL'] = CALLBACK_URL
+                    // await createinvoice(ORDER_ID)
+                    paytm_checksum.genchecksum(paramarray, MERCHANT_KEY, function (err, res) {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            // console.log("here in  genchecksum " + res);
+                            paramarray['CHECKSUMHASH'] = res;
+                            createobj.CHECKSUMHASH = res;
+                            paymentsModel.create(createobj).then(() => {
+                                resolve(paramarray);
+                            })
+                            // console.log('paramarray', paramarray);
+                        }
+                    })
+        }
     })
 }
 
