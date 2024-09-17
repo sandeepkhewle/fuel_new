@@ -14,6 +14,8 @@ router.post('/initiate', (req, res) => {
     let appId = req.user.appId;
     accountService.initiatePayment(appId, userId, data).then(payload => {
         if (paymentGateway === "razorpay") {
+            console.log('randor razorpay', payload);
+
             res.render('razorpay.ejs', {
                 'restdata': payload
             });

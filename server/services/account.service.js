@@ -146,7 +146,11 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         paramarray['CALLBACK_URL'] = CALLBACK_URL
         // await createinvoice(ORDER_ID)
         if (paymentGateway === "razorpay") {
+            console.log('inside razorpay---------');
+
             let payload = await razorpayService.createOrder(TXN_AMOUNT)
+            console.log("payload", payload);
+
             resolve(payload);
         }
         if (paymentGateway === "paytm") {
