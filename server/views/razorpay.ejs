@@ -24,28 +24,28 @@
     console.log('-------------------here----------------');
 
     // Assuming `restdata` is passed from the server and available in the EJS template
-    let restdata = {
-      razorpayKeyId: 'rzp_test_MuUPEsJccohUXX',
-      amount: 35400,
-      amount_due: 35400,
-      amount_paid: 0,
-      attempts: 0,
-      created_at: 1726640894,
-      currency: "INR",
-      entity: "order",
-      id: "order_OyWwQytLPebPZg",
-      notes: [],
-      offer_id: null,
-      receipt: "6ef6cx5gkm17hekpg",
-      status: "created",
-      name: "Test",
-      description: "LPG Yearly",
-      order_id: "fuel_180924_6ef6cx5gkm17hekpf",
-      callback_url: "test",
-      userName: "guest",
-      userEmail: "swapnil@4ibiz.in",
-      userContact: "1234567890"
-    }
+    // let restdata = {
+    //   razorpayKeyId: 'rzp_test_MuUPEsJccohUXX',
+    //   amount: 35400,
+    //   amount_due: 35400,
+    //   amount_paid: 0,
+    //   attempts: 0,
+    //   created_at: 1726640894,
+    //   currency: "INR",
+    //   entity: "order",
+    //   id: "order_OyWwQytLPebPZg",
+    //   notes: [],
+    //   offer_id: null,
+    //   receipt: "6ef6cx5gkm17hekpg",
+    //   status: "created",
+    //   name: "Test",
+    //   description: "LPG Yearly",
+    //   order_id: "fuel_180924_6ef6cx5gkm17hekpf",
+    //   callback_url: "test",
+    //   userName: "guest",
+    //   userEmail: "swapnil@4ibiz.in",
+    //   userContact: "1234567890"
+    // }
 
     async function payNow() {
       console.log("payNow called", restdata);
