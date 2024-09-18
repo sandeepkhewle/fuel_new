@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 
+const apiKey = process.env.RAZORPAYAPIKEY ? process.env.RAZORPAYAPIKEY : "rzp_test_MuUPEsJccohUXX";
+const secretKey = process.env.RAZORPAYSECRETKEY ? process.env.RAZORPAYSECRETKEY : "TympRBJGkqQFeQWAQNwh1hBr";
+
 // services
 const accountService = require('../services/account.service');
 
@@ -14,7 +17,7 @@ router.post('/initiate', (req, res) => {
     let appId = req.user.appId;
     accountService.initiatePayment(appId, userId, data).then(payload => {
         if (paymentGateway === "razorpay") {
-            console.log('randor razorpay', payload);
+            console.log('render razorpay', payload);
 
             res.render('razorpay.ejs', {
                 'restdata': payload

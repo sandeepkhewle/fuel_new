@@ -3,8 +3,8 @@ const uniqid = require('uniqid');
 const Razorpay = require('razorpay');
 const cryptoJS = require("crypto-js");
 
-const apiKey = process.env.RAZORPAYAPIKEY ? process.env.RAZORPAYAPIKEY : "rzp_live_GguHJ2MtIeI3bX";
-const secretKey = process.env.RAZORPAYSECRETKEY ? process.env.RAZORPAYSECRETKEY : "3pApidmx0pOCtYjksdHGdIXt";
+const apiKey = process.env.RAZORPAYAPIKEY ? process.env.RAZORPAYAPIKEY : "rzp_test_MuUPEsJccohUXX";
+const secretKey = process.env.RAZORPAYSECRETKEY ? process.env.RAZORPAYSECRETKEY : "TympRBJGkqQFeQWAQNwh1hBr";
 
 const instance = new Razorpay({
     key_id: apiKey,

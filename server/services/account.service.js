@@ -20,6 +20,10 @@ let MERCHANT_KEY = config.PAYTM_MERCHANT_KEY;
 let CALLBACK_URL = config.CALLBACK_URL;
 let PAYTMRESPONSE_URL = config.PAYTMRESPONSE_URL;
 
+const apiKey = process.env.RAZORPAYAPIKEY ? process.env.RAZORPAYAPIKEY : "rzp_test_MuUPEsJccohUXX";
+const secretKey = process.env.RAZORPAYSECRETKEY ? process.env.RAZORPAYSECRETKEY : "TympRBJGkqQFeQWAQNwh1hBr";
+
+
 // models
 const paymentsModel = require('../models/payments.model');
 const userModel = require('../models/users.model');
@@ -148,7 +152,19 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         if (paymentGateway === "razorpay") {
             console.log('inside razorpay---------');
 
-            let payload = await razorpayService.createOrder(TXN_AMOUNT)
+            let payload = await razorpayService.createOrder({ amount: TXN_AMOUNT, currency: "INR" });
+            console.log("payload--------------", payload);
+
+            payload.razorpayKeyId = apiKey;
+            payload.amount = TXN_AMOUNT;
+            payload.currency = "INR";
+            payload.name = firmName;
+            payload.description = planName;
+            // payload.order_id = ORDER_ID;
+            payload.callback_url = "test";
+            payload.userName = fullName;
+            payload.userEmail = emailId;
+            payload.userContact = phoneNo;
             console.log("payload", payload);
 
             resolve(payload);

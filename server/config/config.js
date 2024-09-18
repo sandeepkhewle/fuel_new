@@ -66,7 +66,7 @@ let config = {
         s3url: "https://s3.ap-south-1.amazonaws.com/fuelprealert",
 
         // database
-        database: 'mongodb://localhost:27017/fuledb',
+        database: 'mongodb://0.0.0.0:27017/fuledb',
         secret_key: "MRy1NTqbVgkkYcz3sp2m5iLiaPlLoD0RMRy1NTqbVgkkYcz3sp2m5iLiaPlLoD0R",
         autoIndex: true,
         mongooseDebug: false,
