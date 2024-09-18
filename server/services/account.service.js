@@ -156,12 +156,12 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             console.log("payload--------------", payload);
 
             payload.razorpayKeyId = apiKey;
-            payload.receipt = ORDER_ID;
-            payload.amount = TXN_AMOUNT;
-            payload.currency = "INR";
+            // payload.receipt = ORDER_ID;
+            // payload.amount = TXN_AMOUNT;
+            // payload.currency = "INR";
+            // payload.order_id = ORDER_ID;
             payload.name = firmName;
             payload.description = planName;
-            // payload.order_id = ORDER_ID;
             payload.callback_url = "test";
             payload.userName = fullName;
             payload.userEmail = emailId;
