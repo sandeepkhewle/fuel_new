@@ -15,94 +15,65 @@
   <form id="payment-form">
     <!-- <label for="amount">Amount:</label>
     <input type="number" id="amount" name="amount" required> -->
-    <button type="button" onclick="payNow()">Pay Now</button>
+    <!-- <button type="button" id="pay-button" onclick="payNow()">Pay Now</button> -->
   </form>
 
 
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
-    console.log('-------------------here----------------');
 
-    // Assuming `restdata` is passed from the server and available in the EJS template
-    // let restdata = {
-    //   razorpayKeyId: 'rzp_test_MuUPEsJccohUXX',
-    //   amount: 35400,
-    //   amount_due: 35400,
-    //   amount_paid: 0,
-    //   attempts: 0,
-    //   created_at: 1726640894,
-    //   currency: "INR",
-    //   entity: "order",
-    //   id: "order_OyWwQytLPebPZg",
-    //   notes: [],
-    //   offer_id: null,
-    //   receipt: "6ef6cx5gkm17hekpg",
-    //   status: "created",
-    //   name: "Test",
-    //   description: "LPG Yearly",
-    //   order_id: "fuel_180924_6ef6cx5gkm17hekpf",
-    //   callback_url: "test",
-    //   userName: "guest",
-    //   userEmail: "swapnil@4ibiz.in",
-    //   userContact: "1234567890"
+    // var restdata = {
+    //   "razorpayKeyId": "rzp_test_MuUPEsJccohUXX",
+    //   "amount": "35400",
+    //   "currency": "INR",
+    //   "name": "Dummy Academy",
+    //   "description": "Pay & Checkout this Course, Upgrade your DSA Skill",
+    //   "id": "order_OyWwQytLPebPZg",
+    //   "userName": "guest",
+    //   "userEmail": "swapnil@4ibiz.in",
+    //   "userContact": "1234567890"
     // }
-
     async function payNow() {
-      console.log("payNow called", restdata);
 
-      // const amount = "50000";
-      // const amount = document.getElementById('amount') ? document.getElementById('amount').value : 50000; // Default amount for demonstration
-
-      // Create order by calling the server endpoint
-      // const response = await fetch('https://api.razorpay.com/v1/create-order', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({ amount: restdata.amount, currency: 'INR', receipt: 'receipt#1', notes: {} })
-      // });
-
-      // console.log("response", response);
-
-      // const order = await response.json();
-
-      // Open Razorpay Checkout
-      const options = {
-        key: '<%= restdata.razorpayKeyId %>', // Replace with your Razorpay key_id from server-side variable
-        amount: '<%= restdata.amount %>',
-        currency: 'INR',
-        name: '<%= restdata.name %>',
-        description: '<%= restdata.description %>',
-        order_id: '<%= restdata.id %>',
-        callback_url: '<%= restdata.callback_url %>',
-        userName: '<%= restdata.userName %>',
-        userEmail: '<%= restdata.userEmail %>',
-        userContact: '<%= restdata.userContact %>',
-
-        // currency: '<%= "9879324739234" %>',
-        // name: 'Acme Corp',
-        // description: 'Test Transaction',
-        // order_id: '<%= "9879324739234" %>', // Order ID from server response
-        // callback_url: '<%= "successUrl" %>', // Your success URL from server-side variable
-        // prefill: {
-        //   name: '<%= "userName" %>', // User's name from server-side variable
-        //   email: '<%= "userEmail" %>', // User's email from server-side variable
-        //   contact: '<%= "userContact" %>' // User's contact number from server-side variable
-        // },
-        theme: {
-          color: '#F37254'
+      var options = {
+        "key": restdata.razorpayKeyId,
+        "amount": restdata.amount,
+        "currency": restdata.currency,
+        "name": restdata.name,
+        "description": restdata.description,
+        "order_id": restdata.id,
+        "handler": function (response) {
+          console.log(response)
+          alert("This step of Payment Succeeded");
         },
+        "prefill": {
+          "name": restdata.userName,
+          "email": restdata.userEmail,
+          "contact": restdata.userContact
+        },
+        "notes": {},
+        "theme": {
+          "color": "#2300a3"
+        }
       };
+      var razorpayObject = new Razorpay(options);
+      console.log(razorpayObject);
+      razorpayObject.on('payment.failed', function (response) {
+        console.log(response);
+        alert("This step of Payment Failed");
+      });
 
-      const rzp = new Razorpay(options);
-      rzp.open();
+      // document.getElementById('pay-button').onclick = function (e) {
+      razorpayObject.open();
+      e.preventDefault();
+      // }
+
     }
 
-    // Invoke payNow function if the amount field is present
-    // if (document.getElementById('amount')) {
-    payNow();
-    // }
+    payNow()
   </script>
+
+
 </body>
 
 </html>
