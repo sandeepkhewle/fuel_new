@@ -12,14 +12,14 @@ const instance = new Razorpay({
 });
 
 
-const createOrder = async ({ amount, currency }) => {
+const createOrder = async ({ amount, currency, receipt }) => {
     try {
         console.log("razorpay createOrder-----", amount, currency);
 
         let options = {
             amount: Number(amount * 100),  // amount in the smallest currency unit
             currency: currency ? currency : "INR",
-            receipt: uniqid()
+            receipt: receipt
         };
         return await instance.orders.create(options);
     } catch (error) {

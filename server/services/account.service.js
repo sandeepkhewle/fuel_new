@@ -152,10 +152,11 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
         if (paymentGateway === "razorpay") {
             console.log('inside razorpay---------');
 
-            let payload = await razorpayService.createOrder({ amount: TXN_AMOUNT, currency: "INR" });
+            let payload = await razorpayService.createOrder({ amount: TXN_AMOUNT, currency: "INR", receipt: ORDER_ID });
             console.log("payload--------------", payload);
 
             payload.razorpayKeyId = apiKey;
+            payload.receipt = ORDER_ID;
             payload.amount = TXN_AMOUNT;
             payload.currency = "INR";
             payload.name = firmName;
