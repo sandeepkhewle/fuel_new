@@ -11,11 +11,16 @@
   <h1>Razorpay Payment Gateway Integration - v2</h1>
 
   <!-- Form with button to trigger payment -->
-  <!-- <form id="payment-form">
+  <form id="payment-form">
     <label for="amount">Amount:</label>
     <input type="number" id="amount" name="amount" value="<%= restdata.amount %>" readonly>
-    <button type="button" id="pay-button">Pay Now</button>
-  </form> -->
+    <button type="button" id="pay-button" onclick="payNow(restdata)">Pay Now</button>
+  </form>
+
+  <p>
+    <%= restdata.amount %>
+  </p>
+
 
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
@@ -34,7 +39,7 @@
     // }
     // console.log("restdata: ", restdata);
 
-    async function payNow() {
+    async function payNow(restdata) {
       console.log({ restdata });
 
 
@@ -80,7 +85,7 @@
     // };
     setTimeout(() => {
       console.log("settimout running");
-      
+
       payNow()
     }, 1000);
   </script>
