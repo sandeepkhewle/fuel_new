@@ -8,45 +8,44 @@
 </head>
 
 <body>
-  <h1>Razorpay Payment Gateway Integration - v2</h1>
+  <h1>Razorpay Payment Gateway Integration - v3</h1>
 
-  <!-- Display amount as a simple text -->
-  <p>
-    Amount: <%= restdata.amount %> INR
-  </p>
+  <p>Amount: <%= restdata.amount %> INR</p>
 
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
   <script>
-    // Inject restdata object from server-side into the JavaScript
-    var d = <% - JSON.stringify(restdata) %>;
-    // console.log("d---------------------------", d);
+    // Inject restdata object from server (potentially HTML-encoded)
+    var rawData = '<%- JSON.stringify(restdata) %>';  // Unescaped EJS output to inject restdata safely
+    console.log("Raw Data from server:--------", rawData);
 
+    // Replace HTML entities (&#34;) with actual double quotes (")
+    var jsonString = rawData.replace(/&#34;/g, '"');
+    console.log("Fixed JSON string:---------", jsonString);
 
-    var restdata = <%= JSON.stringify(restdata) %>;
-    // console.log("Inject---------------------------", restdata);
+    // Parse the corrected string into a valid JSON object
+    var restdata = JSON.parse(jsonString);
+    console.log("Parsed restdata object:---------", restdata);
 
+    async function payNow(restdata) {
 
-    async function payNow(d) {
-      console.log("restdata------------------------------------", restdata.replace(/&#34;/g, '"'));
-      restdata = JSON.parse(restdata.replace(/&#34;/g, '"'));
-
-      console.log("restdata parsed=====================", restdata.replace(/&#34;/g, '"'));
+      console.log("restdata----------", restdata);
 
       var options = {
         "key": restdata.razorpayKeyId, // Razorpay Key ID from backend
         "amount": restdata.amount, // Amount in currency subunits
         "currency": restdata.currency,
-        "name": restdata.name, // Merchant name
-        "description": restdata.description, // Description
+        "name": restdata.name || 'Merchant Name', // Merchant name or default
+        "description": restdata.description || 'Payment Description', // Description
         "order_id": restdata.id, // Razorpay order ID
         "handler": function (response) {
           console.log(response);
           alert("Payment Succeeded");
         },
         "prefill": {
-          "name": restdata.userName, // Pre-fill user's name
-          "email": restdata.userEmail, // Pre-fill user's email
-          "contact": restdata.userContact // Pre-fill user's contact number
+          "name": restdata.userName || 'Your Name', // Pre-fill user's name
+          "email": restdata.userEmail || 'your.email@example.com', // Pre-fill user's email
+          "contact": restdata.userContact || '0000000000' // Pre-fill user's contact number
         },
         "notes": {},
         "theme": {
@@ -54,10 +53,10 @@
         }
       };
 
-      // Create new Razorpay object
+      // Create Razorpay object
       var razorpayObject = new Razorpay(options);
 
-      // Attach error handling for payment failure
+      // Error handling for payment failure
       razorpayObject.on('payment.failed', function (response) {
         console.log(response);
         alert("Payment Failed");
@@ -67,12 +66,12 @@
       razorpayObject.open();
     }
 
-    // Automatically run the payNow function with the restdata object
+    // Automatically trigger payment on page load
     window.onload = function () {
       setTimeout(() => {
-        console.log("Auto-triggering payNow()");
-        payNow(restdata); // Pass the restdata object to payNow()
-      }, 100); // 1-second delay for smoother loading
+        console.log("Automatically triggering payNow()");
+        payNow(restdata);  // Pass the parsed restdata object to the payNow function
+      }, 1000);  // Delay for smoother loading
     };
   </script>
 </body>
