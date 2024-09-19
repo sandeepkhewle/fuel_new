@@ -30,8 +30,8 @@
       console.log("restdata------------------------------------", restdata.replace(/&#34;/g, '"'));
       restdata = JSON.parse(restdata.replace(/&#34;/g, '"'));
 
+      console.log("restdata parsed=====================", restdata.replace(/&#34;/g, '"'));
 
-      restdata
       var options = {
         "key": restdata.razorpayKeyId, // Razorpay Key ID from backend
         "amount": restdata.amount, // Amount in currency subunits
