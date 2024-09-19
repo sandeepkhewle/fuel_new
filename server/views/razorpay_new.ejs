@@ -19,16 +19,19 @@
   <script>
     // Inject restdata object from server-side into the JavaScript
     var d = <% - JSON.stringify(restdata) %>;
-    console.log("d---------------------------", d);
+    // console.log("d---------------------------", d);
 
 
     var restdata = <%= JSON.stringify(restdata) %>;
-    console.log("Inject---------------------------", restdata);
+    // console.log("Inject---------------------------", restdata);
 
 
     async function payNow(d) {
-      console.log("restdata------------------------------------", restdata);
+      console.log("restdata------------------------------------", restdata.replace(/&#34;/g, '"'));
+      restdata = JSON.parse(restdata.replace(/&#34;/g, '"'));
 
+
+      restdata
       var options = {
         "key": restdata.razorpayKeyId, // Razorpay Key ID from backend
         "amount": restdata.amount, // Amount in currency subunits
