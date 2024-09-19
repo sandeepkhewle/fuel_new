@@ -18,10 +18,16 @@
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
     // Inject restdata object from server-side into the JavaScript
-    var restdata = <%= JSON.stringify(restdata) %>;
+    var d = <% - JSON.stringify(restdata) %>;
+    console.log("d---------------------------", d);
 
-    async function payNow(restdata) {
-      console.log({ restdata });
+
+    var restdata = <%= JSON.stringify(restdata) %>;
+    console.log("Inject---------------------------", restdata);
+
+
+    async function payNow(d) {
+      console.log("restdata------------------------------------", restdata);
 
       var options = {
         "key": restdata.razorpayKeyId, // Razorpay Key ID from backend
@@ -59,7 +65,7 @@
     }
 
     // Automatically run the payNow function with the restdata object
-    window.onload = function() {
+    window.onload = function () {
       setTimeout(() => {
         console.log("Auto-triggering payNow()");
         payNow(restdata); // Pass the restdata object to payNow()
