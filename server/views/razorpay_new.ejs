@@ -20,7 +20,18 @@
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
     // Assign restdata from server-side EJS variable
-    var restdata = <%= JSON.stringify(restdata) %>;
+    // var restdata = <%= JSON.stringify(restdata) %>;
+    var restdata = {
+      "razorpayKeyId": "rzp_test_MuUPEsJccohUXX",
+      "amount": "35400",
+      "currency": "INR",
+      "name": "Dummy Academy",
+      "description": "Pay & Checkout this Course, Upgrade your DSA Skill",
+      "id": "order_OyWwQytLPebPZg",
+      "userName": "guest",
+      "userEmail": "swapnil@4ibiz.in",
+      "userContact": "1234567890"
+    }
     console.log("restdata: ", restdata);
 
     async function payNow() {
@@ -62,7 +73,7 @@
     // Attach event listener to Pay Now button
     // document.getElementById('pay-button').onclick = function (e) {
     //   e.preventDefault(); // Prevent form submission
-      payNow(); // Call the payment function
+    payNow(); // Call the payment function
     // };
   </script>
 </body>
