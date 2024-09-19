@@ -35,17 +35,18 @@
         "key": restdata.razorpayKeyId, // Razorpay Key ID from backend
         "amount": restdata.amount, // Amount in currency subunits
         "currency": restdata.currency,
-        "name": restdata.name || 'Merchant Name', // Merchant name or default
-        "description": restdata.description || 'Payment Description', // Description
+        "name": restdata.name, // Merchant name or default
+        "description": restdata.description, // Description
         "order_id": restdata.id, // Razorpay order ID
+        "callback_url": restdata.callback_url,
         "handler": function (response) {
           console.log(response);
           alert("Payment Succeeded");
         },
         "prefill": {
-          "name": restdata.userName || 'Your Name', // Pre-fill user's name
-          "email": restdata.userEmail || 'your.email@example.com', // Pre-fill user's email
-          "contact": restdata.userContact || '0000000000' // Pre-fill user's contact number
+          "name": restdata.userName, // Pre-fill user's name
+          "email": restdata.userEmail, // Pre-fill user's email
+          "contact": restdata.userContact // Pre-fill user's contact number
         },
         "notes": {},
         "theme": {
@@ -71,7 +72,7 @@
       setTimeout(() => {
         console.log("Automatically triggering payNow()");
         payNow(restdata);  // Pass the parsed restdata object to the payNow function
-      }, 1000);  // Delay for smoother loading
+      }, 10);  // Delay for smoother loading
     };
   </script>
 </body>
