@@ -8,15 +8,14 @@
 </head>
 
 <body>
-  <h1>Razorpay Payment Gateway Integration</h1>
+  <h1>Razorpay Payment Gateway Integration <%= JSON.stringify(restdata) %> </h1>
 
-  <!-- The form is commented out in the original HTML. Uncomment it if needed. -->
 
-  <form id="payment-form">
-    <!-- <label for="amount">Amount:</label>
-    <input type="number" id="amount" name="amount" required> -->
-    <!-- <button type="button" id="pay-button" onclick="payNow()">Pay Now</button> -->
-  </form>
+  <!-- <form id="payment-form">
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" required>
+    <button type="button" id="pay-button" onclick="payNow()">Pay Now</button>
+  </form> -->
 
   <table border="1">
     <tbody>
@@ -44,6 +43,7 @@
     //   "userEmail": "swapnil@4ibiz.in",
     //   "userContact": "1234567890"
     // }
+
     async function payNow() {
 
       var options = {

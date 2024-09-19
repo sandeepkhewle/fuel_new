@@ -19,7 +19,7 @@ router.post('/initiate', (req, res) => {
         if (paymentGateway === "razorpay") {
             console.log('render razorpay', payload);
 
-            res.render('razorpay.ejs', {
+            res.render('razorpay_new.ejs', {
                 'restdata': payload
             });
         }

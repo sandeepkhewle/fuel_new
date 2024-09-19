@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Razorpay Payment</title>
+</head>
+
+<body>
+  <h1>Razorpay Payment Gateway Integration</h1>
+
+  <!-- Form with button to trigger payment -->
+  <form id="payment-form">
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" value="<%= restdata.amount %>" readonly>
+    <button type="button" id="pay-button">Pay Now</button>
+  </form>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    // Assign restdata from server-side EJS variable
+    var restdata = <%= JSON.stringify(restdata) %>;
+    console.log("restdata: ", restdata);
+
+    async function payNow() {
+      var options = {
+        "key": restdata.razorpayKeyId, // Razorpay Key ID from backend
+        "amount": restdata.amount, // Amount in currency subunits
+        "currency": restdata.currency,
+        "name": restdata.name, // Merchant name
+        "description": restdata.description, // Description
+        "order_id": restdata.id, // Razorpay order ID
+        "handler": function (response) {
+          console.log(response);
+          alert("Payment Succeeded");
+        },
+        "prefill": {
+          "name": restdata.userName, // Pre-fill user's name
+          "email": restdata.userEmail, // Pre-fill user's email
+          "contact": restdata.userContact // Pre-fill user's contact number
+        },
+        "notes": {},
+        "theme": {
+          "color": "#2300a3" // Customize theme color
+        }
+      };
+
+      // Create new Razorpay object
+      var razorpayObject = new Razorpay(options);
+
+      // Attach error handling for payment failure
+      razorpayObject.on('payment.failed', function (response) {
+        console.log(response);
+        alert("Payment Failed");
+      });
+
+      // Open Razorpay payment window
+      razorpayObject.open();
+    }
+
+    // Attach event listener to Pay Now button
+    document.getElementById('pay-button').onclick = function (e) {
+      e.preventDefault(); // Prevent form submission
+      payNow(); // Call the payment function
+    };
+  </script>
+</body>
+
+</html>
