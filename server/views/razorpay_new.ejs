@@ -10,38 +10,18 @@
 <body>
   <h1>Razorpay Payment Gateway Integration - v2</h1>
 
-  <!-- Form with button to trigger payment -->
-  <form id="payment-form">
-    <label for="amount">Amount:</label>
-    <input type="number" id="amount" name="amount" value="<%= restdata.amount %>" readonly>
-    <button type="button" id="pay-button" onclick="payNow(restdata)">Pay Now</button>
-  </form>
-
+  <!-- Display amount as a simple text -->
   <p>
-    <%= restdata.amount %>
+    Amount: <%= restdata.amount %> INR
   </p>
-
 
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
-    // Assign restdata from server-side EJS variable
-    // var restdata = <%= JSON.stringify(restdata) %>;
-    // var restdata = {
-    //   "razorpayKeyId": "rzp_test_MuUPEsJccohUXX",
-    //   "amount": "35400",
-    //   "currency": "INR",
-    //   "name": "Dummy Academy",
-    //   "description": "Pay & Checkout this Course, Upgrade your DSA Skill",
-    //   "id": "order_OyWwQytLPebPZg",
-    //   "userName": "guest",
-    //   "userEmail": "swapnil@4ibiz.in",
-    //   "userContact": "1234567890"
-    // }
-    // console.log("restdata: ", restdata);
+    // Inject restdata object from server-side into the JavaScript
+    var restdata = <%= JSON.stringify(restdata) %>;
 
     async function payNow(restdata) {
       console.log({ restdata });
-
 
       var options = {
         "key": restdata.razorpayKeyId, // Razorpay Key ID from backend
@@ -78,16 +58,13 @@
       razorpayObject.open();
     }
 
-    // Attach event listener to Pay Now button
-    // document.getElementById('pay-button').onclick = function (e) {
-    //   e.preventDefault(); // Prevent form submission
-    payNow(); // Call the payment function
-    // };
-    setTimeout(() => {
-      console.log("settimout running");
-
-      payNow()
-    }, 1000);
+    // Automatically run the payNow function with the restdata object
+    window.onload = function() {
+      setTimeout(() => {
+        console.log("Auto-triggering payNow()");
+        payNow(restdata); // Pass the restdata object to payNow()
+      }, 100); // 1-second delay for smoother loading
+    };
   </script>
 </body>
 
