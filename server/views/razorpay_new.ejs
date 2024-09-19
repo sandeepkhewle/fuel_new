@@ -21,20 +21,23 @@
   <script>
     // Assign restdata from server-side EJS variable
     // var restdata = <%= JSON.stringify(restdata) %>;
-    var restdata = {
-      "razorpayKeyId": "rzp_test_MuUPEsJccohUXX",
-      "amount": "35400",
-      "currency": "INR",
-      "name": "Dummy Academy",
-      "description": "Pay & Checkout this Course, Upgrade your DSA Skill",
-      "id": "order_OyWwQytLPebPZg",
-      "userName": "guest",
-      "userEmail": "swapnil@4ibiz.in",
-      "userContact": "1234567890"
-    }
-    console.log("restdata: ", restdata);
+    // var restdata = {
+    //   "razorpayKeyId": "rzp_test_MuUPEsJccohUXX",
+    //   "amount": "35400",
+    //   "currency": "INR",
+    //   "name": "Dummy Academy",
+    //   "description": "Pay & Checkout this Course, Upgrade your DSA Skill",
+    //   "id": "order_OyWwQytLPebPZg",
+    //   "userName": "guest",
+    //   "userEmail": "swapnil@4ibiz.in",
+    //   "userContact": "1234567890"
+    // }
+    // console.log("restdata: ", restdata);
 
     async function payNow() {
+      console.log({ restdata });
+
+
       var options = {
         "key": restdata.razorpayKeyId, // Razorpay Key ID from backend
         "amount": restdata.amount, // Amount in currency subunits
@@ -75,6 +78,11 @@
     //   e.preventDefault(); // Prevent form submission
     payNow(); // Call the payment function
     // };
+    setTimeout(() => {
+      console.log("settimout running");
+      
+      payNow()
+    }, 1000);
   </script>
 </body>
 
