@@ -8,14 +8,14 @@
 </head>
 
 <body>
-  <h1>Razorpay Payment Gateway Integration</h1>
+  <h1>Razorpay Payment Gateway Integration - v2</h1>
 
   <!-- Form with button to trigger payment -->
-  <form id="payment-form">
+  <!-- <form id="payment-form">
     <label for="amount">Amount:</label>
     <input type="number" id="amount" name="amount" value="<%= restdata.amount %>" readonly>
     <button type="button" id="pay-button">Pay Now</button>
-  </form>
+  </form> -->
 
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
@@ -60,10 +60,10 @@
     }
 
     // Attach event listener to Pay Now button
-    document.getElementById('pay-button').onclick = function (e) {
-      e.preventDefault(); // Prevent form submission
+    // document.getElementById('pay-button').onclick = function (e) {
+    //   e.preventDefault(); // Prevent form submission
       payNow(); // Call the payment function
-    };
+    // };
   </script>
 </body>
 
