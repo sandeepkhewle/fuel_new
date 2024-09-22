@@ -21,6 +21,7 @@ let CALLBACK_URL = config.CALLBACK_URL;
 let PAYTMRESPONSE_URL = config.PAYTMRESPONSE_URL;
 let apiKey = config.razorpaykey;
 let secretKey = config.razorpaySecret;
+let razorpay_CALLBACK_URL = config.razorpay_CALLBACK_URL;
 
 // models
 const paymentsModel = require('../models/payments.model');
@@ -161,7 +162,7 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             payload.razorpayKeyId = apiKey;
             payload.name = firmName;
             payload.description = planName;
-            payload.callback_url = CALLBACK_URL;
+            payload.callback_url = razorpay_CALLBACK_URL;
             payload.userName = fullName;
             payload.userEmail = emailId;
             payload.userContact = phoneNo;
