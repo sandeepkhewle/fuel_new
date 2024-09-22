@@ -165,7 +165,9 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             payload.userContact = phoneNo;
             console.log("payload", payload);
 
-            resolve(payload);
+            paymentsModel.create(createobj).then(() => {
+                resolve(paramarray);
+            })
         }
         if (paymentGateway === "paytm") {
             paytm_checksum.genchecksum(paramarray, MERCHANT_KEY, function (err, res) {
@@ -212,6 +214,44 @@ const paymentUpdate = async (orderId, CHECKSUMHASH) => {
             let sendMail = false;
             if (responseCode.STATUS === 'TXN_FAILURE') updateObj.paymentStatus = "Failed";
             if (responseCode.STATUS === 'TXN_SUCCESS') {
+                updateObj.paymentStatus = "Success";
+                let cData = await counterSchema.findOneAndUpdate({ appId: "fuel", counterName: "Invoice Number" }, { $inc: { counter: 1 }, updatedAt: new Date() }, { new: true })
+                updateObj.invoiceNo = cData.counter;
+                sendMail = true;
+            }
+            await paymentsModel.findOneAndUpdate({ orderId: orderId }, updateObj, { new: true }).then(data => {
+                console.log('data', data);
+                createinvoice(orderId, true, true).then(data => {
+                    console.log("invoice generated successfully");
+                })
+                if (updateObj.respcode === "01") return;
+                else throw new Error("Unable to update payment")
+            })
+        }
+    })
+}
+
+
+// update payment status after payment - Success or Failed 
+const paymentUpdateRazorpay = async ({ razorpay_payment_id, razorpay_order_id, razorpay_signature }) => {
+    var urlLink = `https://api.razorpay.com/v1/payments/${razorpay_payment_id}`;
+    console.log("url link ", urlLink);
+    request.get({ url: urlLink }, async (err, httpRes, body) => {
+        console.log({ err, httpRes, body });
+
+        if (err) throw err;
+        else {
+            let updateObj = {}
+            let responseCode = JSON.parse(httpRes.body);
+            console.log("responseCode ", (responseCode));
+            updateObj.currency = responseCode.currency;
+            updateObj.bankname = responseCode.bank;
+            updateObj.paymentMode = "razorpay";
+            updateObj.txnAmount = responseCode.amount;
+            updateObj.status = responseCode.status;
+            let sendMail = false;
+            if (responseCode.status === 'Failed') updateObj.paymentStatus = "Failed";
+            if (responseCode.ststus === 'captured') {
                 updateObj.paymentStatus = "Success";
                 let cData = await counterSchema.findOneAndUpdate({ appId: "fuel", counterName: "Invoice Number" }, { $inc: { counter: 1 }, updatedAt: new Date() }, { new: true })
                 updateObj.invoiceNo = cData.counter;
@@ -726,6 +766,7 @@ const sendInvoiceToUser = async (orderId) => {
 module.exports = {
     initiatePayment,
     paymentUpdate,
+    paymentUpdateRazorpay,
     createinvoice,
     assignFreePlan,
     generateInvoice,

@@ -55,7 +55,12 @@ var paymentSchema = mongoose.Schema({
   transactionId: String,
   transactionDate: String,
   status: String,
-  CHECKSUMHASH: String
+  CHECKSUMHASH: String,
+  paytmResponseObj: Object,
+
+
+  // razorpayData
+  zarorpayResponseObj: Object,
 });
 
 paymentSchema.index({ invoiceNo: 'text', fullName: 'text', emailId: 'text', phoneNo: 'text' })

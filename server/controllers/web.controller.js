@@ -327,6 +327,20 @@ router.post('/response', (req, res) => {
     })
 });
 
+
+// { "razorpay_payment_id": "pay_OyvxBtWykJQsZF", "razorpay_order_id": "order_OyvwOoCTWBWIjG", "razorpay_signature": "cf262374d9883e3                                                                                                                                    71cf49c933fe62d897e0954282d0927dcede5a733b673474a" }
+router.post('/razorpayresponse', (req, res) => {
+    console.log("/web/razorpayresponse ----------------------" + JSON.stringify(req.body));
+    let razorpay_payment_id = req.body.razorpay_payment_id;
+    let razorpay_order_id = req.body.razorpay_order_id;
+    let razorpay_signature = req.body.razorpay_signature;
+    accountService.paymentUpdateRazorpay({ razorpay_payment_id, razorpay_order_id, razorpay_signature }).then(data => {
+        res.render('success.ejs', { 'restdata': "true", 'paramlist': paramlist });
+    }).catch(err => {
+        res.render('failure.ejs', { 'restdata': "false", 'paramlist': paramlist });
+    })
+});
+
 /*------------------- paytm response check api -------------------*/
 router.post('/createInvoice', (req, res) => {
     console.log("/web/createInvoice ----------------------" + JSON.stringify(req.body));
