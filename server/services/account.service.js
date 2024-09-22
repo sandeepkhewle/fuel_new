@@ -247,9 +247,10 @@ const paymentUpdateRazorpay = async ({ razorpay_payment_id, razorpay_order_id, r
         apiMode = "orderid";
         urlLink = `https://api.razorpay.com/v1/orders/${razorpay_order_id}/payments`
     }
+    const auth = 'Basic ' + Buffer.from(apiKey + ':' + secretKey).toString('base64');
     console.log("url link ", urlLink);
-    request.get({ url: urlLink }, async (err, httpRes, body) => {
-        console.log({ err, httpRes, body });
+    request.get({ url: urlLink, headers: { 'Content-Type': 'application/json', 'Authorization': auth } }, async (err, httpRes, body) => {
+        console.log({ err, body });
         if (err) throw err;
         else {
             let updateObj = {}
@@ -279,12 +280,15 @@ const paymentUpdateRazorpay = async ({ razorpay_payment_id, razorpay_order_id, r
                 createinvoice(razorpay_order_id, true, true).then(data => {
                     console.log("invoice generated successfully");
                 })
-                if (updateObj.respcode === "01") return;
-                else throw new Error("Unable to update payment")
+                return;
+                // if (updateObj.respcode === "01") return;
+                // else throw new Error("Unable to update payment")
             })
         }
     })
 }
+
+paymentUpdateRazorpay({ razorpay_payment_id: "pay_P0C9UjvCkz0Qa0", razorpay_order_id: "order_P0C82ZeBqdJrMx", razorpay_signature: "razorpay_signature" })
 
 // const createinvoice = async (orderId) => {
 //     try {
