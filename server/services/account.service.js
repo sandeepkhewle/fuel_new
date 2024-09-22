@@ -269,7 +269,7 @@ const paymentUpdateRazorpay = async ({ razorpay_payment_id, razorpay_order_id, r
             updateObj.status = responseBody.status;
             let sendMail = false;
             if (responseBody.status === 'Failed') updateObj.paymentStatus = "Failed";
-            if (responseBody.ststus === 'captured') {
+            if (responseBody.status === 'captured') {
                 updateObj.paymentStatus = "Success";
                 let cData = await counterSchema.findOneAndUpdate({ appId: "fuel", counterName: "Invoice Number" }, { $inc: { counter: 1 }, updatedAt: new Date() }, { new: true })
                 updateObj.invoiceNo = cData.counter;

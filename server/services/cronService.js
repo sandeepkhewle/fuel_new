@@ -64,7 +64,7 @@ let checkPaymentStatus = async () => {
         } else if (e.paymentGateway === "razorpay") {
           peomiseArray.push(accountService.paymentUpdateRazorpay({
             razorpay_payment_id: e.razorpay_payment_id,
-            razorpay_order_id: e.razorpay_order_id,
+            razorpay_order_id: e.orderId,
             razorpay_signature: e.razorpay_signature
           }))
         }
