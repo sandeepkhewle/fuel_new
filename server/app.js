@@ -83,7 +83,7 @@ app.use(function (req, res, next) {
     // check header or url parameters or post parameters for token
     let token = req.query.token || req.headers['x-access-token'] || req.headers.authorization || req.headers.Authorization;
     // console.log('token', token);
-    token = token.replace("Bearer ","");
+    token = token?.replace("Bearer ","");
     // console.log('token', token);
     // decode token
     if (token) {
