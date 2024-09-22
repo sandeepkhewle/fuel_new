@@ -19,10 +19,8 @@ let INDUSTRY_TYPE_ID = config.INDUSTRY_TYPE_ID;
 let MERCHANT_KEY = config.PAYTM_MERCHANT_KEY;
 let CALLBACK_URL = config.CALLBACK_URL;
 let PAYTMRESPONSE_URL = config.PAYTMRESPONSE_URL;
-
-const apiKey = process.env.RAZORPAYAPIKEY ? process.env.RAZORPAYAPIKEY : "rzp_test_MuUPEsJccohUXX";
-const secretKey = process.env.RAZORPAYSECRETKEY ? process.env.RAZORPAYSECRETKEY : "TympRBJGkqQFeQWAQNwh1hBr";
-
+let apiKey = config.razorpaykey;
+let secretKey = config.razorpaySecret;
 
 // models
 const paymentsModel = require('../models/payments.model');
@@ -155,6 +153,10 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
 
             let payload = await razorpayService.createOrder({ amount: parseInt(TXN_AMOUNT), currency: 'INR', receipt: ORDER_ID });
             console.log("payload--------------", payload);
+            console.log("apiKey--------------", apiKey);
+
+            createobj.orderId = payload.id; // assigning oder id from razorpay to order id
+            createobj.paymentGateway = paymentGateway;
 
             payload.razorpayKeyId = apiKey;
             payload.name = firmName;
@@ -166,10 +168,11 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
             console.log("payload", payload);
 
             paymentsModel.create(createobj).then(() => {
-                resolve(paramarray);
+                resolve(payload);
             })
         }
         if (paymentGateway === "paytm") {
+            console.log('inside paytm---------');
             paytm_checksum.genchecksum(paramarray, MERCHANT_KEY, function (err, res) {
                 if (err) {
                     reject(err);
@@ -234,32 +237,45 @@ const paymentUpdate = async (orderId, CHECKSUMHASH) => {
 
 // update payment status after payment - Success or Failed 
 const paymentUpdateRazorpay = async ({ razorpay_payment_id, razorpay_order_id, razorpay_signature }) => {
-    var urlLink = `https://api.razorpay.com/v1/payments/${razorpay_payment_id}`;
+    let urlLink;
+    let apiMode;
+    if (razorpay_payment_id) {
+        apiMode = "paymentid";
+        urlLink = `https://api.razorpay.com/v1/payments/${razorpay_payment_id}`;
+    } else if (razorpay_order_id) {
+        apiMode = "orderid";
+        urlLink = `https://api.razorpay.com/v1/orders/${razorpay_order_id}/payments`
+    }
     console.log("url link ", urlLink);
     request.get({ url: urlLink }, async (err, httpRes, body) => {
         console.log({ err, httpRes, body });
-
         if (err) throw err;
         else {
             let updateObj = {}
-            let responseCode = JSON.parse(httpRes.body);
-            console.log("responseCode ", (responseCode));
-            updateObj.currency = responseCode.currency;
-            updateObj.bankname = responseCode.bank;
-            updateObj.paymentMode = "razorpay";
-            updateObj.txnAmount = responseCode.amount;
-            updateObj.status = responseCode.status;
+            let responseBody = JSON.parse(httpRes.body);
+            if (apiMode === "orderid") {
+                responseBody = responseBody.items[0];
+            }
+            console.log("responseBody ", (responseBody));
+            updateObj.razorpay_payment_id = razorpay_payment_id;
+            updateObj.razorpay_order_id = razorpay_order_id;
+            updateObj.razorpay_signature = razorpay_signature;
+            updateObj.zarorpayResponseObj = responseBody;
+            updateObj.currency = responseBody.currency;
+            updateObj.bankname = responseBody.bank;
+            updateObj.txnAmount = responseBody.amount;
+            updateObj.status = responseBody.status;
             let sendMail = false;
-            if (responseCode.status === 'Failed') updateObj.paymentStatus = "Failed";
-            if (responseCode.ststus === 'captured') {
+            if (responseBody.status === 'Failed') updateObj.paymentStatus = "Failed";
+            if (responseBody.ststus === 'captured') {
                 updateObj.paymentStatus = "Success";
                 let cData = await counterSchema.findOneAndUpdate({ appId: "fuel", counterName: "Invoice Number" }, { $inc: { counter: 1 }, updatedAt: new Date() }, { new: true })
                 updateObj.invoiceNo = cData.counter;
                 sendMail = true;
             }
-            await paymentsModel.findOneAndUpdate({ orderId: orderId }, updateObj, { new: true }).then(data => {
+            await paymentsModel.findOneAndUpdate({ orderId: razorpay_order_id }, updateObj, { new: true }).then(data => {
                 console.log('data', data);
-                createinvoice(orderId, true, true).then(data => {
+                createinvoice(razorpay_order_id, true, true).then(data => {
                     console.log("invoice generated successfully");
                 })
                 if (updateObj.respcode === "01") return;
