@@ -59,7 +59,15 @@ let checkPaymentStatus = async () => {
       let PayData = await paymentModel.find({ "paymentStatus": "Pending", createdAt: { $gte: last45Min } });
       let peomiseArray = [];
       PayData.forEach(e => {
-        peomiseArray.push(accountService.paymentUpdate(e.orderId, e.CHECKSUMHASH))
+        if (e.paymentGateway === "paytm") {
+          peomiseArray.push(accountService.paymentUpdate(e.orderId, e.CHECKSUMHASH))
+        } else if (e.paymentGateway === "razorpay") {
+          peomiseArray.push(accountService.paymentUpdateRazorpay({
+            razorpay_payment_id: e.razorpay_payment_id,
+            razorpay_order_id: e.orderId,
+            razorpay_signature: e.razorpay_signature
+          }))
+        }
       });
       Promise.all(peomiseArray).then(() => {
         console.log("checkPaymentStatus completed");

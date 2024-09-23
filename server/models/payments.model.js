@@ -60,6 +60,9 @@ var paymentSchema = mongoose.Schema({
 
 
   // razorpayData
+  razorpay_payment_id: String,
+  razorpay_order_id: String,
+  razorpay_signature: String,
   zarorpayResponseObj: Object,
 });
 

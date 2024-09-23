@@ -49,7 +49,13 @@ let config = {
         CALLBACK_URL: 'https://api.fuelpricealert.in/web/response',
         //  CALLBACK_URL : 'http://www.infotecindia.in/paytm/response',
         PAYTM_FINAL_URL: 'https://securegw.paytm.in/order/process',
-        PAYTMRESPONSE_URL: "https://securegw.paytm.in/order/status?JsonData="
+        PAYTMRESPONSE_URL: "https://securegw.paytm.in/order/status?JsonData=",
+
+        //razorpay
+        razorpaykey: 'rzp_test_MuUPEsJccohUXX',
+        razorpaySecret: 'TympRBJGkqQFeQWAQNwh1hBr',
+        razorpay_CALLBACK_URL: 'https://api.fuelpricealert.in/web/razorpayresponse',
+
     },
     staging: {
         confEnv: 'staging',
@@ -99,7 +105,13 @@ let config = {
         CALLBACK_URL: 'http://65.0.75.20:4108/web/response',
         //  CALLBACK_URL : 'http://www.infotecindia.in/paytm/response',
         PAYTM_FINAL_URL: 'https://securegw.paytm.in/order/process',
-        PAYTMRESPONSE_URL: "https://securegw.paytm.in/order/status?JsonData="
+        PAYTMRESPONSE_URL: "https://securegw.paytm.in/order/status?JsonData=",
+
+        
+        //razorpay
+        razorpaykey: 'rzp_test_MuUPEsJccohUXX',
+        razorpaySecret: 'TympRBJGkqQFeQWAQNwh1hBr',
+        razorpay_CALLBACK_URL: 'http://65.0.75.20:4108/web/razorpayresponse',
     }
 }
 
