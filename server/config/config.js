@@ -52,8 +52,8 @@ let config = {
         PAYTMRESPONSE_URL: "https://securegw.paytm.in/order/status?JsonData=",
 
         //razorpay
-        razorpaykey: 'rzp_test_MuUPEsJccohUXX',
-        razorpaySecret: 'TympRBJGkqQFeQWAQNwh1hBr',
+        razorpaykey: 'rzp_live_GguHJ2MtIeI3bX',
+        razorpaySecret: '3pApidmx0pOCtYjksdHGdIXt',
         razorpay_CALLBACK_URL: 'https://api.fuelpricealert.in/web/razorpayresponse',
 
     },
