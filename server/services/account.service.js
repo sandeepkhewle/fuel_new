@@ -290,8 +290,6 @@ const paymentUpdateRazorpay = async ({ razorpay_payment_id, razorpay_order_id, r
     })
 }
 
-paymentUpdateRazorpay({ razorpay_payment_id: "pay_P0C9UjvCkz0Qa0", razorpay_order_id: "order_P0C82ZeBqdJrMx", razorpay_signature: "razorpay_signature" })
-
 // const createinvoice = async (orderId) => {
 //     try {
 //         console.log('createinvoice', orderId);
