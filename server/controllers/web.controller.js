@@ -334,6 +334,7 @@ router.post('/razorpayresponse', (req, res) => {
     let razorpay_payment_id = req.body.razorpay_payment_id;
     let razorpay_order_id = req.body.razorpay_order_id;
     let razorpay_signature = req.body.razorpay_signature;
+    let paramlist = req.body;
     accountService.paymentUpdateRazorpay({ razorpay_payment_id, razorpay_order_id, razorpay_signature }).then(data => {
         res.render('success.ejs', { 'restdata': "true", 'paramlist': paramlist });
     }).catch(err => {
