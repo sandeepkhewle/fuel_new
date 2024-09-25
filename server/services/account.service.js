@@ -40,6 +40,8 @@ const initiatePayment = async (appId, userId, { planId, discount, gstNumber, fir
     return new Promise(async (resolve, reject) => {
 
         let updateObj = {};
+        paymentGateway = paymentGateway ? paymentGateway : 'paytm';
+
         if (gstNumber) updateObj.gstNumber = gstNumber;
         if (firmName) updateObj.firmName = firmName;
         if (emailId) updateObj.emailId = emailId;
