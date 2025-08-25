@@ -234,6 +234,8 @@ let sendNotification = async ({ appId, catName, data, message, title, userId }) 
                             `Successfully sent to ${response.successCount} devices, ${response.failureCount} failed`
                         );
                         messagePayload = [];
+                        console.log("response --", JSON.stringify(response));
+                        
                         // return response;
                     } catch (error) {
                         console.error("Error sending notification:", error);
