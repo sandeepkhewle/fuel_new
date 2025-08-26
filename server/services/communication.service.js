@@ -134,7 +134,7 @@ let sendOtpSms = async (appId, phoneNo, otp) => {
 const admin = require("firebase-admin");
 
 // Initialize Firebase Admin SDK
-const serviceAccount = require("../json/fuel-price-alert-firebase-adminsdk-244pv-b46b94b590.json");
+const serviceAccount = require("../json/fuel-price-alert-firebase-adminsdk.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
